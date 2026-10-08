@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Donate | SwachhataPukare Foundation</title>
+<meta name="description" content="Support SwachhataPukare Foundation's environmental and civic work. Demo donation flow — no real payment is taken.">
+<meta name="theme-color" content="#133A3F">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SwachhataPukare Foundation">
+<meta property="og:title" content="Donate | SwachhataPukare Foundation">
+<meta property="og:description" content="Support river cleaning, water hyacinth work and clean energy projects.">
+<!-- TODO: add absolute og:url + og:image once this site has a public URL -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%23F5F0E8'/%3E%3Cpath%20d='M16%205c0%200-7%208.2-7%2012.4a7%207%200%200%200%2014%200C23%2013.2%2016%205%2016%205z'%20fill='none'%20stroke='%231F7A78'%20stroke-width='2.2'%20stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+<link rel="stylesheet" href="assets/css/print.css">
+<script defer src="assets/js/config.js"></script>
+<script defer src="assets/js/data.js"></script>
+<script defer src="assets/js/utils.js"></script>
+<script defer src="assets/js/store.js"></script>
+<script defer src="assets/js/components.js"></script>
+<script defer src="assets/js/forms.js"></script>
+</head>
+<body data-page="donate">
+<a class="skip-link" href="#main">Skip to content</a>
+<div id="sp-top"></div>
+
+<main id="main">
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span aria-current="page">Donate</span>
+      </nav>
+      <div class="page-hero__inner">
+        <p class="eyebrow">Support the work</p>
+        <h1>Donate</h1>
+        <p class="page-hero__lead">Your contribution supports the Foundation's river cleaning drives,
+          water hyacinth work, solar initiatives and community projects.</p>
+        <p><span class="placeholder-note">Demo donation — no real payment is processed.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container donate-layout">
+      <form class="story-block donate-form" id="donate-form" novalidate>
+        <span class="eyebrow">Choose an amount</span>
+        <div class="amount-chips" role="group" aria-label="Donation amount in INR">
+          <button class="amount-chip is-selected" type="button" data-amount="500" aria-pressed="true">INR 500</button>
+          <button class="amount-chip" type="button" data-amount="1000" aria-pressed="false">INR 1,000</button>
+          <button class="amount-chip" type="button" data-amount="2500" aria-pressed="false">INR 2,500</button>
+          <button class="amount-chip" type="button" data-amount="5000" aria-pressed="false">INR 5,000</button>
+          <button class="amount-chip" type="button" data-amount="custom" aria-pressed="false">Custom amount</button>
+        </div>
+
+        <div class="field" data-custom-wrap hidden>
+          <label class="field__label" for="don-custom">Custom amount (INR)</label>
+          <input class="input" id="don-custom" name="custom" type="number" min="100" step="50" inputmode="numeric" placeholder="e.g. 750">
+          <span class="field__error" aria-live="polite"></span>
+        </div>
+
+        <div class="form-grid form-grid--2">
+          <div class="field">
+            <label class="field__label" for="don-name">Full name <span class="req" aria-hidden="true">*</span></label>
+            <input class="input" id="don-name" name="name" type="text" autocomplete="name">
+            <span class="field__error" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label class="field__label" for="don-phone">Mobile <span class="req" aria-hidden="true">*</span></label>
+            <input class="input" id="don-phone" name="phone" type="tel" inputmode="numeric" maxlength="10" autocomplete="tel">
+            <span class="field__error" aria-live="polite"></span>
+          </div>
+          <div class="field field--full">
+            <label class="field__label" for="don-email">Email <span class="req" aria-hidden="true">*</span></label>
+            <input class="input" id="don-email" name="email" type="email" autocomplete="email">
+            <span class="field__hint">The receipt will be emailed to this address (demo — no email is sent).</span>
+            <span class="field__error" aria-live="polite"></span>
+          </div>
+          <div class="field field--full">
+            <label class="check">
+              <input type="checkbox" name="newsletter">
+              Keep me posted about the Foundation's work
+            </label>
+          </div>
+        </div>
+
+        <div class="notice">This is a demo. No payment details are collected and no money moves.</div>
+
+        <div class="btn-row">
+          <button class="btn btn--amber btn--lg" type="submit" id="donate-submit">Donate INR 500</button>
+        </div>
+      </form>
+
+      <aside class="donate-aside">
+        <div class="story-block">
+          <span class="eyebrow">Where it goes</span>
+          <h2>Your support keeps work moving</h2>
+          <ul class="check-list muted">
+            <li>River cleaning drives — equipment, transport and disposal</li>
+            <li>Water hyacinth — harvesting and craft materials</li>
+            <li>Solar power and sewage treatment projects</li>
+            <li>TEDxBistupur — organising and community outreach</li>
+          </ul>
+          <p class="form-note">Placeholder list — confirm with the Foundation before launch (config.js).</p>
+        </div>
+        <div class="story-block">
+          <span class="eyebrow">Registered details</span>
+          <h2>Foundation information</h2>
+          <address class="address-static">
+            SwachhataPukare Foundation<br>
+            HIG-276, Ward No-15, Near Bank Of Baroda,<br>
+            Adityapur, Jamshedpur, Jharkhand 831013<br>
+            <span class="mono">GST No: 20ABHCS8922N1ZZ</span>
+          </address>
+        </div>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<div id="sp-bottom"></div>
+</body>
+</html>

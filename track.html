@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Track your order | SwachhataPukare Foundation</title>
+<meta name="description" content="Track a demo order from SwachhataPukare Foundation: order placed, packed, shipped, out for delivery and delivered.">
+<meta name="theme-color" content="#133A3F">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SwachhataPukare Foundation">
+<meta property="og:title" content="Track your order | SwachhataPukare Foundation">
+<meta property="og:description" content="See where your handcrafted order is, step by step.">
+<!-- TODO: add absolute og:url + og:image once this site has a public URL -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%23F5F0E8'/%3E%3Cpath%20d='M16%205c0%200-7%208.2-7%2012.4a7%207%200%200%200%2014%200C23%2013.2%2016%205%2016%205z'%20fill='none'%20stroke='%231F7A78'%20stroke-width='2.2'%20stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+<link rel="stylesheet" href="assets/css/print.css">
+<script defer src="assets/js/config.js"></script>
+<script defer src="assets/js/data.js"></script>
+<script defer src="assets/js/utils.js"></script>
+<script defer src="assets/js/store.js"></script>
+<script defer src="assets/js/components.js"></script>
+<script defer src="assets/js/track.js"></script>
+</head>
+<body data-page="track">
+<a class="skip-link" href="#main">Skip to content</a>
+<div id="sp-top"></div>
+
+<main id="main">
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__inner">
+        <p class="eyebrow">Order status</p>
+        <h1>Track your order</h1>
+        <p class="page-hero__lead">Enter the order id from your confirmation and the mobile number used at checkout.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow">
+      <form class="track-search" id="track-form" novalidate>
+        <div class="field">
+          <label class="field__label" for="track-id">Order id</label>
+          <input class="input" id="track-id" name="id" type="text" placeholder="SP-20261008-0001" autocomplete="off">
+          <span class="field__error" aria-live="polite"></span>
+        </div>
+        <div class="field">
+          <label class="field__label" for="track-phone">Mobile number</label>
+          <input class="input" id="track-phone" name="phone" type="tel" inputmode="numeric" maxlength="10" placeholder="10-digit mobile">
+          <span class="field__error" aria-live="polite"></span>
+        </div>
+        <button class="btn btn--primary" type="submit">Track order</button>
+      </form>
+
+      <div data-track-result hidden></div>
+    </div>
+  </section>
+</main>
+
+<div id="sp-bottom"></div>
+</body>
+</html>

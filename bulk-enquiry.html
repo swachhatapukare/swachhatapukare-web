@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bulk &amp; branding enquiry | SwachhataPukare Foundation</title>
+<meta name="description" content="Request a corporate quotation for handcrafted products with branding and customisation. Demo form — reference number generated locally.">
+<meta name="theme-color" content="#133A3F">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SwachhataPukare Foundation">
+<meta property="og:title" content="Bulk &amp; branding enquiry | SwachhataPukare Foundation">
+<meta property="og:description" content="Corporate gifting, printed branding and larger quantities, quoted separately.">
+<!-- TODO: add absolute og:url + og/image once this site has a public URL -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%23F5F0E8'/%3E%3Cpath%20d='M16%205c0%200-7%208.2-7%2012.4a7%207%200%200%200%2014%200C23%2013.2%2016%205%2016%205z'%20fill='none'%20stroke='%231F7A78'%20stroke-width='2.2'%20stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+<link rel="stylesheet" href="assets/css/print.css">
+<script defer src="assets/js/config.js"></script>
+<script defer src="assets/js/data.js"></script>
+<script defer src="assets/js/utils.js"></script>
+<script defer src="assets/js/store.js"></script>
+<script defer src="assets/js/components.js"></script>
+<script defer src="assets/js/forms.js"></script>
+</head>
+<body data-page="bulk-enquiry">
+<a class="skip-link" href="#main">Skip to content</a>
+<div id="sp-top"></div>
+
+<main id="main">
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span aria-current="page">Bulk &amp; branding enquiry</span>
+      </nav>
+      <div class="page-hero__inner">
+        <p class="eyebrow">For teams and gifting</p>
+        <h1>Need branding or bulk?</h1>
+        <p class="page-hero__lead">Tell us what you need and we will prepare a quotation.
+          Print and courier charges are quoted separately from the product prices shown in the shop.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow">
+      <form class="story-block bulk-form" id="bulk-form" novalidate>
+        <span class="eyebrow">Quotation request</span>
+        <h2>Company details</h2>
+
+        <div class="form-grid form-grid--2">
+          <div class="field">
+            <label class="field__label" for="bk-company">Company / organisation <span class="req" aria-hidden="true">*</span></label>
+            <input class="input" id="bk-company" name="company" type="text" autocomplete="organization">
+            <span class="field__error" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label class="field__label" for="bk-contact">Contact person <span class="req" aria-hidden="true">*</span></label>
+            <input class="input" id="bk-contact" name="contact" type="text" autocomplete="name">
+            <span class="field__error" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label class="field__label" for="bk-phone">Phone <span class="req" aria-hidden="true">*</span></label>
+            <input class="input" id="bk-phone" name="phone" type="tel" inputmode="numeric" maxlength="10" autocomplete="tel">
+            <span class="field__error" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label class="field__label" for="bk-email">Email <span class="req" aria-hidden="true">*</span></label>
+            <input class="input" id="bk-email" name="email" type="email" autocomplete="email">
+            <span class="field__error" aria-live="polite"></span>
+          </div>
+          <div class="field field--full">
+            <label class="field__label" for="bk-date">Required by</label>
+            <input class="input" id="bk-date" name="requiredBy" type="date">
+            <span class="field__hint">Leave blank if you are flexible.</span>
+          </div>
+        </div>
+
+        <h2>Products &amp; quantity</h2>
+        <p class="form-note">Tick the pieces you are interested in and give an approximate quantity for each.</p>
+        <div class="bulk-products" data-bulk-products></div>
+
+        <h2>Branding &amp; customisation</h2>
+        <div class="form-grid form-grid--2">
+          <div class="field field--full">
+            <label class="field__label" for="bk-logo">Logo file (optional)</label>
+            <input class="input" id="bk-logo" name="logo" type="file" accept="image/*">
+            <span class="field__hint">Previewed locally only — the file never leaves your browser (demo).</span>
+          </div>
+          <div class="field field--full">
+            <div class="logo-preview" data-logo-preview hidden>
+              <img alt="Logo preview" width="160" height="80">
+              <div>
+                <p class="text-sm" data-logo-name></p>
+                <button class="link-btn" type="button" data-logo-remove>Remove</button>
+              </div>
+            </div>
+          </div>
+          <div class="field field--full">
+            <label class="field__label" for="bk-notes">Print / customisation notes</label>
+            <textarea class="textarea" id="bk-notes" name="notes" rows="4"
+              placeholder="Logo placement, colours, packaging, delivery locations…"></textarea>
+          </div>
+        </div>
+
+        <div class="notice">Demo form — nothing is emailed. Your enquiry is saved in this browser so you can see the flow.</div>
+
+        <div class="btn-row">
+          <button class="btn btn--primary btn--lg" type="submit">Request quotation</button>
+          <a class="btn btn--ghost" href="shop.html">Back to the shop</a>
+        </div>
+      </form>
+
+      <div class="bulk-success" data-bulk-success hidden role="status"></div>
+    </div>
+  </section>
+</main>
+
+<div id="sp-bottom"></div>
+</body>
+</html>

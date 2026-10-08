@@ -1,0 +1,124 @@
+/* tokens.css — SwachhataPukare Foundation design tokens
+   All colours, spacing, type and motion live here. No magic values elsewhere. */
+
+:root {
+  /* ---------------------------------------------------------------- colour */
+  --c-dark: #133A3F;
+  --c-teal: #1F7A78;
+  --c-teal-deep: #17605E;
+  --c-teal-soft: #E2EFEC;
+  --c-sage: #A8C3A8;
+  --c-sage-soft: #EBF1E8;
+  --c-cream: #F5F0E8;
+  --c-paper: #FBF9F4;
+  --c-amber: #C99A1E;
+  --c-amber-deep: #A0760F;
+  --c-amber-text: #8A6A12;
+  --c-amber-soft: #F8EFD8;
+  --c-ink: #222B2D;
+  --c-muted: #5B6B6E;
+  --c-line: #D8DEDC;
+  --c-white: #FFFFFF;
+
+  /* semantic / status */
+  --c-danger: #9E3527;
+  --c-danger-soft: #F8E9E5;
+  --c-success: #1B6E48;
+  --c-success-soft: #E4F1E9;
+  --c-info-soft: #E7EFF3;
+
+  /* on-colour pairings (WCAG AA checked) */
+  --c-on-dark: #F5F0E8;
+  --c-on-dark-muted: #C3D2D0;
+  --c-on-teal: #FBF9F4;
+  --c-focus: #C99A1E;
+  --c-focus-dark: #F3D68B;
+
+  /* category tints used by image placeholders + tiles */
+  --c-cat-office: #DCE7E4;
+  --c-cat-desk: #E4EDE0;
+  --c-cat-home: #EDE6D8;
+  --c-cat-tabletop: #E9E2EE;
+  --c-cat-heritage: #F0E2D2;
+  --c-cat-lighting: #E3EAF2;
+
+  /* --------------------------------------------------------------- spacing */
+  --s-0: 0;
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 2.5rem;
+  --s-8: 3rem;
+  --s-9: 4rem;
+  --s-10: 5rem;
+  --s-11: 6rem;
+  --s-12: 8rem;
+
+  /* ---------------------------------------------------------------- radius */
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --r-full: 999px;
+
+  /* --------------------------------------------------------------- shadows */
+  --sh-1: 0 1px 2px rgba(19, 58, 63, 0.06), 0 2px 8px rgba(19, 58, 63, 0.05);
+  --sh-2: 0 4px 14px rgba(19, 58, 63, 0.09), 0 2px 4px rgba(19, 58, 63, 0.05);
+  --sh-3: 0 18px 44px rgba(19, 58, 63, 0.16), 0 4px 12px rgba(19, 58, 63, 0.07);
+  --sh-inset: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+
+  /* ------------------------------------------------------------ typography */
+  --f-display: "DM Serif Display", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --f-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --f-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --t-xs: 0.75rem;
+  --t-sm: 0.8125rem;
+  --t-base: 1rem;
+  --t-md: 1.0625rem;
+  --t-lg: 1.25rem;
+  --t-xl: 1.5rem;
+  --t-2xl: 1.9375rem;
+  --t-3xl: clamp(2rem, 1.4rem + 2.4vw, 2.75rem);
+  --t-hero: clamp(2.25rem, 1.3rem + 4.6vw, 4rem);
+
+  --lh-tight: 1.12;
+  --lh-snug: 1.4;
+  --lh-body: 1.65;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  --ls-caps: 0.14em;
+
+  /* ---------------------------------------------------------------- layout */
+  --wrap: 1200px;
+  --wrap-wide: 1340px;
+  --wrap-narrow: 780px;
+  --gutter: clamp(1rem, 3.6vw, 2rem);
+  --header-h: 4.5rem;
+  --banner-h: 2.25rem;
+  --section-y: clamp(3rem, 7vw, 5.5rem);
+
+  /* ---------------------------------------------------------------- motion */
+  --e-out: cubic-bezier(0.22, 0.68, 0.32, 1);
+  --e-in-out: cubic-bezier(0.5, 0, 0.2, 1);
+  --d-xs: 120ms;
+  --d-sm: 180ms;
+  --d-md: 260ms;
+  --d-lg: 440ms;
+
+  /* ------------------------------------------------------------------- z   */
+  --z-fab: 40;
+  --z-header: 60;
+  --z-scrim: 70;
+  --z-drawer: 80;
+  --z-modal: 90;
+  --z-toast: 100;
+}

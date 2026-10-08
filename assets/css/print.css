@@ -1,0 +1,56 @@
+/* print.css — printable pages (invoice, order summary) */
+
+@media print {
+  :root {
+    --c-paper: #ffffff;
+    --c-cream: #ffffff;
+  }
+
+  body {
+    background: #ffffff;
+    color: #000000;
+    font-size: 11pt;
+  }
+
+  .demo-banner,
+  .site-header,
+  .site-footer,
+  .whatsapp-fab,
+  .toast,
+  .scrim,
+  .mobile-nav,
+  .cart-drawer,
+  .no-print,
+  .skip-link {
+    display: none !important;
+  }
+
+  .print-only { display: block !important; }
+
+  .section { padding-block: 0; }
+
+  a { color: #000000; text-decoration: none; }
+
+  .invoice {
+    border: 0;
+    box-shadow: none;
+    padding: 0;
+    max-width: none;
+  }
+
+  .invoice__table {
+    page-break-inside: auto;
+  }
+
+  .invoice__table tr { page-break-inside: avoid; }
+
+  .invoice__totals { page-break-inside: avoid; }
+
+  h1, h2, h3 { page-break-after: avoid; }
+
+  img { max-width: 100% !important; }
+
+  @page {
+    margin: 16mm;
+  }
+}
