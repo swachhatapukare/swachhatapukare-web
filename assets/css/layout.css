@@ -84,6 +84,11 @@
 .stack--sm > * + * { margin-top: var(--s-2); }
 .stack--lg > * + * { margin-top: var(--s-6); }
 
+/* #sp-top holds the injected banner + header. Flattening it lets the sticky
+   header pin against <body> — a sticky element only sticks inside its own
+   parent box, so keeping the wrapper box would unstick it as soon as you scroll. */
+#sp-top { display: contents; }
+
 /* ------------------------------------------------------------------- demo banner */
 .demo-banner {
   background: var(--c-dark);
@@ -187,6 +192,9 @@
 }
 
 .brand__img { width: 2.4rem; height: 2.4rem; object-fit: contain; }
+
+/* the full lock-up is portrait (emblem + caption line), so height drives it */
+.brand__img--full { width: auto; height: 3.25rem; object-fit: contain; }
 
 /* desktop nav */
 .nav { margin-left: auto; }
@@ -490,6 +498,13 @@
 .footer-brand .brand__sub { color: var(--c-on-dark); }
 
 .footer-brand .brand__mark { color: var(--c-sage); }
+
+/* footer shows the full lock-up (emblem + caption line) instead of the small emblem */
+.footer-brand .brand__img--full {
+  width: auto;
+  height: 6rem;
+  object-fit: contain;
+}
 
 .footer-about {
   margin-top: var(--s-4);

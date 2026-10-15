@@ -9,7 +9,9 @@ SP.config = {
   SITE_SHORT: "SwachhataPukare",
   TAGLINE: "Crafted for everyday use.",
   CATALOGUE_INTRO: "Handcrafted pieces from the Foundation's own catalogue.",
-  LOGO_PATH: "assets/logo.png", // optional photo logo; falls back to the SVG wordmark
+  LOGO_PATH: "assets/logo.png", // circular emblem, used in header + menu
+  LOGO_PATH_FULL: "assets/logo-full.png", // full lock-up incl. caption line, used in the footer
+  // both fall back to the SVG wordmark if the file is missing
 
   FOUNDATION: {
     name: "SwachhataPukare Foundation",

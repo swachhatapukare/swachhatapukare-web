@@ -57,6 +57,7 @@
       '<article class="invoice">' +
       '<header class="invoice__head">' +
       '<div class="invoice__from">' +
+      '<img class="invoice__logo" src="assets/logo.png" alt="" width="64" height="64">' +
       '<p class="invoice__org">' + SP.esc(cfg.FOUNDATION.name) + "</p>" +
       "<address>" + cfg.FOUNDATION.addressLines.map(SP.esc).join("<br>") + "</address>" +
       '<p class="invoice__gst">GST No: ' + SP.esc(cfg.FOUNDATION.gst) + "</p>" +
@@ -121,6 +122,14 @@
     if (!root) return;
 
     render();
+
+    /* the logo is decorative letterhead — drop it silently if the file is absent */
+    var logo = SP.qs(".invoice__logo");
+    if (logo) {
+      logo.addEventListener("error", function () {
+        if (logo.parentNode) logo.parentNode.removeChild(logo);
+      });
+    }
 
     var printBtn = document.getElementById("print-invoice");
     if (printBtn) {

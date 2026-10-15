@@ -141,6 +141,18 @@ hr {
   color: var(--c-muted);
 }
 
+/* Long unbreakable strings (emails, order ids, URLs) must never widen a
+   grid/flex track or leak out of a card. `anywhere` — unlike `break-word` —
+   also shrinks the min-content width, which is what actually stops the leak. */
+p, li, dd, dt, address, h1, h2, h3, h4, h5, h6,
+figcaption, summary, label, legend, td, th,
+span, strong, a, em, b, small {
+  overflow-wrap: anywhere;
+}
+
+/* …except where a string must stay on one line. */
+.nowrap, .mono.nowrap { overflow-wrap: normal; word-break: keep-all; }
+
 .muted { color: var(--c-muted); }
 
 .text-sm { font-size: var(--t-sm); }

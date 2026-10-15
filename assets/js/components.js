@@ -145,14 +145,15 @@ window.SP = window.SP || {};
   };
 
   /* ================================================================ brand */
-  function brandMarkup(cls) {
+  function brandMarkup(cls, full) {
     var mark =
       '<svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">' +
       '<path d="M16 3.2s-8.4 9.6-8.4 14.6a8.4 8.4 0 0 0 16.8 0C24.4 12.8 16 3.2 16 3.2z" fill="#1F7A78" fill-opacity=".14"/>' +
       '<path d="M16 4.6s-7.2 8.8-7.2 13.4a7.2 7.2 0 0 0 14.4 0C23.2 13.4 16 4.6 16 4.6z" fill="none" stroke="#1F7A78" stroke-width="1.7"/>' +
       '<path d="M12.6 19.6a4 4 0 0 0 3.4 3.6" fill="none" stroke="#1F7A78" stroke-width="1.7" stroke-linecap="round"/>' +
       "</svg>";
-    return '<a class="brand ' + (cls || "") + '" href="index.html" data-logo>' +
+    return '<a class="brand ' + (cls || "") + '" href="index.html"' +
+      (full ? " data-logo-full" : " data-logo") + ">" +
       mark +
       '<span class="brand__text">' +
       '<span class="brand__word">SwachhataPukare</span>' +
@@ -161,19 +162,21 @@ window.SP = window.SP || {};
   }
   SP.brandMarkup = brandMarkup;
 
-  /* Optional photo logo at assets/logo.png, silently falls back to the wordmark */
+  /* Optional photo logo: emblem everywhere, full lock-up (data-logo-full) in the
+     footer. Either silently falls back to the SVG wordmark when the file is absent. */
   function attachPhotoLogo(scope) {
-    SP.qsa("[data-logo]", scope).forEach(function (holder) {
+    SP.qsa("[data-logo],[data-logo-full]", scope).forEach(function (holder) {
+      var full = holder.hasAttribute("data-logo-full");
       var img = document.createElement("img");
-      img.className = "brand__img";
+      img.className = full ? "brand__img brand__img--full" : "brand__img";
       img.alt = cfg.SITE_SHORT + " Foundation";
-      img.width = 40;
-      img.height = 40;
+      img.width = full ? 78 : 40;
+      img.height = full ? 96 : 40;
       var mark = holder.querySelector(".brand__mark");
       img.addEventListener("error", function () {
         if (img.parentNode && mark) img.parentNode.replaceChild(mark, img);
       });
-      img.src = cfg.LOGO_PATH;
+      img.src = full ? cfg.LOGO_PATH_FULL : cfg.LOGO_PATH;
       if (mark) mark.parentNode.replaceChild(img, mark);
     });
   }
@@ -244,7 +247,7 @@ window.SP = window.SP || {};
 
     return (
       '<aside class="mobile-nav" id="mobile-nav" aria-label="Menu" aria-hidden="true">' +
-      '<div class="mobile-nav__head">' + brandMarkup() +
+      '<div class="mobile-nav__head">' + brandMarkup("", true) +
       '<button class="icon-btn" type="button" data-action="menu-close" aria-label="Close menu">' + icon("close", 20) + "</button>" +
       "</div>" +
       '<div class="mobile-nav__body">' +
@@ -268,7 +271,7 @@ window.SP = window.SP || {};
     var header = h(
       '<div class="site-header">' +
       '<div class="site-header__inner">' +
-      brandMarkup() +
+      brandMarkup("", true) +
       navItems(page) +
       '<div class="header-actions">' +
       '<a class="icon-btn icon-btn--account" href="account.html" aria-label="My account">' + icon("user", 22) + "</a>" +
@@ -303,7 +306,7 @@ window.SP = window.SP || {};
       '<footer class="site-footer">' +
       '<div class="container">' +
       '<div class="footer-grid">' +
-      '<div class="footer-brand">' + brandMarkup() +
+      '<div class="footer-brand">' + brandMarkup("", true) +
       '<p class="footer-about">Handcrafted goods from the Foundation\'s own catalogue, sold to support its environmental and civic work in and around Jamshedpur.</p>' +
       '<span class="footer-title">Partners</span>' +
       '<ul class="partner-chips">' + chips + "</ul>" +

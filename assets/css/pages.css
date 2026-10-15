@@ -488,6 +488,14 @@
   .invoice__head { grid-template-columns: 1.3fr 1fr; }
 }
 
+.invoice__logo {
+  width: 4rem;
+  height: 4rem;
+  object-fit: contain;
+  display: block;
+  margin-bottom: var(--s-3);
+}
+
 .invoice__org {
   font-family: var(--f-display);
   font-size: var(--t-xl);

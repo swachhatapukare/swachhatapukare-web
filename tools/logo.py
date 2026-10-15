@@ -3,8 +3,12 @@
 
 Master (kept untouched):  assets/SPF Logo - Highres.png   (1920x1920, transparent)
 Generated:
-  assets/logo.png       - the circular emblem, 512px square (site header + footer)
-  assets/logo-full.png  - full lock-up incl. the caption line, 768px tall
+  assets/logo.png             - the circular emblem, 512px square (site header + mobile menu)
+  assets/logo-full.png        - full lock-up incl. the caption line, 768px tall
+                                (footer + shop page hero)
+  assets/favicon.ico          - 16/32/48px browser tab icon
+  assets/favicon-32.png       - same emblem as a PNG favicon
+  assets/apple-touch-icon.png - 180px, opaque cream background for iOS
 
 Run from the repo root:  python tools/logo.py
 Requires Pillow:  python -m pip install pillow
@@ -18,11 +22,15 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MASTER = os.path.join(ROOT, "assets", "SPF Logo - Highres.png")
 OUT_EMBLEM = os.path.join(ROOT, "assets", "logo.png")
 OUT_FULL = os.path.join(ROOT, "assets", "logo-full.png")
+OUT_FAV_ICO = os.path.join(ROOT, "assets", "favicon.ico")
+OUT_FAV_PNG = os.path.join(ROOT, "assets", "favicon-32.png")
+OUT_TOUCH = os.path.join(ROOT, "assets", "apple-touch-icon.png")
 
 EMBLEM_SIZE = 512      # displayed at ~40px, so this is ~12x retina headroom
 FULL_HEIGHT = 768
 PAD = 0.03             # transparent margin around the emblem
 COLORS = 256           # PNG-8 palette; the logo is flat vector-style art
+CREAM = (245, 240, 232, 255)   # --c-cream, used where an opaque icon is needed
 
 
 def opaque_box(im):
@@ -83,16 +91,32 @@ def save(im, path, size=None):
                                     len(data) // 1024, mode))
 
 
+def on_background(im, colour):
+    """Flatten onto an opaque background — favicons/touch icons must not be
+    transparent (a transparent .ico renders black in some browsers)."""
+    bg = Image.new("RGBA", im.size, colour)
+    return Image.alpha_composite(bg, im)
+
+
 def main():
     im = Image.open(MASTER).convert("RGBA")
     full_box = opaque_box(im)
     emblem_box = split_emblem(im, full_box)
 
-    save(padded_square(im, emblem_box), OUT_EMBLEM, (EMBLEM_SIZE, EMBLEM_SIZE))
+    emblem = padded_square(im, emblem_box)
+    save(emblem, OUT_EMBLEM, (EMBLEM_SIZE, EMBLEM_SIZE))
 
     full = im.crop(full_box)
     w = int(round(FULL_HEIGHT * full.width / full.height))
     save(full, OUT_FULL, (w, FULL_HEIGHT))
+
+    # favicons: opaque cream ground so the icon never renders as a black square
+    fav_src = on_background(emblem, CREAM)
+    save(fav_src, OUT_FAV_PNG, (32, 32))
+    fav_src.save(OUT_FAV_ICO, format="ICO", sizes=[(16, 16), (32, 32), (48, 48)])
+    print("%s  16/32/48  %d KB  ICO" % (os.path.relpath(OUT_FAV_ICO, ROOT),
+                                        os.path.getsize(OUT_FAV_ICO) // 1024))
+    save(fav_src, OUT_TOUCH, (180, 180))
 
 
 if __name__ == "__main__":
