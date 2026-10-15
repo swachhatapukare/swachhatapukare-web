@@ -51,7 +51,24 @@ assets/
   js/   config.js → data.js → utils.js → store.js → components.js → <page>.js
   products/   (drop product photos here: {slug}-1.jpg, {slug}-2.jpg, {slug}-3.jpg)
   gallery/    (drop work photos here; see config.js GALLERY)
-  logo.png    (optional — replaces the SVG wordmark if present)
+  SPF Logo - Highres.png  (master logo, 1920x1920, kept untouched)
+  logo.png                (generated: 512px circular emblem, PNG-8 27 KB — used by the site)
+  logo-full.png           (generated: full lock-up incl. caption, 621x768, 52 KB)
+```
+
+### Logo
+
+The header, mobile menu and footer load `assets/logo.png` (`LOGO_PATH` in
+`config.js`); if that file is missing the SVG water-drop wordmark is used instead.
+
+The two `logo.png` / `logo-full.png` files are generated from the high-res master
+by `tools/logo.py` — it trims the transparent margins, splits the emblem off from
+the caption line, resizes with LANCZOS and writes the smaller of a full-colour or
+256-colour PNG:
+
+```bash
+python -m pip install pillow   # once
+python tools/logo.py
 ```
 
 * Plain HTML5 / CSS3 / vanilla ES2020 JavaScript. No framework, no CDN (Google Fonts only),
