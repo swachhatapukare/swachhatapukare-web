@@ -77,16 +77,26 @@
         </div>
 
         <div class="filters__group">
-          <h3 class="filters__title">Price (INR)</h3>
-          <div class="filters__row">
-            <label class="field">
-              <span class="visually-hidden">Minimum price</span>
-              <input class="input" type="number" name="min" min="0" step="10" inputmode="numeric" placeholder="Min">
-            </label>
-            <label class="field">
-              <span class="visually-hidden">Maximum price</span>
-              <input class="input" type="number" name="max" min="0" step="10" inputmode="numeric" placeholder="Max">
-            </label>
+          <div class="filters__price-head">
+            <h3 class="filters__title">Price (INR)</h3>
+            <p class="price-filter__values">
+              <output class="price-filter__value" data-price-min-label for="price-min">₹100</output>
+              <span class="price-filter__sep" aria-hidden="true">–</span>
+              <output class="price-filter__value" data-price-max-label for="price-max">₹1,100</output>
+            </p>
+          </div>
+          <div class="price-range" data-price-range>
+            <div class="price-range__rail" aria-hidden="true">
+              <span class="price-range__fill" data-price-fill></span>
+            </div>
+            <input class="price-range__input" type="range" id="price-min" data-price-min
+              min="100" max="1100" step="10" value="100" aria-label="Minimum price">
+            <input class="price-range__input" type="range" id="price-max" data-price-max
+              min="100" max="1100" step="10" value="1100" aria-label="Maximum price">
+          </div>
+          <div class="price-range__scale" aria-hidden="true">
+            <span data-price-min-bound>₹100</span>
+            <span data-price-max-bound>₹1,100</span>
           </div>
           <p class="field__hint">Based on the lower price of variants.</p>
         </div>

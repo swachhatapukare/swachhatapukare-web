@@ -13,6 +13,9 @@
   };
 
   var grid, emptyEl, countEl, activeEl, searchInput, sortSelect, filtersEl;
+  var priceMinInput, priceMaxInput, priceFill, priceMinLabel, priceMaxLabel;
+  var priceMinBoundEl, priceMaxBoundEl;
+  var priceBounds = { min: 0, max: 1000, step: 10 };
 
   function slugToName(slug) {
     var found = SP.config.CATEGORIES.filter(function (c) { return c.slug === slug; })[0];
@@ -54,6 +57,83 @@
       max: state.max,
       sort: state.sort === "featured" ? "" : state.sort
     });
+  }
+
+  /* ---------------------------------------------------------- price range */
+  function computePriceBounds() {
+    var prices = SP.products.map(SP.minPrice).filter(function (n) { return isFinite(n); });
+    if (!prices.length) return { min: 0, max: 1000, step: 10 };
+    var lo = Math.min.apply(null, prices);
+    var hi = Math.max.apply(null, prices);
+    var min = Math.floor(lo / 100) * 100;
+    var max = Math.ceil(hi / 100) * 100;
+    if (max <= min) max = min + 100;
+    return { min: min, max: max, step: 10 };
+  }
+
+  function priceFromState() {
+    var step = priceBounds.step;
+    var min = state.min === "" ? priceBounds.min : Number(state.min);
+    var max = state.max === "" ? priceBounds.max : Number(state.max);
+    if (!isFinite(min)) min = priceBounds.min;
+    if (!isFinite(max)) max = priceBounds.max;
+    min = SP.clamp(Math.round(min / step) * step, priceBounds.min, priceBounds.max);
+    max = SP.clamp(Math.round(max / step) * step, priceBounds.min, priceBounds.max);
+    if (min > max) min = max;
+    return { min: min, max: max };
+  }
+
+  function normalizePriceState() {
+    var price = priceFromState();
+    state.min = price.min <= priceBounds.min ? "" : String(price.min);
+    state.max = price.max >= priceBounds.max ? "" : String(price.max);
+  }
+
+  function updatePriceUI(min, max) {
+    var spread = priceBounds.max - priceBounds.min || 1;
+    priceFill.style.left = ((min - priceBounds.min) / spread) * 100 + "%";
+    priceFill.style.right = ((priceBounds.max - max) / spread) * 100 + "%";
+    priceMinLabel.textContent = SP.fmtINR(min);
+    priceMaxLabel.textContent = SP.fmtINR(max);
+    priceMinInput.setAttribute("aria-valuetext", SP.fmtINR(min));
+    priceMaxInput.setAttribute("aria-valuetext", SP.fmtINR(max));
+  }
+
+  function raisePriceThumb(input) {
+    priceMinInput.style.zIndex = input === priceMinInput ? "5" : "4";
+    priceMaxInput.style.zIndex = input === priceMaxInput ? "5" : "4";
+  }
+
+  function applyPriceBounds() {
+    priceBounds = computePriceBounds();
+    [priceMinInput, priceMaxInput].forEach(function (input) {
+      input.min = String(priceBounds.min);
+      input.max = String(priceBounds.max);
+      input.step = String(priceBounds.step);
+    });
+    priceMinBoundEl.textContent = SP.fmtINR(priceBounds.min);
+    priceMaxBoundEl.textContent = SP.fmtINR(priceBounds.max);
+  }
+
+  function onPriceInput(changed) {
+    var min = Number(priceMinInput.value);
+    var max = Number(priceMaxInput.value);
+
+    if (changed === "min" && min > max) {
+      min = max;
+      priceMinInput.value = String(min);
+    }
+    if (changed === "max" && max < min) {
+      max = min;
+      priceMaxInput.value = String(max);
+    }
+
+    state.min = min <= priceBounds.min ? "" : String(min);
+    state.max = max >= priceBounds.max ? "" : String(max);
+
+    updatePriceUI(min, max);
+    raisePriceThumb(changed === "min" ? priceMinInput : priceMaxInput);
+    sync();
   }
 
   /* ------------------------------------------------------------- filtering */
@@ -159,10 +239,10 @@
     SP.qsa('input[name="tag"]', filtersEl).forEach(function (input) {
       input.checked = state.tag === input.value;
     });
-    var minInput = filtersEl.querySelector('input[name="min"]');
-    var maxInput = filtersEl.querySelector('input[name="max"]');
-    if (minInput) minInput.value = state.min;
-    if (maxInput) maxInput.value = state.max;
+    var price = priceFromState();
+    priceMinInput.value = String(price.min);
+    priceMaxInput.value = String(price.max);
+    updatePriceUI(price.min, price.max);
   }
 
   function clearAll() {
@@ -204,7 +284,16 @@
     searchInput = document.getElementById("shop-search");
     sortSelect = document.getElementById("shop-sort");
     filtersEl = document.getElementById("shop-filters");
+    priceMinInput = document.querySelector("[data-price-min]");
+    priceMaxInput = document.querySelector("[data-price-max]");
+    priceFill = document.querySelector("[data-price-fill]");
+    priceMinLabel = document.querySelector("[data-price-min-label]");
+    priceMaxLabel = document.querySelector("[data-price-max-label]");
+    priceMinBoundEl = document.querySelector("[data-price-min-bound]");
+    priceMaxBoundEl = document.querySelector("[data-price-max-bound]");
     if (!grid) return;
+
+    applyPriceBounds();
 
     /* filter scrim lives on the page so the drawer can be dismissed by tap */
     if (!document.getElementById("filter-scrim")) {
@@ -215,6 +304,7 @@
     }
 
     readUrl();
+    normalizePriceState();
     applyStateToControls();
     render();
 
@@ -228,6 +318,14 @@
       sync();
     });
 
+    [priceMinInput, priceMaxInput].forEach(function (input) {
+      input.addEventListener("input", function () {
+        onPriceInput(input === priceMinInput ? "min" : "max");
+      });
+      input.addEventListener("pointerdown", function () { raisePriceThumb(input); });
+      input.addEventListener("keydown", function () { raisePriceThumb(input); });
+    });
+
     filtersEl.addEventListener("change", function (e) {
       var input = e.target;
       if (input.name === "cat") {
@@ -235,10 +333,6 @@
       } else if (input.name === "tag") {
         var checked = SP.qsa('input[name="tag"]:checked', filtersEl);
         state.tag = checked.length ? checked[0].value : "";
-      } else if (input.name === "min") {
-        state.min = input.value.trim();
-      } else if (input.name === "max") {
-        state.max = input.value.trim();
       } else {
         return;
       }
@@ -283,6 +377,7 @@
     /* keep the URL honest when the user hits back/forward */
     window.addEventListener("popstate", function () {
       readUrl();
+      normalizePriceState();
       applyStateToControls();
       render();
     });
