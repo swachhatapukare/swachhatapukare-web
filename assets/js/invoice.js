@@ -1,4 +1,4 @@
-/* invoice.js — printable demo invoice (?id=) */
+/* invoice.js — printable invoice (?id=) */
 
 (function (SP) {
   "use strict";
@@ -46,7 +46,7 @@
     }
 
     var addr = order.address || {};
-    var methodMap = { upi: "UPI (demo)", card: "Card (demo)", netbanking: "Net banking (demo)", cod: "Cash on Delivery" };
+    var methodMap = { upi: "UPI", card: "Card", netbanking: "Net banking", cod: "Cash on Delivery" };
 
     actionsEl.hidden = false;
     backLink.href = "order-confirmation.html?id=" + encodeURIComponent(order.id);
@@ -68,7 +68,7 @@
       "<div><dt>Invoice no.</dt><dd class=\"mono\">" + SP.esc(order.id) + "</dd></div>" +
       "<div><dt>Date</dt><dd>" + SP.fmtDate(order.placedAt) + "</dd></div>" +
       "<div><dt>Payment</dt><dd>" + SP.esc(methodMap[order.payment.method] || order.payment.method) + "</dd></div>" +
-      "<div><dt>Status</dt><dd>Demo order</dd></div>" +
+      "<div><dt>Status</dt><dd>Confirmed</dd></div>" +
       "</dl></div></header>" +
 
       '<section class="invoice__billing">' +
@@ -102,14 +102,14 @@
         : "") +
       '<div class="summary__row"><span>Courier estimate</span><strong>' +
       (order.shipping === 0 ? "Free" : SP.fmtINR(order.shipping)) + "</strong></div>" +
-      '<div class="summary__row"><span>GST @ ' + order.gstPercent + '% (demo)</span><strong>' + SP.fmtINR(order.gst) + "</strong></div>" +
+      '<div class="summary__row"><span>GST @ ' + order.gstPercent + '%</span><strong>' + SP.fmtINR(order.gst) + "</strong></div>" +
       '<div class="summary__row summary__row--total"><span>Grand total</span><strong>' + SP.fmtINR(order.total) + "</strong></div>" +
       "</div>" +
 
       '<footer class="invoice__foot">' +
-      '<p class="invoice__disclaimer"><strong>Demo invoice. Not a tax document.</strong></p>' +
-      "<p>Product prices exclude print and courier charges. GST shown is a demo percentage (" +
-      order.gstPercent + "%) configured in config.js.</p>" +
+      '<p class="invoice__disclaimer"><strong>Not a tax document.</strong></p>' +
+      "<p>Product prices exclude print and courier charges. GST is charged at " +
+      order.gstPercent + "%.</p>" +
       "<p>Generated " + SP.fmtDateTime(new Date().toISOString()) + " · " + SP.esc(cfg.SITE_NAME) + "</p>" +
       "</footer>" +
       "</article>";

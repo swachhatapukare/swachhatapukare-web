@@ -79,7 +79,7 @@
       (t.coupon
         ? '<p class="form-note">Coupon <strong>' + SP.esc(t.coupon) + "</strong> applied (" + SP.esc(t.couponLabel) + "). " +
           '<button class="link-btn" type="button" data-remove-coupon>Remove</button></p>'
-        : '<p class="form-note">Demo coupon: <strong>SWACHH10</strong> gives 10% off.</p>') +
+        : '<p class="form-note">Use code <strong>SWACHH10</strong> for 10% off.</p>') +
 
       "<hr>" +
 
@@ -89,7 +89,7 @@
         : "") +
       '<div class="summary__row"><span>Courier estimate</span><strong>' +
       (t.shipping === 0 ? "Free" : SP.fmtINR(t.shipping)) + "</strong></div>" +
-      '<div class="summary__row"><span>GST @ ' + t.gstPercent + '% (demo)</span><strong>' + SP.fmtINR(t.gst) + "</strong></div>" +
+      '<div class="summary__row"><span>GST @ ' + t.gstPercent + '%</span><strong>' + SP.fmtINR(t.gst) + "</strong></div>" +
       '<div class="summary__row summary__row--total"><span>Total</span><strong>' + SP.fmtINR(t.total) + "</strong></div>" +
 
       '<p class="form-note">Prices <strong>exclude print and courier charges</strong>. Print work and courier are quoted separately.</p>' +

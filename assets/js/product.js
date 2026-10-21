@@ -83,7 +83,7 @@
         ? product.variants.map(function (v) { return v.name + " (" + SP.fmtINR(v.price) + ")"; }).join(", ")
         : "Single version"],
       ["Tags", (product.tags || []).length ? product.tags.join(", ") : "Handcrafted"],
-      ["Availability", product.stock_status === "instock" ? "In stock (demo)" : "Out of stock"]
+      ["Availability", product.stock_status === "instock" ? "In stock" : "Out of stock"]
     ];
     return (
       '<table class="specs"><caption class="visually-hidden">Specifications for ' + SP.esc(product.name) + "</caption><tbody>" +
@@ -216,7 +216,7 @@
       '<p class="notice notice--warn">All prices are in INR and <strong>exclude print and courier charges</strong>. ' +
       "A courier estimate is shown at checkout.</p>" +
       '<p class="pdp__stock"><span class="badge badge--outline">' +
-      (product.stock_status === "instock" ? "In stock (demo)" : "Out of stock") + "</span>" +
+      (product.stock_status === "instock" ? "In stock" : "Out of stock") + "</span>" +
       '<a class="pdp__wa" href="' + whatsappUrl() + '" target="_blank" rel="noopener noreferrer">' +
       '<svg class="i" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.4a8.6 8.6 0 0 0-7.3 13.2L3.4 20.6l4.1-1.3A8.6 8.6 0 1 0 12 3.4z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>' +
       "Ask on WhatsApp</a></p>" +

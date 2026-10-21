@@ -36,7 +36,7 @@
       '<svg class="i" width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7.5v5.5M12 16.2v.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>' +
       "</span>" +
       "<h1>We could not find that order</h1>" +
-      '<p class="muted">Check the order id, or start a new order from the shop. (Orders live in this browser only — this is a demo.)</p>' +
+      '<p class="muted">Check the order id, or start a new order from the shop. (Orders live in this browser only.)</p>' +
       '<div class="btn-row">' +
       '<a class="btn btn--primary" href="shop.html">Back to the shop</a>' +
       '<a class="btn btn--secondary" href="track.html">Track an order</a>' +
@@ -65,10 +65,8 @@
       "<h1>Order confirmed</h1>" +
       '<p class="confirm-hero__id mono">' + SP.esc(order.id) + "</p>" +
       '<p class="lead">Thank you, ' + SP.esc(order.customer.name) +
-      ". A confirmation would be emailed to <strong>" + SP.esc(order.customer.email) + "</strong> (demo — no email is sent).</p>" +
+      ". A confirmation would be emailed to <strong>" + SP.esc(order.customer.email) + "</strong>.</p>" +
       "</div></div>" +
-
-      '<div class="notice">This is a demo order. No payment was taken and nothing will be shipped.</div>' +
 
       '<div class="confirm-grid">' +
       '<section class="summary" aria-labelledby="conf-summary">' +
@@ -81,7 +79,7 @@
         : "") +
       '<div class="summary__row"><span>Courier estimate</span><strong>' +
       (order.shipping === 0 ? "Free" : SP.fmtINR(order.shipping)) + "</strong></div>" +
-      '<div class="summary__row"><span>GST @ ' + order.gstPercent + '% (demo)</span><strong>' + SP.fmtINR(order.gst) + "</strong></div>" +
+      '<div class="summary__row"><span>GST @ ' + order.gstPercent + '%</span><strong>' + SP.fmtINR(order.gst) + "</strong></div>" +
       '<div class="summary__row summary__row--total"><span>Total</span><strong>' + SP.fmtINR(order.total) + "</strong></div>" +
       '<p class="form-note">Product prices exclude print and courier charges.</p>' +
       "</section>" +
@@ -108,7 +106,7 @@
   }
 
   function paymentLabel(order) {
-    var map = { upi: "UPI (demo)", card: "Card (demo)", netbanking: "Net banking (demo)", cod: "Cash on Delivery" };
+    var map = { upi: "UPI", card: "Card", netbanking: "Net banking", cod: "Cash on Delivery" };
     return map[order.payment.method] || order.payment.method;
   }
 

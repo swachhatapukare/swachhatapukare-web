@@ -87,7 +87,7 @@
       "</span>" +
       "<h3>We could not find that order</h3>" +
       '<p class="muted">' + SP.esc(message) + "</p>" +
-      '<p class="form-note">Orders are stored in this browser only — this demo has no server. ' +
+      '<p class="form-note">Orders are stored in this browser only. ' +
       "Place an order first, then track it from the confirmation page.</p>" +
       '<div class="btn-row">' +
       '<a class="btn btn--primary" href="shop.html">Go to the shop</a>' +

@@ -48,7 +48,7 @@
         : "") +
       '<div class="summary__row"><span>Courier estimate</span><strong>' +
       (t.shipping === 0 ? "Free" : SP.fmtINR(t.shipping)) + "</strong></div>" +
-      '<div class="summary__row"><span>GST @ ' + t.gstPercent + '% (demo)</span><strong>' + SP.fmtINR(t.gst) + "</strong></div>" +
+      '<div class="summary__row"><span>GST @ ' + t.gstPercent + '%</span><strong>' + SP.fmtINR(t.gst) + "</strong></div>" +
       '<div class="summary__row summary__row--total"><span>Total</span><strong>' + SP.fmtINR(t.total) + "</strong></div>";
 
     updateCod(t);
@@ -132,7 +132,6 @@
         title: "Confirm your order",
         html:
           '<p>You are placing a <strong>Cash on Delivery</strong> order. Pay when it arrives.</p>' +
-          '<p class="form-note">Demo checkout — no real order is created.</p>' +
           '<div class="modal__actions">' +
           '<button class="btn btn--secondary" type="button" data-action="modal-close">Cancel</button>' +
           '<button class="btn btn--primary" type="button" id="confirm-cod">Place order</button>' +
@@ -150,7 +149,7 @@
     }
 
     SP.ui.modal({
-      title: "Secure payment (demo)",
+      title: "Secure payment",
       html:
         '<div class="payment-state" data-payment-processing>' +
         '<div class="spinner" role="status"><span class="visually-hidden">Processing payment</span></div>' +
@@ -167,9 +166,9 @@
         '<span class="payment-state__icon">' +
         '<svg class="i" width="34" height="34" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.8l4.4 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
         "</span>" +
-        "<h3>Payment successful (demo)</h3>" +
+        "<h3>Payment successful</h3>" +
         '<p class="form-note">' + SP.esc(methodLabel(paymentMethod)) + " · " +
-        SP.fmtINR(SP.store.totals().total) + " · nothing was actually charged.</p>" +
+        SP.fmtINR(SP.store.totals().total) + ".</p>" +
         '<div class="modal__actions">' +
         '<button class="btn btn--primary" type="button" id="payment-continue">Continue to confirmation</button>' +
         "</div></div>";

@@ -172,7 +172,7 @@ window.SP = window.SP || {};
     var shipping = 0;
     if (lines.length && net < SP.config.FREE_SHIPPING_ABOVE) shipping = SP.config.SHIPPING_FLAT;
 
-    var gst = Math.round((net * SP.config.DEMO_GST_PERCENT) / 100);
+    var gst = Math.round((net * SP.config.GST_PERCENT) / 100);
     var total = net + shipping + gst;
 
     return {
@@ -184,7 +184,7 @@ window.SP = window.SP || {};
       couponLabel: conf ? conf.label : "",
       shipping: shipping,
       gst: gst,
-      gstPercent: SP.config.DEMO_GST_PERCENT,
+      gstPercent: SP.config.GST_PERCENT,
       total: total,
       freeShippingThreshold: SP.config.FREE_SHIPPING_ABOVE,
       freeShippingGap: Math.max(0, SP.config.FREE_SHIPPING_ABOVE - net),
@@ -251,7 +251,7 @@ window.SP = window.SP || {};
       total: t.total,
       payment: {
         method: payload.method,
-        status: payload.method === "cod" ? "due_on_delivery" : "paid_demo"
+        status: payload.method === "cod" ? "due_on_delivery" : "paid"
       },
       customer: payload.customer,
       address: payload.address,
@@ -292,7 +292,7 @@ window.SP = window.SP || {};
 
   /* BACKEND-HOOK: POST /api/auth/otp — server sends and verifies the OTP. */
   function verifyOtp(phone, otp) {
-    return String(otp).trim() === SP.config.OTP_DEMO && /^[6-9]\d{9}$/.test(SP.digits(phone));
+    return String(otp).trim() === SP.config.OTP_CODE && /^[6-9]\d{9}$/.test(SP.digits(phone));
   }
 
   function saveUser(user) {

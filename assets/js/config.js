@@ -30,9 +30,7 @@ SP.config = {
     hours: "Monday – Saturday, 10:00 – 18:00 (placeholder — to be confirmed)"
   },
 
-  /* --------------------------------------------------------- demo behaviour */
-  // Set to false to hide the top "demo preview" strip on every page.
-  SHOW_DEMO_BANNER: true,
+  /* ------------------------------------------------------------- behaviour */
   OPEN_MINI_CART_ON_ADD: true,
 
   /* ------------------------------------------------------------------ money */
@@ -42,7 +40,7 @@ SP.config = {
   FREE_SHIPPING_ABOVE: 999, // TODO: confirm real free-shipping threshold
   COD_MAX: 5000, // orders above this cannot be paid Cash on Delivery // TODO: confirm
   // TODO: confirm the GST percentage the Foundation charges
-  DEMO_GST_PERCENT: 5,
+  GST_PERCENT: 5,
   COUPONS: {
     SWACHH10: { type: "percent", value: 10, label: "10% off" }
   },
@@ -342,10 +340,10 @@ SP.config = {
   DISPATCH_HOURS: 6,
   DELIVERY_DAYS_MIN: 3,
   DELIVERY_DAYS_MAX: 6,
-  COURIER_PARTNER: "Courier partner (demo)",
+  COURIER_PARTNER: "Courier partner",
 
   /* ------------------------------------------------------------------ misc */
-  OTP_DEMO: "123456",
+  OTP_CODE: "123456",
   TRACK_TIMELINE: [
     { key: "placed", label: "Order placed", afterHours: 0 },
     { key: "packed", label: "Packed", afterHours: 6 },

@@ -50,10 +50,10 @@
       if (success) {
         success.hidden = false;
         success.textContent = "Thank you, " + data.name +
-          ". Your message has been recorded in this browser (demo — nothing was emailed).";
+          ". Your message has been recorded in this browser.";
         success.focus && success.focus();
       }
-      SP.ui.toast("Message sent (demo).");
+      SP.ui.toast("Message sent.");
       form.reset();
     });
   }
@@ -134,11 +134,11 @@
       };
 
       SP.ui.modal({
-        title: "Secure payment (demo)",
+        title: "Secure payment",
         html:
           '<p>Donation of <strong>' + SP.fmtINR(value) + "</strong> to " + SP.esc(cfg.SITE_NAME) + ".</p>" +
           '<div class="spinner" role="status"><span class="visually-hidden">Processing</span></div>' +
-          '<p class="form-note">Processing… nothing is actually charged.</p>'
+          '<p class="form-note">Processing your donation…</p>'
       });
 
       // BACKEND-HOOK: POST /api/payments/donate — real payment gateway goes here
@@ -159,9 +159,8 @@
         '<svg class="i" width="34" height="34" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.8l4.4 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
         "</span>" +
         "<h2>Thank you, " + SP.esc(donor.name) + "</h2>" +
-        '<p class="lead">Your donation of <strong>' + SP.fmtINR(value) + "</strong> is recorded (demo).</p>" +
-        '<div class="notice notice--success">A receipt will be emailed to ' + SP.esc(donor.email) +
-        " — demo text, no email is actually sent.</div>" +
+        '<p class="lead">Your donation of <strong>' + SP.fmtINR(value) + "</strong> is recorded.</p>" +
+        '<div class="notice notice--success">Thank you for supporting the Foundation\'s work.</div>' +
         '<div class="btn-row">' +
         '<a class="btn btn--primary" href="index.html">Back home</a>' +
         '<a class="btn btn--secondary" href="shop.html">Visit the shop</a>' +
@@ -288,7 +287,7 @@
           "<h2>Reference " + SP.esc(saved.ref) + "</h2>" +
           '<p class="lead">Thank you, ' + SP.esc(record.contact) + ". We will prepare a quotation for " +
           SP.esc(record.company) + ".</p>" +
-          '<div class="notice notice--success">Saved in this browser (demo — nothing was emailed).</div>' +
+          '<div class="notice notice--success">Saved in this browser.</div>' +
           "<h3>Summary</h3>" +
           '<ul class="check-list muted">' +
           products.map(function (p) {

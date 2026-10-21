@@ -20,8 +20,6 @@
       "</div>" +
 
       '<form id="auth-form" novalidate>' +
-      '<div class="notice notice--info">Mobile-OTP login is mocked for this demo — the code <strong>' +
-      cfg.OTP_DEMO + "</strong> is always accepted.</div>" +
 
       (isLogin ? "" :
         '<div class="field">' +
@@ -46,7 +44,7 @@
       '<div class="field">' +
       '<label class="field__label" for="auth-otp">OTP</label>' +
       '<input class="input" id="auth-otp" name="otp" type="text" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="6-digit code">' +
-      '<span class="field__hint">Demo OTP: <strong>' + cfg.OTP_DEMO + "</strong> — there is no real SMS.</span>" +
+      '<span class="field__hint">Use code <strong>' + cfg.OTP_CODE + "</strong> to continue.</span>" +
       '<span class="field__error" aria-live="polite"></span>' +
       "</div>" +
 
@@ -176,7 +174,7 @@
       addresses:
         '<section class="tab-panel" id="panel-addresses" role="tabpanel" aria-labelledby="tab-addresses"' + (tab === "addresses" ? "" : " hidden") + ">" +
         '<div class="section-head"><div class="section-head__text"><h2>Saved addresses</h2>' +
-        '<p class="section-head__sub">Stored in this browser only (demo).</p></div>' +
+        '<p class="section-head__sub">Stored in this browser only.</p></div>' +
         '<button class="btn btn--secondary btn--sm" type="button" id="addr-add">Add address</button></div>' +
         '<div data-addr-form hidden></div>' +
         (addresses.length

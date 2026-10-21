@@ -5,7 +5,7 @@ A complete, dependency-free front-end prototype for the SwachhataPukare Foundati
 a Foundation website (work, gallery, donate, contact, bulk enquiry) and a
 single-brand marketplace for its handcrafted catalogue.
 
-**This is a demo preview.** No real payments or orders are taken. Cart, coupons,
+**This is a static prototype.** No real payments or orders are taken. Cart, coupons,
 OTP login, orders and invoices all live in `localStorage` (`sp_*` keys) in the browser.
 
 ## Run it locally
@@ -74,7 +74,7 @@ python tools/logo.py
 * Plain HTML5 / CSS3 / vanilla ES2020 JavaScript. No framework, no CDN (Google Fonts only),
   no bundler, no inline styles or inline event handlers.
 * Classic `<script defer>` files sharing one global namespace: `SP`.
-* `components.js` injects the demo banner, header, mega/mobile menu, footer,
+* `components.js` injects the header, mega/mobile menu, footer,
   mini-cart drawer, modal, toast and WhatsApp button into `#sp-top` / `#sp-bottom`,
   so the chrome is edited in exactly one place.
 * Prices everywhere state that they **exclude print and courier charges**.
@@ -82,14 +82,14 @@ python tools/logo.py
   so the site is fully presentable before any photography exists.
 * Every unverified claim is marked with a visible `TODO` note (see `config.js`).
 
-### Demo mechanics
+### Prototype mechanics
 
 * Coupon `SWACHH10` → 10% off. Free shipping above `FREE_SHIPPING_ABOVE` (₹999).
 * Cash on Delivery is blocked for orders above `COD_MAX` (₹5,000) with an explanation.
 * OTP login always accepts `123456` (any other code fails).
 * Order ids look like `SP-20261008-0001`; the tracking timeline is simulated from
   `TRACK_TIMELINE` (0h / 6h / 24h / 48h / 96h).
-* Invoices are labelled "Demo invoice"; taxes use `DEMO_GST_PERCENT` (5%).
+* Invoices use `GST_PERCENT` (5%).
 
 ## Where to fill in real values
 
@@ -102,7 +102,7 @@ Everything client-specific is at the top of `assets/js/config.js`:
 | `IMPACT` counters | verified impact numbers |
 | `TESTIMONIALS` | real quotes + attributions |
 | `COPY.about`, `COPY.whatWeDo` | approved About and work copy |
-| `COUPONS`, `DEMO_GST_PERCENT`, `COD_MAX`, `SHIPPING_FLAT`, `FREE_SHIPPING_ABOVE` | commercial terms |
+| `COUPONS`, `GST_PERCENT`, `COD_MAX`, `SHIPPING_FLAT`, `FREE_SHIPPING_ABOVE` | commercial terms |
 | `DISPATCH_HOURS`, `COURIER_PARTNER`, delivery day range | real fulfilment terms |
 | `GALLERY` | real photo paths + captions |
 
@@ -124,9 +124,9 @@ on WordPress, so a rebuild is mostly a lift-and-shift:
 | `cart.html`, `checkout.html` | WooCommerce cart + checkout (native templates) |
 | `store.js` totals, `SWACHH10` coupon | WooCommerce cart totals + coupon |
 | `order-confirmation`, `track`, `invoice` | Thank-you page, **Order tracking** plugin, **PDF invoices** plugin (order notes hold the timeline) |
-| `account.html` | My Account (login uses WooCommerce; the demo OTP would need an SMS OTP plugin) |
+| `account.html` | My Account (login uses WooCommerce; the OTP flow would need an SMS OTP plugin) |
 | `donate.html`, `contact.html`, `bulk-enquiry.html` | Donation plugin (or WooCommerce product) + a forms plugin (WPForms/CF7) with mail routing |
-| `components.js` header/footer/banner | Theme header/footer templates; the demo banner becomes a dismissible notice bar |
+| `components.js` header/footer | Theme header/footer templates |
 | `localStorage` state | Server-side sessions/orders — all `BACKEND-HOOK:` comments in `store.js` mark the seams |
 | `assets/products/*.jpg` | Media Library uploads (WooCommerce sizes) |
 

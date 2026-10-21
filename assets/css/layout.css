@@ -84,58 +84,10 @@
 .stack--sm > * + * { margin-top: var(--s-2); }
 .stack--lg > * + * { margin-top: var(--s-6); }
 
-/* #sp-top holds the injected banner + header. Flattening it lets the sticky
+/* #sp-top holds the injected header. Flattening it lets the sticky
    header pin against <body> — a sticky element only sticks inside its own
    parent box, so keeping the wrapper box would unstick it as soon as you scroll. */
 #sp-top { display: contents; }
-
-/* ------------------------------------------------------------------- demo banner */
-.demo-banner {
-  background: var(--c-dark);
-  color: var(--c-on-dark);
-  font-size: var(--t-sm);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.demo-banner__inner {
-  max-width: var(--wrap);
-  margin-inline: auto;
-  padding: var(--s-2) var(--gutter);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--s-3);
-  min-height: var(--banner-h);
-  text-align: center;
-}
-
-.demo-banner__dot {
-  width: 7px;
-  height: 7px;
-  border-radius: var(--r-full);
-  background: var(--c-amber);
-  flex: none;
-}
-
-.demo-banner__text { color: var(--c-on-dark); }
-
-.demo-banner__close {
-  margin-left: auto;
-  color: var(--c-on-dark-muted);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.75rem;
-  height: 1.75rem;
-  border-radius: var(--r-full);
-  flex: none;
-  transition: background var(--d-sm) var(--e-out), color var(--d-sm) var(--e-out);
-}
-
-.demo-banner__close:hover {
-  background: rgba(255, 255, 255, 0.14);
-  color: var(--c-on-dark);
-}
 
 /* ------------------------------------------------------------------- header */
 .site-header {

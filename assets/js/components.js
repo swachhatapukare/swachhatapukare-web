@@ -1,5 +1,5 @@
 /* components.js — chrome written once and injected into every page:
-   demo banner, header + mega menu, mobile nav, footer, mini-cart drawer,
+   header + mega menu, mobile nav, footer, mini-cart drawer,
    modal, toast, WhatsApp button, and image fallbacks. */
 
 window.SP = window.SP || {};
@@ -181,25 +181,6 @@ window.SP = window.SP || {};
     });
   }
 
-  /* ================================================================ banner */
-  function renderBanner(root) {
-    if (!cfg.SHOW_DEMO_BANNER) return;
-    var dismissed = false;
-    try { dismissed = window.localStorage.getItem("sp_banner_dismissed") === "1"; } catch (e) { /* ignore */ }
-    if (dismissed) return;
-
-    var banner = h(
-      '<div class="demo-banner" role="region" aria-label="Demo notice">' +
-      '<div class="demo-banner__inner">' +
-      '<span class="demo-banner__dot" aria-hidden="true"></span>' +
-      '<span class="demo-banner__text">Demo preview. No real payments or orders.</span>' +
-      '<button class="demo-banner__close" type="button" data-action="banner-dismiss" aria-label="Dismiss demo notice">' +
-      icon("close", 16) + "</button>" +
-      "</div></div>"
-    );
-    root.appendChild(banner);
-  }
-
   /* =============================================================== header */
   function navItems(page) {
     function active(key) { return page === key ? " is-active" : ""; }
@@ -328,12 +309,12 @@ window.SP = window.SP || {};
       '<p class="footer-about footer-about--spaced">' + SP.esc(cfg.FOUNDATION.hours) + "</p>" +
       "</div></div>" +
       '<div class="footer-bottom">' +
-      '<span>&copy; ' + new Date().getFullYear() + " " + SP.esc(cfg.SITE_NAME) + ". Demo preview — no real orders.</span>" +
+      '<span>&copy; ' + new Date().getFullYear() + " " + SP.esc(cfg.SITE_NAME) + ".</span>" +
       '<nav class="footer-bottom__links" aria-label="Footer">' +
       '<a href="policies.html">Policies</a>' +
       '<a href="track.html">Track order</a>' +
       '<a href="account.html">Account</a>' +
-      '<a href="404.html">Sitemap demo</a>' +
+      '<a href="404.html">Sitemap</a>' +
       "</nav></div></div></footer>"
     );
     root.appendChild(footer);
@@ -625,11 +606,6 @@ window.SP = window.SP || {};
       var action = target.getAttribute("data-action");
 
       switch (action) {
-        case "banner-dismiss":
-          try { window.localStorage.setItem("sp_banner_dismissed", "1"); } catch (err) { /* ignore */ }
-          if (target.closest(".demo-banner")) target.closest(".demo-banner").remove();
-          break;
-
         case "menu-toggle": toggleMenu(); break;
         case "menu-close": closeMenu(); break;
 
@@ -775,7 +751,6 @@ window.SP = window.SP || {};
       var bottom = el("#sp-bottom");
 
       if (top) {
-        renderBanner(top);
         renderHeader(top, page);
       }
       if (bottom) renderFooter(bottom);
