@@ -218,7 +218,7 @@
       '<p class="pdp__stock"><span class="badge badge--outline">' +
       (product.stock_status === "instock" ? "In stock" : "Out of stock") + "</span>" +
       '<a class="pdp__wa" href="' + whatsappUrl() + '" target="_blank" rel="noopener noreferrer">' +
-      '<svg class="i" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.4a8.6 8.6 0 0 0-7.3 13.2L3.4 20.6l4.1-1.3A8.6 8.6 0 1 0 12 3.4z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>' +
+      SP.icon("whatsapp", 16) +
       "Ask on WhatsApp</a></p>" +
       "</div></div>" +
 
