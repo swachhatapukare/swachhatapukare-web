@@ -1,161 +1,297 @@
-/* home.js — hero art, animated counters, categories, featured carousel, testimonials */
+/* home.js — home page only: link targets, image fallbacks, scroll reveals,
+   impact counters, story cross-fade and keyboard support for scroll rows.
+   No dependencies beyond the existing SP helpers. */
 
 (function (SP) {
   "use strict";
 
-  var cfg = SP.config;
+  var HOME_CONFIG = {
+    /* TODO: SP.config.SHOP_URL does not exist in this repo yet, and teaser.js
+       is not present either. Set SHOP_URL to the external store base (for
+       example "https://shop.example.org/") when it is ready. An empty string
+       keeps every shop link on this site's own shop.html / product.html. */
+    SHOP_URL: "",
 
-  /* ---------------------------------------------------------------- hero */
-  function renderHeroArt() {
-    var frame = SP.qs("[data-hero-art]");
-    if (frame) {
-      frame.innerHTML = SP.imgTag({
-        src: "assets/products/coaster-set-1.jpg",
-        alt: "Handwoven coaster set from the Foundation's catalogue",
-        name: "Coaster Set",
-        tint: "--c-cat-tabletop",
-        w: 900,
-        h: 900,
-        eager: true
-      });
-      SP.hydrateImages(frame);
-    }
-    var story = SP.qs("[data-story-art]");
-    if (story) {
-      story.innerHTML =
-        '<div class="story-art">' +
-        SP.imgTag({
-          src: "assets/gallery/weaving-1.jpg",
-          alt: "Weaving water hyacinth — photograph pending",
-          name: "Water hyacinth weaving",
-          tint: "--c-cat-home",
-          w: 900,
-          h: 720
-        }) +
-        '<span class="story-art__tag badge badge--hyacinth">Water Hyacinth</span>' +
-        "</div>";
-      SP.hydrateImages(story);
-    }
+    /* TODO confirm: figures still to be verified with the Foundation.
+       The same numbers are written in index.html so they survive with JS off;
+       keep the two in sync. A null value hides its tile. */
+    IMPACT: [
+      { value: 500, suffix: "+", label: "River cleaning drives", aria: "500 plus river cleaning drives" },
+      { value: 68, suffix: "+", label: "TEDx speakers", aria: "68 plus TEDx speakers" },
+      { value: 5000, suffix: "\u00A0kW+", label: "Solar capacity", aria: "5,000 kilowatts plus of solar capacity", format: "comma" },
+      { value: null, label: "CSR projects" }
+    ]
+  };
+
+  var reduced = SP.prefersReducedMotion ? SP.prefersReducedMotion() : false;
+  var qsa = SP.qsa || function (sel, root) {
+    return Array.prototype.slice.call((root || document).querySelectorAll(sel));
+  };
+
+  /* ------------------------------------------------------------ shop links */
+  function shopBase() {
+    var base = (SP.config && SP.config.SHOP_URL) || HOME_CONFIG.SHOP_URL || "";
+    return String(base).trim();
   }
 
-  /* ------------------------------------------------------------ counters */
-  function renderCounters() {
-    var holder = SP.qs("[data-counters]");
-    if (!holder) return;
+  function shopHref() {
+    return shopBase() || "shop.html";
+  }
 
-    holder.innerHTML = cfg.IMPACT.map(function (item) {
-      return (
-        '<div class="counter">' +
-        '<span class="counter__num" data-count-to="' + item.value + '" data-suffix="' + SP.esc(item.suffix || "") + '">' +
-        (SP.prefersReducedMotion() ? item.value + SP.esc(item.suffix || "") : "0" + SP.esc(item.suffix || "")) +
-        "</span>" +
-        '<span class="counter__label">' + SP.esc(item.label) + "</span>" +
-        "</div>"
-      );
+  function productHref(slug) {
+    var path = "product.html?slug=" + encodeURIComponent(slug || "");
+    var base = shopBase();
+    if (!base) return path;
+    return (base.slice(-1) === "/" ? base : base + "/") + path;
+  }
+
+  function wireShopLinks() {
+    qsa("[data-shop-link]").forEach(function (link) {
+      link.setAttribute("href", shopHref());
+    });
+    qsa("[data-product-link]").forEach(function (link) {
+      var slug = link.getAttribute("data-product-link");
+      if (slug) link.setAttribute("href", productHref(slug));
+    });
+  }
+
+  /* --------------------------------------------------------- image fallback */
+  function tintHex(name) {
+    var value = "";
+    try {
+      value = getComputedStyle(document.documentElement).getPropertyValue(name || "").trim();
+    } catch (e) { value = ""; }
+    return value || "#ECE7DB";
+  }
+
+  function escapeXml(value) {
+    return String(value == null ? "" : value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function wrapLabel(label, perLine) {
+    var words = String(label || "Photo coming soon").split(/\s+/);
+    var lines = [];
+    var line = "";
+    words.forEach(function (word) {
+      if (line && (line + " " + word).length > perLine) {
+        lines.push(line);
+        line = word;
+      } else {
+        line = line ? line + " " + word : word;
+      }
+    });
+    if (line) lines.push(line);
+    return lines.slice(0, 4);
+  }
+
+  function placeholderUri(label, tint, w, h) {
+    w = Math.max(320, w || 900);
+    h = Math.max(320, h || 900);
+    var lines = wrapLabel(label, Math.max(14, Math.round(w / 24)));
+    var fontSize = Math.max(20, Math.round(w / 24));
+    var gap = Math.round(fontSize * 1.3);
+    var startY = Math.round(h / 2) - Math.round((lines.length - 1) * gap / 2);
+    var labelMarkup = lines.map(function (line, index) {
+      return "<text x='" + Math.round(w / 2) + "' y='" + (startY + index * gap) +
+        "' text-anchor='middle' font-family='Georgia, serif' font-size='" + fontSize +
+        "' fill='#133A3F'>" + escapeXml(line) + "</text>";
     }).join("");
+    var dropY = startY - fontSize - Math.round(fontSize * 1.9);
 
-    if (SP.prefersReducedMotion() || !("IntersectionObserver" in window)) return;
+    var svg =
+      "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 " + w + " " + h + "' width='" + w + "' height='" + h + "'>" +
+      "<rect width='" + w + "' height='" + h + "' fill='" + tint + "'/>" +
+      "<g fill='none' stroke='#1F7A78' stroke-opacity='.22' stroke-width='2'>" +
+      "<path d='M-40 " + Math.round(h * 0.78) + "c140-50 250 45 390 0s250-50 390 0 250 45 390 0'/>" +
+      "<path d='M-40 " + Math.round(h * 0.84) + "c140-50 250 45 390 0s250-50 390 0 250 45 390 0'/>" +
+      "<path d='M-40 " + Math.round(h * 0.9) + "c140-50 250 45 390 0s250-50 390 0 250 45 390 0'/>" +
+      "</g>" +
+      "<path d='M" + Math.round(w / 2) + " " + (dropY - Math.round(fontSize * 1.6)) +
+      "s-" + Math.round(fontSize * 1.1) + " " + Math.round(fontSize * 1.3) + " -" + Math.round(fontSize * 1.1) + " " + Math.round(fontSize * 2) +
+      "a" + Math.round(fontSize * 1.1) + " " + Math.round(fontSize * 1.1) + " 0 0 0 " + Math.round(fontSize * 2.2) + " 0" +
+      "c0-" + Math.round(fontSize * 0.7) + " -" + Math.round(fontSize * 1.1) + " -" + Math.round(fontSize * 2) + " -" + Math.round(fontSize * 1.1) + " -" + Math.round(fontSize * 2) + "z' " +
+      "fill='none' stroke='#1F7A78' stroke-opacity='.55' stroke-width='2'/>" +
+      labelMarkup +
+      "<text x='" + Math.round(w / 2) + "' y='" + (startY + lines.length * gap + Math.round(fontSize * 0.2)) +
+      "' text-anchor='middle' font-family='Helvetica, Arial, sans-serif' font-size='" + Math.max(11, Math.round(fontSize * 0.34)) +
+      "' letter-spacing='2' fill='#5B6B6E'>PHOTO COMING SOON</text>" +
+      "</svg>";
 
-    var seen = false;
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting || seen) return;
-        seen = true;
-        SP.qsa("[data-count-to]", holder).forEach(function (node) { animate(node); });
-        observer.disconnect();
-      });
-    }, { threshold: 0.4 });
-    observer.observe(holder);
+    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
   }
 
-  function animate(node) {
-    var target = Number(node.getAttribute("data-count-to")) || 0;
-    var suffix = node.getAttribute("data-suffix") || "";
+  SP.homeFallback = function (img) {
+    if (!img || img.dataset.hFallback) return;
+    img.dataset.hFallback = "1";
+    img.onerror = null;
+    var w = Number(img.getAttribute("data-w")) || img.naturalWidth || 900;
+    var h = Number(img.getAttribute("data-h")) || img.naturalHeight || 900;
+    img.src = placeholderUri(img.getAttribute("data-label") || img.getAttribute("alt"), tintHex(img.getAttribute("data-tint")), w, h);
+    img.classList.add("is-fallback");
+  };
+
+  function hydrateFallbacks() {
+    qsa("img[data-label]").forEach(function (img) {
+      if (img.complete && img.naturalWidth === 0) {
+        SP.homeFallback(img);
+      } else {
+        img.addEventListener("error", function () { SP.homeFallback(img); });
+      }
+    });
+  }
+
+  /* --------------------------------------------------------------- counters */
+  function formatNumber(value, format) {
+    if (format === "comma") {
+      try {
+        return new Intl.NumberFormat("en-IN").format(value);
+      } catch (e) {
+        return String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+    }
+    return String(value);
+  }
+
+  function animateCount(node, target, format) {
+    if (reduced) {
+      node.textContent = formatNumber(target, format);
+      return;
+    }
     var duration = 1200;
-    var start = performance.now();
+    var start = null;
     function frame(now) {
-      var t = SP.clamp((now - start) / duration, 0, 1);
+      if (start === null) start = now;
+      var t = Math.min((now - start) / duration, 1);
       var eased = 1 - Math.pow(1 - t, 3);
-      node.textContent = Math.round(target * eased) + suffix;
+      node.textContent = formatNumber(Math.round(target * eased), format);
       if (t < 1) requestAnimationFrame(frame);
-      else node.textContent = target + suffix;
+      else node.textContent = formatNumber(target, format);
     }
     requestAnimationFrame(frame);
   }
 
-  /* ---------------------------------------------------------- categories */
-  function renderCategories() {
-    var holder = SP.qs("[data-categories]");
-    if (!holder) return;
-    holder.innerHTML = SP.categories().map(function (cat) {
-      var count = SP.categoryCount(cat.name);
-      return (
-        '<a class="category-tile" href="shop.html?cat=' + cat.slug + '">' +
-        '<span class="category-tile__count">' + count + (count === 1 ? " product" : " products") + "</span>" +
-        '<span class="category-tile__name">' + SP.esc(cat.name) + "</span>" +
-        '<span class="category-tile__arrow">' +
-        '<svg class="i" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
-        "</span></a>"
-      );
-    }).join("");
+  function initImpact() {
+    var items = qsa(".h-impact__item");
+    if (!items.length) return;
+
+    var visible = HOME_CONFIG.IMPACT.filter(function (entry) { return entry.value != null; });
+
+    items.forEach(function (item, index) {
+      var entry = visible[index];
+      if (!entry) return;
+      if (entry.aria) item.setAttribute("aria-label", entry.aria);
+      var node = item.querySelector(".h-impact__count");
+      var suffix = item.querySelector(".h-impact__suffix");
+      var label = item.querySelector(".h-impact__label");
+      if (node) {
+        node.setAttribute("data-count-to", String(entry.value));
+        node.setAttribute("data-format", entry.format || "");
+        node.textContent = formatNumber(entry.value, entry.format);
+      }
+      if (suffix && entry.suffix != null) suffix.textContent = entry.suffix;
+      if (label) label.textContent = entry.label;
+    });
+
+    if (reduced || !("IntersectionObserver" in window)) return;
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var node = entry.target.querySelector(".h-impact__count");
+        observer.unobserve(entry.target);
+        if (!node) return;
+        animateCount(node, Number(node.getAttribute("data-count-to")) || 0, node.getAttribute("data-format"));
+      });
+    }, { threshold: 0.4 });
+
+    items.forEach(function (item) { observer.observe(item); });
   }
 
-  /* ------------------------------------------------------------- featured */
-  function renderFeatured() {
-    var track = SP.qs("[data-carousel-track]");
-    if (!track) return;
-    var list = SP.featuredProducts();
-    track.innerHTML = list.map(function (p) {
-      return '<div class="carousel__slide">' + SP.productCard(p) + "</div>";
-    }).join("");
-    SP.hydrateImages(track);
+  /* ------------------------------------------------------------ story steps */
+  function initStory() {
+    var steps = qsa("[data-story-steps] .h-step");
+    var images = qsa(".h-story__img");
+    var progress = document.querySelector("[data-story-progress]");
+    if (!steps.length || !images.length) return;
 
-    var prev = SP.qs('[data-carousel="prev"]');
-    var next = SP.qs('[data-carousel="next"]');
-    function step(dir) {
-      var amount = Math.max(240, track.clientWidth * 0.7);
-      track.scrollBy({ left: dir * amount, behavior: SP.prefersReducedMotion() ? "auto" : "smooth" });
+    function setActive(index) {
+      steps.forEach(function (step, i) {
+        var active = i === index;
+        step.classList.toggle("is-active", active);
+        var button = step.querySelector(".h-step__btn");
+        if (button) button.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+      images.forEach(function (image, i) {
+        var active = i === index;
+        image.classList.toggle("is-active", active);
+        if (active) image.removeAttribute("aria-hidden");
+        else image.setAttribute("aria-hidden", "true");
+      });
+      if (progress) {
+        progress.style.transform = "scaleY(" + ((index + 1) / steps.length).toFixed(4) + ")";
+      }
     }
-    if (prev) prev.addEventListener("click", function () { step(-1); });
-    if (next) next.addEventListener("click", function () { step(1); });
+
+    steps.forEach(function (step, index) {
+      var button = step.querySelector(".h-step__btn");
+      if (!button) return;
+      button.addEventListener("click", function () { setActive(index); });
+    });
+
+    if (!("IntersectionObserver" in window)) return;
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        setActive(Number(entry.target.getAttribute("data-step")) || 0);
+      });
+    }, { rootMargin: "-42% 0px -42% 0px", threshold: 0 });
+
+    steps.forEach(function (step) { observer.observe(step); });
+    setActive(0);
   }
 
-  /* --------------------------------------------------------- testimonials */
-  function renderTestimonials() {
-    var holder = SP.qs("[data-testimonials]");
-    if (!holder) return;
-    holder.innerHTML = cfg.TESTIMONIALS.map(function (t) {
-      return (
-        '<figure class="testimonial">' +
-        '<blockquote><p>“' + SP.esc(t.quote) + "”</p></blockquote>" +
-        "<figcaption>" +
-        '<span class="testimonial__author">' + SP.esc(t.author) + "</span>" +
-        '<span class="testimonial__role">' + SP.esc(t.role) + "</span>" +
-        "</figcaption></figure>"
-      );
-    }).join("");
+  /* ------------------------------------------------------------- scroll rows */
+  function initScrollRows() {
+    qsa("[data-scroll-row]").forEach(function (row) {
+      row.addEventListener("keydown", function (event) {
+        if (row.scrollWidth <= row.clientWidth + 2) return;
+        var item = row.querySelector("li, article");
+        var step = item ? item.getBoundingClientRect().width + 16 : row.clientWidth * 0.8;
+        var behavior = reduced ? "auto" : "smooth";
+
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          row.scrollBy({ left: step, behavior: behavior });
+        } else if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          row.scrollBy({ left: -step, behavior: behavior });
+        } else if (event.key === "Home") {
+          event.preventDefault();
+          row.scrollTo({ left: 0, behavior: behavior });
+        } else if (event.key === "End") {
+          event.preventDefault();
+          row.scrollTo({ left: row.scrollWidth, behavior: behavior });
+        }
+      });
+    });
   }
 
-  /* ------------------------------------------------------------ partners */
-  function renderPartners() {
-    var holder = SP.qs("[data-partners]");
-    if (!holder) return;
-    holder.innerHTML = cfg.PARTNERS.map(function (name) {
-      return '<li class="chip chip--lg">' + SP.esc(name) + "</li>";
-    }).join("");
-  }
-
+  /* ------------------------------------------------------------------- init */
   function init() {
-    renderHeroArt();
-    renderCounters();
-    renderCategories();
-    renderFeatured();
-    renderTestimonials();
-    renderPartners();
+    hydrateFallbacks();
+    wireShopLinks();
+    initImpact();
+    initStory();
+    initScrollRows();
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
+    document.addEventListener("DOMContentLoaded", init, { once: true });
   } else {
     init();
   }
