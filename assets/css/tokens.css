@@ -3,44 +3,46 @@
 
 :root {
   /* ---------------------------------------------------------------- colour */
-  --c-dark: #133A3F;
-  --c-teal: #1F7A78;
-  --c-teal-deep: #17605E;
-  --c-teal-soft: #E2EFEC;
-  --c-sage: #A8C3A8;
-  --c-sage-soft: #EBF1E8;
-  --c-cream: #F5F0E8;
-  --c-paper: #FBF9F4;
-  --c-amber: #C99A1E;
-  --c-amber-deep: #A0760F;
-  --c-amber-text: #8A6A12;
-  --c-amber-soft: #F8EFD8;
-  --c-ink: #222B2D;
-  --c-muted: #5B6B6E;
-  --c-line: #D8DEDC;
+  /* Palette taken from the logo: logo blue #176BAE, white, and a deep navy
+     built from the same hue for text and dark bands. */
+  --c-dark: #0B2E4F;
+  --c-teal: #176BAE;
+  --c-teal-deep: #0F5C99;
+  --c-teal-soft: #E6F1FB;
+  --c-sage: #86BEE6;
+  --c-sage-soft: #EDF5FC;
+  --c-cream: #F2F7FD;
+  --c-paper: #FFFFFF;
+  --c-amber: #CFE6F8;
+  --c-amber-deep: #176BAE;
+  --c-amber-text: #0F5C99;
+  --c-amber-soft: #E4F1FC;
+  --c-ink: #12283F;
+  --c-muted: #53687C;
+  --c-line: #D6E4F1;
   --c-white: #FFFFFF;
 
   /* semantic / status */
-  --c-danger: #9E3527;
-  --c-danger-soft: #F8E9E5;
-  --c-success: #1B6E48;
-  --c-success-soft: #E4F1E9;
-  --c-info-soft: #E7EFF3;
+  --c-danger: #A5261C;
+  --c-danger-soft: #FBEAE8;
+  --c-success: #0E6B57;
+  --c-success-soft: #E3F3EE;
+  --c-info-soft: #E7F1FB;
 
   /* on-colour pairings (WCAG AA checked) */
-  --c-on-dark: #F5F0E8;
-  --c-on-dark-muted: #C3D2D0;
-  --c-on-teal: #FBF9F4;
-  --c-focus: #C99A1E;
-  --c-focus-dark: #F3D68B;
+  --c-on-dark: #FFFFFF;
+  --c-on-dark-muted: #C2D6E8;
+  --c-on-teal: #FFFFFF;
+  --c-focus: #176BAE;
+  --c-focus-dark: #9CCBF0;
 
   /* category tints used by image placeholders + tiles */
-  --c-cat-office: #DCE7E4;
-  --c-cat-desk: #E4EDE0;
-  --c-cat-home: #EDE6D8;
-  --c-cat-tabletop: #E9E2EE;
-  --c-cat-heritage: #F0E2D2;
-  --c-cat-lighting: #E3EAF2;
+  --c-cat-office: #DCEBFA;
+  --c-cat-desk: #E3F0FB;
+  --c-cat-home: #EAF4FD;
+  --c-cat-tabletop: #E1ECF8;
+  --c-cat-heritage: #D7E8F7;
+  --c-cat-lighting: #EDF5FD;
 
   /* --------------------------------------------------------------- spacing */
   --s-0: 0;
@@ -66,9 +68,9 @@
   --r-full: 999px;
 
   /* --------------------------------------------------------------- shadows */
-  --sh-1: 0 1px 2px rgba(19, 58, 63, 0.06), 0 2px 8px rgba(19, 58, 63, 0.05);
-  --sh-2: 0 4px 14px rgba(19, 58, 63, 0.09), 0 2px 4px rgba(19, 58, 63, 0.05);
-  --sh-3: 0 18px 44px rgba(19, 58, 63, 0.16), 0 4px 12px rgba(19, 58, 63, 0.07);
+  --sh-1: 0 1px 2px rgba(11, 46, 79, 0.06), 0 2px 8px rgba(11, 46, 79, 0.05);
+  --sh-2: 0 4px 14px rgba(11, 46, 79, 0.09), 0 2px 4px rgba(11, 46, 79, 0.05);
+  --sh-3: 0 18px 44px rgba(11, 46, 79, 0.16), 0 4px 12px rgba(11, 46, 79, 0.07);
   --sh-inset: inset 0 1px 0 rgba(255, 255, 255, 0.6);
 
   /* ------------------------------------------------------------ typography */

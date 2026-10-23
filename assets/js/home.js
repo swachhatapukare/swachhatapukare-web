@@ -61,7 +61,7 @@
     try {
       value = getComputedStyle(document.documentElement).getPropertyValue(name || "").trim();
     } catch (e) { value = ""; }
-    return value || "#ECE7DB";
+    return value || "#E8F1FA";
   }
 
   function escapeXml(value) {
@@ -98,14 +98,14 @@
     var labelMarkup = lines.map(function (line, index) {
       return "<text x='" + Math.round(w / 2) + "' y='" + (startY + index * gap) +
         "' text-anchor='middle' font-family='Georgia, serif' font-size='" + fontSize +
-        "' fill='#133A3F'>" + escapeXml(line) + "</text>";
+        "' fill='#0B2E4F'>" + escapeXml(line) + "</text>";
     }).join("");
     var dropY = startY - fontSize - Math.round(fontSize * 1.9);
 
     var svg =
       "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 " + w + " " + h + "' width='" + w + "' height='" + h + "'>" +
       "<rect width='" + w + "' height='" + h + "' fill='" + tint + "'/>" +
-      "<g fill='none' stroke='#1F7A78' stroke-opacity='.22' stroke-width='2'>" +
+      "<g fill='none' stroke='#176BAE' stroke-opacity='.22' stroke-width='2'>" +
       "<path d='M-40 " + Math.round(h * 0.78) + "c140-50 250 45 390 0s250-50 390 0 250 45 390 0'/>" +
       "<path d='M-40 " + Math.round(h * 0.84) + "c140-50 250 45 390 0s250-50 390 0 250 45 390 0'/>" +
       "<path d='M-40 " + Math.round(h * 0.9) + "c140-50 250 45 390 0s250-50 390 0 250 45 390 0'/>" +
@@ -114,11 +114,11 @@
       "s-" + Math.round(fontSize * 1.1) + " " + Math.round(fontSize * 1.3) + " -" + Math.round(fontSize * 1.1) + " " + Math.round(fontSize * 2) +
       "a" + Math.round(fontSize * 1.1) + " " + Math.round(fontSize * 1.1) + " 0 0 0 " + Math.round(fontSize * 2.2) + " 0" +
       "c0-" + Math.round(fontSize * 0.7) + " -" + Math.round(fontSize * 1.1) + " -" + Math.round(fontSize * 2) + " -" + Math.round(fontSize * 1.1) + " -" + Math.round(fontSize * 2) + "z' " +
-      "fill='none' stroke='#1F7A78' stroke-opacity='.55' stroke-width='2'/>" +
+      "fill='none' stroke='#176BAE' stroke-opacity='.55' stroke-width='2'/>" +
       labelMarkup +
       "<text x='" + Math.round(w / 2) + "' y='" + (startY + lines.length * gap + Math.round(fontSize * 0.2)) +
       "' text-anchor='middle' font-family='Helvetica, Arial, sans-serif' font-size='" + Math.max(11, Math.round(fontSize * 0.34)) +
-      "' letter-spacing='2' fill='#5B6B6E'>PHOTO COMING SOON</text>" +
+      "' letter-spacing='2' fill='#53687C'>PHOTO COMING SOON</text>" +
       "</svg>";
 
     return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);

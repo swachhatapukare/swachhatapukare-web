@@ -428,7 +428,7 @@
 
 .track-head__eta {
   background: var(--c-teal-soft);
-  border: 1px solid #C6E0DB;
+  border: 1px solid #C3DDF2;
   border-radius: var(--r-md);
   padding: var(--s-3) var(--s-4);
   display: grid;
@@ -629,8 +629,8 @@ html.no-scroll { overflow: hidden; }
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(60rem 30rem at 85% -10%, rgba(168, 195, 168, 0.4), transparent 60%),
-    radial-gradient(40rem 24rem at -10% 20%, rgba(31, 122, 120, 0.12), transparent 60%),
+    radial-gradient(60rem 30rem at 85% -10%, rgba(134, 190, 230, 0.35), transparent 60%),
+    radial-gradient(40rem 24rem at -10% 20%, rgba(23, 107, 174, 0.12), transparent 60%),
     linear-gradient(180deg, var(--c-cream), var(--c-paper));
   border-bottom: 1px solid var(--c-line);
 }
@@ -642,7 +642,7 @@ html.no-scroll { overflow: hidden; }
   right: 0;
   bottom: -2px;
   height: 5rem;
-  background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0 60c150-40 250 30 400 10s250-50 400-20 250 40 400 0v50H0z' fill='%23FBF9F4'/%3E%3C/svg%3E") no-repeat bottom / 100% 100%;
+  background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0 60c150-40 250 30 400 10s250-50 400-20 250 40 400 0v50H0z' fill='%23FFFFFF'/%3E%3C/svg%3E") no-repeat bottom / 100% 100%;
   pointer-events: none;
 }
 
@@ -826,7 +826,7 @@ html.no-scroll { overflow: hidden; }
 .wwd-sections .story-block p { font-size: var(--t-md); }
 
 .wwd-sections .is-placeholder {
-  background: repeating-linear-gradient(135deg, var(--c-cream), var(--c-cream) 10px, #F1EBDF 10px, #F1EBDF 20px);
+  background: repeating-linear-gradient(135deg, var(--c-cream), var(--c-cream) 10px, #E6F1FB 10px, #E6F1FB 20px);
   border: 1px dashed var(--c-line);
   border-radius: var(--r-sm);
   padding: var(--s-3) var(--s-4);

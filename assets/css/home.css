@@ -6,14 +6,14 @@
 
 .page-home {
   /* home-only palette */
-  --h-paper: #F4F1EA;          /* page base, replaces pure white */
-  --h-paper-deep: #ECE7DB;     /* reserved photo / media beds */
-  --h-clay: #C98B72;           /* decorative fills, lines and shapes only */
-  --h-sage-wash: #E8EEE4;
-  --h-teal-wash: #E4ECE7;
-  --h-rule: rgba(19, 58, 63, 0.14);
-  --h-rule-soft: rgba(19, 58, 63, 0.08);
-  --h-rule-light: rgba(245, 240, 232, 0.18);
+  --h-paper: #F4F8FD;          /* page base, replaces pure white */
+  --h-paper-deep: #E8F1FA;     /* reserved photo / media beds */
+  --h-clay: #4C97D4;           /* decorative fills, lines and shapes only */
+  --h-sage-wash: #E6F0FA;
+  --h-teal-wash: #E2EEF9;
+  --h-rule: rgba(11, 46, 79, 0.14);
+  --h-rule-soft: rgba(11, 46, 79, 0.08);
+  --h-rule-light: rgba(255, 255, 255, 0.18);
 
   /* fluid type, home only */
   --h-h1: clamp(2.7rem, 1.35rem + 6vw, 5.4rem);
@@ -207,8 +207,8 @@
   overflow: hidden;
   padding-block: clamp(2.4rem, 6vw, 5.25rem) clamp(2.5rem, 5vw, 4rem);
   background:
-    radial-gradient(70rem 46rem at 92% -18%, rgba(168, 195, 168, 0.36), rgba(168, 195, 168, 0) 62%),
-    linear-gradient(180deg, var(--h-paper), #F0EDE3);
+    radial-gradient(70rem 46rem at 92% -18%, rgba(134, 190, 230, 0.32), rgba(134, 190, 230, 0) 62%),
+    linear-gradient(180deg, var(--h-paper), #EAF3FC);
 }
 
 .page-home .h-hero__decor {
@@ -341,7 +341,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  border: 1px solid rgba(19, 58, 63, 0.12);
+  border: 1px solid rgba(11, 46, 79, 0.12);
   border-radius: inherit;
   pointer-events: none;
 }
@@ -597,7 +597,7 @@
 .page-home .h-step.is-active .h-step__btn::before {
   background: var(--c-teal);
   border-color: var(--c-teal);
-  box-shadow: 0 0 0 4px rgba(31, 122, 120, 0.14);
+  box-shadow: 0 0 0 4px rgba(23, 107, 174, 0.14);
 }
 
 .page-home .h-step__index {
@@ -760,9 +760,9 @@
   top: 0.75rem;
   left: 0.75rem;
   padding: 0.28rem 0.6rem;
-  border: 1px solid rgba(19, 58, 63, 0.12);
+  border: 1px solid rgba(11, 46, 79, 0.12);
   border-radius: var(--r-full);
-  background: rgba(244, 241, 234, 0.94);
+  background: rgba(255, 255, 255, 0.94);
   color: var(--c-dark);
   font-size: 0.7rem;
   font-weight: var(--fw-semibold);
@@ -771,7 +771,7 @@
 }
 
 .page-home .h-tag--heritage {
-  background: rgba(240, 226, 210, 0.96);
+  background: rgba(214, 231, 246, 0.96);
 }
 
 .page-home .h-product__body {
@@ -982,7 +982,7 @@
   width: 2.6rem;
   height: 2.6rem;
   flex: none;
-  border: 1px solid rgba(19, 58, 63, 0.1);
+  border: 1px solid rgba(11, 46, 79, 0.1);
   border-radius: 50%;
   background: var(--c-sage);
   color: var(--c-dark);
@@ -1041,7 +1041,7 @@
   padding: 0.9rem 1.25rem;
   border: 1px solid var(--c-line);
   border-radius: var(--r-full);
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.65);
   color: var(--c-dark);
   font-family: var(--f-display);
   font-size: clamp(1.05rem, 1rem + 0.3vw, 1.25rem);
@@ -1194,12 +1194,12 @@
 
 .page-home .h-amount--other {
   background: transparent;
-  border-color: rgba(245, 240, 232, 0.42);
+  border-color: rgba(255, 255, 255, 0.42);
   color: var(--c-on-dark);
 }
 
 .page-home .h-amount--other:hover {
-  background: rgba(245, 240, 232, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   border-color: var(--c-on-dark);
   color: var(--c-on-dark);
 }

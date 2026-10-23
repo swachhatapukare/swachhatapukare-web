@@ -33,6 +33,11 @@ video {
 
 img { height: auto; background: var(--c-cream); }
 
+/* logos are transparent PNGs — never put a placeholder tint behind them */
+img.brand__img,
+.page-hero__logo,
+.invoice__logo { background: transparent; }
+
 input,
 button,
 textarea,

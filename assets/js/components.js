@@ -53,12 +53,12 @@ window.SP = window.SP || {};
 
   /* ========================================================== image system */
   var TINT_FALLBACK = {
-    "--c-cat-office": "#DCE7E4",
-    "--c-cat-desk": "#E4EDE0",
-    "--c-cat-home": "#EDE6D8",
-    "--c-cat-tabletop": "#E9E2EE",
-    "--c-cat-heritage": "#F0E2D2",
-    "--c-cat-lighting": "#E3EAF2"
+    "--c-cat-office": "#DCEBFA",
+    "--c-cat-desk": "#E3F0FB",
+    "--c-cat-home": "#EAF4FD",
+    "--c-cat-tabletop": "#E1ECF8",
+    "--c-cat-heritage": "#D7E8F7",
+    "--c-cat-lighting": "#EDF5FD"
   };
 
   function tintHex(tintVar) {
@@ -67,7 +67,7 @@ window.SP = window.SP || {};
       value = getComputedStyle(document.documentElement).getPropertyValue(tintVar || "").trim();
     } catch (e) { value = ""; }
     if (value) return value;
-    return TINT_FALLBACK[tintVar] || "#E7E3D8";
+    return TINT_FALLBACK[tintVar] || "#EAF2FA";
   }
 
   function placeholder(name, tintVar, w, h, tag) {
@@ -80,23 +80,23 @@ window.SP = window.SP || {};
     var lines = line2 ? [line1, line2] : [line1];
     var startY = 470 - (lines.length - 1) * 26;
     var textSvg = lines.map(function (line, i) {
-      return "<text x='450' y='" + (startY + i * 56) + "' text-anchor='middle' font-family='Georgia, serif' font-size='46' fill='#133A3F'>" +
+      return "<text x='450' y='" + (startY + i * 56) + "' text-anchor='middle' font-family='Georgia, serif' font-size='46' fill='#0B2E4F'>" +
         String(line).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + "</text>";
     }).join("");
     var svg =
       "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 900' width='" + w + "' height='" + h + "'>" +
       "<rect width='900' height='900' fill='" + bg + "'/>" +
-      "<g fill='none' stroke='#1F7A78' stroke-opacity='.28' stroke-width='4'>" +
+      "<g fill='none' stroke='#176BAE' stroke-opacity='.28' stroke-width='4'>" +
       "<path d='M-40 700c140-70 250 60 390 0s250-70 390 0 250 60 390 0'/>" +
       "<path d='M-40 760c140-70 250 60 390 0s250-70 390 0 250 60 390 0'/>" +
       "<path d='M-40 820c140-70 250 60 390 0s250-70 390 0 250 60 390 0'/>" +
       "</g>" +
       "<g transform='translate(378 210) scale(5.5)'>" +
-      "<path d='M12 2.6C12 2.6 5.4 10 5.4 14.4a6.6 6.6 0 0 0 13.2 0C18.6 10 12 2.6 12 2.6z' fill='none' stroke='#1F7A78' stroke-opacity='.65' stroke-width='1.4'/>" +
-      "<path d='M9 15.6a3.6 3.6 0 0 0 3.2 3.4' fill='none' stroke='#1F7A78' stroke-opacity='.65' stroke-width='1.4' stroke-linecap='round'/>" +
+      "<path d='M12 2.6C12 2.6 5.4 10 5.4 14.4a6.6 6.6 0 0 0 13.2 0C18.6 10 12 2.6 12 2.6z' fill='none' stroke='#176BAE' stroke-opacity='.65' stroke-width='1.4'/>" +
+      "<path d='M9 15.6a3.6 3.6 0 0 0 3.2 3.4' fill='none' stroke='#176BAE' stroke-opacity='.65' stroke-width='1.4' stroke-linecap='round'/>" +
       "</g>" +
       textSvg +
-      "<text x='450' y='560' text-anchor='middle' font-family='Helvetica, Arial, sans-serif' font-size='24' letter-spacing='4' fill='#5B6B6E'>" +
+      "<text x='450' y='560' text-anchor='middle' font-family='Helvetica, Arial, sans-serif' font-size='24' letter-spacing='4' fill='#53687C'>" +
       (tag ? String(tag).replace(/</g, "&lt;") : "PHOTO COMING SOON") + "</text>" +
       "</svg>";
     return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
@@ -148,9 +148,9 @@ window.SP = window.SP || {};
   function brandMarkup(cls, full) {
     var mark =
       '<svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">' +
-      '<path d="M16 3.2s-8.4 9.6-8.4 14.6a8.4 8.4 0 0 0 16.8 0C24.4 12.8 16 3.2 16 3.2z" fill="#1F7A78" fill-opacity=".14"/>' +
-      '<path d="M16 4.6s-7.2 8.8-7.2 13.4a7.2 7.2 0 0 0 14.4 0C23.2 13.4 16 4.6 16 4.6z" fill="none" stroke="#1F7A78" stroke-width="1.7"/>' +
-      '<path d="M12.6 19.6a4 4 0 0 0 3.4 3.6" fill="none" stroke="#1F7A78" stroke-width="1.7" stroke-linecap="round"/>' +
+      '<path d="M16 3.2s-8.4 9.6-8.4 14.6a8.4 8.4 0 0 0 16.8 0C24.4 12.8 16 3.2 16 3.2z" fill="#176BAE" fill-opacity=".14"/>' +
+      '<path d="M16 4.6s-7.2 8.8-7.2 13.4a7.2 7.2 0 0 0 14.4 0C23.2 13.4 16 4.6 16 4.6z" fill="none" stroke="#176BAE" stroke-width="1.7"/>' +
+      '<path d="M12.6 19.6a4 4 0 0 0 3.4 3.6" fill="none" stroke="#176BAE" stroke-width="1.7" stroke-linecap="round"/>' +
       "</svg>";
     return '<a class="brand ' + (cls || "") + '" href="index.html"' +
       (full ? " data-logo-full" : " data-logo") + ">" +
