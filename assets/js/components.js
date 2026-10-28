@@ -278,7 +278,7 @@ window.SP = window.SP || {};
     }).join("");
 
     var chips = cfg.PARTNERS.map(function (p) {
-      return '<li class="chip chip--dark">' + SP.esc(p) + "</li>";
+      return '<li class="chip">' + SP.esc(p) + "</li>";
     }).join("");
 
     var address = cfg.FOUNDATION.addressLines.join(", ");

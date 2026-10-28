@@ -422,15 +422,30 @@
 }
 
 /* ----------------------------------------------------------------- footer */
+/* Light surface so the Foundation's dark-blue lock-up stays legible. */
 .site-footer {
-  background: var(--c-dark);
-  color: var(--c-on-dark-muted);
-  padding-top: clamp(2.5rem, 6vw, 4rem);
+  background: var(--c-teal-soft);
+  color: var(--c-muted);
+  border-top: 1px solid var(--c-line);
+  padding-top: clamp(2rem, 5vw, 3rem);
   font-size: var(--t-base);
 }
 
-.site-footer a { color: var(--c-on-dark); text-decoration: none; }
-.site-footer a:hover { color: var(--c-sage); text-decoration: underline; }
+.site-footer a { color: var(--c-dark); text-decoration: none; }
+.site-footer a:hover { color: var(--c-teal); text-decoration: underline; }
+
+.site-footer .chip {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: var(--c-line);
+  color: var(--c-dark);
+}
+
+.partner-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-top: var(--s-3);
+}
 
 .footer-grid {
   display: grid;
@@ -447,9 +462,9 @@
 }
 
 .footer-brand .brand__word,
-.footer-brand .brand__sub { color: var(--c-on-dark); }
+.footer-brand .brand__sub { color: var(--c-dark); }
 
-.footer-brand .brand__mark { color: var(--c-sage); }
+.footer-brand .brand__mark { color: var(--c-teal); }
 
 /* footer shows the full lock-up (emblem + caption line) instead of the small emblem */
 .footer-brand .brand__img--full {
@@ -462,7 +477,7 @@
   margin-top: var(--s-4);
   max-width: 40ch;
   line-height: 1.6;
-  color: var(--c-on-dark-muted);
+  color: var(--c-muted);
 }
 
 .footer-title {
@@ -471,7 +486,7 @@
   letter-spacing: var(--ls-caps);
   text-transform: uppercase;
   font-weight: var(--fw-semibold);
-  color: var(--c-sage);
+  color: var(--c-teal-deep);
   margin-bottom: var(--s-3);
 }
 
@@ -480,19 +495,19 @@
 .footer-address {
   font-style: normal;
   line-height: 1.6;
-  color: var(--c-on-dark-muted);
+  color: var(--c-muted);
 }
 
 .footer-gst {
   margin-top: var(--s-3);
   font-family: var(--f-mono);
   font-size: var(--t-sm);
-  color: var(--c-on-dark);
+  color: var(--c-dark);
 }
 
 .footer-bottom {
   margin-top: clamp(2rem, 5vw, 3rem);
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  border-top: 1px solid var(--c-line);
   padding-block: var(--s-4) var(--s-5);
   display: flex;
   flex-wrap: wrap;
@@ -500,17 +515,11 @@
   align-items: center;
   justify-content: space-between;
   font-size: var(--t-sm);
+  color: var(--c-muted);
 }
 
 .footer-bottom__links {
   display: flex;
   flex-wrap: wrap;
   gap: var(--s-4);
-}
-
-.partner-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s-2);
-  margin-top: var(--s-3);
 }

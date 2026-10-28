@@ -96,7 +96,6 @@ hr {
 }
 
 .on-dark :focus-visible,
-.site-footer :focus-visible,
 .cta-band :focus-visible {
   outline-color: var(--c-focus-dark);
 }

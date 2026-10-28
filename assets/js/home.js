@@ -281,6 +281,52 @@
     });
   }
 
+  /* --------------------------------------------------- partner logo marquee */
+  function initPartners() {
+    var root = qsa("[data-partner-marquee]")[0];
+    if (!root) return;
+    var track = root.querySelector("[data-partner-marquee-track]");
+    var logos = (SP.config && SP.config.PARTNER_LOGOS) || [];
+    if (!track || !logos.length) { root.hidden = true; return; }
+
+    function listing(hidden) {
+      var repeat = Math.max(2, Math.ceil(7 / logos.length));
+      var html = "";
+      for (var r = 0; r < repeat; r++) {
+        logos.forEach(function (logo) {
+          html += '<li class="h-partners__item' + (logo.tone === "dark" ? " is-dark" : "") + '"' +
+            (logo.width ? ' style="--logo-w:' + Number(logo.width) + 'rem"' : "") +
+            (hidden ? ' aria-hidden="true"' : "") + ">" +
+            '<img class="h-partners__logo" src="' + SP.esc(logo.src) + '" alt="' +
+            (hidden ? "" : SP.esc(logo.name)) + '" width="180" height="60" loading="lazy" decoding="async">' +
+            '<span class="h-partners__name">' + SP.esc(logo.name) + "</span>" +
+            "</li>";
+        });
+      }
+      return html;
+    }
+
+    /* Two identical halves let the track slide by exactly -50% and loop. */
+    track.innerHTML = listing(false) + listing(true);
+
+    qsa(".h-partners__item", track).forEach(function (item) {
+      var img = item.querySelector(".h-partners__logo");
+      if (!img) return;
+      function fallback() { item.classList.add("is-fallback"); }
+      img.addEventListener("error", fallback);
+      img.addEventListener("load", function () {
+        if (img.naturalWidth === 0) fallback();
+      });
+    });
+
+    /* Match speed to the content so short and long logo sets feel the same. */
+    requestAnimationFrame(function () {
+      var half = track.scrollWidth / 2;
+      if (!half) return;
+      root.style.setProperty("--marquee-duration", Math.min(60, Math.max(18, half / 70)).toFixed(1) + "s");
+    });
+  }
+
   /* ------------------------------------------------------------------- init */
   function init() {
     hydrateFallbacks();
@@ -288,6 +334,7 @@
     initImpact();
     initStory();
     initScrollRows();
+    initPartners();
   }
 
   if (document.readyState === "loading") {

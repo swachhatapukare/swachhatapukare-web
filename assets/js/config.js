@@ -56,6 +56,18 @@ SP.config = {
 
   PARTNERS: ["Tata Steel", "Tata Communications", "NTPC"],
 
+  /* Partner logos for the "Working alongside" marquee on the home page.
+     Files live in assets/partners/ — add or swap entries freely.
+     tone: "dark" sits white-on-transparent artwork on a navy pill so it stays
+     visible; colour logos need no tone. width is the logo's max width in rem,
+     used to balance wide wordmarks against compact emblems. A missing file
+     falls back to the partner's name as a text wordmark. */
+  PARTNER_LOGOS: [
+    { name: "Tata Steel", src: "assets/partners/tata-steel-logo.png", tone: "dark", width: 9 },
+    { name: "Tata Communications", src: "assets/partners/Tata Communications Logo White.svg", tone: "dark", width: 18 },
+    { name: "NTPC", src: "assets/partners/NTPC.png", width: 6.5 }
+  ],
+
   /* ------------------------------------------------------------ testimonials */
   // TODO: placeholder quotes — replace with testimonials approved by the Foundation.
   TESTIMONIALS: [
