@@ -326,6 +326,48 @@
       input.addEventListener("keydown", function () { raisePriceThumb(input); });
     });
 
+    /* price presets */
+    SP.qsa("[data-price-preset]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var preset = btn.getAttribute("data-price-preset");
+        if (preset === "all") {
+          state.min = "";
+          state.max = "";
+        } else {
+          var parts = preset.split("-");
+          state.min = parts[0] === "0" ? "" : parts[0];
+          state.max = parts[1];
+        }
+        applyStateToControls();
+        sync();
+      });
+    });
+
+    /* pincode delivery check */
+    var pinForm = document.getElementById("shop-pincode-form");
+    var pinInput = document.getElementById("shop-pincode-input");
+    var pinResult = document.getElementById("shop-pincode-result");
+    if (pinForm && pinInput && pinResult) {
+      pinInput.addEventListener("input", function () {
+        pinInput.value = pinInput.value.replace(/\D/g, "").slice(0, 6);
+        pinResult.hidden = true;
+      });
+      pinForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var val = pinInput.value.trim();
+        if (!/^[1-9]\d{5}$/.test(val)) {
+          pinResult.hidden = false;
+          pinResult.className = "pincode-result pincode-result--error";
+          pinResult.textContent = "Please enter a valid 6-digit Indian PIN code.";
+          return;
+        }
+        pinResult.hidden = false;
+        pinResult.className = "pincode-result pincode-result--success";
+        pinResult.innerHTML = "<strong>✓ Delivery available to " + SP.esc(val) + "!</strong><br>" +
+          "Serviced by <strong>" + SP.esc(SP.config.COURIER_PARTNER) + "</strong>. Estimated transit: 3–5 business days. Free shipping on orders above ₹999.";
+      });
+    }
+
     filtersEl.addEventListener("change", function (e) {
       var input = e.target;
       if (input.name === "cat") {

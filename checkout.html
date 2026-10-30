@@ -182,8 +182,15 @@
             <hr>
             <div data-order-totals></div>
             <p class="form-note">Product prices <strong>exclude print and courier charges</strong>; the courier estimate is included in the total below.</p>
+            <div class="checkout-consent">
+              <label class="check">
+                <input type="checkbox" id="co-consent" name="agree_terms" required>
+                <span>I agree to the <a href="policies.html#terms" target="_blank">Terms &amp; Conditions</a> and <a href="policies.html#privacy" target="_blank">Privacy Policy</a> (required under the Digital Personal Data Protection Act, 2023). <span class="req" aria-hidden="true">*</span></span>
+              </label>
+              <span class="field__error" aria-live="polite"></span>
+            </div>
             <button class="btn btn--primary btn--block btn--lg" type="submit" id="place-order">Place order</button>
-            <p class="form-note">By placing an order you agree to the <a href="policies.html">shipping &amp; returns policy</a> (placeholder text).</p>
+            <p class="form-note">By placing an order you confirm acceptance of our <a href="policies.html#terms" target="_blank">Terms</a>, <a href="policies.html#payment" target="_blank">Payment Policy</a> and <a href="policies.html#shipping" target="_blank">Shipping Terms</a>.</p>
           </div>
         </aside>
       </form>

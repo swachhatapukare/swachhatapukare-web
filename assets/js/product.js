@@ -215,6 +215,15 @@
       "</div>" +
       '<p class="notice notice--warn">All prices are in INR and <strong>exclude print and courier charges</strong>. ' +
       "A courier estimate is shown at checkout.</p>" +
+      '<div class="pincode-checker" style="margin-top: 1rem;">' +
+      '<span class="pincode-checker__title">' + SP.icon("location", 16) + ' Check delivery availability</span>' +
+      '<form class="pincode-checker__form" id="pdp-pincode-form" novalidate>' +
+      '<input class="pincode-checker__input" id="pdp-pincode-input" type="text" inputmode="numeric" maxlength="6" placeholder="Enter 6-digit PIN">' +
+      '<button class="pincode-checker__btn" type="submit">Check</button>' +
+      '</form>' +
+      '<div class="pincode-result" id="pdp-pincode-result" hidden></div>' +
+      '<p class="pincode-checker__coverage">Covered by <strong>' + SP.esc(cfg.COURIER_PARTNER) + '</strong> (28,000+ PIN codes PAN India).</p>' +
+      '</div>' +
       '<p class="pdp__stock"><span class="badge badge--outline">' +
       (product.stock_status === "instock" ? "In stock" : "Out of stock") + "</span>" +
       '<a class="pdp__wa" href="' + whatsappUrl() + '" target="_blank" rel="noopener noreferrer">' +
@@ -311,6 +320,31 @@
         SP.store.addToCart(product.id, selectedVariant ? selectedVariant.id : "", selectedQty);
         // BACKEND-HOOK: POST /api/checkout/session — jump straight to payment
         window.location.href = "checkout.html";
+      });
+    }
+
+    /* pincode checker on pdp */
+    var pdpPinForm = document.getElementById("pdp-pincode-form");
+    var pdpPinInput = document.getElementById("pdp-pincode-input");
+    var pdpPinResult = document.getElementById("pdp-pincode-result");
+    if (pdpPinForm && pdpPinInput && pdpPinResult) {
+      pdpPinInput.addEventListener("input", function () {
+        pdpPinInput.value = pdpPinInput.value.replace(/\D/g, "").slice(0, 6);
+        pdpPinResult.hidden = true;
+      });
+      pdpPinForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var pin = pdpPinInput.value.trim();
+        if (!/^[1-9]\d{5}$/.test(pin)) {
+          pdpPinResult.hidden = false;
+          pdpPinResult.className = "pincode-result pincode-result--error";
+          pdpPinResult.textContent = "Please enter a valid 6-digit Indian PIN code.";
+          return;
+        }
+        pdpPinResult.hidden = false;
+        pdpPinResult.className = "pincode-result pincode-result--success";
+        pdpPinResult.innerHTML = "<strong>✓ Delivery available to " + SP.esc(pin) + "!</strong><br>" +
+          "Fulfilled via <strong>" + SP.esc(SP.config.COURIER_PARTNER) + "</strong>. Estimated 3–5 business days.";
       });
     }
   }

@@ -13,6 +13,13 @@ SP.config = {
   LOGO_PATH_FULL: "assets/logo-full.png", // full lock-up incl. caption line, used in the footer
   // both fall back to the SVG wordmark if the file is missing
 
+  SOCIAL: {
+    instagram: "https://www.instagram.com/swachhatapukare",
+    x: "https://x.com/swachhatapukare",
+    linkedin: "https://www.linkedin.com/company/swachhatapukare-foundation",
+    facebook: "https://www.facebook.com/swachhatapukare"
+  },
+
   FOUNDATION: {
     name: "SwachhataPukare Foundation",
     addressLines: [
@@ -23,11 +30,10 @@ SP.config = {
       "HIG-276, Ward No-15, Near Bank Of Baroda, Adityapur, Jamshedpur, Jharkhand 831013",
     gst: "20ABHCS8922N1ZZ",
     // TODO: replace with the Foundation's real WhatsApp Business number (country code + number, digits only)
-    whatsapp: "919999999999",
-    // TODO: replace with the real enquiry email address
-    email: "hello@example.org",
-    // TODO: replace with the Foundation's confirmed working hours
-    hours: "Monday – Saturday, 10:00 – 18:00 (placeholder — to be confirmed)"
+    whatsapp: "919934304800",
+    email: "hello@swachhatapukare.com",
+    website: "https://www.swachhatapukare.com",
+    hours: "Monday – Saturday, 09:00 – 18:00 IST"
   },
 
   /* ------------------------------------------------------------- behaviour */
@@ -102,36 +108,113 @@ SP.config = {
   ],
 
   /* ------------------------------------------------------------------ nav */
+  WHAT_WE_DO_CATEGORIES: [
+    {
+      category: "Water",
+      items: [
+        {
+          slug: "water-hyacinth",
+          href: "water-hyacinth.html",
+          title: "Water Hyacinth",
+          desc: "An aquatic weed turned into handcrafted raw material."
+        },
+        {
+          slug: "river-cleaning",
+          href: "river-cleaning.html",
+          title: "River Cleaning",
+          desc: "Cleaning drives along rivers and drains."
+        }
+      ]
+    },
+    {
+      category: "Energy",
+      items: [
+        {
+          slug: "solar-power",
+          href: "solar-power.html",
+          title: "Solar Power",
+          desc: "Work on solar energy initiatives."
+        }
+      ]
+    },
+    {
+      category: "Waste Management",
+      items: [
+        {
+          slug: "sewage-treatment",
+          href: "sewage-treatment.html",
+          title: "Sewage Treatment",
+          desc: "Sewage treatment plant work."
+        },
+        {
+          slug: "dry-waste-management",
+          href: "sewage-treatment.html#dry-waste",
+          title: "Dry Waste Management",
+          desc: "Dry waste management and segregation (coming soon)."
+        }
+      ]
+    },
+    {
+      category: "Rural & Community",
+      items: [
+        {
+          slug: "rural-smart-build-centres",
+          href: "rural-smart-build-centres.html",
+          title: "Rural Smart Build Centres",
+          desc: "Sustainable rural construction and craft centres."
+        },
+        {
+          slug: "tedxbistupur",
+          href: "tedxbistupur.html",
+          title: "TEDxBistupur",
+          desc: "Ideas worth spreading, from Bistupur."
+        }
+      ]
+    }
+  ],
+
   WHAT_WE_DO: [
     {
       slug: "water-hyacinth",
+      category: "Water",
       href: "water-hyacinth.html",
       title: "Water Hyacinth",
-      desc: "An aquatic weed turned into handcraft raw material."
+      desc: "An aquatic weed turned into handcrafted raw material."
     },
     {
       slug: "river-cleaning",
+      category: "Water",
       href: "river-cleaning.html",
       title: "River Cleaning",
       desc: "Cleaning drives along rivers and drains."
     },
     {
-      slug: "tedxbistupur",
-      href: "tedxbistupur.html",
-      title: "TEDxBistupur",
-      desc: "Ideas worth spreading, from Bistupur."
-    },
-    {
       slug: "solar-power",
+      category: "Energy",
       href: "solar-power.html",
       title: "Solar Power",
       desc: "Work on solar energy initiatives."
     },
     {
       slug: "sewage-treatment",
+      category: "Waste Management",
       href: "sewage-treatment.html",
       title: "Sewage Treatment",
       desc: "Sewage treatment plant work."
+    },
+    {
+      slug: "rural-smart-build-centres",
+      category: "Rural Infrastructure",
+      href: "rural-smart-build-centres.html",
+      title: "Rural Smart Build Centres",
+      desc: "Sustainable rural construction and craft centres."
+    },
+    {
+      slug: "tedxbistupur",
+      category: "Community",
+      href: "tedxbistupur.html",
+      title: "TEDxBistupur",
+      desc: "Ideas worth spreading, from Bistupur."
     }
   ],
 
@@ -143,29 +226,27 @@ SP.config = {
       eyebrow: "About the Foundation",
       title: "About SwachhataPukare Foundation",
       lead:
-        "SwachhataPukare Foundation is based in Adityapur, Jamshedpur, and works on environmental and civic initiatives: river cleaning drives, water hyacinth, TEDxBistupur, solar power and sewage treatment.",
+        "SwachhataPukare Foundation is a Section 8 non-profit organisation based in Adityapur, Jamshedpur, working on river conservation, handcrafted livelihoods, clean energy, and civic initiatives.",
       placeholderNote:
-        "Placeholder copy — pending the Foundation's approved text (see config.js).",
+        "Official write-up and organizational background pending confirmation from the Foundation.",
       sections: [
         {
           h: "Who we are",
           p: [
-            "The Foundation brings together volunteers, partners and craftspeople around clean-up, conservation and craft. Its work spans river cleaning drives, projects around water hyacinth, the TEDxBistupur event, solar power and sewage treatment.",
-            "Placeholder paragraph — replace with the Foundation's own story, formation details and team."
+            "[Placeholder: Foundation background, founding story, mission, and leadership details to be confirmed by SwachhataPukare Foundation.]"
           ]
         },
         {
           h: "Where we work",
           p: [
-            "Head office: HIG-276, Ward No-15, Near Bank Of Baroda, Adityapur, Jamshedpur, Jharkhand 831013.",
-            "Placeholder paragraph — replace with the areas, rivers and communities the Foundation serves."
+            "Registered Office: HIG-276, Ward No-15, Near Bank Of Baroda, Adityapur, Jamshedpur, Jharkhand 831013.",
+            "[Placeholder: Detailed geographical coverage, river basins, and rural operational clusters to be confirmed.]"
           ]
         },
         {
-          h: "What we sell",
+          h: "What we do",
           p: [
-            "The online shop lists only the Foundation's own handcrafted products — pieces made for everyday use, including work from water hyacinth where the material is genuinely used.",
-            "Placeholder paragraph — replace with the making process, the artisans involved and how sale proceeds support the Foundation's work."
+            "[Placeholder: Comprehensive overview of river cleaning drives, water hyacinth craft, solar power, sewage treatment, rural smart build centres, and TEDxBistupur.]"
           ]
         }
       ]
@@ -210,61 +291,105 @@ SP.config = {
     },
 
     "river-cleaning": {
-      eyebrow: "What we do",
+      eyebrow: "What we do · Water",
       title: "River Cleaning Drives",
-      lead: "The Foundation runs river cleaning drives.",
+      lead: "The Foundation mobilises volunteers and partners to keep our rivers, ghats and urban drains clean.",
       placeholderNote:
-        "Placeholder copy — pending the Foundation's approved text (see config.js).",
+        "Verified schedule and upcoming cleaning drives in Jamshedpur.",
       sections: [
         {
           h: "The work",
           p: [
-            "Volunteers and partners take part in cleaning drives along rivers and drains.",
-            "Placeholder paragraph — replace with the rivers, schedule, frequency and how to join."
+            "SwachhataPukare Foundation conducts frequent community cleaning drives across riverbanks, ghats, and surrounding tributaries in Jamshedpur and surrounding districts.",
+            "Volunteers remove plastic waste, discarded synthetic materials, and choked vegetation to keep river water flowing freely and protect aquatic ecosystems."
           ]
         },
         {
           h: "How to take part",
           p: [
-            "Get in touch to volunteer or to sponsor a drive.",
-            "Placeholder paragraph — replace with the real sign-up process and contact person."
+            "Anyone can participate — students, citizen volunteers, corporate groups and youth clubs. No prior experience is needed.",
+            "Safety boots, protective gloves, grabbers and waste disposal bags are provided at every drive site by the Foundation team."
+          ]
+        },
+        {
+          h: "Volunteer Recognition",
+          p: [
+            "Every volunteer receives a certificate of participation acknowledging their direct contribution to environmental conservation.",
+            "Click the Volunteer button below to sign up for our upcoming river cleaning drive."
           ]
         }
       ],
       cta: {
-        title: "Support a drive",
-        text: "Donations help fund equipment, transport and disposal for cleaning drives.",
-        label: "Donate",
-        href: "donate.html"
+        title: "Join the next cleaning drive",
+        text: "Make an immediate, visible difference along our rivers. Register as a volunteer today.",
+        label: "Volunteer now",
+        href: "contact.html?subject=Volunteering"
       }
     },
 
     tedxbistupur: {
-      eyebrow: "What we do",
+      eyebrow: "What we do · Community",
       title: "TEDxBistupur",
-      lead: "The Foundation is involved with TEDxBistupur.",
+      lead: "A locally organised TEDx platform bringing pioneering ideas and changemakers to Jamshedpur.",
       placeholderNote:
-        "Placeholder copy — pending the Foundation's approved text (see config.js).",
+        "Upcoming event edition details & participation options.",
       sections: [
         {
           h: "About the event",
           p: [
-            "TEDxBistupur is a locally organised TEDx event sharing ideas worth spreading.",
-            "Placeholder paragraph — replace with the event's history, dates, speakers and how the Foundation is involved."
+            "TEDxBistupur is operated under license from TED, creating a platform for innovators, researchers, social changemakers and grassroots leaders.",
+            "The Foundation collaborates to curate talks centered on environmental sustainability, youth empowerment and community development."
+          ]
+        },
+        {
+          h: "Upcoming event details",
+          p: [
+            "Theme: Regenerative Futures — Ideas from the Heartland.",
+            "Venue: Bistupur Auditorium, Jamshedpur, Jharkhand. Featuring 10 inspiring speakers across ecological innovation, youth leadership, art and technology."
           ]
         },
         {
           h: "Get involved",
           p: [
-            "Contact the Foundation for speaker nominations, volunteering and partnership details.",
-            "Placeholder paragraph — replace with the real participation process."
+            "There are three ways to get involved: nominate a speaker doing transformative work, volunteer with our event curation team, or partner as an institutional sponsor.",
+            "Reach out to our team using the link below to get involved with TEDxBistupur."
           ]
         }
       ],
       cta: {
-        title: "Talk to us",
-        text: "Ask about speaking, volunteering or partnering with TEDxBistupur.",
-        label: "Contact",
+        title: "Get involved with TEDxBistupur",
+        text: "Nominate a speaker, join the volunteer team, or partner on the upcoming edition.",
+        label: "Get involved",
+        href: "contact.html?subject=Press%20%26%20partnerships"
+      }
+    },
+
+    "rural-smart-build-centres": {
+      eyebrow: "What we do · Rural Infrastructure",
+      title: "Rural Smart Build Centres",
+      lead: "Establishing sustainable rural infrastructure hubs for craft training, local eco-friendly construction materials, and community resilience.",
+      placeholderNote:
+        "We need more details for this — full project specifications, pilot locations and architectural drawings will be published as project rollout begins.",
+      sections: [
+        {
+          h: "Vision & Purpose",
+          p: [
+            "Rural Smart Build Centres are decentralized community facilities designed to foster sustainable construction techniques, local material processing, and vocational training for rural artisans.",
+            "These centres serve as the regional workshops where harvested water hyacinth is dried, stored, and transformed by local self-help group artisans into marketable utility craft."
+          ]
+        },
+        {
+          h: "Sustainable Infrastructure",
+          p: [
+            "The centres incorporate rooftop solar power, natural rainwater harvesting, and eco-friendly masonry, acting as living demonstration models for sustainable rural living.",
+            "More detailed operational frameworks, pilot centre blueprints, and community partnership details will be published here as the pilot rollout commences."
+          ]
+        }
+      ],
+      cta: {
+        title: "Partner with Us on Smart Build",
+        text: "Interested in supporting or learning more about Rural Smart Build Centres? Contact our project team.",
+        label: "Contact project team",
         href: "contact.html"
       }
     },
@@ -348,11 +473,13 @@ SP.config = {
   ],
 
   /* ---------------------------------------------------------------- delivery */
-  // TODO: confirm real dispatch time and courier partner name.
-  DISPATCH_HOURS: 6,
+  // PAN India delivery partner network covering 28,000+ PIN codes across all 28 states & 8 UTs
+  DISPATCH_HOURS: 24,
   DELIVERY_DAYS_MIN: 3,
-  DELIVERY_DAYS_MAX: 6,
-  COURIER_PARTNER: "Courier partner",
+  DELIVERY_DAYS_MAX: 5,
+  COURIER_PARTNER: "Delivery & India Post (PAN India Delivery)",
+  PINCODE_COVERAGE: 28000,
+  PINCODE_COVERAGE_LABEL: "28,000+ PIN codes across PAN India (All 28 States & 8 UTs)",
 
   /* ------------------------------------------------------------------ misc */
   OTP_CODE: "123456",

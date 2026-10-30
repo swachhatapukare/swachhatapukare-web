@@ -1,4 +1,4 @@
-/* account.js — login / signup with mock OTP, profile, address book, order history */
+/* account.js — login / signup with email and password, profile, address book, order history */
 
 (function (SP) {
   "use strict";
@@ -23,34 +23,37 @@
 
       (isLogin ? "" :
         '<div class="field">' +
-        '<label class="field__label" for="auth-name">Full name</label>' +
-        '<input class="input" id="auth-name" name="name" type="text" autocomplete="name">' +
+        '<label class="field__label" for="auth-name">Full name <span class="req" aria-hidden="true">*</span></label>' +
+        '<input class="input" id="auth-name" name="name" type="text" autocomplete="name" placeholder="Your full name">' +
         '<span class="field__error" aria-live="polite"></span>' +
         "</div>") +
 
       '<div class="field">' +
-      '<label class="field__label" for="auth-phone">Mobile number</label>' +
-      '<input class="input" id="auth-phone" name="phone" type="tel" inputmode="numeric" maxlength="10" autocomplete="tel" placeholder="10-digit mobile">' +
+      '<label class="field__label" for="auth-email">Email address <span class="req" aria-hidden="true">*</span></label>' +
+      '<input class="input" id="auth-email" name="email" type="email" autocomplete="email" placeholder="name@example.com">' +
+      '<span class="field__error" aria-live="polite"></span>' +
+      "</div>" +
+
+      '<div class="field">' +
+      '<label class="field__label" for="auth-password">Password <span class="req" aria-hidden="true">*</span></label>' +
+      '<input class="input" id="auth-password" name="password" type="password" autocomplete="' + (isLogin ? "current-password" : "new-password") + '" placeholder="' + (isLogin ? "Enter your password" : "At least 6 characters") + '">' +
       '<span class="field__error" aria-live="polite"></span>' +
       "</div>" +
 
       (isLogin ? "" :
         '<div class="field">' +
-        '<label class="field__label" for="auth-email">Email</label>' +
-        '<input class="input" id="auth-email" name="email" type="email" autocomplete="email">' +
+        '<label class="field__label" for="auth-confirm-password">Confirm password <span class="req" aria-hidden="true">*</span></label>' +
+        '<input class="input" id="auth-confirm-password" name="confirmPassword" type="password" autocomplete="new-password" placeholder="Re-enter your password">' +
         '<span class="field__error" aria-live="polite"></span>' +
         "</div>") +
 
-      '<div class="field">' +
-      '<label class="field__label" for="auth-otp">OTP</label>' +
-      '<input class="input" id="auth-otp" name="otp" type="text" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="6-digit code">' +
-      '<span class="field__hint">Use code <strong>' + cfg.OTP_CODE + "</strong> to continue.</span>" +
-      '<span class="field__error" aria-live="polite"></span>' +
-      "</div>" +
-
       '<button class="btn btn--primary btn--block btn--lg" type="submit">' +
       (isLogin ? "Log in" : "Create account") + "</button>" +
-      '<p class="form-note">BACKEND-HOOK: an API would send the OTP by SMS and verify it server-side.</p>' +
+      '<p class="form-note">' +
+      (isLogin
+        ? 'Don\'t have an account yet? <button type="button" class="link-btn" data-auth-tab="signup">Sign up here</button>.'
+        : 'Already have an account? <button type="button" class="link-btn" data-auth-tab="login">Log in here</button>.') +
+      "</p>" +
       "</form></div>"
     );
   }
@@ -66,8 +69,8 @@
       '<span class="field__error" aria-live="polite"></span></div>' +
       '<div class="field">' +
       '<label class="field__label" for="prof-phone">Mobile</label>' +
-      '<input class="input" id="prof-phone" type="text" value="' + SP.esc(user.phone || "") + '" readonly>' +
-      '<span class="field__hint">The mobile used to log in cannot be changed here.</span></div>' +
+      '<input class="input" id="prof-phone" name="phone" type="tel" value="' + SP.esc(user.phone || "") + '" placeholder="Optional mobile number">' +
+      '<span class="field__hint">Used for delivery updates.</span></div>' +
       '<div class="field field--full">' +
       '<label class="field__label" for="prof-email">Email</label>' +
       '<input class="input" id="prof-email" name="email" type="email" value="' + SP.esc(user.email || "") + '">' +
@@ -269,38 +272,49 @@
     var authForm = document.getElementById("auth-form");
     if (authForm) {
       authForm.addEventListener("input", function (e) {
-        if (e.target.name === "phone") e.target.value = e.target.value.replace(/\D/g, "").slice(0, 10);
-        if (e.target.name === "otp") e.target.value = e.target.value.replace(/\D/g, "").slice(0, 6);
         SP.clearFieldError(e.target);
       });
       authForm.addEventListener("submit", function (e) {
         e.preventDefault();
         var isLogin = authMode === "login";
         var rules = SP.rules([
-          ["phone", { fn: function (v) { return SP.validators.mobile(v) || "Enter a 10-digit Indian mobile number."; } }],
-          ["otp", { fn: function (v) { return SP.validators.otp(v) || "Enter the 6-digit OTP."; } }]
+          ["email", { fn: function (v) { return SP.validators.email(v) || "Enter a valid email address."; } }],
+          ["password", { fn: function (v) { return (v && v.length >= 6) ? "" : "Password must be at least 6 characters."; } }]
         ]);
         if (!isLogin) {
-          rules.name = { fn: function (v) { return SP.validators.name(v) || "Enter your name."; } };
-          rules.email = { fn: function (v) { return SP.validators.email(v) || "Enter a valid email."; } };
+          rules.name = { fn: function (v) { return SP.validators.name(v) || "Enter your full name."; } };
+          rules.confirmPassword = {
+            fn: function (v) {
+              var pass = authForm.querySelector('[name="password"]').value;
+              return v === pass ? "" : "Passwords do not match.";
+            }
+          };
         }
         if (!SP.validateForm(authForm, rules)) return;
 
-        var phone = authForm.querySelector('[name="phone"]').value;
-        var otp = authForm.querySelector('[name="otp"]').value;
-        var nameInput = authForm.querySelector('[name="name"]');
-        var emailInput = authForm.querySelector('[name="email"]');
-        // BACKEND-HOOK: POST /api/auth/verify-otp
-        var result = SP.store.login(phone, otp,
-          nameInput ? nameInput.value : "",
-          emailInput ? emailInput.value : "");
-        if (!result.ok) {
-          SP.ui.toast(result.message, "error");
-          SP.fieldError(authForm.querySelector('[name="otp"]'), result.message);
-          return;
+        var email = authForm.querySelector('[name="email"]').value;
+        var password = authForm.querySelector('[name="password"]').value;
+
+        if (isLogin) {
+          var res = SP.store.loginWithEmail(email, password);
+          if (!res.ok) {
+            SP.ui.toast(res.message, "error");
+            SP.fieldError(authForm.querySelector('[name="password"]'), res.message);
+            return;
+          }
+          SP.ui.toast("Logged in.");
+          render("profile");
+        } else {
+          var name = authForm.querySelector('[name="name"]').value;
+          var regRes = SP.store.registerWithEmail(name, email, password);
+          if (!regRes.ok) {
+            SP.ui.toast(regRes.message, "error");
+            SP.fieldError(authForm.querySelector('[name="email"]'), regRes.message);
+            return;
+          }
+          SP.ui.toast("Account created successfully. Welcome!");
+          render("profile");
         }
-        SP.ui.toast("Logged in.");
-        render("profile");
       });
     }
 
@@ -335,6 +349,8 @@
         var user = SP.store.getUser() || {};
         user.name = profileForm.querySelector('[name="name"]').value.trim();
         user.email = profileForm.querySelector('[name="email"]').value.trim();
+        var phoneEl = profileForm.querySelector('[name="phone"]');
+        if (phoneEl) user.phone = phoneEl.value.trim();
         SP.store.saveUser(user);
         SP.ui.toast("Profile saved.");
         render("profile");

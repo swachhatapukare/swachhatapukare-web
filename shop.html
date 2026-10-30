@@ -100,7 +100,29 @@
             <span data-price-min-bound>₹100</span>
             <span data-price-max-bound>₹1,100</span>
           </div>
+          <div class="price-presets" style="display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.6rem;">
+            <button class="btn btn--ghost btn--xs" type="button" data-price-preset="0-250">Under ₹250</button>
+            <button class="btn btn--ghost btn--xs" type="button" data-price-preset="250-500">₹250–₹500</button>
+            <button class="btn btn--ghost btn--xs" type="button" data-price-preset="500-1000">₹500–₹1,000</button>
+            <button class="btn btn--ghost btn--xs" type="button" data-price-preset="all">All</button>
+          </div>
           <p class="field__hint">Based on the lower price of variants.</p>
+        </div>
+
+        <div class="filters__group">
+          <div class="pincode-checker" id="shop-pincode-checker">
+            <h3 class="pincode-checker__title">
+              <svg class="i" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6.5-6 6.5-10.5a6.5 6.5 0 1 0-13 0C5.5 15 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="10.4" r="2.4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+              Delivery Check
+            </h3>
+            <p class="pincode-checker__desc">Check courier delivery availability for your PIN code.</p>
+            <form class="pincode-checker__form" id="shop-pincode-form" novalidate>
+              <input class="pincode-checker__input" id="shop-pincode-input" type="text" inputmode="numeric" maxlength="6" placeholder="Enter 6-digit PIN" aria-label="Enter PIN code for delivery check">
+              <button class="pincode-checker__btn" type="submit">Check</button>
+            </form>
+            <div class="pincode-result" id="shop-pincode-result" hidden></div>
+            <p class="pincode-checker__coverage">Partner: <strong>Delhivery &amp; India Post</strong> (Covering 28,000+ PIN codes PAN India at economical rates).</p>
+          </div>
         </div>
 
         <div class="filters__group">

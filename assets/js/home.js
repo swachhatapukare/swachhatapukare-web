@@ -327,10 +327,135 @@
     });
   }
 
+  /* -------------------------------------------------------- hero slideshow */
+  function initHeroSlideshow() {
+    var hero = document.querySelector("[data-hero-slideshow]");
+    if (!hero) return;
+
+    var slides = qsa(".h-hero__slide", hero);
+    var tabs = qsa("[data-hero-tab]", hero);
+    var prevBtns = qsa('[data-hero-nav="prev"]', hero);
+    var nextBtns = qsa('[data-hero-nav="next"]', hero);
+
+    var elSpotCat = hero.querySelector("[data-spotlight-cat]");
+    var elSpotCounter = hero.querySelector("[data-spotlight-counter]");
+    var elSpotTitle = hero.querySelector("[data-spotlight-title]");
+    var elSpotDesc = hero.querySelector("[data-spotlight-desc]");
+    var elSpotLink = hero.querySelector("[data-spotlight-link]");
+    var elSpotCta = hero.querySelector("[data-spotlight-cta]");
+
+    if (!slides.length) return;
+
+    var current = 0;
+    var timer = null;
+    var duration = 5000;
+
+    function goTo(index) {
+      current = (index + slides.length) % slides.length;
+
+      // 1. Update background slides
+      slides.forEach(function (slide, i) {
+        var active = i === current;
+        slide.classList.toggle("is-active", active);
+        if (active) slide.removeAttribute("aria-hidden");
+        else slide.setAttribute("aria-hidden", "true");
+      });
+
+      // 2. Update timeline tabs & progress bars
+      tabs.forEach(function (tab, i) {
+        var active = i === current;
+        tab.classList.toggle("is-active", active);
+        tab.setAttribute("aria-selected", active ? "true" : "false");
+        var bar = tab.querySelector(".h-hero__tab-bar");
+        if (bar) {
+          bar.style.transition = "none";
+          bar.style.width = "0%";
+          if (active && !reduced) {
+            void bar.offsetWidth; // Force layout recalculation
+            bar.style.transition = "width " + (duration / 1000) + "s linear";
+            bar.style.width = "100%";
+          }
+        }
+      });
+
+      // 3. Update spotlight card content smoothly
+      var curSlide = slides[current];
+      if (curSlide) {
+        var name = curSlide.getAttribute("data-work-name") || "Initiative";
+        var cat = curSlide.getAttribute("data-work-cat") || "Key Focus";
+        var desc = curSlide.getAttribute("data-work-desc") || "";
+        var href = curSlide.getAttribute("data-work-href") || "#things-we-do";
+        var cta = curSlide.getAttribute("data-work-cta") || "Learn more";
+
+        if (elSpotCat) elSpotCat.textContent = cat;
+        if (elSpotCounter) elSpotCounter.textContent = (current + 1 < 10 ? "0" : "") + (current + 1) + " / " + (slides.length < 10 ? "0" : "") + slides.length;
+        if (elSpotTitle) elSpotTitle.textContent = name;
+        if (elSpotDesc) elSpotDesc.textContent = desc;
+        if (elSpotLink) elSpotLink.setAttribute("href", href);
+        if (elSpotCta) elSpotCta.textContent = cta;
+      }
+    }
+
+    function next() { goTo(current + 1); }
+    function prev() { goTo(current - 1); }
+
+    function startAuto() {
+      if (reduced) return;
+      stopAuto();
+      timer = setInterval(next, duration);
+    }
+
+    function stopAuto() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+      var activeTab = tabs[current];
+      if (activeTab) {
+        var bar = activeTab.querySelector(".h-hero__tab-bar");
+        if (bar) {
+          var computedWidth = window.getComputedStyle(bar).width;
+          bar.style.transition = "none";
+          bar.style.width = computedWidth;
+        }
+      }
+    }
+
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener("click", function () {
+        goTo(i);
+        startAuto();
+      });
+    });
+
+    prevBtns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        prev();
+        startAuto();
+      });
+    });
+
+    nextBtns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        next();
+        startAuto();
+      });
+    });
+
+    hero.addEventListener("mouseenter", stopAuto);
+    hero.addEventListener("mouseleave", startAuto);
+    hero.addEventListener("touchstart", stopAuto, { passive: true });
+    hero.addEventListener("touchend", startAuto, { passive: true });
+
+    goTo(0);
+    startAuto();
+  }
+
   /* ------------------------------------------------------------------- init */
   function init() {
     hydrateFallbacks();
     wireShopLinks();
+    initHeroSlideshow();
     initImpact();
     initStory();
     initScrollRows();

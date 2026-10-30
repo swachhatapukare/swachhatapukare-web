@@ -976,3 +976,99 @@ html.no-scroll { overflow: hidden; }
 /* ==================================================================== 404 */
 .nf-page { padding-block: clamp(2.5rem, 8vw, 5rem); }
 .nf-links { margin-top: var(--s-6); }
+
+/* ==================================================================== team / about */
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-5);
+  margin-top: var(--s-4);
+}
+
+@media (min-width: 860px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.person-box {
+  background: var(--c-paper);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-xl);
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  box-shadow: var(--sh-1);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--d-sm) var(--e-out), box-shadow var(--d-sm) var(--e-out);
+}
+
+.person-box:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--sh-2);
+}
+
+.person-box__header {
+  border-bottom: 1px solid var(--c-line);
+  padding-bottom: 0.85rem;
+  margin-bottom: 1.15rem;
+}
+
+.person-box__credentials {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-teal);
+  margin-bottom: 0.3rem;
+}
+
+.person-box__name {
+  margin: 0;
+  font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.55rem);
+  color: var(--c-dark);
+  font-family: var(--f-display);
+}
+
+.person-box__body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+@media (min-width: 540px) {
+  .person-box__body {
+    grid-template-columns: 130px 1fr;
+  }
+}
+
+.person-box__media {
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  box-shadow: var(--sh-1);
+}
+
+.person-box__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.person-box__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.person-box__content p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.62;
+  color: var(--c-muted);
+}

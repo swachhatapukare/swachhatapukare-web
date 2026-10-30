@@ -11,6 +11,7 @@ window.SP = window.SP || {};
     cart: "sp_cart",
     orders: "sp_orders",
     user: "sp_user",
+    accounts: "sp_accounts",
     addresses: "sp_addresses",
     enquiries: "sp_enquiries",
     bulk: "sp_bulk_enquiries",
@@ -290,6 +291,86 @@ window.SP = window.SP || {};
     return read(KEYS.user, null);
   }
 
+  function getAccounts() {
+    var list = read(KEYS.accounts, []);
+    return Array.isArray(list) ? list : [];
+  }
+
+  function registerWithEmail(name, email, password) {
+    email = String(email || "").trim().toLowerCase();
+    name = String(name || "").trim();
+    password = String(password || "");
+    if (!email) return { ok: false, message: "Email is required." };
+    if (password.length < 6) return { ok: false, message: "Password must be at least 6 characters." };
+
+    var accounts = getAccounts();
+    var existing = accounts.filter(function (a) { return (a.email || "").toLowerCase() === email; })[0];
+    if (existing) {
+      return { ok: false, message: "An account with this email already exists. Please log in." };
+    }
+
+    var newAccount = {
+      id: SP.uid("acc"),
+      name: name || "Friend",
+      email: email,
+      password: password,
+      since: new Date().toISOString()
+    };
+    accounts.push(newAccount);
+    write(KEYS.accounts, accounts);
+
+    var user = {
+      id: newAccount.id,
+      name: newAccount.name,
+      email: newAccount.email,
+      since: newAccount.since
+    };
+    saveUser(user);
+    return { ok: true, user: user };
+  }
+
+  function loginWithEmail(email, password) {
+    email = String(email || "").trim().toLowerCase();
+    password = String(password || "");
+    if (!email) return { ok: false, message: "Please enter your email." };
+    if (!password) return { ok: false, message: "Please enter your password." };
+
+    var accounts = getAccounts();
+    var found = accounts.filter(function (a) { return (a.email || "").toLowerCase() === email; })[0];
+    if (found) {
+      if (found.password && found.password !== password) {
+        return { ok: false, message: "Incorrect password. Please try again." };
+      }
+      var user = {
+        id: found.id,
+        name: found.name,
+        email: found.email,
+        phone: found.phone || "",
+        since: found.since
+      };
+      saveUser(user);
+      return { ok: true, user: user };
+    }
+
+    var newAcc = {
+      id: SP.uid("acc"),
+      name: email.split("@")[0] || "Friend",
+      email: email,
+      password: password,
+      since: new Date().toISOString()
+    };
+    accounts.push(newAcc);
+    write(KEYS.accounts, accounts);
+    var newUser = {
+      id: newAcc.id,
+      name: newAcc.name,
+      email: newAcc.email,
+      since: newAcc.since
+    };
+    saveUser(newUser);
+    return { ok: true, user: newUser };
+  }
+
   /* BACKEND-HOOK: POST /api/auth/otp — server sends and verifies the OTP. */
   function verifyOtp(phone, otp) {
     return String(otp).trim() === SP.config.OTP_CODE && /^[6-9]\d{9}$/.test(SP.digits(phone));
@@ -423,6 +504,9 @@ window.SP = window.SP || {};
     tracking: tracking,
     getUser: getUser,
     saveUser: saveUser,
+    getAccounts: getAccounts,
+    registerWithEmail: registerWithEmail,
+    loginWithEmail: loginWithEmail,
     login: login,
     verifyOtp: verifyOtp,
     logout: logout,

@@ -105,7 +105,13 @@
     ["address", { fn: function (v) { return SP.validators.required(v) || "Please enter your address."; } }],
     ["city", { fn: function (v) { return SP.validators.required(v) || "Please enter your city."; } }],
     ["state", { fn: function (v) { return SP.validators.required(v) || "Please select your state."; } }],
-    ["pincode", { fn: function (v) { return SP.validators.pincode(v) || "Enter a valid 6-digit pincode."; } }]
+    ["pincode", { fn: function (v) { return SP.validators.pincode(v) || "Enter a valid 6-digit pincode."; } }],
+    ["agree_terms", {
+      fn: function () {
+        var chk = form.querySelector('[name="agree_terms"]');
+        return (chk && chk.checked) ? "" : "You must agree to the Terms & Conditions and Privacy Policy to proceed.";
+      }
+    }]
   ]);
 
   function collect() {

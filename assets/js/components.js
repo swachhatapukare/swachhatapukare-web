@@ -34,12 +34,19 @@ window.SP = window.SP || {};
       filter: '<path d="M4 6.5h16M7 12h10M10 17.5h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
       search: '<circle cx="11" cy="11" r="6.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M15.6 15.6L20 20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>',
       whatsapp: '<path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>',
+      mail: '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M22 6l-10 7L2 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
+      chat: '<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
+      download: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><polyline points="7 10 12 15 17 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
       plus: '<path d="M12 5.5v13M5.5 12h13" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>',
       minus: '<path d="M5.5 12h13" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>',
       check: '<path d="M5 12.8l4.4 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
       trash: '<path d="M5 7h14M10 7V5.4A1.4 1.4 0 0 1 11.4 4h1.2A1.4 1.4 0 0 1 14 5.4V7m3 0l-.8 11.2A1.8 1.8 0 0 1 14.4 20H9.6a1.8 1.8 0 0 1-1.8-1.8L7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
       location: '<path d="M12 21s6.5-6 6.5-10.5a6.5 6.5 0 1 0-13 0C5.5 15 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10.4" r="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/>',
-      phone: '<path d="M6.4 4.5h3l1.4 3.5-1.8 1.4a10.6 10.6 0 0 0 5.6 5.6l1.4-1.8 3.5 1.4v3a2 2 0 0 1-2.2 2A15.6 15.6 0 0 1 4.4 6.7a2 2 0 0 1 2-2.2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>'
+      phone: '<path d="M6.4 4.5h3l1.4 3.5-1.8 1.4a10.6 10.6 0 0 0 5.6 5.6l1.4-1.8 3.5 1.4v3a2 2 0 0 1-2.2 2A15.6 15.6 0 0 1 4.4 6.7a2 2 0 0 1 2-2.2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+      instagram: '<rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>',
+      x: '<path d="M18.9 3h3.1l-6.8 7.8L23 21h-6.2l-4.9-6.4L6.3 21H3.1l7.3-8.3L2.5 3h6.4l4.4 5.8L18.9 3zm-1.1 16.2h1.7L7.3 4.7H5.5l12.3 14.5z" fill="currentColor"/>',
+      linkedin: '<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="9" width="4" height="12" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="4" cy="4" r="2" fill="currentColor"/>',
+      facebook: '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3V2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>'
     };
     return '<svg class="i" width="' + s + '" height="' + s + '" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
       (paths[name] || "") + "</svg>";
@@ -188,13 +195,58 @@ window.SP = window.SP || {};
     var wwdPages = cfg.WHAT_WE_DO.map(function (i) { return i.slug; });
     var wwdActive = wwdPages.indexOf(page) !== -1;
 
-    var wwdCards = cfg.WHAT_WE_DO.map(function (item, i) {
-      var iconNames = ["leaf", "water", "mic", "sun", "location"];
-      return '<a class="nav-card" href="' + item.href + '">' +
-        '<span class="nav-card__icon">' + icon(iconNames[i % iconNames.length], 20) + "</span>" +
-        '<span><span class="nav-card__title">' + SP.esc(item.title) + "</span>" +
-        '<span class="nav-card__desc">' + SP.esc(item.desc) + "</span></span></a>";
-    }).join("");
+    var categories = cfg.WHAT_WE_DO_CATEGORIES || [
+      {
+        category: "Water",
+        items: [
+          { slug: "water-hyacinth", href: "water-hyacinth.html", title: "Water Hyacinth", desc: "An aquatic weed turned into handcrafted raw material." },
+          { slug: "river-cleaning", href: "river-cleaning.html", title: "River Cleaning", desc: "Cleaning drives along rivers and drains." }
+        ]
+      },
+      {
+        category: "Energy",
+        items: [
+          { slug: "solar-power", href: "solar-power.html", title: "Solar Power", desc: "Work on solar energy initiatives." }
+        ]
+      },
+      {
+        category: "Waste Management",
+        items: [
+          { slug: "sewage-treatment", href: "sewage-treatment.html", title: "Sewage Treatment", desc: "Sewage treatment plant work." },
+          { slug: "dry-waste-management", href: "sewage-treatment.html#dry-waste", title: "Dry Waste Management", desc: "Segregation and recycling (coming soon)." }
+        ]
+      },
+      {
+        category: "Rural & Community",
+        items: [
+          { slug: "rural-smart-build-centres", href: "rural-smart-build-centres.html", title: "Rural Smart Build Centres", desc: "Sustainable rural construction and craft centres." },
+          { slug: "tedxbistupur", href: "tedxbistupur.html", title: "TEDxBistupur", desc: "Ideas worth spreading, from Bistupur." }
+        ]
+      }
+    ];
+
+    var wwdPanelContent = categories.map(function (cat) {
+      var catCards = cat.items.map(function (item) {
+        var iconName = "leaf";
+        if (item.slug === "river-cleaning" || item.slug === "water-hyacinth") iconName = "water";
+        else if (item.slug === "solar-power") iconName = "sun";
+        else if (item.slug === "sewage-treatment" || item.slug === "dry-waste-management") iconName = "drop";
+        else if (item.slug === "tedxbistupur") iconName = "mic";
+        else if (item.slug === "rural-smart-build-centres") iconName = "location";
+
+        return '<a class="nav-card" href="' + item.href + '">' +
+          '<span class="nav-card__icon">' + icon(iconName, 18) + '</span>' +
+          '<span class="nav-card__body">' +
+          '<strong class="nav-card__title">' + SP.esc(item.title) + '</strong>' +
+          '<span class="nav-card__desc">' + SP.esc(item.desc) + '</span>' +
+          '</span></a>';
+      }).join('');
+
+      return '<div class="nav-cat-group">' +
+        '<span class="nav-cat-heading">' + SP.esc(cat.category) + '</span>' +
+        '<div class="nav-cat-cards">' + catCards + '</div>' +
+        '</div>';
+    }).join('');
 
     return (
       '<nav class="nav" aria-label="Main">' +
@@ -203,23 +255,35 @@ window.SP = window.SP || {};
       '<li class="nav__item"><a class="nav__link' + active("shop") + '" href="shop.html"' + activeAttr("shop") + ">Shop</a></li>" +
       '<li class="nav__item nav__item--has-menu">' +
       '<button class="nav__link' + (wwdActive ? " is-active" : "") + '" type="button" data-action="wwd-toggle" aria-expanded="false" aria-controls="nav-wwd-panel">What we do' + caretSvg() + "</button>" +
-      '<div class="nav__panel" id="nav-wwd-panel">' + wwdCards +
-      '<a class="nav-card" href="gallery.html"><span class="nav-card__icon">' + icon("leaf", 20) + "</span>" +
-      '<span><span class="nav-card__title">Gallery</span><span class="nav-card__desc">Photos from the Foundation\'s work.</span></span></a>' +
+      '<div class="nav__panel nav__panel--categorized" id="nav-wwd-panel">' + wwdPanelContent +
       "</div></li>" +
       '<li class="nav__item"><a class="nav__link' + active("about") + '" href="about.html"' + activeAttr("about") + ">About</a></li>" +
       '<li class="nav__item"><a class="nav__link' + active("donate") + '" href="donate.html"' + activeAttr("donate") + ">Donate</a></li>" +
+      '<li class="nav__item"><a class="nav__link' + active("gallery") + '" href="gallery.html"' + activeAttr("gallery") + ">Gallery</a></li>" +
       '<li class="nav__item"><a class="nav__link' + active("contact") + '" href="contact.html"' + activeAttr("contact") + ">Contact</a></li>" +
       "</ul></nav>"
     );
   }
 
   function mobileNavMarkup(page) {
-    var wwd = cfg.WHAT_WE_DO.map(function (item) {
-      var isActive = item.slug === page;
-      return '<a class="mobile-nav__link' + (isActive ? " is-active" : "") + '" href="' + item.href + '">' +
-        SP.esc(item.title) + icon("arrow", 16) + "</a>";
-    }).join("");
+    var categories = cfg.WHAT_WE_DO_CATEGORIES || [];
+    var wwd = "";
+    if (categories.length) {
+      wwd = categories.map(function (cat) {
+        var links = cat.items.map(function (item) {
+          var isActive = item.slug === page;
+          return '<a class="mobile-nav__link' + (isActive ? " is-active" : "") + '" href="' + item.href + '">' +
+            SP.esc(item.title) + icon("arrow", 16) + "</a>";
+        }).join("");
+        return '<div class="mobile-nav__cat"><span class="mobile-nav__cat-title">' + SP.esc(cat.category) + '</span>' + links + '</div>';
+      }).join("");
+    } else {
+      wwd = cfg.WHAT_WE_DO.map(function (item) {
+        var isActive = item.slug === page;
+        return '<a class="mobile-nav__link' + (isActive ? " is-active" : "") + '" href="' + item.href + '">' +
+          SP.esc(item.title) + icon("arrow", 16) + "</a>";
+      }).join("");
+    }
 
     function link(href, key, label) {
       return '<a class="mobile-nav__link' + (page === key ? " is-active" : "") + '" href="' + href + '"' +
@@ -237,8 +301,8 @@ window.SP = window.SP || {};
       '<span class="mobile-nav__group">What we do</span>' +
       '<div class="mobile-nav__sub">' + wwd + "</div>" +
       link("about.html", "about", "About") +
-      link("gallery.html", "gallery", "Gallery") +
       link("donate.html", "donate", "Donate") +
+      link("gallery.html", "gallery", "Gallery") +
       link("contact.html", "contact", "Contact") +
       "</div>" +
       '<div class="mobile-nav__foot">' +
@@ -277,45 +341,85 @@ window.SP = window.SP || {};
       return '<li><a href="' + item.href + '">' + SP.esc(item.title) + "</a></li>";
     }).join("");
 
-    var chips = cfg.PARTNERS.map(function (p) {
-      return '<li class="chip">' + SP.esc(p) + "</li>";
-    }).join("");
-
     var address = cfg.FOUNDATION.addressLines.join(", ");
+    var social = cfg.SOCIAL || {};
 
     var footer = h(
       '<footer class="site-footer">' +
       '<div class="container">' +
       '<div class="footer-grid">' +
-      '<div class="footer-brand">' + brandMarkup("", true) +
-      '<p class="footer-about">Handcrafted goods from the Foundation\'s own catalogue, sold to support its environmental and civic work in and around Jamshedpur.</p>' +
-      '<span class="footer-title">Partners</span>' +
-      '<ul class="partner-chips">' + chips + "</ul>" +
-      "</div>" +
-      '<div class="footer-col"><span class="footer-title">Shop</span>' +
-      '<ul class="footer-list"><li><a href="shop.html">All products</a></li>' + shopLinks +
-      '<li><a href="bulk-enquiry.html">Bulk &amp; branding</a></li></ul></div>' +
-      '<div class="footer-col"><span class="footer-title">What we do</span>' +
-      '<ul class="footer-list">' + wwdLinks +
-      '<li><a href="about.html">About</a></li><li><a href="gallery.html">Gallery</a></li></ul></div>' +
-      '<div class="footer-col"><span class="footer-title">Contact</span>' +
-      '<address class="footer-address">' + SP.esc(address) + "</address>" +
-      '<p class="footer-gst">GST No: ' + SP.esc(cfg.FOUNDATION.gst) + "</p>" +
+
+      // Col 1: Brand & Mission
+      '<div class="footer-brand">' +
+      brandMarkup("", true) +
+      '<p class="footer-about">Transforming river waste into handcrafted utility, driving river conservation, women self-help group livelihoods, and clean community infrastructure.</p>' +
+      '<div class="footer-social">' +
+      '<span class="footer-social__title">Connect with us</span>' +
+      '<div class="footer-social__icons">' +
+      '<a class="social-icon" href="' + (social.instagram || "#") + '" target="_blank" rel="noopener noreferrer" aria-label="Follow SwachhataPukare on Instagram">' + icon("instagram", 18) + '</a>' +
+      '<a class="social-icon" href="' + (social.x || "#") + '" target="_blank" rel="noopener noreferrer" aria-label="Follow SwachhataPukare on X">' + icon("x", 16) + '</a>' +
+      '<a class="social-icon" href="' + (social.linkedin || "#") + '" target="_blank" rel="noopener noreferrer" aria-label="Follow SwachhataPukare on LinkedIn">' + icon("linkedin", 18) + '</a>' +
+      '<a class="social-icon" href="' + (social.facebook || "#") + '" target="_blank" rel="noopener noreferrer" aria-label="Follow SwachhataPukare on Facebook">' + icon("facebook", 18) + '</a>' +
+      '</div></div>' +
+      '</div>' +
+
+      // Col 2: Handcrafted Shop
+      '<div class="footer-col"><span class="footer-title">Handcrafted Shop</span>' +
       '<ul class="footer-list">' +
-      '<li><a href="contact.html">Enquiry form</a></li>' +
-      '<li><a href="donate.html">Donate</a></li>' +
-      '<li><a href="policies.html">Shipping &amp; returns</a></li>' +
-      "</ul>" +
-      '<p class="footer-about footer-about--spaced">' + SP.esc(cfg.FOUNDATION.hours) + "</p>" +
-      "</div></div>" +
+      '<li><a href="shop.html">Browse all products</a></li>' +
+      shopLinks +
+      '<li><a href="bulk-enquiry.html">Bulk &amp; corporate gifting</a></li>' +
+      '<li><a href="track.html">Track your parcel</a></li>' +
+      '</ul></div>' +
+
+      // Col 3: What We Do
+      '<div class="footer-col"><span class="footer-title">What We Do</span>' +
+      '<ul class="footer-list">' +
+      wwdLinks +
+      '<li><a href="about.html">About our leadership</a></li>' +
+      '<li><a href="gallery.html">Field photo gallery</a></li>' +
+      '</ul></div>' +
+
+      // Col 4: Policies & Legal
+      '<div class="footer-col"><span class="footer-title">Policies &amp; Legal</span>' +
+      '<ul class="footer-list">' +
+      '<li><a href="policies.html#terms">Terms &amp; conditions</a></li>' +
+      '<li><a href="policies.html#payment">Payment policy</a></li>' +
+      '<li><a href="policies.html#shipping">Shipping &amp; delivery</a></li>' +
+      '<li><a href="policies.html#returns">Returns &amp; refunds</a></li>' +
+      '<li><a href="policies.html#privacy">Data protection &amp; privacy</a></li>' +
+      '</ul></div>' +
+
+      // Col 5: Contact
+      '<div class="footer-col footer-col--contact"><span class="footer-title">Contact Us</span>' +
+      '<address class="footer-address"><strong>SwachhataPukare Foundation</strong><br>' + SP.esc(address) + '</address>' +
+      '<div class="footer-contact-links">' +
+      '<a class="footer-contact-item" href="tel:+919934304800">' + icon("phone", 14) + ' +91 99343 04800</a>' +
+      '<a class="footer-contact-item" href="mailto:hello@swachhatapukare.com">' + icon("mail", 14) + ' hello@swachhatapukare.com</a>' +
+      '<a class="footer-contact-item" href="contact.html">' + icon("chat", 14) + ' General enquiry form</a>' +
+      '</div>' +
+      '<p class="footer-hours">' + SP.esc(cfg.FOUNDATION.hours) + '</p>' +
+      '<div class="footer-gst">GSTIN: ' + SP.esc(cfg.FOUNDATION.gst) + '</div>' +
+      '</div>' +
+
+      '</div>' + // .footer-grid
+
+      // Bottom Bar
       '<div class="footer-bottom">' +
-      '<span>&copy; ' + new Date().getFullYear() + " " + SP.esc(cfg.SITE_NAME) + ".</span>" +
-      '<nav class="footer-bottom__links" aria-label="Footer">' +
+      '<div class="footer-bottom__copy">' +
+      '<span>&copy; ' + new Date().getFullYear() + ' ' + SP.esc(cfg.SITE_NAME) + '. Jamshedpur, Jharkhand.</span>' +
+      '</div>' +
+      '<nav class="footer-bottom__links" aria-label="Footer Quicklinks">' +
       '<a href="policies.html">Policies</a>' +
-      '<a href="track.html">Track order</a>' +
-      '<a href="account.html">Account</a>' +
-      '<a href="404.html">Sitemap</a>' +
-      "</nav></div></div></footer>"
+      '<a href="policies.html#terms">Terms</a>' +
+      '<a href="policies.html#privacy">Privacy</a>' +
+      '<a href="track.html">Track Order</a>' +
+      '<a href="account.html">My Account</a>' +
+      '<button class="footer-back-to-top" type="button" onclick="window.scrollTo({top:0,behavior:\'smooth\'})">Back to top &uarr;</button>' +
+      '</nav>' +
+      '</div>' +
+
+      '</div></footer>'
     );
     root.appendChild(footer);
   }
