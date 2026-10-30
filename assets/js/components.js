@@ -394,7 +394,7 @@ window.SP = window.SP || {};
       '<div class="footer-col footer-col--contact"><span class="footer-title">Contact Us</span>' +
       '<address class="footer-address"><strong>SwachhataPukare Foundation</strong><br>' + SP.esc(address) + '</address>' +
       '<div class="footer-contact-links">' +
-      '<a class="footer-contact-item" href="tel:+919934304800">' + icon("phone", 14) + ' +91 99343 04800</a>' +
+      '<a class="footer-contact-item" href="tel:' + (cfg.FOUNDATION.phoneTel || '+910000000000') + '">' + icon("phone", 14) + ' ' + SP.esc(cfg.FOUNDATION.phone || '+91 00000 00000') + '</a>' +
       '<a class="footer-contact-item" href="mailto:hello@swachhatapukare.com">' + icon("mail", 14) + ' hello@swachhatapukare.com</a>' +
       '<a class="footer-contact-item" href="contact.html">' + icon("chat", 14) + ' General enquiry form</a>' +
       '</div>' +

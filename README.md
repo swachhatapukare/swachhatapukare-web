@@ -97,7 +97,7 @@ Everything client-specific is at the top of `assets/js/config.js`:
 
 | Placeholder | Replace with |
 | --- | --- |
-| `FOUNDATION.whatsapp` (`919999999999`) | the Foundation's WhatsApp Business number |
+| `FOUNDATION.whatsapp` (`910000000000`) | the Foundation's WhatsApp Business number |
 | `FOUNDATION.email`, `FOUNDATION.hours` | real enquiry email + working hours |
 | `IMPACT` counters | verified impact numbers |
 | `TESTIMONIALS` | real quotes + attributions |

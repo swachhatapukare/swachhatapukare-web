@@ -200,7 +200,7 @@ payment_sections = [
         "• COD Refunds: For Cash on Delivery returns, refunds are credited directly to the customer's verified bank account or UPI ID upon receipt of returned goods."
     ]),
     ("6", "Contact & Billing Queries", [
-        "For any billing questions, invoice corrections, or transaction clarifications, please contact our Accounts Team at accounts@swachhatapukare.com or WhatsApp +91 99343 04800."
+        "For any billing questions, invoice corrections, or transaction clarifications, please contact our Accounts Team at accounts@swachhatapukare.com or WhatsApp +91 00000 00000."
     ])
 ]
 

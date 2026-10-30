@@ -29,8 +29,10 @@ SP.config = {
     addressOneLine:
       "HIG-276, Ward No-15, Near Bank Of Baroda, Adityapur, Jamshedpur, Jharkhand 831013",
     gst: "20ABHCS8922N1ZZ",
+    phone: "+91 00000 00000",
+    phoneTel: "+910000000000",
     // TODO: replace with the Foundation's real WhatsApp Business number (country code + number, digits only)
-    whatsapp: "919934304800",
+    whatsapp: "910000000000",
     email: "hello@swachhatapukare.com",
     website: "https://www.swachhatapukare.com",
     hours: "Monday – Saturday, 09:00 – 18:00 IST"
