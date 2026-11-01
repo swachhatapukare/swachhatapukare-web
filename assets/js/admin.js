@@ -240,10 +240,14 @@
         '<td><span class="admin-badge admin-badge--' + (payStatus === "paid" ? "success" : "warning") + '">' + SP.esc(payStatus.replace(/_/g, " ")) + '</span></td>' +
         '<td><span class="admin-badge admin-badge--' + getStatusBadgeClass(status) + '">' + SP.esc(status) + '</span></td>' +
         '<td><strong>' + (SP.fmtINR ? SP.fmtINR(order.total) : "₹" + order.total) + '</strong></td>' +
-        '<td>' +
-        '<div style="display:flex;gap:0.4rem;">' +
-        '<button class="btn btn--outline btn--xs" data-view-order="' + SP.esc(order.id) + '">Manage</button>' +
-        '<a class="btn btn--outline btn--xs" href="invoice.html?id=' + encodeURIComponent(order.id) + '" target="_blank">Invoice</a>' +
+        '<td class="td-actions">' +
+        '<div class="adm-table-actions">' +
+        '<button class="adm-icon-btn" data-view-order="' + SP.esc(order.id) + '" title="Manage Order & Fulfillment" aria-label="Manage Order">' +
+        '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>' +
+        '</button>' +
+        '<a class="adm-icon-btn" href="invoice.html?id=' + encodeURIComponent(order.id) + '" target="_blank" title="Print Official Invoice" aria-label="Print Invoice">' +
+        '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>' +
+        '</a>' +
         '</div>' +
         '</td>' +
         '</tr>'
@@ -401,8 +405,12 @@
         '</div>' +
         '</td>' +
         '<td><span class="admin-badge admin-badge--' + badgeClass + '">' + badgeLabel + '</span></td>' +
-        '<td>' +
-        '<button class="btn btn--outline btn--xs" data-edit-prod="' + prod.id + '">Edit</button>' +
+        '<td class="td-actions">' +
+        '<div class="adm-table-actions">' +
+        '<button class="adm-icon-btn" data-edit-prod="' + prod.id + '" title="Edit Product Details" aria-label="Edit Product">' +
+        '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>' +
+        '</button>' +
+        '</div>' +
         '</td>' +
         '</tr>'
       );
@@ -583,11 +591,17 @@
           '<td><span class="admin-badge admin-badge--info">' + SP.esc(post.category) + '</span></td>' +
           '<td>' + SP.esc(post.author || "Team") + '</td>' +
           '<td>' + SP.esc(post.date || "") + '</td>' +
-          '<td>' +
-          '<div style="display:flex;gap:0.4rem;">' +
-          '<button class="btn btn--outline btn--xs" data-edit-post="' + SP.esc(post.id) + '">Edit</button>' +
-          '<a class="btn btn--outline btn--xs" href="blog.html?post=' + encodeURIComponent(post.slug) + '" target="_blank">View</a>' +
-          '<button class="btn btn--outline btn--xs text-danger" data-delete-post="' + SP.esc(post.id) + '">Delete</button>' +
+          '<td class="td-actions">' +
+          '<div class="adm-table-actions">' +
+          '<button class="adm-icon-btn" data-edit-post="' + SP.esc(post.id) + '" title="Edit Article" aria-label="Edit Article">' +
+          '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>' +
+          '</button>' +
+          '<a class="adm-icon-btn" href="blog.html?post=' + encodeURIComponent(post.slug) + '" target="_blank" title="View Published Article" aria-label="View Published Article">' +
+          '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>' +
+          '</a>' +
+          '<button class="adm-icon-btn adm-icon-btn--danger" data-delete-post="' + SP.esc(post.id) + '" title="Delete Article" aria-label="Delete Article">' +
+          '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>' +
+          '</button>' +
           '</div>' +
           '</td>' +
           '</tr>'
