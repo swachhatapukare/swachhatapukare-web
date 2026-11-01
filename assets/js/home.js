@@ -17,9 +17,9 @@
        keep the two in sync. A null value hides its tile. */
     IMPACT: [
       { value: 500, suffix: "+", label: "River cleaning drives", aria: "500 plus river cleaning drives" },
+      { value: 10, suffix: "+", label: "CSR Projects", aria: "10 plus CSR projects" },
       { value: 68, suffix: "+", label: "TEDx speakers", aria: "68 plus TEDx speakers" },
-      { value: 5000, suffix: "\u00A0kW+", label: "Solar capacity", aria: "5,000 kilowatts plus of solar capacity", format: "comma" },
-      { value: null, label: "CSR projects" }
+      { value: 5000, suffix: "\u00A0kW+", label: "Solar capacity", aria: "5,000 kilowatts plus of solar capacity", format: "comma" }
     ]
   };
 
@@ -451,70 +451,11 @@
     startAuto();
   }
 
-  /* -------------------------------------------------------- work category stage */
-  function initWorkFilter() {
-    var filterBar = document.querySelector(".h-work__filters");
-    if (!filterBar) return;
-
-    var tabs = qsa(".h-work__tab", filterBar);
-    var cats = qsa(".h-work-cat");
-    var prevBtn = document.querySelector('[data-work-nav="prev"]');
-    var nextBtn = document.querySelector('[data-work-nav="next"]');
-
-    var catKeys = ["water", "energy", "waste", "community"];
-    var currentIdx = 0;
-
-    function selectCat(idx) {
-      currentIdx = (idx + catKeys.length) % catKeys.length;
-      var activeKey = catKeys[currentIdx];
-
-      tabs.forEach(function (t) {
-        var match = t.getAttribute("data-filter") === activeKey;
-        t.classList.toggle("is-active", match);
-        t.setAttribute("aria-selected", match ? "true" : "false");
-      });
-
-      cats.forEach(function (catEl) {
-        var match = catEl.getAttribute("data-category") === activeKey;
-        if (match) {
-          catEl.style.display = "";
-          catEl.classList.remove("is-hidden");
-        } else {
-          catEl.style.display = "none";
-          catEl.classList.add("is-hidden");
-        }
-      });
-    }
-
-    tabs.forEach(function (tab) {
-      tab.addEventListener("click", function () {
-        var key = tab.getAttribute("data-filter");
-        var idx = catKeys.indexOf(key);
-        if (idx !== -1) selectCat(idx);
-      });
-    });
-
-    if (prevBtn) {
-      prevBtn.addEventListener("click", function () {
-        selectCat(currentIdx - 1);
-      });
-    }
-
-    if (nextBtn) {
-      nextBtn.addEventListener("click", function () {
-        selectCat(currentIdx + 1);
-      });
-    }
-
-    selectCat(0);
-  }
-
   /* ------------------------------------------------------------------- init */
   function init() {
     hydrateFallbacks();
     wireShopLinks();
     initHeroSlideshow();
-    initWorkFilter();
     initImpact();
     initStory();
     initScrollRows();
