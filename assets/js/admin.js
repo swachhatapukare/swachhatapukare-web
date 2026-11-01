@@ -801,10 +801,12 @@
         '<td>' + SP.esc(item.phone || "—") + '</td>' +
         '<td><span class="text-sm">' + SP.esc(item.details.slice(0, 75)) + (item.details.length > 75 ? "..." : "") + '</span></td>' +
         '<td><span class="admin-badge admin-badge--' + (item.status === "Closed" ? "muted" : "success") + '">' + SP.esc(item.status) + '</span></td>' +
-        '<td>' +
-        '<button class="btn btn--outline btn--xs" data-toggle-enquiry="' + SP.esc(item.id) + '" data-type="' + SP.esc(item.type) + '">' +
+        '<td class="td-actions">' +
+        '<div class="adm-table-actions">' +
+        '<button class="btn btn--outline btn--xs" data-toggle-enquiry="' + SP.esc(item.id) + '" data-type="' + SP.esc(item.type) + '" style="white-space:nowrap;">' +
         (item.status === "Closed" ? "Re-open" : "Mark Closed") +
         '</button>' +
+        '</div>' +
         '</td>' +
         '</tr>'
       );

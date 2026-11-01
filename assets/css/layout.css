@@ -189,19 +189,19 @@
   top: calc(100% + 0.6rem);
   left: 50%;
   transform: translateX(-50%) translateY(6px);
-  width: min(680px, 84vw);
-  background: var(--c-paper);
+  width: min(780px, 92vw);
+  background: #FFFFFF;
   border: 1px solid var(--c-line);
-  border-radius: var(--r-lg);
-  box-shadow: var(--sh-3);
-  padding: var(--s-4);
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--s-2);
+  border-radius: 16px;
+  box-shadow: 0 20px 45px rgba(6, 27, 46, 0.12), 0 4px 12px rgba(6, 27, 46, 0.05);
+  padding: 0;
+  display: block;
+  overflow: hidden;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transition: opacity var(--d-sm) var(--e-out), transform var(--d-sm) var(--e-out), visibility var(--d-sm);
+  z-index: 250;
 }
 
 .nav__panel.is-open {
@@ -209,6 +209,276 @@
   visibility: visible;
   pointer-events: auto;
   transform: translateX(-50%) translateY(0);
+}
+
+/* ================================== Interactive What We Do Dropdown */
+.nav-wwd-showcase {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 360px;
+  background: #FFFFFF;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+/* Category Rail (Left Side) */
+.nav-wwd-rail {
+  background: #F8FAFC;
+  border-right: 1px solid #E2E8F0;
+  padding: 1rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.nav-wwd-rail__head {
+  padding: 0.25rem 0.5rem 0.5rem;
+  border-bottom: 1px solid #E2E8F0;
+  margin-bottom: 0.35rem;
+}
+
+.nav-wwd-rail__label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #64748B;
+}
+
+/* Category Box/Tab */
+.nav-wwd-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #061B2E;
+  background: transparent;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.nav-wwd-tab:hover,
+.nav-wwd-tab.is-active {
+  background: #FFFFFF;
+  border-color: #CBD5E1;
+  box-shadow: 0 4px 12px rgba(6, 27, 46, 0.05);
+  transform: translateX(3px);
+}
+
+.nav-wwd-tab.is-active {
+  border-color: var(--c-teal, #176BAE);
+  background: #FFFFFF;
+}
+
+.nav-wwd-tab__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #EAF3F9;
+  color: var(--c-teal, #176BAE);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.nav-wwd-tab.is-active .nav-wwd-tab__icon,
+.nav-wwd-tab:hover .nav-wwd-tab__icon {
+  background: var(--c-teal, #176BAE);
+  color: #FFFFFF;
+}
+
+.nav-wwd-tab__info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.nav-wwd-tab__name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #061B2E;
+  line-height: 1.25;
+}
+
+.nav-wwd-tab__badge {
+  font-size: 0.68rem;
+  color: #64748B;
+  margin-top: 1px;
+}
+
+.nav-wwd-tab__arrow {
+  font-size: 0.85rem;
+  color: #94A3B8;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: all 0.2s;
+}
+
+.nav-wwd-tab:hover .nav-wwd-tab__arrow,
+.nav-wwd-tab.is-active .nav-wwd-tab__arrow {
+  opacity: 1;
+  transform: translateX(0);
+  color: var(--c-teal, #176BAE);
+}
+
+/* Showcase Stage (Right Side) */
+.nav-wwd-stage {
+  padding: 1.25rem 1.5rem;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated Work Panes */
+.nav-wwd-pane {
+  display: none;
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.nav-wwd-pane.is-active {
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+  transform: translateX(0);
+  animation: wwdSlideOut 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes wwdSlideOut {
+  from {
+    opacity: 0;
+    transform: translateX(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.nav-wwd-pane__head {
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #F1F5F9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-wwd-pane__eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--c-teal, #176BAE);
+}
+
+.nav-wwd-pane__count {
+  font-size: 0.72rem;
+  color: #94A3B8;
+}
+
+.nav-wwd-work-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.nav-wwd-work-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.nav-wwd-work-card:hover {
+  background: #FFFFFF;
+  border-color: var(--c-teal, #176BAE);
+  box-shadow: 0 6px 16px rgba(23, 107, 174, 0.08);
+  transform: translateX(4px);
+}
+
+.nav-wwd-work-card__icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: #EAF3F9;
+  color: var(--c-teal, #176BAE);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.nav-wwd-work-card:hover .nav-wwd-work-card__icon {
+  background: var(--c-teal, #176BAE);
+  color: #FFFFFF;
+  transform: scale(1.05);
+}
+
+.nav-wwd-work-card__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.nav-wwd-work-card__tag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--c-teal, #176BAE);
+  margin-bottom: 2px;
+}
+
+.nav-wwd-work-card__title {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #061B2E;
+  margin-bottom: 3px;
+  line-height: 1.25;
+}
+
+.nav-wwd-work-card__desc {
+  font-size: 0.78rem;
+  color: #64748B;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.nav-wwd-work-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--c-teal, #176BAE);
+  margin-top: 0.45rem;
+  opacity: 0.85;
+  transition: all 0.2s;
+}
+
+.nav-wwd-work-card:hover .nav-wwd-work-card__cta {
+  opacity: 1;
+  transform: translateX(4px);
 }
 
 .nav-card {

@@ -933,26 +933,47 @@ html.no-scroll { overflow: hidden; }
 .address-card--lg { padding: var(--s-5); gap: var(--s-3); }
 
 .contact-links {
-  margin: var(--s-2) 0 0;
+  margin: var(--s-3) 0 0;
   padding: 0;
   list-style: none;
   display: grid;
-  gap: 0.65rem;
+  gap: 0.5rem;
+}
+.contact-links li {
+  margin: 0;
+  padding: 0;
 }
 .contact-links a {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 0.45rem;
-  color: #12588c;
-  font-weight: var(--fw-medium);
-  font-size: 0.95rem;
-  text-decoration: none;
+  justify-content: space-between;
+  padding: 0.6rem 0.75rem;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  color: #061B2E !important;
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-decoration: none !important;
   transition: all var(--d-sm) var(--e-out);
 }
+.contact-links a::after {
+  content: "→";
+  display: inline-block;
+  color: var(--c-teal, #176BAE);
+  font-weight: 700;
+  font-size: 1rem;
+  transition: transform var(--d-sm) var(--e-out);
+}
 .contact-links a:hover {
-  color: var(--c-teal);
-  text-decoration: none;
-  transform: translateX(4px);
+  background: #FFFFFF;
+  border-color: var(--c-teal, #176BAE);
+  color: var(--c-teal, #176BAE) !important;
+  transform: translateX(3px);
+  box-shadow: 0 4px 10px rgba(6, 27, 46, 0.05);
+}
+.contact-links a:hover::after {
+  transform: translateX(3px);
 }
 
 /* =================================================================== bulk */

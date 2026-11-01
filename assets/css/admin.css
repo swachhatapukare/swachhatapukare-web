@@ -367,9 +367,10 @@ body.admin-body {
 /* Action Icons & Cells */
 .admin-table th.th-actions,
 .admin-table td.td-actions {
-  white-space: nowrap;
+  white-space: nowrap !important;
   width: 1%;
   text-align: right;
+  min-width: 110px;
 }
 
 .adm-table-actions {
@@ -377,7 +378,8 @@ body.admin-body {
   align-items: center;
   justify-content: flex-end;
   gap: 0.4rem;
-  white-space: nowrap;
+  white-space: nowrap !important;
+  flex-wrap: nowrap;
 }
 
 .adm-icon-btn {

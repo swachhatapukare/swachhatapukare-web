@@ -195,58 +195,165 @@ window.SP = window.SP || {};
     var wwdPages = cfg.WHAT_WE_DO.map(function (i) { return i.slug; });
     var wwdActive = wwdPages.indexOf(page) !== -1;
 
-    var categories = cfg.WHAT_WE_DO_CATEGORIES || [
+    var categories = [
       {
-        category: "Water",
+        id: "water",
+        name: "Water",
+        badge: "2 Initiatives",
+        icon: "water",
+        href: "water-hyacinth.html",
+        paneTitle: "Water Initiatives & Ecological Restoration",
         items: [
-          { slug: "water-hyacinth", href: "water-hyacinth.html", title: "Water Hyacinth", desc: "An aquatic weed turned into handcrafted raw material." },
-          { slug: "river-cleaning", href: "river-cleaning.html", title: "River Cleaning", desc: "Cleaning drives along rivers and drains." }
+          {
+            slug: "water-hyacinth",
+            href: "water-hyacinth.html",
+            icon: "water",
+            tag: "Handcrafted & Eco-Friendly",
+            title: "Water Hyacinth Craft",
+            desc: "Transforming an invasive river weed into sustainable, handcrafted lifestyle & home products.",
+            cta: "Explore craft & shop"
+          },
+          {
+            slug: "river-cleaning",
+            href: "river-cleaning.html",
+            icon: "water",
+            tag: "Ecological Restoration",
+            title: "River Cleaning Drives",
+            desc: "Volunteer-powered riverbank cleanups and continuous mechanical de-weeding across Jharkhand.",
+            cta: "View river clean-up drives"
+          }
         ]
       },
       {
-        category: "Energy",
+        id: "energy",
+        name: "Energy",
+        badge: "1 Initiative",
+        icon: "sun",
+        href: "solar-power.html",
+        paneTitle: "Clean & Renewable Energy Infrastructure",
         items: [
-          { slug: "solar-power", href: "solar-power.html", title: "Solar Power", desc: "Work on solar energy initiatives." }
+          {
+            slug: "solar-power",
+            href: "solar-power.html",
+            icon: "sun",
+            tag: "Renewable Energy",
+            title: "Solar Power Systems",
+            desc: "Distributed rooftop and institutional solar arrays cutting emissions and fossil dependency.",
+            cta: "Learn about solar work"
+          }
         ]
       },
       {
-        category: "Waste Management",
+        id: "waste",
+        name: "Waste Management",
+        badge: "2 Initiatives",
+        icon: "drop",
+        href: "sewage-treatment.html",
+        paneTitle: "Effluent, Sewage & Circular Waste",
         items: [
-          { slug: "sewage-treatment", href: "sewage-treatment.html", title: "Sewage Treatment", desc: "Sewage treatment plant work." },
-          { slug: "dry-waste-management", href: "sewage-treatment.html#dry-waste", title: "Dry Waste Management", desc: "Segregation and recycling (coming soon)." }
+          {
+            slug: "sewage-treatment",
+            href: "sewage-treatment.html",
+            icon: "drop",
+            tag: "Biological Wastewater",
+            title: "Sewage Treatment (STP)",
+            desc: "Decentralized sewage and effluent treatment solutions ensuring zero untreated river runoff.",
+            cta: "Explore wastewater treatment"
+          },
+          {
+            slug: "dry-waste-management",
+            href: "sewage-treatment.html#dry-waste",
+            icon: "leaf",
+            tag: "Circular Economy",
+            title: "Dry Waste & Plastic Recycling",
+            desc: "Community source segregation, material recovery, and plastic recycling partnerships.",
+            cta: "Discover recycling projects"
+          }
         ]
       },
       {
-        category: "Rural & Community",
+        id: "rural",
+        name: "Rural & Community",
+        badge: "2 Initiatives",
+        icon: "location",
+        href: "rural-smart-build-centres.html",
+        paneTitle: "Livelihood Hubs & Grassroots Voices",
         items: [
-          { slug: "rural-smart-build-centres", href: "rural-smart-build-centres.html", title: "Rural Smart Build Centres", desc: "Sustainable rural construction and craft centres." },
-          { slug: "tedxbistupur", href: "tedxbistupur.html", title: "TEDxBistupur", desc: "Ideas worth spreading, from Bistupur." }
+          {
+            slug: "rural-smart-build-centres",
+            href: "rural-smart-build-centres.html",
+            icon: "location",
+            tag: "Artisan Empowerment",
+            title: "Rural Smart-Build Centres",
+            desc: "Grassroots craft incubation hubs training rural women in design, production, and livelihood.",
+            cta: "Visit smart-build centres"
+          },
+          {
+            slug: "tedxbistupur",
+            href: "tedxbistupur.html",
+            icon: "mic",
+            tag: "Ideas Worth Spreading",
+            title: "TEDxBistupur",
+            desc: "Independently organized TED events amplifying local innovators and environmental thinkers.",
+            cta: "Watch talks & stories"
+          }
         ]
       }
     ];
 
-    var wwdPanelContent = categories.map(function (cat) {
-      var catCards = cat.items.map(function (item) {
-        var iconName = "leaf";
-        if (item.slug === "river-cleaning" || item.slug === "water-hyacinth") iconName = "water";
-        else if (item.slug === "solar-power") iconName = "sun";
-        else if (item.slug === "sewage-treatment" || item.slug === "dry-waste-management") iconName = "drop";
-        else if (item.slug === "tedxbistupur") iconName = "mic";
-        else if (item.slug === "rural-smart-build-centres") iconName = "location";
+    var tabsHtml = categories.map(function (cat, idx) {
+      var isActive = idx === 0;
+      return (
+        '<a class="nav-wwd-tab' + (isActive ? ' is-active' : '') + '" ' +
+        'href="' + cat.href + '" ' +
+        'role="tab" ' +
+        'aria-selected="' + (isActive ? 'true' : 'false') + '" ' +
+        'data-wwd-target="wwd-pane-' + cat.id + '">' +
+        '<span class="nav-wwd-tab__icon">' + icon(cat.icon, 18) + '</span>' +
+        '<span class="nav-wwd-tab__info">' +
+        '<strong class="nav-wwd-tab__name">' + SP.esc(cat.name) + '</strong>' +
+        '<span class="nav-wwd-tab__badge">' + SP.esc(cat.badge) + '</span>' +
+        '</span>' +
+        '<span class="nav-wwd-tab__arrow">&rarr;</span>' +
+        '</a>'
+      );
+    }).join("");
 
-        return '<a class="nav-card" href="' + item.href + '">' +
-          '<span class="nav-card__icon">' + icon(iconName, 18) + '</span>' +
-          '<span class="nav-card__body">' +
-          '<strong class="nav-card__title">' + SP.esc(item.title) + '</strong>' +
-          '<span class="nav-card__desc">' + SP.esc(item.desc) + '</span>' +
-          '</span></a>';
-      }).join('');
+    var panesHtml = categories.map(function (cat, idx) {
+      var isActive = idx === 0;
+      var cardsHtml = cat.items.map(function (item) {
+        return (
+          '<a class="nav-wwd-work-card" href="' + item.href + '">' +
+          '<span class="nav-wwd-work-card__icon">' + icon(item.icon, 20) + '</span>' +
+          '<span class="nav-wwd-work-card__content">' +
+          '<span class="nav-wwd-work-card__tag">' + SP.esc(item.tag) + '</span>' +
+          '<strong class="nav-wwd-work-card__title">' + SP.esc(item.title) + '</strong>' +
+          '<p class="nav-wwd-work-card__desc">' + SP.esc(item.desc) + '</p>' +
+          '<span class="nav-wwd-work-card__cta">' + SP.esc(item.cta) + ' &rarr;</span>' +
+          '</span>' +
+          '</a>'
+        );
+      }).join("");
 
-      return '<div class="nav-cat-group">' +
-        '<span class="nav-cat-heading">' + SP.esc(cat.category) + '</span>' +
-        '<div class="nav-cat-cards">' + catCards + '</div>' +
-        '</div>';
-    }).join('');
+      return (
+        '<div class="nav-wwd-pane' + (isActive ? ' is-active' : '') + '" id="wwd-pane-' + cat.id + '" role="tabpanel">' +
+        '<div class="nav-wwd-pane__head">' +
+        '<span class="nav-wwd-pane__eyebrow">' + SP.esc(cat.paneTitle) + '</span>' +
+        '<span class="nav-wwd-pane__count">' + cat.items.length + (cat.items.length === 1 ? ' Initiative' : ' Initiatives') + '</span>' +
+        '</div>' +
+        '<div class="nav-wwd-work-grid">' + cardsHtml + '</div>' +
+        '</div>'
+      );
+    }).join("");
+
+    var wwdPanelContent =
+      '<div class="nav-wwd-showcase">' +
+      '<div class="nav-wwd-rail" role="tablist" aria-label="What We Do Focus Areas">' +
+      '<div class="nav-wwd-rail__head"><span class="nav-wwd-rail__label">Focus Areas</span></div>' +
+      tabsHtml +
+      '</div>' +
+      '<div class="nav-wwd-stage">' + panesHtml + '</div>' +
+      '</div>';
 
     return (
       '<nav class="nav" aria-label="Main">' +
@@ -905,6 +1012,31 @@ window.SP = window.SP || {};
         hasMenu.addEventListener("mouseleave", function () {
           if (!SP.isDesktop()) return;
           hoverTimer = setTimeout(closeWwd, 220);
+        });
+      }
+
+      /* interactive category showcase hover & focus slide-out */
+      var wwdPanel = el("#nav-wwd-panel");
+      if (wwdPanel) {
+        var wwdTabs = wwdPanel.querySelectorAll(".nav-wwd-tab");
+        var wwdPanes = wwdPanel.querySelectorAll(".nav-wwd-pane");
+
+        wwdTabs.forEach(function (tab) {
+          function activateTab() {
+            var targetId = tab.getAttribute("data-wwd-target");
+            wwdTabs.forEach(function (t) {
+              var isCurrent = t === tab;
+              t.classList.toggle("is-active", isCurrent);
+              t.setAttribute("aria-selected", isCurrent ? "true" : "false");
+            });
+            wwdPanes.forEach(function (pane) {
+              var matches = pane.id === targetId;
+              pane.classList.toggle("is-active", matches);
+            });
+          }
+
+          tab.addEventListener("mouseenter", activateTab);
+          tab.addEventListener("focus", activateTab);
         });
       }
     }
