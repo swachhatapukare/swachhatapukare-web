@@ -86,9 +86,9 @@ SP.config = {
     { name: "M+ Solar by Petronas", src: "assets/partners/msolar by petronas.jpg", width: 9.5 },
     { name: "Neoperl", src: "assets/partners/neoperl.png", width: 9 },
     { name: "MM Aqua", src: "assets/partners/mmaqua.png", width: 9.5 },
-    { name: "Enactus", src: "assets/partners/enactus.png", width: 8.5 },
-    { name: "Inner Wheel", src: "assets/partners/innerwheel.png", width: 7.5 },
-    { name: "Utkarsh Bangla", src: "assets/partners/utkarshbangla.png", width: 7.5 }
+    { name: "Enactus", src: "assets/partners/enactus.png", width: 10 },
+    { name: "Inner Wheel", src: "assets/partners/innerwheel.png", width: 8.5 },
+    { name: "Utkarsh Bangla", src: "assets/partners/utkarshbangla.png", width: 9 }
   ],
 
   /* ------------------------------------------------------------ testimonials */
