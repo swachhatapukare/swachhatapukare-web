@@ -298,7 +298,7 @@
             (logo.width ? ' style="--logo-w:' + Number(logo.width) + 'rem"' : "") +
             (hidden ? ' aria-hidden="true"' : "") + ">" +
             '<img class="h-partners__logo" src="' + SP.esc(logo.src) + '" alt="' +
-            (hidden ? "" : SP.esc(logo.name)) + '" width="180" height="60" loading="lazy" decoding="async">' +
+            (hidden ? "" : SP.esc(logo.name)) + '" width="220" height="75" loading="lazy" decoding="async">' +
             '<span class="h-partners__name">' + SP.esc(logo.name) + "</span>" +
             "</li>";
         });
@@ -323,7 +323,7 @@
     requestAnimationFrame(function () {
       var half = track.scrollWidth / 2;
       if (!half) return;
-      root.style.setProperty("--marquee-duration", Math.min(60, Math.max(18, half / 70)).toFixed(1) + "s");
+      root.style.setProperty("--marquee-duration", Math.min(75, Math.max(20, half / 65)).toFixed(1) + "s");
     });
   }
 

@@ -62,18 +62,33 @@ SP.config = {
     { value: 3, suffix: "", label: "Partners", placeholder: false }
   ],
 
-  PARTNERS: ["Tata Steel", "Tata Communications", "NTPC"],
+  PARTNERS: [
+    "Tata Steel",
+    "Tata Communications",
+    "NTPC",
+    "Axis India",
+    "M+ Solar by Petronas",
+    "Neoperl",
+    "MM Aqua",
+    "Enactus",
+    "Inner Wheel",
+    "Utkarsh Bangla"
+  ],
 
   /* Partner logos for the "Working alongside" marquee on the home page.
-     Files live in assets/partners/ — add or swap entries freely.
-     tone: "dark" sits white-on-transparent artwork on a navy pill so it stays
-     visible; colour logos need no tone. width is the logo's max width in rem,
-     used to balance wide wordmarks against compact emblems. A missing file
-     falls back to the partner's name as a text wordmark. */
+     Files live in assets/partners/ — all placed on clean white card backgrounds.
+     width is the logo's max width in rem to maintain visual harmony. */
   PARTNER_LOGOS: [
-    { name: "Tata Steel", src: "assets/partners/tata-steel-logo.png", tone: "dark", width: 9 },
-    { name: "Tata Communications", src: "assets/partners/Tata Communications Logo White.svg", tone: "dark", width: 18 },
-    { name: "NTPC", src: "assets/partners/NTPC.png", width: 6.5 }
+    { name: "Tata Steel", src: "assets/partners/tatasteel.png", width: 9.5 },
+    { name: "Tata Communications", src: "assets/partners/tatacommunications.png", width: 11 },
+    { name: "NTPC", src: "assets/partners/NTPC.png", width: 7.5 },
+    { name: "Axis India", src: "assets/partners/Axis india.png", width: 9.5 },
+    { name: "M+ Solar by Petronas", src: "assets/partners/msolar by petronas.jpg", width: 9.5 },
+    { name: "Neoperl", src: "assets/partners/neoperl.png", width: 9 },
+    { name: "MM Aqua", src: "assets/partners/mmaqua.png", width: 9.5 },
+    { name: "Enactus", src: "assets/partners/enactus.png", width: 8.5 },
+    { name: "Inner Wheel", src: "assets/partners/innerwheel.png", width: 7.5 },
+    { name: "Utkarsh Bangla", src: "assets/partners/utkarshbangla.png", width: 7.5 }
   ],
 
   /* ------------------------------------------------------------ testimonials */

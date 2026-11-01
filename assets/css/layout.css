@@ -434,9 +434,9 @@
 
 /* ----------------------------------------------------------------- footer */
 .site-footer {
-  background: #081E33;
-  color: #B9D1E8;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: #0C2640;
+  color: #BED6EC;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
   padding-top: clamp(2.75rem, 5.5vw, 4.25rem);
   font-size: var(--t-sm);
 }
@@ -513,21 +513,26 @@
   white-space: nowrap;
 }
 
-.footer-brand .brand__mark path[fill="#176BAE"] {
-  fill: #86BEE6;
-}
-
-.footer-brand .brand__mark path[stroke="#176BAE"] {
-  stroke: #86BEE6;
+.footer-brand .brand__mark {
+  background: #FFFFFF;
+  border-radius: 10px;
+  padding: 0.35rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .footer-brand .brand__img,
 .footer-brand .brand__img--full {
   width: auto;
-  height: 3.4rem;
-  max-width: 3.8rem;
+  height: 3.6rem;
+  max-width: 4.4rem;
   object-fit: contain;
   flex-shrink: 0;
+  background: #FFFFFF;
+  border-radius: 10px;
+  padding: 0.35rem 0.45rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .footer-about {
