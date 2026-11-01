@@ -565,7 +565,7 @@
   background: var(--c-amber);
 }
 
-.footer-list {
+.site-footer .footer-list {
   display: grid;
   gap: 0.62rem;
   list-style: none;
@@ -573,7 +573,7 @@
   margin: 0;
 }
 
-.footer-list li a {
+.site-footer .footer-list li a {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -583,7 +583,7 @@
   transition: all 0.2s ease;
 }
 
-.footer-list li a:hover {
+.site-footer .footer-list li a:hover {
   color: #FFFFFF;
   transform: translateX(3px);
 }

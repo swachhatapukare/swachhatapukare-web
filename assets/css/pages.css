@@ -840,10 +840,31 @@ html.no-scroll { overflow: hidden; }
   .wwd-aside { position: sticky; top: calc(var(--header-h) + 1rem); }
 }
 
-.work-nav { gap: var(--s-2); }
-.work-nav a { color: var(--c-teal-deep); text-decoration: none; }
-.work-nav a:hover { text-decoration: underline; }
-.work-nav a[aria-current="page"] { color: var(--c-dark); }
+.work-nav {
+  display: grid;
+  gap: var(--s-2);
+  list-style: none;
+  padding: 0;
+  margin: var(--s-2) 0 0;
+}
+.work-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--c-teal-deep);
+  font-weight: var(--fw-medium);
+  text-decoration: none;
+  transition: all var(--d-sm) var(--e-out);
+}
+.work-nav a:hover {
+  color: var(--c-teal);
+  text-decoration: none;
+  transform: translateX(4px);
+}
+.work-nav a[aria-current="page"] {
+  color: var(--c-dark);
+  font-weight: var(--fw-bold);
+}
 
 /* ================================================================= donate */
 .donate-layout {
@@ -902,9 +923,28 @@ html.no-scroll { overflow: hidden; }
 
 .address-card--lg { padding: var(--s-5); gap: var(--s-3); }
 
-.contact-links { margin-top: var(--s-2); }
-.contact-links a { color: var(--c-teal-deep); text-decoration: none; }
-.contact-links a:hover { text-decoration: underline; }
+.contact-links {
+  margin: var(--s-2) 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.65rem;
+}
+.contact-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #12588c;
+  font-weight: var(--fw-medium);
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all var(--d-sm) var(--e-out);
+}
+.contact-links a:hover {
+  color: var(--c-teal);
+  text-decoration: none;
+  transform: translateX(4px);
+}
 
 /* =================================================================== bulk */
 .bulk-form { gap: var(--s-4); }
