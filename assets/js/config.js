@@ -236,34 +236,63 @@ SP.config = {
   ],
 
   /* ------------------------------------------------- page copy (About + WWD) */
-  // TODO: every block below is placeholder copy. Replace with the Foundation's
-  // own approved words before this site goes live.
+  // Page copy for the Foundation's About and What We Do pages.
   COPY: {
     about: {
       eyebrow: "About the Foundation",
       title: "About SwachhataPukare Foundation",
       lead:
-        "SwachhataPukare Foundation is a Section 8 non-profit organisation based in Adityapur, Jamshedpur, working on river conservation, handcrafted livelihoods, clean energy, and civic initiatives.",
-      placeholderNote:
-        "Official write-up and organizational background pending confirmation from the Foundation.",
+        "Founded in 2019, Swachhata Pukare is a Section 8 non-profit organization building practical, community-led solutions for environmental restoration, resilient livelihoods, and human well-being across India.",
+      placeholderNote: "",
       sections: [
         {
-          h: "Who we are",
+          h: "Who We Are",
           p: [
-            "[Placeholder: Foundation background, founding story, mission, and leadership details to be confirmed by SwachhataPukare Foundation.]"
+            "Founded in 2019 by Mr. Gaurav Anand, Swachhata Pukare is a Section 8 non-profit organization dedicated to fostering sustainable development across India. We believe environmental preservation and human well-being go hand in hand.",
+            "By developing cost-effective, decentralized solutions for ecological restoration while creating resilient livelihoods for women and local artisans, we bridge the gap between environmental health, social justice, and economic prosperity.",
+            "We are a collective of environmental innovators, grassroots changemakers, community volunteers, and social entrepreneurs. Operating with complete transparency, our team turns complex environmental challenges into scalable, community-driven solutions."
           ]
         },
         {
-          h: "Where we work",
+          h: "Our vision and mission",
           p: [
-            "Registered Office: HIG-276, Ward No-15, Near Bank Of Baroda, Adityapur, Jamshedpur, Jharkhand 831013.",
-            "[Placeholder: Detailed geographical coverage, river basins, and rural operational clusters to be confirmed.]"
+            "Our vision is a resilient world where ecosystems are restored, communities thrive self-reliantly, and sustainable living is accessible to all.",
+            "Our mission is to deliver practical, low-cost technologies and grassroots initiatives across waste, water, and energy management while fostering women's empowerment, artisan preservation, and community health."
           ]
         },
         {
-          h: "What we do",
+          h: "Where We Work",
           p: [
-            "[Placeholder: Comprehensive overview of river cleaning drives, water hyacinth craft, solar power, sewage treatment, rural smart build centres, and TEDxBistupur.]"
+            "Headquartered in Jamshedpur (Adityapur), Jharkhand, our roots run deep in the tribal and rural belts of eastern India, where urban expansion and industrialization intersect with vulnerable ecosystems.",
+            "Our primary grassroots projects, river cleanups, and community livelihood centers operate across Jharkhand and neighboring regions. Our digital health initiatives and advocacy programs extend broader nationwide impact through strategic corporate and civic partnerships."
+          ]
+        },
+        {
+          h: "What We Do",
+          p: [
+            "Ecological waste upcycling and livelihoods: We harvest water hyacinth from choked water bodies and upcycle it into high-value handicrafts and daily-use products, providing steady income and financial independence to rural women and traditional artisans.",
+            "Water conservation and cleanups: We organize recurring river cleanup drives, restore native freshwater bodies, and install decentralized, affordable sewage treatment plant solutions to protect aquatic ecosystems.",
+            "Renewable energy and climate action: We design and implement community-scale solar power setups and energy-efficiency practices to reduce carbon footprints in rural clusters and urban neighborhoods.",
+            "Environmental health: We deploy affordable interventions to monitor and improve local air and soil health, minimize open dumping, and promote circular waste management techniques.",
+            "Digital healthcare access: In collaboration with Tata Communications, we bridge critical healthcare gaps by deploying digital medical solutions to underserved rural communities.",
+            "Youth and community engagement: We curate civic platforms such as TEDxBistupur and conduct hands-on environmental education workshops to inspire the next generation of climate leaders."
+          ]
+        },
+        {
+          h: "Our Core Pillars",
+          p: [
+            "Planet-First Engineering: Prioritizing low-cost, scalable, and circular solutions over resource-heavy alternatives.",
+            "Economic Dignity: Ensuring environmental cleanups translate directly into green jobs for rural women and artisans.",
+            "Collaborative Action: Partnering with industry leaders, educational institutions, local municipalities, and volunteer networks to amplify grassroots impact."
+          ]
+        },
+        {
+          h: "Our Impact in Numbers",
+          p: [
+            "2019 — Year established.",
+            "500+ — Community and river cleanup drives organized.",
+            "Thousands — Women and artisans uplifted with sustainable livelihoods.",
+            "Metric tons — Of invasive water hyacinth removed and repurposed."
           ]
         }
       ]

@@ -13,6 +13,22 @@
   function renderWorkNav(currentSlug) {
     var holder = SP.qs("[data-work-nav]");
     if (!holder) return;
+    if (currentSlug === "about") {
+      holder.classList.add("work-nav--categories");
+      holder.innerHTML = (cfg.WHAT_WE_DO_CATEGORIES || []).map(function (group) {
+        return (
+          '<li class="work-nav__category">' +
+          '<span class="work-nav__category-label">' + SP.esc(group.category) + "</span>" +
+          '<ul class="work-nav__subnav">' +
+          group.items.map(function (item) {
+            return '<li><a href="' + SP.esc(item.href) + '">' + SP.esc(item.title) + "</a></li>";
+          }).join("") +
+          "</ul>" +
+          "</li>"
+        );
+      }).join("");
+      return;
+    }
     holder.innerHTML = cfg.WHAT_WE_DO.map(function (item) {
       var active = item.slug === currentSlug;
       return (
