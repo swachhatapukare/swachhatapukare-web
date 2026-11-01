@@ -265,3 +265,15 @@ SP.relatedProducts = function (product, limit) {
   });
   return same.concat(others).slice(0, limit);
 };
+
+/* Merge custom products/inventory overrides saved from Admin Panel */
+try {
+  var customProds = JSON.parse(window.localStorage.getItem("sp_custom_products") || "[]");
+  if (Array.isArray(customProds) && customProds.length) {
+    customProds.forEach(function (cp) {
+      var idx = SP.products.findIndex(function (p) { return p.id === cp.id || p.sku === cp.sku; });
+      if (idx !== -1) SP.products[idx] = Object.assign({}, SP.products[idx], cp);
+      else SP.products.push(cp);
+    });
+  }
+} catch (e) { /* ignore */ }

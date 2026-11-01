@@ -483,6 +483,65 @@ window.SP = window.SP || {};
     });
   }
 
+  /* -------------------------------------------------------- admin management */
+  function updateOrder(orderId, patch) {
+    var orders = getOrders();
+    var found = null;
+    for (var i = 0; i < orders.length; i++) {
+      if (orders[i].id === orderId) {
+        orders[i] = Object.assign({}, orders[i], patch);
+        found = orders[i];
+        break;
+      }
+    }
+    if (found) {
+      write(KEYS.orders, orders);
+      emit("sp:order_updated", found);
+    }
+    return found;
+  }
+
+  function deleteOrder(orderId) {
+    var orders = getOrders().filter(function (o) { return o.id !== orderId; });
+    write(KEYS.orders, orders);
+    emit("sp:orders_changed", orders);
+    return true;
+  }
+
+  function getEnquiries() {
+    var list = read(KEYS.enquiries, []);
+    return Array.isArray(list) ? list : [];
+  }
+
+  function getBulkEnquiries() {
+    var list = read(KEYS.bulk, []);
+    return Array.isArray(list) ? list : [];
+  }
+
+  function updateEnquiry(id, patch) {
+    var list = getEnquiries();
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].id === id) {
+        list[i] = Object.assign({}, list[i], patch);
+        write(KEYS.enquiries, list);
+        return list[i];
+      }
+    }
+    return null;
+  }
+
+  function updateBulkEnquiry(ref, patch) {
+    var list = getBulkEnquiries();
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].ref === ref) {
+        list[i] = Object.assign({}, list[i], patch);
+        write(KEYS.bulk, list);
+        return list[i];
+      }
+    }
+    return null;
+  }
+
   /* ---------------------------------------------------------------- export */
   SP.store = {
     KEYS: KEYS,
@@ -500,6 +559,8 @@ window.SP = window.SP || {};
     getOrders: getOrders,
     getOrder: getOrder,
     placeOrder: placeOrder,
+    updateOrder: updateOrder,
+    deleteOrder: deleteOrder,
     lastOrderId: lastOrderId,
     tracking: tracking,
     getUser: getUser,
@@ -515,7 +576,11 @@ window.SP = window.SP || {};
     deleteAddress: deleteAddress,
     defaultAddress: defaultAddress,
     saveEnquiry: saveEnquiry,
+    getEnquiries: getEnquiries,
+    updateEnquiry: updateEnquiry,
     saveBulkEnquiry: saveBulkEnquiry,
+    getBulkEnquiries: getBulkEnquiries,
+    updateBulkEnquiry: updateBulkEnquiry,
     saveDonation: saveDonation,
     ordersForUser: ordersForUser
   };

@@ -1,0 +1,15 @@
+# robots.txt for SwachhataPukare Foundation
+# https://www.swachhatapukare.com
+
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /admin/
+Disallow: /checkout.html
+Disallow: /account.html
+Disallow: /cart.html
+Disallow: /invoice.html
+Disallow: /order-confirmation.html
+
+# XML Sitemap
+Sitemap: https://www.swachhatapukare.com/sitemap.xml

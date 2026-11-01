@@ -258,6 +258,7 @@ window.SP = window.SP || {};
       '<div class="nav__panel nav__panel--categorized" id="nav-wwd-panel">' + wwdPanelContent +
       "</div></li>" +
       '<li class="nav__item"><a class="nav__link' + active("about") + '" href="about.html"' + activeAttr("about") + ">About</a></li>" +
+      '<li class="nav__item"><a class="nav__link' + active("blog") + '" href="blog.html"' + activeAttr("blog") + ">Blog</a></li>" +
       '<li class="nav__item"><a class="nav__link' + active("donate") + '" href="donate.html"' + activeAttr("donate") + ">Donate</a></li>" +
       '<li class="nav__item"><a class="nav__link' + active("gallery") + '" href="gallery.html"' + activeAttr("gallery") + ">Gallery</a></li>" +
       '<li class="nav__item"><a class="nav__link' + active("contact") + '" href="contact.html"' + activeAttr("contact") + ">Contact</a></li>" +
@@ -301,6 +302,7 @@ window.SP = window.SP || {};
       '<span class="mobile-nav__group">What we do</span>' +
       '<div class="mobile-nav__sub">' + wwd + "</div>" +
       link("about.html", "about", "About") +
+      link("blog.html", "blog", "Blog & Stories") +
       link("donate.html", "donate", "Donate") +
       link("gallery.html", "gallery", "Gallery") +
       link("contact.html", "contact", "Contact") +
@@ -376,6 +378,7 @@ window.SP = window.SP || {};
       '<div class="footer-col"><span class="footer-title">What We Do</span>' +
       '<ul class="footer-list">' +
       wwdLinks +
+      '<li><a href="blog.html">Field stories &amp; blog</a></li>' +
       '<li><a href="about.html">About our leadership</a></li>' +
       '<li><a href="gallery.html">Field photo gallery</a></li>' +
       '</ul></div>' +

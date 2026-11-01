@@ -178,6 +178,16 @@
     var items = qsa(".h-impact__item");
     if (!items.length) return;
 
+    try {
+      var customImpact = JSON.parse(window.localStorage.getItem("sp_custom_impact") || "null");
+      if (customImpact) {
+        if (customImpact.drives) HOME_CONFIG.IMPACT[0].value = Number(customImpact.drives);
+        if (customImpact.csr) HOME_CONFIG.IMPACT[1].value = Number(customImpact.csr);
+        if (customImpact.tedx) HOME_CONFIG.IMPACT[2].value = Number(customImpact.tedx);
+        if (customImpact.solar) HOME_CONFIG.IMPACT[3].value = Number(customImpact.solar);
+      }
+    } catch (e) { /* ignore */ }
+
     var visible = HOME_CONFIG.IMPACT.filter(function (entry) { return entry.value != null; });
 
     items.forEach(function (item, index) {
