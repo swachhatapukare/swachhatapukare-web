@@ -31,7 +31,7 @@
       <input type="password" class="admin-lock-input" id="admin-passcode-input" placeholder="••••••••" autofocus required autocomplete="current-password">
       <button type="submit" class="btn btn--primary btn--full" style="padding: 0.85rem;">Unlock Portal &rarr;</button>
     </form>
-    <p class="admin-lock-hint">Authorized personnel only &bull; Default Passcode: <code>pukare2026</code></p>
+    <p class="admin-lock-hint">Authorized personnel only &bull; Default Passcode: <code id="quick-passcode-btn" style="cursor: pointer; text-decoration: underline; background: rgba(255,255,255,0.15); padding: 2px 6px; border-radius: 4px;" title="Click to fill &amp; enter">pukare2026</code></p>
   </div>
 </div>
 
@@ -356,7 +356,7 @@
 </div>
 
 <!-- ======================================================== ORDER MODAL -->
-<div class="admin-modal-backdrop" id="order-detail-modal" hidden>
+<div class="admin-modal-backdrop" id="order-detail-modal" hidden style="display: none;">
   <div class="admin-modal admin-modal--lg">
     <div class="admin-modal__head">
       <h3 class="admin-modal__title">Order Details: <span class="font-mono text-primary" id="modal-order-id"></span></h3>
@@ -411,7 +411,7 @@
 </div>
 
 <!-- ============================================== PRODUCT ADD/EDIT MODAL -->
-<div class="admin-modal-backdrop" id="product-modal" hidden>
+<div class="admin-modal-backdrop" id="product-modal" hidden style="display: none;">
   <div class="admin-modal">
     <div class="admin-modal__head">
       <h3 class="admin-modal__title" id="product-modal-title">Product Details</h3>
@@ -467,7 +467,7 @@
 </div>
 
 <!-- ============================================== ARTICLE ADD/EDIT MODAL -->
-<div class="admin-modal-backdrop" id="article-modal" hidden>
+<div class="admin-modal-backdrop" id="article-modal" hidden style="display: none;">
   <div class="admin-modal admin-modal--lg">
     <div class="admin-modal__head">
       <h3 class="admin-modal__title" id="article-modal-title">Compose Article</h3>
@@ -532,3 +532,4 @@
 
 </body>
 </html>
+

@@ -64,6 +64,35 @@
       });
     });
 
+    // Close modal on backdrop click
+    document.querySelectorAll(".admin-modal-backdrop").forEach(function (backdrop) {
+      backdrop.addEventListener("click", function (e) {
+        if (e.target === backdrop) {
+          closeAllModals();
+        }
+      });
+    });
+
+    // Close modal on Escape key
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" || e.keyCode === 27) {
+        closeAllModals();
+      }
+    });
+
+    // Quick Passcode click helper
+    var quickPass = document.getElementById("quick-passcode-btn");
+    if (quickPass && lockInput) {
+      quickPass.addEventListener("click", function () {
+        lockInput.value = PASSCODE;
+        sessionStorage.setItem("sp_admin_auth", "true");
+        unlock();
+      });
+    }
+
+    // Always start with all modals closed
+    closeAllModals();
+
     bindBillingActions();
     bindInventoryActions();
     bindCmsActions();
@@ -309,7 +338,7 @@
     var invLink = document.getElementById("modal-invoice-link");
     if (invLink) invLink.href = "invoice.html?id=" + encodeURIComponent(order.id);
 
-    modal.hidden = false;
+    openModal(modal);
   }
 
   /* ==================================================== 3. INVENTORY PANEL */
@@ -514,7 +543,7 @@
       descInput.value = "";
     }
 
-    modal.hidden = false;
+    openModal(modal);
   }
 
   /* ========================================================== 4. CMS PANEL */
@@ -679,7 +708,7 @@
       featInput.checked = false;
     }
 
-    modal.hidden = false;
+    openModal(modal);
   }
 
   /* ==================================================== 5. ENQUIRIES PANEL */
@@ -855,9 +884,18 @@
   }
 
   /* ============================================================== UTILITIES */
+  function openModal(modal) {
+    if (!modal) return;
+    modal.hidden = false;
+    modal.classList.add("is-open");
+    modal.style.display = "flex";
+  }
+
   function closeAllModals() {
     document.querySelectorAll(".admin-modal-backdrop").forEach(function (m) {
       m.hidden = true;
+      m.classList.remove("is-open");
+      m.style.display = "none";
     });
   }
 
@@ -896,3 +934,4 @@
   document.addEventListener("DOMContentLoaded", init);
 
 })(window.SP);
+

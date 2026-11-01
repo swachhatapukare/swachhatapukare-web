@@ -403,10 +403,18 @@ body.admin-body {
   z-index: 500;
   background: rgba(6, 27, 46, 0.6);
   backdrop-filter: blur(4px);
-  display: flex;
+  display: none !important;
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
+}
+
+.admin-modal-backdrop.is-open {
+  display: flex !important;
+}
+
+.admin-modal-backdrop[hidden] {
+  display: none !important;
 }
 .admin-modal {
   background: #FFFFFF;
@@ -510,3 +518,4 @@ body.admin-body {
   .admin-sidebar { width: 100%; }
   .adm-form-grid { grid-template-columns: 1fr; }
 }
+
