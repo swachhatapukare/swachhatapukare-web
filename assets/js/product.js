@@ -343,7 +343,7 @@
         }
         pdpPinResult.hidden = false;
         pdpPinResult.className = "pincode-result pincode-result--success";
-        pdpPinResult.innerHTML = "<strong>✓ Delivery available to " + SP.esc(pin) + "!</strong><br>" +
+        pdpPinResult.innerHTML = "<strong>&#10003; Delivery available to " + SP.esc(pin) + "!</strong><br>" +
           "Fulfilled via <strong>" + SP.esc(SP.config.COURIER_PARTNER) + "</strong>. Estimated 3–5 business days.";
       });
     }

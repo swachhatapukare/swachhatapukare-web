@@ -67,29 +67,45 @@ body.admin-body {
 .admin-lock-form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.85rem;
+}
+.admin-lock-field {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 0.35rem;
+}
+.admin-lock-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--adm-dark);
 }
 .admin-lock-input {
   width: 100%;
-  padding: 0.85rem 1rem;
+  padding: 0.75rem 0.9rem;
   border: 1.5px solid var(--adm-border);
   border-radius: 8px;
-  font-size: 1.1rem;
-  text-align: center;
-  letter-spacing: 0.25em;
-  font-family: var(--f-mono, monospace);
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--adm-dark);
+  background: #FFFFFF;
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
   box-sizing: border-box;
+}
+.admin-lock-input[type="password"] {
+  font-family: var(--f-mono, monospace);
+  letter-spacing: 0.15em;
 }
 .admin-lock-input:focus {
   border-color: var(--adm-primary);
   box-shadow: 0 0 0 3px rgba(23, 107, 174, 0.15);
 }
 .admin-lock-hint {
-  font-size: 0.8rem;
-  color: #94A3B8;
-  margin-top: 1rem;
+  font-size: 0.82rem;
+  color: #64748B;
+  margin-top: 1.25rem;
+  line-height: 1.5;
 }
 
 /* ============================================================= Layout Frame */

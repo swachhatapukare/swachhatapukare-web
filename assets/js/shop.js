@@ -363,7 +363,7 @@
         }
         pinResult.hidden = false;
         pinResult.className = "pincode-result pincode-result--success";
-        pinResult.innerHTML = "<strong>✓ Delivery available to " + SP.esc(val) + "!</strong><br>" +
+        pinResult.innerHTML = "<strong>&#10003; Delivery available to " + SP.esc(val) + "!</strong><br>" +
           "Serviced by <strong>" + SP.esc(SP.config.COURIER_PARTNER) + "</strong>. Estimated transit: 3–5 business days. Free shipping on orders above ₹999.";
       });
     }

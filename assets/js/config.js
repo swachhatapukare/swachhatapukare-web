@@ -494,7 +494,7 @@ SP.config = {
   DISPATCH_HOURS: 24,
   DELIVERY_DAYS_MIN: 3,
   DELIVERY_DAYS_MAX: 5,
-  COURIER_PARTNER: "Delivery & India Post (PAN India Delivery)",
+  COURIER_PARTNER: "Delhivery & India Post (PAN India Delivery)",
   PINCODE_COVERAGE: 28000,
   PINCODE_COVERAGE_LABEL: "28,000+ PIN codes across PAN India (All 28 States & 8 UTs)",
 

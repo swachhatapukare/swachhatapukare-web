@@ -1521,42 +1521,53 @@
   background: var(--c-surface);
   border: 1px solid var(--c-line);
   border-radius: var(--r-lg);
-  padding: var(--s-4);
-  margin-top: var(--s-4);
+  padding: 1rem;
+  margin-top: 0;
+  box-sizing: border-box;
 }
 
 .pincode-checker__title {
-  font-size: var(--t-sm);
-  font-weight: var(--fw-bold);
+  font-size: 0.875rem;
+  font-weight: var(--fw-bold, 700);
   color: var(--c-dark);
-  margin-bottom: 0.35rem;
+  margin: 0 0 0.35rem 0;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
+}
+
+.pincode-checker__title svg {
+  flex-shrink: 0;
+  color: var(--c-teal);
 }
 
 .pincode-checker__desc {
-  font-size: var(--t-xs);
+  font-size: var(--t-xs, 0.75rem);
   color: var(--c-muted);
   line-height: 1.45;
-  margin-bottom: var(--s-3);
+  margin: 0 0 0.75rem 0;
 }
 
 .pincode-checker__form {
   display: flex;
-  gap: 0.4rem;
+  align-items: center;
+  gap: 0.45rem;
+  width: 100%;
 }
 
 .pincode-checker__input {
   flex: 1;
   min-width: 0;
   height: 38px;
+  line-height: 38px;
   padding: 0 0.75rem;
-  font-size: var(--t-sm);
+  font-size: 0.85rem;
   font-family: inherit;
-  border: 1px solid var(--c-line);
+  border: 1.5px solid var(--c-line);
   border-radius: var(--r-md);
-  background: var(--c-paper);
+  background: #FFFFFF;
+  color: var(--c-dark);
+  box-sizing: border-box;
 }
 
 .pincode-checker__input:focus {
@@ -1568,14 +1579,18 @@
 .pincode-checker__btn {
   height: 38px;
   padding: 0 1rem;
-  font-size: var(--t-xs);
-  font-weight: var(--fw-bold);
+  font-size: 0.8rem;
+  font-weight: var(--fw-bold, 700);
   border-radius: var(--r-md);
   border: none;
   background: var(--c-dark);
   color: var(--c-on-dark);
   cursor: pointer;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
   transition: background var(--d-fast);
 }
 
@@ -1584,11 +1599,12 @@
 }
 
 .pincode-result {
-  margin-top: 0.6rem;
-  font-size: var(--t-xs);
+  margin-top: 0.65rem;
+  font-size: 0.78rem;
   line-height: 1.5;
-  padding: 0.5rem 0.65rem;
+  padding: 0.6rem 0.75rem;
   border-radius: var(--r-md);
+  word-break: break-word;
 }
 
 .pincode-result--success {
@@ -1604,8 +1620,9 @@
 }
 
 .pincode-checker__coverage {
-  margin-top: 0.45rem;
+  margin-top: 0.55rem;
   font-size: 0.72rem;
+  line-height: 1.4;
   color: var(--c-muted);
 }
 

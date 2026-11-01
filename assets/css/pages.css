@@ -11,8 +11,28 @@
 }
 
 @media (min-width: 900px) {
-  .shop-layout { grid-template-columns: 15.5rem minmax(0, 1fr); }
-  .shop-layout .filters { position: sticky; top: calc(var(--header-h) + 1rem); }
+  .shop-layout {
+    grid-template-columns: 17.5rem minmax(0, 1fr);
+    align-items: start;
+    gap: var(--s-6);
+  }
+  .shop-layout .filters {
+    position: sticky;
+    top: calc(var(--header-h) + 1rem);
+    max-height: calc(100vh - var(--header-h) - 1.5rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-right: 0.5rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(6, 27, 46, 0.25) transparent;
+  }
+  .shop-layout .filters::-webkit-scrollbar {
+    width: 5px;
+  }
+  .shop-layout .filters::-webkit-scrollbar-thumb {
+    background: rgba(6, 27, 46, 0.25);
+    border-radius: 4px;
+  }
 }
 
 .shop-main { display: grid; gap: var(--s-4); }

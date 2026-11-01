@@ -3,19 +3,24 @@
 (function (SP) {
   "use strict";
 
-  var PASSCODE = "pukare2026";
+  var DEFAULT_USERS = {
+    "admin": "pukare2026",
+    "staff": "pukare2026",
+    "swachhata": "pukare2026"
+  };
   var currentTab = "overview";
   var ordersFilter = "all";
   var inventoryFilter = "all";
   var enquiriesFilter = "all";
 
   // Elements
-  var lockOverlay, lockInput, lockForm;
+  var lockOverlay, usernameInput, passwordInput, lockForm;
   var navItems, panels, currentTitle;
 
   function init() {
     lockOverlay = document.getElementById("admin-lock-overlay");
-    lockInput = document.getElementById("admin-passcode-input");
+    usernameInput = document.getElementById("admin-username-input");
+    passwordInput = document.getElementById("admin-password-input");
     lockForm = document.getElementById("admin-lock-form");
     navItems = document.querySelectorAll("[data-admin-tab]");
     panels = document.querySelectorAll(".admin-panel");
@@ -27,15 +32,21 @@
     } else if (lockForm) {
       lockForm.addEventListener("submit", function (e) {
         e.preventDefault();
-        var code = (lockInput.value || "").trim();
-        if (code === PASSCODE) {
+        var u = (usernameInput && usernameInput.value ? usernameInput.value : "").trim().toLowerCase();
+        var p = (passwordInput && passwordInput.value ? passwordInput.value : "").trim();
+
+        if (DEFAULT_USERS[u] && DEFAULT_USERS[u] === p) {
           sessionStorage.setItem("sp_admin_auth", "true");
+          sessionStorage.setItem("sp_admin_user", u);
           unlock();
+          toast("Logged in as " + u, "success");
         } else {
-          lockInput.classList.add("is-invalid");
-          toast("Incorrect passcode. Please try again.", "error");
-          lockInput.value = "";
-          lockInput.focus();
+          if (passwordInput) {
+            passwordInput.classList.add("is-invalid");
+            passwordInput.value = "";
+            passwordInput.focus();
+          }
+          toast("Invalid username or password. Please try again.", "error");
         }
       });
     }
@@ -53,7 +64,14 @@
     if (logoutBtn) {
       logoutBtn.addEventListener("click", function () {
         sessionStorage.removeItem("sp_admin_auth");
-        window.location.reload();
+        sessionStorage.removeItem("sp_admin_user");
+        if (passwordInput) passwordInput.value = "";
+        if (lockOverlay) {
+          lockOverlay.style.display = "flex";
+        } else {
+          window.location.reload();
+        }
+        toast("Logged out successfully.", "info");
       });
     }
 
@@ -80,13 +98,16 @@
       }
     });
 
-    // Quick Passcode click helper
+    // Quick Login click helper
     var quickPass = document.getElementById("quick-passcode-btn");
-    if (quickPass && lockInput) {
+    if (quickPass) {
       quickPass.addEventListener("click", function () {
-        lockInput.value = PASSCODE;
+        if (usernameInput) usernameInput.value = "admin";
+        if (passwordInput) passwordInput.value = "pukare2026";
         sessionStorage.setItem("sp_admin_auth", "true");
+        sessionStorage.setItem("sp_admin_user", "admin");
         unlock();
+        toast("Logged in as admin", "success");
       });
     }
 
@@ -102,6 +123,9 @@
 
   function unlock() {
     if (lockOverlay) lockOverlay.style.display = "none";
+    var user = sessionStorage.getItem("sp_admin_user") || "admin";
+    var badge = document.querySelector(".admin-sidebar__badge");
+    if (badge) badge.textContent = "Admin (" + user + ")";
     switchTab("overview");
   }
 
