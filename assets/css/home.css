@@ -1099,27 +1099,65 @@
 .page-home .h-work {
   background: var(--h-paper);
   position: relative;
+  padding-block: clamp(2.5rem, 4vw, 3.5rem);
 }
 
-/* Category Filter Tabs */
+/* Category Stage Switcher (One Screen View) */
+.page-home .h-work__nav-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-block: 1.25rem 1.85rem;
+  flex-wrap: wrap;
+}
+
 .page-home .h-work__filters {
   display: flex;
   align-items: center;
   gap: 0.65rem;
   overflow-x: auto;
-  padding-bottom: 0.75rem;
-  margin-block: 1.75rem 2.5rem;
+  padding-bottom: 0.25rem;
   scrollbar-width: none;
 }
 .page-home .h-work__filters::-webkit-scrollbar {
   display: none;
 }
 
+.page-home .h-work__arrows {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.page-home .h-work__arrow-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--c-line);
+  background: var(--c-white);
+  color: var(--c-dark);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.05rem;
+  line-height: 1;
+  transition: all var(--d-sm) var(--e-out);
+}
+
+.page-home .h-work__arrow-btn:hover {
+  background: #061B2E;
+  color: #FFFFFF;
+  border-color: #061B2E;
+  transform: scale(1.05);
+}
+
 .page-home .h-work__tab {
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  padding: 0.6rem 1.15rem;
+  padding: 0.55rem 1.1rem;
   border-radius: var(--r-full);
   background: var(--c-white);
   border: 1px solid var(--c-line);
@@ -1170,39 +1208,40 @@
   color: #FFFFFF;
 }
 
-/* Categorized Stream (Thematic Split Rows - Not Cards) */
+/* Categorized Stage (Single-Screen Fit) */
 .page-home .h-work__stream {
   display: flex;
   flex-direction: column;
-  gap: clamp(2.5rem, 5vw, 4rem);
+  min-height: 320px;
 }
 
 .page-home .h-work-cat {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem clamp(2rem, 4vw, 4.5rem);
-  padding-top: 2.25rem;
-  border-top: 1px solid var(--c-line);
-  transition: opacity var(--d-md) var(--e-out);
+  gap: 1.5rem clamp(2rem, 3.5vw, 3.5rem);
+  padding: clamp(1.5rem, 2.5vw, 2.25rem);
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: var(--r-xl);
+  backdrop-filter: blur(4px);
+  animation: work-stage-fade 0.28s ease-out;
+}
+
+@keyframes work-stage-fade {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @media (min-width: 900px) {
   .page-home .h-work-cat {
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.85fr);
-    align-items: flex-start;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.85fr);
+    align-items: center;
   }
 }
 
 /* Category Sidebar / Header Column */
 .page-home .h-work-cat__header {
   position: relative;
-}
-
-@media (min-width: 900px) {
-  .page-home .h-work-cat__header {
-    position: sticky;
-    top: 6rem;
-  }
 }
 
 .page-home .h-work-cat__tag {
@@ -1214,7 +1253,7 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--c-teal-deep);
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.5rem;
 }
 
 .page-home .h-work-cat[data-category="water"] .h-work-cat__tag { color: var(--c-teal-deep); }
@@ -1228,15 +1267,15 @@
 
 .page-home .h-work-cat__title {
   font-family: var(--f-display);
-  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  font-size: clamp(1.6rem, 2.2vw, 2.1rem);
   line-height: 1.15;
   color: var(--c-dark);
-  margin: 0 0 0.85rem;
+  margin: 0 0 0.65rem;
 }
 
 .page-home .h-work-cat__desc {
-  font-size: 0.96rem;
-  line-height: 1.65;
+  font-size: 0.92rem;
+  line-height: 1.6;
   color: var(--c-muted);
   max-width: 32ch;
   margin: 0;
@@ -1246,16 +1285,16 @@
 .page-home .h-work-cat__items {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1rem;
 }
 
 .page-home .h-work-item {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 1.25rem;
-  padding: clamp(1.5rem, 2.8vw, 2.2rem);
-  border-radius: var(--r-lg);
+  gap: 0.85rem;
+  padding: 1.25rem 1.6rem;
+  border-radius: var(--r-md);
   background: var(--c-white);
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-left: 4px solid var(--c-line);
@@ -1279,8 +1318,8 @@
 
 .page-home .h-work-item:hover,
 .page-home .h-work-item:focus-visible {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(6, 27, 46, 0.07);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(6, 27, 46, 0.07);
   border-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -1297,23 +1336,23 @@
 .page-home .h-work-item__meta {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  margin-bottom: 0.5rem;
+  gap: 0.55rem;
+  margin-bottom: 0.4rem;
 }
 
 .page-home .h-work-item__index {
   font-family: var(--f-display);
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   font-weight: var(--fw-bold);
   color: var(--c-muted);
   letter-spacing: 0.05em;
 }
 
 .page-home .h-work-item__pill {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: var(--fw-semibold);
   letter-spacing: 0.04em;
-  padding: 0.15rem 0.55rem;
+  padding: 0.12rem 0.5rem;
   border-radius: var(--r-full);
   background: var(--c-sand-soft);
   color: var(--c-dark);
@@ -1325,10 +1364,10 @@
 
 .page-home .h-work-item__title {
   font-family: var(--f-display);
-  font-size: clamp(1.22rem, 1.4vw, 1.48rem);
+  font-size: clamp(1.15rem, 1.25vw, 1.35rem);
   line-height: 1.25;
   color: var(--c-dark);
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.35rem;
   transition: color var(--d-sm) var(--e-out);
 }
 
@@ -1337,25 +1376,25 @@
 }
 
 .page-home .h-work-item__text {
-  font-size: 0.92rem;
-  line-height: 1.6;
+  font-size: 0.88rem;
+  line-height: 1.5;
   color: var(--c-muted);
-  margin: 0 0 0.95rem;
-  max-width: 55ch;
+  margin: 0 0 0.65rem;
+  max-width: 50ch;
 }
 
 .page-home .h-work-item__tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
+  gap: 0.4rem;
 }
 
 .page-home .h-chip {
   display: inline-flex;
   align-items: center;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: var(--fw-medium);
-  padding: 0.2rem 0.55rem;
+  padding: 0.18rem 0.5rem;
   border-radius: var(--r-sm);
   background: var(--c-sand-soft);
   color: var(--c-muted);
@@ -1369,12 +1408,12 @@
 .page-home .h-work-item__cta {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  font-size: 0.88rem;
+  gap: 0.4rem;
+  font-size: 0.84rem;
   font-weight: var(--fw-semibold);
   color: var(--c-teal-deep);
   white-space: nowrap;
-  padding: 0.4rem 0.8rem;
+  padding: 0.35rem 0.75rem;
   border-radius: var(--r-full);
   background: rgba(23, 107, 174, 0.06);
   transition: all var(--d-sm) var(--e-out);

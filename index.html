@@ -228,28 +228,39 @@
         <p class="h-head__sub">Our holistic programs driving environmental restoration, clean energy, waste management, and community livelihoods across Eastern India.</p>
       </div>
 
-      <!-- Category Filter Tabs -->
-      <div class="h-work__filters" role="tablist" aria-label="Work category filter">
-        <button class="h-work__tab is-active" type="button" role="tab" aria-selected="true" data-filter="all">
-          <span>All Areas</span>
-          <span class="h-work__tab-badge">4</span>
-        </button>
-        <button class="h-work__tab" type="button" role="tab" aria-selected="false" data-filter="water">
-          <span class="h-work__tab-indicator h-work__tab-indicator--water"></span>
-          <span>Water</span>
-        </button>
-        <button class="h-work__tab" type="button" role="tab" aria-selected="false" data-filter="energy">
-          <span class="h-work__tab-indicator h-work__tab-indicator--energy"></span>
-          <span>Energy</span>
-        </button>
-        <button class="h-work__tab" type="button" role="tab" aria-selected="false" data-filter="waste">
-          <span class="h-work__tab-indicator h-work__tab-indicator--waste"></span>
-          <span>Waste Management</span>
-        </button>
-        <button class="h-work__tab" type="button" role="tab" aria-selected="false" data-filter="community">
-          <span class="h-work__tab-indicator h-work__tab-indicator--community"></span>
-          <span>Rural &amp; Community</span>
-        </button>
+      <!-- Category Stage Switcher (Fits in One Screen) -->
+      <div class="h-work__nav-wrap">
+        <div class="h-work__filters" role="tablist" aria-label="Work category filter">
+          <button class="h-work__tab is-active" type="button" role="tab" aria-selected="true" data-filter="water">
+            <span class="h-work__tab-indicator h-work__tab-indicator--water"></span>
+            <span>Water</span>
+            <span class="h-work__tab-badge">2</span>
+          </button>
+          <button class="h-work__tab" type="button" role="tab" aria-selected="false" data-filter="energy">
+            <span class="h-work__tab-indicator h-work__tab-indicator--energy"></span>
+            <span>Energy</span>
+            <span class="h-work__tab-badge">1</span>
+          </button>
+          <button class="h-work__tab" type="button" role="tab" aria-selected="false" data-filter="waste">
+            <span class="h-work__tab-indicator h-work__tab-indicator--waste"></span>
+            <span>Waste Management</span>
+            <span class="h-work__tab-badge">2</span>
+          </button>
+          <button class="h-work__tab" type="button" role="tab" aria-selected="false" data-filter="community">
+            <span class="h-work__tab-indicator h-work__tab-indicator--community"></span>
+            <span>Rural &amp; Community</span>
+            <span class="h-work__tab-badge">2</span>
+          </button>
+        </div>
+
+        <div class="h-work__arrows" aria-label="Category navigation">
+          <button class="h-work__arrow-btn" type="button" data-work-nav="prev" aria-label="Previous work category">
+            &#8592;
+          </button>
+          <button class="h-work__arrow-btn" type="button" data-work-nav="next" aria-label="Next work category">
+            &#8594;
+          </button>
+        </div>
       </div>
 
       <!-- Categorized Thematic Showcase (Editorial Stream, Not Cards) -->
@@ -316,7 +327,7 @@
         </div>
 
         <!-- 2. ENERGY -->
-        <div class="h-work-cat" data-category="energy">
+        <div class="h-work-cat" data-category="energy" style="display: none;">
           <div class="h-work-cat__header">
             <div class="h-work-cat__tag">
               <svg class="h-work-cat__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -353,7 +364,7 @@
         </div>
 
         <!-- 3. WASTE MANAGEMENT -->
-        <div class="h-work-cat" data-category="waste">
+        <div class="h-work-cat" data-category="waste" style="display: none;">
           <div class="h-work-cat__header">
             <div class="h-work-cat__tag">
               <svg class="h-work-cat__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
@@ -413,7 +424,7 @@
         </div>
 
         <!-- 4. RURAL & COMMUNITY -->
-        <div class="h-work-cat" data-category="community">
+        <div class="h-work-cat" data-category="community" style="display: none;">
           <div class="h-work-cat__header">
             <div class="h-work-cat__tag">
               <svg class="h-work-cat__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>

@@ -451,36 +451,62 @@
     startAuto();
   }
 
-  /* -------------------------------------------------------- work category filter */
+  /* -------------------------------------------------------- work category stage */
   function initWorkFilter() {
     var filterBar = document.querySelector(".h-work__filters");
     if (!filterBar) return;
 
     var tabs = qsa(".h-work__tab", filterBar);
     var cats = qsa(".h-work-cat");
+    var prevBtn = document.querySelector('[data-work-nav="prev"]');
+    var nextBtn = document.querySelector('[data-work-nav="next"]');
+
+    var catKeys = ["water", "energy", "waste", "community"];
+    var currentIdx = 0;
+
+    function selectCat(idx) {
+      currentIdx = (idx + catKeys.length) % catKeys.length;
+      var activeKey = catKeys[currentIdx];
+
+      tabs.forEach(function (t) {
+        var match = t.getAttribute("data-filter") === activeKey;
+        t.classList.toggle("is-active", match);
+        t.setAttribute("aria-selected", match ? "true" : "false");
+      });
+
+      cats.forEach(function (catEl) {
+        var match = catEl.getAttribute("data-category") === activeKey;
+        if (match) {
+          catEl.style.display = "";
+          catEl.classList.remove("is-hidden");
+        } else {
+          catEl.style.display = "none";
+          catEl.classList.add("is-hidden");
+        }
+      });
+    }
 
     tabs.forEach(function (tab) {
       tab.addEventListener("click", function () {
-        var filter = tab.getAttribute("data-filter");
-        tabs.forEach(function (t) {
-          var active = t === tab;
-          t.classList.toggle("is-active", active);
-          t.setAttribute("aria-selected", active ? "true" : "false");
-        });
-
-        cats.forEach(function (catEl) {
-          var catName = catEl.getAttribute("data-category");
-          var show = filter === "all" || filter === catName;
-          if (show) {
-            catEl.style.display = "";
-            catEl.classList.remove("is-hidden");
-          } else {
-            catEl.style.display = "none";
-            catEl.classList.add("is-hidden");
-          }
-        });
+        var key = tab.getAttribute("data-filter");
+        var idx = catKeys.indexOf(key);
+        if (idx !== -1) selectCat(idx);
       });
     });
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function () {
+        selectCat(currentIdx - 1);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function () {
+        selectCat(currentIdx + 1);
+      });
+    }
+
+    selectCat(0);
   }
 
   /* ------------------------------------------------------------------- init */
