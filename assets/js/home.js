@@ -451,11 +451,44 @@
     startAuto();
   }
 
+  /* -------------------------------------------------------- work category filter */
+  function initWorkFilter() {
+    var filterBar = document.querySelector(".h-work__filters");
+    if (!filterBar) return;
+
+    var tabs = qsa(".h-work__tab", filterBar);
+    var cats = qsa(".h-work-cat");
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        var filter = tab.getAttribute("data-filter");
+        tabs.forEach(function (t) {
+          var active = t === tab;
+          t.classList.toggle("is-active", active);
+          t.setAttribute("aria-selected", active ? "true" : "false");
+        });
+
+        cats.forEach(function (catEl) {
+          var catName = catEl.getAttribute("data-category");
+          var show = filter === "all" || filter === catName;
+          if (show) {
+            catEl.style.display = "";
+            catEl.classList.remove("is-hidden");
+          } else {
+            catEl.style.display = "none";
+            catEl.classList.add("is-hidden");
+          }
+        });
+      });
+    });
+  }
+
   /* ------------------------------------------------------------------- init */
   function init() {
     hydrateFallbacks();
     wireShopLinks();
     initHeroSlideshow();
+    initWorkFilter();
     initImpact();
     initStory();
     initScrollRows();
