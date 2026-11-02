@@ -117,9 +117,12 @@
           '<div class="blog-card__footer">' +
           '<div class="blog-card__author-info">' +
           '<div class="blog-card__avatar">' + (featured.author ? featured.author.charAt(0) : "S") + '</div>' +
-          '<div><strong>' + SP.esc(featured.author) + '</strong><span class="text-xs text-muted block">' + SP.esc(featured.authorRole || "") + '</span></div>' +
+          '<div class="blog-card__author-meta">' +
+          '<strong class="blog-card__author-name">' + SP.esc(featured.author) + '</strong>' +
+          (featured.authorRole ? '<span class="blog-card__date">' + SP.esc(featured.authorRole) + '</span>' : '') +
           '</div>' +
-          '<a href="blog.html?post=' + encodeURIComponent(featured.slug) + '" class="btn btn--primary btn--sm blog-post-link" data-slug="' + SP.esc(featured.slug) + '">Read story &rarr;</a>' +
+          '</div>' +
+          '<a href="blog.html?post=' + encodeURIComponent(featured.slug) + '" class="btn btn--primary btn--sm blog-post-link" data-slug="' + SP.esc(featured.slug) + '" style="white-space:nowrap;flex-shrink:0;">Read story &rarr;</a>' +
           '</div>' +
           '</div>' +
           '</article>';
@@ -144,10 +147,13 @@
           '<div class="blog-card__footer">' +
           '<div class="blog-card__author-info">' +
           '<div class="blog-card__avatar">' + (post.author ? post.author.charAt(0) : "S") + '</div>' +
-          '<div><strong>' + SP.esc(post.author) + '</strong><span class="text-xs text-muted block">' + SP.esc(post.date) + '</span></div>' +
+          '<div class="blog-card__author-meta">' +
+          '<strong class="blog-card__author-name">' + SP.esc(post.author) + '</strong>' +
+          '<span class="blog-card__date">' + SP.esc(post.date) + '</span>' +
+          '</div>' +
           '</div>' +
           '<a href="blog.html?post=' + encodeURIComponent(post.slug) + '" class="blog-card__cta blog-post-link" data-slug="' + SP.esc(post.slug) + '" aria-label="Read ' + SP.esc(post.title) + '">' +
-          '<span>Read</span> &rarr;' +
+          '<span>Read</span>&nbsp;&rarr;' +
           '</a>' +
           '</div>' +
           '</article>'

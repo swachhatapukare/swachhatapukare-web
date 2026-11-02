@@ -189,6 +189,10 @@ span, strong, a, em, b, small {
   box-shadow: 0 0 0 4px var(--c-sage-soft);
 }
 
+/* ------------------------------------------------------------------- utilities */
+.block { display: block !important; }
+.inline-block { display: inline-block !important; }
+
 /* ---------------------------------------------------------- reduced motion */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

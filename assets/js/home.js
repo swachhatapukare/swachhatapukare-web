@@ -337,73 +337,110 @@
     });
   }
 
-  /* -------------------------------------------------------- hero slideshow */
+  /* -------------------------------------------------------- hero spotlight */
   function initHeroSlideshow() {
     var hero = document.querySelector("[data-hero-slideshow]");
     if (!hero) return;
 
-    var slides = qsa(".h-hero__slide", hero);
+    var spotlight = hero.querySelector("[data-hero-spotlight]");
     var tabs = qsa("[data-hero-tab]", hero);
     var prevBtns = qsa('[data-hero-nav="prev"]', hero);
     var nextBtns = qsa('[data-hero-nav="next"]', hero);
 
     var elSpotCat = hero.querySelector("[data-spotlight-cat]");
     var elSpotCounter = hero.querySelector("[data-spotlight-counter]");
+    var elSpotIcon = hero.querySelector("[data-spotlight-icon]");
     var elSpotTitle = hero.querySelector("[data-spotlight-title]");
     var elSpotDesc = hero.querySelector("[data-spotlight-desc]");
+    var elSpotHighlightText = hero.querySelector("[data-spotlight-highlight-text]");
     var elSpotLink = hero.querySelector("[data-spotlight-link]");
     var elSpotCta = hero.querySelector("[data-spotlight-cta]");
+    var elSpotBar = hero.querySelector("[data-spotlight-bar]");
 
-    if (!slides.length) return;
+    var initiatives = [
+      {
+        cat: "Livelihoods & Circular Craft",
+        title: "Water Hyacinth Craft",
+        desc: "Harvesting invasive aquatic weeds from local rivers and turning them into handwoven baskets, home decor, and office utility goods with rural women's self-help groups.",
+        highlight: "100+ MT weeds cleared & upcycled into artisan products",
+        href: "water-hyacinth.html",
+        cta: "Discover Water Hyacinth Craft",
+        icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>'
+      },
+      {
+        cat: "Water Conservation & Action",
+        title: "River Cleaning Drives",
+        desc: "500+ volunteer and partner-led cleaning drives clearing plastic choke points, drains, and floating waste along the Subarnarekha and Kharkai rivers in Jharkhand.",
+        highlight: "500+ volunteer river cleanup drives conducted",
+        href: "river-cleaning.html",
+        cta: "Volunteer for River Drives",
+        icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12c3-3 6-3 9 0s6 3 9 0"/><path d="M2 17c3-3 6-3 9 0s6 3 9 0"/></svg>'
+      },
+      {
+        cat: "Clean & Renewable Energy",
+        title: "Solar Power Systems",
+        desc: "Over 5,000 kW+ of solar capacity installed across educational institutions, health centres, and community facilities, replacing fossil fuel dependency.",
+        highlight: "5,000 kW+ solar arrays cutting carbon emissions",
+        href: "solar-power.html",
+        cta: "Explore Solar Projects",
+        icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>'
+      },
+      {
+        cat: "Effluent & Sanitation",
+        title: "Sewage Treatment Plants",
+        desc: "Decentralized biological wastewater treatment setups that intercept and remediate sewage before it pollutes groundwater and surface rivers.",
+        highlight: "Decentralized biological treatment solutions",
+        href: "sewage-treatment.html",
+        cta: "See Treatment Methods",
+        icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>'
+      }
+    ];
 
     var current = 0;
     var timer = null;
     var duration = 5000;
+    var progressStart = 0;
+    var animFrame = null;
+
+    function renderProgress() {
+      if (!elSpotBar || reduced) return;
+      var elapsed = Date.now() - progressStart;
+      var pct = Math.min(100, (elapsed / duration) * 100);
+      elSpotBar.style.width = pct + "%";
+      if (pct < 100) {
+        animFrame = requestAnimationFrame(renderProgress);
+      }
+    }
+
+    function resetProgress() {
+      if (animFrame) cancelAnimationFrame(animFrame);
+      if (elSpotBar) elSpotBar.style.width = "0%";
+      progressStart = Date.now();
+      if (!reduced) renderProgress();
+    }
 
     function goTo(index) {
-      current = (index + slides.length) % slides.length;
+      current = (index + initiatives.length) % initiatives.length;
+      var item = initiatives[current];
 
-      // 1. Update background slides
-      slides.forEach(function (slide, i) {
-        var active = i === current;
-        slide.classList.toggle("is-active", active);
-        if (active) slide.removeAttribute("aria-hidden");
-        else slide.setAttribute("aria-hidden", "true");
-      });
-
-      // 2. Update timeline tabs & progress bars
+      // Update tabs
       tabs.forEach(function (tab, i) {
         var active = i === current;
         tab.classList.toggle("is-active", active);
         tab.setAttribute("aria-selected", active ? "true" : "false");
-        var bar = tab.querySelector(".h-hero__tab-bar");
-        if (bar) {
-          bar.style.transition = "none";
-          bar.style.width = "0%";
-          if (active && !reduced) {
-            void bar.offsetWidth; // Force layout recalculation
-            bar.style.transition = "width " + (duration / 1000) + "s linear";
-            bar.style.width = "100%";
-          }
-        }
       });
 
-      // 3. Update spotlight card content smoothly
-      var curSlide = slides[current];
-      if (curSlide) {
-        var name = curSlide.getAttribute("data-work-name") || "Initiative";
-        var cat = curSlide.getAttribute("data-work-cat") || "Key Focus";
-        var desc = curSlide.getAttribute("data-work-desc") || "";
-        var href = curSlide.getAttribute("data-work-href") || "#things-we-do";
-        var cta = curSlide.getAttribute("data-work-cta") || "Learn more";
+      // Update content
+      if (elSpotCat) elSpotCat.textContent = item.cat;
+      if (elSpotCounter) elSpotCounter.textContent = "0" + (current + 1) + " / 0" + initiatives.length;
+      if (elSpotIcon) elSpotIcon.innerHTML = item.icon;
+      if (elSpotTitle) elSpotTitle.textContent = item.title;
+      if (elSpotDesc) elSpotDesc.textContent = item.desc;
+      if (elSpotHighlightText) elSpotHighlightText.textContent = item.highlight;
+      if (elSpotLink) elSpotLink.setAttribute("href", item.href);
+      if (elSpotCta) elSpotCta.textContent = item.cta;
 
-        if (elSpotCat) elSpotCat.textContent = cat;
-        if (elSpotCounter) elSpotCounter.textContent = (current + 1 < 10 ? "0" : "") + (current + 1) + " / " + (slides.length < 10 ? "0" : "") + slides.length;
-        if (elSpotTitle) elSpotTitle.textContent = name;
-        if (elSpotDesc) elSpotDesc.textContent = desc;
-        if (elSpotLink) elSpotLink.setAttribute("href", href);
-        if (elSpotCta) elSpotCta.textContent = cta;
-      }
+      resetProgress();
     }
 
     function next() { goTo(current + 1); }
@@ -412,6 +449,7 @@
     function startAuto() {
       if (reduced) return;
       stopAuto();
+      resetProgress();
       timer = setInterval(next, duration);
     }
 
@@ -420,20 +458,13 @@
         clearInterval(timer);
         timer = null;
       }
-      var activeTab = tabs[current];
-      if (activeTab) {
-        var bar = activeTab.querySelector(".h-hero__tab-bar");
-        if (bar) {
-          var computedWidth = window.getComputedStyle(bar).width;
-          bar.style.transition = "none";
-          bar.style.width = computedWidth;
-        }
-      }
+      if (animFrame) cancelAnimationFrame(animFrame);
     }
 
-    tabs.forEach(function (tab, i) {
+    tabs.forEach(function (tab) {
       tab.addEventListener("click", function () {
-        goTo(i);
+        var idx = Number(tab.getAttribute("data-hero-tab")) || 0;
+        goTo(idx);
         startAuto();
       });
     });
@@ -452,10 +483,10 @@
       });
     });
 
-    hero.addEventListener("mouseenter", stopAuto);
-    hero.addEventListener("mouseleave", startAuto);
-    hero.addEventListener("touchstart", stopAuto, { passive: true });
-    hero.addEventListener("touchend", startAuto, { passive: true });
+    if (spotlight) {
+      spotlight.addEventListener("mouseenter", stopAuto);
+      spotlight.addEventListener("mouseleave", startAuto);
+    }
 
     goTo(0);
     startAuto();
