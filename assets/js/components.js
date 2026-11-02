@@ -276,17 +276,17 @@ window.SP = window.SP || {};
         name: "Rural & Community",
         badge: "2 Initiatives",
         icon: "location",
-        href: "rural-smart-build-centres.html",
+        href: "rural-smart-village-centres.html",
         paneTitle: "Livelihood Hubs & Grassroots Voices",
         items: [
           {
-            slug: "rural-smart-build-centres",
-            href: "rural-smart-build-centres.html",
+            slug: "rural-smart-village-centres",
+            href: "rural-smart-village-centres.html",
             icon: "location",
             tag: "Artisan Empowerment",
-            title: "Rural Smart-Build Centres",
+            title: "Rural Smart Village Centres",
             desc: "Grassroots craft incubation hubs training rural women in design, production, and livelihood.",
-            cta: "Visit smart-build centres"
+            cta: "Visit smart village centres"
           },
           {
             slug: "tedxbistupur",

@@ -93,7 +93,7 @@ window.SP = window.SP || {};
         "Clean power is the backbone of durable community transformation. Across rural pockets of Eastern India, grid outages frequently cripple basic public facilities, water purification pumps, and artisan workspaces.",
         "By facilitating the installation and commissioning of over 5,000 kW of rooftop and decentralized solar capacity, SwachhataPukare helps bridge the energy equity gap.",
         "### Impact on Artisan Production",
-        "Our Rural Smart Build production centers now operate on uninterrupted solar energy. Looms, finishing presses, and lighting run continuously regardless of external power cuts, increasing artisan productivity by more than 35% while keeping operational carbon footprints at absolute zero."
+        "Our Rural Smart Village production centres now operate on uninterrupted solar energy. Looms, finishing presses, and lighting run continuously regardless of external power cuts, increasing artisan productivity by more than 35% while keeping operational carbon footprints at absolute zero."
       ],
       tags: ["Solar Power", "Renewable Energy", "Rural Infrastructure"]
     },

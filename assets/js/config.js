@@ -175,10 +175,10 @@ SP.config = {
       category: "Rural & Community",
       items: [
         {
-          slug: "rural-smart-build-centres",
-          href: "rural-smart-build-centres.html",
-          title: "Rural Smart Build Centres",
-          desc: "Sustainable rural construction and craft centres."
+          slug: "rural-smart-village-centres",
+          href: "rural-smart-village-centres.html",
+          title: "Rural Smart Village Centres",
+          desc: "Sustainable rural development and village craft centres."
         },
         {
           slug: "tedxbistupur",
@@ -220,11 +220,11 @@ SP.config = {
       desc: "Sewage treatment plant work."
     },
     {
-      slug: "rural-smart-build-centres",
+      slug: "rural-smart-village-centres",
       category: "Rural Infrastructure",
-      href: "rural-smart-build-centres.html",
-      title: "Rural Smart Build Centres",
-      desc: "Sustainable rural construction and craft centres."
+      href: "rural-smart-village-centres.html",
+      title: "Rural Smart Village Centres",
+      desc: "Sustainable rural development and village craft centres."
     },
     {
       slug: "tedxbistupur",
@@ -410,31 +410,31 @@ SP.config = {
       }
     },
 
-    "rural-smart-build-centres": {
+    "rural-smart-village-centres": {
       eyebrow: "What we do · Rural Infrastructure",
-      title: "Rural Smart Build Centres",
-      lead: "Establishing sustainable rural infrastructure hubs for craft training, local eco-friendly construction materials, and community resilience.",
+      title: "Rural Smart Village Centres",
+      lead: "Establishing sustainable rural infrastructure hubs for craft training, clean energy, local artisan workshops, and community resilience.",
       placeholderNote:
         "We need more details for this — full project specifications, pilot locations and architectural drawings will be published as project rollout begins.",
       sections: [
         {
           h: "Vision & Purpose",
           p: [
-            "Rural Smart Build Centres are decentralized community facilities designed to foster sustainable construction techniques, local material processing, and vocational training for rural artisans.",
+            "Rural Smart Village Centres are decentralized community facilities designed to foster sustainable rural living, local material processing, clean energy access, and vocational training for rural artisans.",
             "These centres serve as the regional workshops where harvested water hyacinth is dried, stored, and transformed by local self-help group artisans into marketable utility craft."
           ]
         },
         {
           h: "Sustainable Infrastructure",
           p: [
-            "The centres incorporate rooftop solar power, natural rainwater harvesting, and eco-friendly masonry, acting as living demonstration models for sustainable rural living.",
-            "More detailed operational frameworks, pilot centre blueprints, and community partnership details will be published here as the pilot rollout commences."
+            "The centres incorporate rooftop solar power, natural rainwater harvesting, and eco-friendly infrastructure, acting as living demonstration models for sustainable rural living.",
+            "More detailed operational frameworks, model village blueprints, and community partnership details will be published here as the pilot rollout commences."
           ]
         }
       ],
       cta: {
-        title: "Partner with Us on Smart Build",
-        text: "Interested in supporting or learning more about Rural Smart Build Centres? Contact our project team.",
+        title: "Partner with Us on Smart Village Centres",
+        text: "Interested in supporting or learning more about Rural Smart Village Centres? Contact our project team.",
         label: "Contact project team",
         href: "contact.html"
       }
