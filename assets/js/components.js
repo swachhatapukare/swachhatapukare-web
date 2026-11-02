@@ -193,7 +193,7 @@ window.SP = window.SP || {};
     function active(key) { return page === key ? " is-active" : ""; }
     function activeAttr(key) { return page === key ? ' aria-current="page"' : ""; }
     var wwdPages = cfg.WHAT_WE_DO.map(function (i) { return i.slug; });
-    var wwdActive = wwdPages.indexOf(page) !== -1;
+    var wwdActive = wwdPages.indexOf(page) !== -1 && page !== "tedxbistupur";
 
     var categories = [
       {
@@ -359,15 +359,16 @@ window.SP = window.SP || {};
       '<nav class="nav" aria-label="Main">' +
       '<ul class="nav__list">' +
       '<li class="nav__item"><a class="nav__link' + active("home") + '" href="index.html"' + activeAttr("home") + ">Home</a></li>" +
-      '<li class="nav__item"><a class="nav__link' + active("shop") + '" href="shop.html"' + activeAttr("shop") + ">Shop</a></li>" +
+      '<li class="nav__item"><a class="nav__link' + active("about") + '" href="about.html"' + activeAttr("about") + ">About</a></li>" +
       '<li class="nav__item nav__item--has-menu">' +
       '<button class="nav__link' + (wwdActive ? " is-active" : "") + '" type="button" data-action="wwd-toggle" aria-expanded="false" aria-controls="nav-wwd-panel">What we do' + caretSvg() + "</button>" +
       '<div class="nav__panel nav__panel--categorized" id="nav-wwd-panel">' + wwdPanelContent +
       "</div></li>" +
-      '<li class="nav__item"><a class="nav__link' + active("about") + '" href="about.html"' + activeAttr("about") + ">About</a></li>" +
-      '<li class="nav__item"><a class="nav__link' + active("blog") + '" href="blog.html"' + activeAttr("blog") + ">Blog</a></li>" +
+      '<li class="nav__item"><a class="nav__link' + active("tedxbistupur") + '" href="tedxbistupur.html"' + activeAttr("tedxbistupur") + ">TEDx</a></li>" +
+      '<li class="nav__item"><a class="nav__link' + active("shop") + '" href="shop.html"' + activeAttr("shop") + ">Shop</a></li>" +
       '<li class="nav__item"><a class="nav__link' + active("donate") + '" href="donate.html"' + activeAttr("donate") + ">Donate</a></li>" +
       '<li class="nav__item"><a class="nav__link' + active("gallery") + '" href="gallery.html"' + activeAttr("gallery") + ">Gallery</a></li>" +
+      '<li class="nav__item"><a class="nav__link' + active("blog") + '" href="blog.html"' + activeAttr("blog") + ">Blog</a></li>" +
       '<li class="nav__item"><a class="nav__link' + active("contact") + '" href="contact.html"' + activeAttr("contact") + ">Contact</a></li>" +
       "</ul></nav>"
     );
@@ -405,13 +406,14 @@ window.SP = window.SP || {};
       "</div>" +
       '<div class="mobile-nav__body">' +
       link("index.html", "home", "Home") +
-      link("shop.html", "shop", "Shop") +
+      link("about.html", "about", "About") +
       '<span class="mobile-nav__group">What we do</span>' +
       '<div class="mobile-nav__sub">' + wwd + "</div>" +
-      link("about.html", "about", "About") +
-      link("blog.html", "blog", "Blog & Stories") +
+      link("tedxbistupur.html", "tedxbistupur", "TEDx") +
+      link("shop.html", "shop", "Shop") +
       link("donate.html", "donate", "Donate") +
       link("gallery.html", "gallery", "Gallery") +
+      link("blog.html", "blog", "Blog") +
       link("contact.html", "contact", "Contact") +
       "</div>" +
       '<div class="mobile-nav__foot">' +
