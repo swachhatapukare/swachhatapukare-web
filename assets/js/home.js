@@ -461,6 +461,53 @@
     startAuto();
   }
 
+  /* ------------------------------------------------------------- work tabs */
+  function initWorkTabs() {
+    var tabs = document.querySelectorAll(".h-work-tab");
+    var panels = document.querySelectorAll(".h-work-panel");
+    if (!tabs.length || !panels.length) return;
+
+    function switchTab(targetCat) {
+      tabs.forEach(function (tab) {
+        var isTarget = tab.getAttribute("data-cat") === targetCat;
+        tab.classList.toggle("is-active", isTarget);
+        tab.setAttribute("aria-selected", isTarget ? "true" : "false");
+      });
+      panels.forEach(function (panel) {
+        var isTarget = panel.getAttribute("id") === "panel-" + targetCat;
+        panel.classList.toggle("is-active", isTarget);
+      });
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        var cat = tab.getAttribute("data-cat");
+        if (cat) switchTab(cat);
+      });
+
+      tab.addEventListener("keydown", function (e) {
+        var tabList = Array.from(tabs);
+        var idx = tabList.indexOf(tab);
+        if (e.key === "ArrowRight") {
+          e.preventDefault();
+          var next = tabList[(idx + 1) % tabList.length];
+          next.focus();
+          next.click();
+        } else if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          var prev = tabList[(idx - 1 + tabList.length) % tabList.length];
+          prev.focus();
+          prev.click();
+        }
+      });
+    });
+
+    var hash = window.location.hash || "";
+    if (hash.indexOf("energy") !== -1 || hash.indexOf("solar") !== -1) switchTab("energy");
+    else if (hash.indexOf("waste") !== -1 || hash.indexOf("sewage") !== -1) switchTab("waste");
+    else if (hash.indexOf("community") !== -1 || hash.indexOf("tedx") !== -1) switchTab("community");
+  }
+
   /* ------------------------------------------------------------------- init */
   function init() {
     hydrateFallbacks();
@@ -470,6 +517,7 @@
     initStory();
     initScrollRows();
     initPartners();
+    initWorkTabs();
   }
 
   if (document.readyState === "loading") {

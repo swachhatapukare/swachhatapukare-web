@@ -309,7 +309,7 @@ window.SP = window.SP || {};
         'role="tab" ' +
         'aria-selected="' + (isActive ? 'true' : 'false') + '" ' +
         'data-wwd-target="wwd-pane-' + cat.id + '">' +
-        '<span class="nav-wwd-tab__icon">' + icon(cat.icon, 18) + '</span>' +
+        '<span class="nav-wwd-tab__icon">' + icon(cat.icon, 22) + '</span>' +
         '<span class="nav-wwd-tab__info">' +
         '<strong class="nav-wwd-tab__name">' + SP.esc(cat.name) + '</strong>' +
         '<span class="nav-wwd-tab__badge">' + SP.esc(cat.badge) + '</span>' +
@@ -324,7 +324,7 @@ window.SP = window.SP || {};
       var cardsHtml = cat.items.map(function (item) {
         return (
           '<a class="nav-wwd-work-card" href="' + item.href + '">' +
-          '<span class="nav-wwd-work-card__icon">' + icon(item.icon, 20) + '</span>' +
+          '<span class="nav-wwd-work-card__icon">' + icon(item.icon, 24) + '</span>' +
           '<span class="nav-wwd-work-card__content">' +
           '<span class="nav-wwd-work-card__tag">' + SP.esc(item.tag) + '</span>' +
           '<strong class="nav-wwd-work-card__title">' + SP.esc(item.title) + '</strong>' +

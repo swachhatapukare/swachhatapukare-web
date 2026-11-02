@@ -290,152 +290,295 @@
         <p class="h-work__intro">Four interconnected pillars driving environmental restoration, clean energy, waste management, and community livelihoods across Eastern India.</p>
       </div>
 
-      <!-- Architectural 4-Pillar Board: All 4 visible in one screen, balanced symmetry -->
-      <div class="h-pillars">
+      <!-- Categorical Tabs Selector -->
+      <div class="h-work-tabs" role="tablist" aria-label="Work Pillars and Categories">
+        <button class="h-work-tab is-active" type="button" role="tab" id="tab-water" aria-selected="true" aria-controls="panel-water" data-cat="water">
+          <span class="h-work-tab__num">01</span>
+          <span class="h-work-tab__icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+          </span>
+          <span class="h-work-tab__label">Water &amp; Ecology</span>
+        </button>
+
+        <button class="h-work-tab" type="button" role="tab" id="tab-energy" aria-selected="false" aria-controls="panel-energy" data-cat="energy">
+          <span class="h-work-tab__num">02</span>
+          <span class="h-work-tab__icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </span>
+          <span class="h-work-tab__label">Solar &amp; Clean Power</span>
+        </button>
+
+        <button class="h-work-tab" type="button" role="tab" id="tab-waste" aria-selected="false" aria-controls="panel-waste" data-cat="waste">
+          <span class="h-work-tab__num">03</span>
+          <span class="h-work-tab__icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="7 19 12 14 17 19"/><polyline points="7 5 12 10 17 5"/><line x1="12" y1="14" x2="12" y2="3"/><line x1="12" y1="10" x2="12" y2="21"/></svg>
+          </span>
+          <span class="h-work-tab__label">Wastewater &amp; Recovery</span>
+        </button>
+
+        <button class="h-work-tab" type="button" role="tab" id="tab-community" aria-selected="false" aria-controls="panel-community" data-cat="community">
+          <span class="h-work-tab__num">04</span>
+          <span class="h-work-tab__icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </span>
+          <span class="h-work-tab__label">Rural Hubs &amp; Ideas</span>
+        </button>
+      </div>
+
+      <!-- Categorical Panels Showcase -->
+      <div class="h-work-panels">
         
-        <!-- Pillar 01: Water -->
-        <article class="h-pillar h-pillar--water">
-          <header class="h-pillar__head">
-            <div class="h-pillar__meta">
-              <span class="h-pillar__num">01</span>
-              <span class="h-pillar__badge">Water</span>
+        <!-- Panel 01: Water & River Ecology -->
+        <div class="h-work-panel is-active" id="panel-water" role="tabpanel" aria-labelledby="tab-water">
+          <div class="h-work-panel__banner h-work-panel__banner--water">
+            <div class="h-work-panel__lead">
+              <span class="h-work-panel__badge">Pillar 01 &bull; Water</span>
+              <h3 class="h-work-panel__title">River &amp; Water Ecology</h3>
+              <p class="h-work-panel__desc">Restoring freshwater basins, clearing invasive weeds, and revitalizing riparian riverbanks through consistent community action.</p>
             </div>
-            <h3 class="h-pillar__title">River &amp; Water Ecology</h3>
-            <p class="h-pillar__desc">Restoring river basins &amp; turning invasive weed into craft.</p>
-          </header>
-
-          <div class="h-pillar__body">
-            <a class="h-pitem" href="water-hyacinth.html">
-              <div class="h-pitem__content">
-                <h4 class="h-pitem__title">Water Hyacinth Craft</h4>
-                <p class="h-pitem__text">Harvesting invasive weeds to train women's SHGs in handcrafted goods.</p>
-              </div>
-              <span class="h-pitem__link">
-                <span>Explore craft</span>
-                <svg class="h-arrow" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-            </a>
-
-            <a class="h-pitem" href="river-cleaning.html">
-              <div class="h-pitem__content">
-                <h4 class="h-pitem__title">River Cleaning Drives</h4>
-                <p class="h-pitem__text">Over 500 weekly continuous cleanups on the Subarnarekha and Kharkai.</p>
-              </div>
-              <span class="h-pitem__link">
-                <span>Explore drives</span>
-                <svg class="h-arrow" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-            </a>
-          </div>
-        </article>
-
-        <!-- Pillar 02: Energy -->
-        <article class="h-pillar h-pillar--energy">
-          <header class="h-pillar__head">
-            <div class="h-pillar__meta">
-              <span class="h-pillar__num">02</span>
-              <span class="h-pillar__badge">Energy</span>
+            <div class="h-work-panel__stat">
+              <span class="h-work-panel__stat-num">500+ Drives</span>
+              <span class="h-work-panel__stat-label">100+ MT weed cleared across Jharkhand</span>
             </div>
-            <h3 class="h-pillar__title">Solar &amp; Clean Power</h3>
-            <p class="h-pillar__desc">Renewable energy installations cutting carbon across institutions.</p>
-          </header>
-
-          <div class="h-pillar__body">
-            <a class="h-pitem" href="solar-power.html">
-              <div class="h-pitem__content">
-                <h4 class="h-pitem__title">Solar Power Systems</h4>
-                <p class="h-pitem__text">Over 5,000 kW of rooftop &amp; micro-grid solar power installed.</p>
-              </div>
-              <span class="h-pitem__link">
-                <span>Explore solar</span>
-                <svg class="h-arrow" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-            </a>
-
-            <a class="h-pitem" href="solar-power.html">
-              <div class="h-pitem__content">
-                <h4 class="h-pitem__title">Clean Energy Access</h4>
-                <p class="h-pitem__text">Solar-powered facilities for schools, healthcare, and rural centers.</p>
-              </div>
-              <span class="h-pitem__link">
-                <span>Explore access</span>
-                <svg class="h-arrow" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-            </a>
           </div>
-        </article>
 
-        <!-- Pillar 03: Waste Management -->
-        <article class="h-pillar h-pillar--waste">
-          <header class="h-pillar__head">
-            <div class="h-pillar__meta">
-              <span class="h-pillar__num">03</span>
-              <span class="h-pillar__badge">Waste</span>
+          <div class="h-work-cards">
+            <!-- Initiative 1: Water Hyacinth Craft -->
+            <article class="h-wcard">
+              <div class="h-wcard__top">
+                <div class="h-wcard__icon-box h-wcard__icon-box--water">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+                </div>
+                <span class="h-wcard__tag">Handcrafted Livelihoods</span>
+              </div>
+              <h4 class="h-wcard__title">Water Hyacinth Craft</h4>
+              <p class="h-wcard__desc">Harvesting invasive aquatic weeds that choke our river ecosystems, naturally drying the plant stems, and training rural women's SHGs into master artisans who create premium bags, baskets, and desk accessories.</p>
+              <div class="h-wcard__features">
+                <span class="h-wcard__pill">Women SHG Empowerment</span>
+                <span class="h-wcard__pill">100% Biodegradable</span>
+                <span class="h-wcard__pill">Plastic Replacement</span>
+              </div>
+              <div class="h-wcard__foot">
+                <a class="h-wcard__btn" href="water-hyacinth.html">
+                  <span>Explore Hyacinth Craft</span>
+                  <svg class="h-arrow" width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </article>
+
+            <!-- Initiative 2: River Cleaning Drives -->
+            <article class="h-wcard">
+              <div class="h-wcard__top">
+                <div class="h-wcard__icon-box h-wcard__icon-box--water">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2M4 19c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2"/><path d="M12 3.6s-4.4 5.2-4.4 8a4.4 4.4 0 0 0 8.8 0c0-2.8-4.4-8-4.4-8z"/></svg>
+                </div>
+                <span class="h-wcard__tag">Conservation in Action</span>
+              </div>
+              <h4 class="h-wcard__title">River Cleaning Drives</h4>
+              <p class="h-wcard__desc">Over 500 uninterrupted weekly cleanups along the banks of the Subarnarekha and Kharkai rivers in Jamshedpur, mobilizing hundreds of citizen volunteers and intercepting solid waste before it harms aquatic life.</p>
+              <div class="h-wcard__features">
+                <span class="h-wcard__pill">500+ Consecutive Weeks</span>
+                <span class="h-wcard__pill">Subarnarekha &amp; Kharkai</span>
+                <span class="h-wcard__pill">Youth Mobilization</span>
+              </div>
+              <div class="h-wcard__foot">
+                <a class="h-wcard__btn" href="river-cleaning.html">
+                  <span>Explore River Drives</span>
+                  <svg class="h-arrow" width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Panel 02: Solar & Clean Power -->
+        <div class="h-work-panel" id="panel-energy" role="tabpanel" aria-labelledby="tab-energy">
+          <div class="h-work-panel__banner h-work-panel__banner--energy">
+            <div class="h-work-panel__lead">
+              <span class="h-work-panel__badge">Pillar 02 &bull; Energy</span>
+              <h3 class="h-work-panel__title">Solar &amp; Clean Power</h3>
+              <p class="h-work-panel__desc">Accelerating clean renewable energy adoption across institutional campuses, maternal clinics, and off-grid rural communities.</p>
             </div>
-            <h3 class="h-pillar__title">Wastewater &amp; Recovery</h3>
-            <p class="h-pillar__desc">Decentralized treatment preventing untreated runoff into rivers.</p>
-          </header>
-
-          <div class="h-pillar__body">
-            <a class="h-pitem" href="sewage-treatment.html">
-              <div class="h-pitem__content">
-                <h4 class="h-pitem__title">Johkasou Sewage Treatment</h4>
-                <p class="h-pitem__text">Japanese decentralized STP tech treating domestic wastewater on site.</p>
-              </div>
-              <span class="h-pitem__link">
-                <span>Explore STP</span>
-                <svg class="h-arrow" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-            </a>
-
-            <a class="h-pitem" href="sewage-treatment.html#dry-waste">
-              <div class="h-pitem__content">
-                <h4 class="h-pitem__title">Dry Waste Segregation</h4>
-                <p class="h-pitem__text">Material recovery pipelines diverting dry waste from landfills and waters.</p>
-              </div>
-              <span class="h-pitem__link">
-                <span>Explore recovery</span>
-                <svg class="h-arrow" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-            </a>
-          </div>
-        </article>
-
-        <!-- Pillar 04: Rural & Community -->
-        <article class="h-pillar h-pillar--community">
-          <header class="h-pillar__head">
-            <div class="h-pillar__meta">
-              <span class="h-pillar__num">04</span>
-              <span class="h-pillar__badge">Community</span>
+            <div class="h-work-panel__stat">
+              <span class="h-work-panel__stat-num">5,000 kW+</span>
+              <span class="h-work-panel__stat-label">Clean solar power capacity deployed</span>
             </div>
-            <h3 class="h-pillar__title">Rural Hubs &amp; Ideas</h3>
-            <p class="h-pillar__desc">Artisan production hubs and platforms championing changemakers.</p>
-          </header>
-
-          <div class="h-pillar__body">
-            <a class="h-pitem" href="rural-smart-build-centres.html">
-              <div class="h-pitem__content">
-                <h4 class="h-pitem__title">Rural Smart Build Centres</h4>
-                <p class="h-pitem__text">Sustainable green village hubs for artisan craft production &amp; skill training.</p>
-              </div>
-              <span class="h-pitem__link">
-                <span>Explore centres</span>
-                <svg class="h-arrow" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-            </a>
-
-            <a class="h-pitem" href="tedxbistupur.html">
-              <div class="h-pitem__content">
-                <h4 class="h-pitem__title">TEDxBistupur</h4>
-                <p class="h-pitem__text">Region's premier ideas platform with 68+ speakers driving innovation.</p>
-              </div>
-              <span class="h-pitem__link">
-                <span>Explore TEDx</span>
-                <svg class="h-arrow" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-            </a>
           </div>
-        </article>
+
+          <div class="h-work-cards">
+            <!-- Initiative 1: Solar Power Systems -->
+            <article class="h-wcard">
+              <div class="h-wcard__top">
+                <div class="h-wcard__icon-box h-wcard__icon-box--energy">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                </div>
+                <span class="h-wcard__tag">Clean Infrastructure</span>
+              </div>
+              <h4 class="h-wcard__title">Solar Power Systems</h4>
+              <p class="h-wcard__desc">Engineering and installing over 5,000 kW of rooftop and micro-grid solar power systems across schools, colleges, and healthcare facilities, cutting thousands of tons of greenhouse gas emissions annually.</p>
+              <div class="h-wcard__features">
+                <span class="h-wcard__pill">5,000 kW+ Rooftop Solar</span>
+                <span class="h-wcard__pill">Zero Carbon Emissions</span>
+                <span class="h-wcard__pill">Institutional Partnerships</span>
+              </div>
+              <div class="h-wcard__foot">
+                <a class="h-wcard__btn" href="solar-power.html">
+                  <span>Explore Solar Power</span>
+                  <svg class="h-arrow" width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </article>
+
+            <!-- Initiative 2: Clean Energy Access -->
+            <article class="h-wcard">
+              <div class="h-wcard__top">
+                <div class="h-wcard__icon-box h-wcard__icon-box--energy">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                </div>
+                <span class="h-wcard__tag">Rural Resilience</span>
+              </div>
+              <h4 class="h-wcard__title">Clean Energy Access</h4>
+              <p class="h-wcard__desc">Electrifying off-grid rural health centers, smart build artisan hubs, and village education classrooms with reliable, solar-backed energy storage to ensure uninterrupted essential services.</p>
+              <div class="h-wcard__features">
+                <span class="h-wcard__pill">Rural Clinics Powered</span>
+                <span class="h-wcard__pill">24/7 Reliable Storage</span>
+                <span class="h-wcard__pill">Diesel Displacement</span>
+              </div>
+              <div class="h-wcard__foot">
+                <a class="h-wcard__btn" href="solar-power.html#clean-access">
+                  <span>Explore Energy Access</span>
+                  <svg class="h-arrow" width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Panel 03: Wastewater & Recovery -->
+        <div class="h-work-panel" id="panel-waste" role="tabpanel" aria-labelledby="tab-waste">
+          <div class="h-work-panel__banner h-work-panel__banner--waste">
+            <div class="h-work-panel__lead">
+              <span class="h-work-panel__badge">Pillar 03 &bull; Waste</span>
+              <h3 class="h-work-panel__title">Wastewater &amp; Recovery</h3>
+              <p class="h-work-panel__desc">Preventing untreated municipal effluents from poisoning natural waterways through decentralized sanitation and systematic waste diversion.</p>
+            </div>
+            <div class="h-work-panel__stat">
+              <span class="h-work-panel__stat-num">90%+ BOD</span>
+              <span class="h-work-panel__stat-label">Decentralized domestic sewage reduction</span>
+            </div>
+          </div>
+
+          <div class="h-work-cards">
+            <!-- Initiative 1: Johkasou Sewage Treatment -->
+            <article class="h-wcard">
+              <div class="h-wcard__top">
+                <div class="h-wcard__icon-box h-wcard__icon-box--waste">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="7 19 12 14 17 19"/><polyline points="7 5 12 10 17 5"/><line x1="12" y1="14" x2="12" y2="3"/><line x1="12" y1="10" x2="12" y2="21"/></svg>
+                </div>
+                <span class="h-wcard__tag">Advanced Sanitation</span>
+              </div>
+              <h4 class="h-wcard__title">Johkasou Sewage Treatment</h4>
+              <p class="h-wcard__desc">Deploying proven Japanese decentralized STP technology that treats blackwater and greywater directly on-site with zero chemical additives, allowing treated water to be reused safely for horticulture and recharge.</p>
+              <div class="h-wcard__features">
+                <span class="h-wcard__pill">Japanese Johkasou Tech</span>
+                <span class="h-wcard__pill">On-Site Decentralized</span>
+                <span class="h-wcard__pill">Zero Open Outfall</span>
+              </div>
+              <div class="h-wcard__foot">
+                <a class="h-wcard__btn" href="sewage-treatment.html">
+                  <span>Explore Johkasou STP</span>
+                  <svg class="h-arrow" width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </article>
+
+            <!-- Initiative 2: Dry Waste Segregation -->
+            <article class="h-wcard">
+              <div class="h-wcard__top">
+                <div class="h-wcard__icon-box h-wcard__icon-box--waste">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                </div>
+                <span class="h-wcard__tag">Circular Pipelines</span>
+              </div>
+              <h4 class="h-wcard__title">Dry Waste Segregation</h4>
+              <p class="h-wcard__desc">Partnering with residential townships, institutions, and scrap recyclers to implement systematic dry waste recovery streams that prevent thousands of tons of plastics from reaching municipal landfills and waterways.</p>
+              <div class="h-wcard__features">
+                <span class="h-wcard__pill">Source Segregation</span>
+                <span class="h-wcard__pill">Plastic Interception</span>
+                <span class="h-wcard__pill">Landfill Diversion</span>
+              </div>
+              <div class="h-wcard__foot">
+                <a class="h-wcard__btn" href="sewage-treatment.html#dry-waste">
+                  <span>Explore Dry Waste Recovery</span>
+                  <svg class="h-arrow" width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Panel 04: Rural Hubs & Community -->
+        <div class="h-work-panel" id="panel-community" role="tabpanel" aria-labelledby="tab-community">
+          <div class="h-work-panel__banner h-work-panel__banner--community">
+            <div class="h-work-panel__lead">
+              <span class="h-work-panel__badge">Pillar 04 &bull; Community</span>
+              <h3 class="h-work-panel__title">Rural Hubs &amp; Ideas</h3>
+              <p class="h-work-panel__desc">Fostering grassroots leadership, artisan craft clusters, and high-impact regional forums that bridge local environmental action with global discourse.</p>
+            </div>
+            <div class="h-work-panel__stat">
+              <span class="h-work-panel__stat-num">68+ Speakers</span>
+              <span class="h-work-panel__stat-label">Hosted via TEDxBistupur platforms</span>
+            </div>
+          </div>
+
+          <div class="h-work-cards">
+            <!-- Initiative 1: Rural Smart Build Centres -->
+            <article class="h-wcard">
+              <div class="h-wcard__top">
+                <div class="h-wcard__icon-box h-wcard__icon-box--community">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+                <span class="h-wcard__tag">Green Architecture</span>
+              </div>
+              <h4 class="h-wcard__title">Rural Smart Build Centres</h4>
+              <p class="h-wcard__desc">Building sustainable community infrastructure using compressed earth blocks, passive ventilation, and solar microgrids that function as craft training production clusters and digital access nodes for rural youth.</p>
+              <div class="h-wcard__features">
+                <span class="h-wcard__pill">Low-Carbon Architecture</span>
+                <span class="h-wcard__pill">Artisan Production Clusters</span>
+                <span class="h-wcard__pill">Community Ownership</span>
+              </div>
+              <div class="h-wcard__foot">
+                <a class="h-wcard__btn" href="rural-smart-build-centres.html">
+                  <span>Explore Smart Centres</span>
+                  <svg class="h-arrow" width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </article>
+
+            <!-- Initiative 2: TEDxBistupur -->
+            <article class="h-wcard">
+              <div class="h-wcard__top">
+                <div class="h-wcard__icon-box h-wcard__icon-box--community">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+                </div>
+                <span class="h-wcard__tag">Ideas &amp; Changemakers</span>
+              </div>
+              <h4 class="h-wcard__title">TEDxBistupur</h4>
+              <p class="h-wcard__desc">Jamshedpur's premier independently organized ideas conference, curating visionary grassroots leaders, environmental scientists, and youth icons to spark scalable initiatives across Eastern India.</p>
+              <div class="h-wcard__features">
+                <span class="h-wcard__pill">68+ Visionary Talks</span>
+                <span class="h-wcard__pill">Annual Flagship Stage</span>
+                <span class="h-wcard__pill">Grassroots Amplification</span>
+              </div>
+              <div class="h-wcard__foot">
+                <a class="h-wcard__btn" href="tedxbistupur.html">
+                  <span>Explore TEDxBistupur</span>
+                  <svg class="h-arrow" width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </article>
+          </div>
+        </div>
 
       </div>
     </div>
