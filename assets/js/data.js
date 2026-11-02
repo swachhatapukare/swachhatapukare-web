@@ -231,7 +231,18 @@ SP.getProductById = function (id) {
 };
 
 SP.categories = function () {
-  return SP.config.CATEGORIES.slice();
+  var base = (SP.config && SP.config.CATEGORIES) ? SP.config.CATEGORIES.slice() : [];
+  try {
+    var custom = JSON.parse(window.localStorage.getItem("sp_custom_categories") || "[]");
+    if (Array.isArray(custom)) {
+      custom.forEach(function (c) {
+        if (!base.some(function (b) { return b.name === c.name || b.slug === c.slug; })) {
+          base.push(c);
+        }
+      });
+    }
+  } catch (e) { /* ignore */ }
+  return base;
 };
 
 SP.categoryCount = function (name) {

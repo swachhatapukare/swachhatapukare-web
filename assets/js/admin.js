@@ -11,6 +11,7 @@
   var currentTab = "overview";
   var ordersFilter = "all";
   var inventoryFilter = "all";
+  var invCategoryFilter = "all";
   var enquiriesFilter = "all";
 
   // Elements
@@ -114,6 +115,8 @@
     // Always start with all modals closed
     closeAllModals();
 
+    loadCustomCategories();
+    refreshCategoryDropdowns();
     bindBillingActions();
     bindInventoryActions();
     bindCmsActions();
@@ -126,6 +129,8 @@
     var user = sessionStorage.getItem("sp_admin_user") || "admin";
     var badge = document.querySelector(".admin-sidebar__badge");
     if (badge) badge.textContent = "Admin (" + user + ")";
+    loadCustomCategories();
+    refreshCategoryDropdowns();
     switchTab("overview");
   }
 
@@ -369,13 +374,101 @@
     openModal(modal);
   }
 
-  /* ==================================================== 3. INVENTORY PANEL */
+  /* ==================================================== 3. INVENTORY & CATEGORIES */
+  function loadCustomCategories() {
+    try {
+      var custom = JSON.parse(window.localStorage.getItem("sp_custom_categories") || "[]");
+      if (Array.isArray(custom)) {
+        custom.forEach(function (cat) {
+          if (!SP.config.CATEGORIES.some(function (c) { return c.name === cat.name || c.slug === cat.slug; })) {
+            SP.config.CATEGORIES.push(cat);
+          }
+        });
+      }
+    } catch (e) { /* ignore */ }
+  }
+
+  function refreshCategoryDropdowns() {
+    var categories = (SP.categories && SP.categories()) || SP.config.CATEGORIES || [];
+
+    // 1. Product Modal category selector
+    var prodCat = document.getElementById("prod-category");
+    if (prodCat) {
+      var currentVal = prodCat.value;
+      prodCat.innerHTML = categories.map(function (c) {
+        return '<option value="' + SP.esc(c.name) + '">' + SP.esc(c.name) + '</option>';
+      }).join("");
+      if (currentVal && categories.some(function (c) { return c.name === currentVal; })) {
+        prodCat.value = currentVal;
+      }
+    }
+
+    // 2. Inventory panel category filter
+    var filterCat = document.getElementById("inv-category-filter");
+    if (filterCat) {
+      var currentFilter = filterCat.value || invCategoryFilter || "all";
+      var counts = {};
+      (SP.products || []).forEach(function (p) {
+        counts[p.category] = (counts[p.category] || 0) + 1;
+      });
+
+      var options = '<option value="all">All Categories (' + (SP.products || []).length + ')</option>';
+      options += categories.map(function (c) {
+        var cnt = counts[c.name] || 0;
+        return '<option value="' + SP.esc(c.name) + '">' + SP.esc(c.name) + ' (' + cnt + ')</option>';
+      }).join("");
+
+      filterCat.innerHTML = options;
+      filterCat.value = currentFilter;
+    }
+  }
+
   function renderInventory() {
     var products = SP.products || [];
+
+    // Calculate full stock statistics
+    var totalStockUnits = 0;
+    var lowStockCount = 0;
+    var outOfStockCount = 0;
+    var categoriesMap = {};
+
+    products.forEach(function (p) {
+      var q = p.stock_qty != null ? p.stock_qty : 25;
+      totalStockUnits += q;
+      if (q <= 0 || p.stock_status === "outofstock") {
+        outOfStockCount++;
+      } else if (q <= 5) {
+        lowStockCount++;
+      }
+      if (p.category) categoriesMap[p.category] = true;
+    });
+
+    var elStockUnits = document.getElementById("inv-kpi-stock-units");
+    var elLowCount = document.getElementById("inv-kpi-low-count");
+    var elOutCount = document.getElementById("inv-kpi-out-count");
+    var elTotalSkus = document.getElementById("inv-kpi-total-skus");
+    var elCatsMeta = document.getElementById("inv-kpi-categories-meta");
+
+    if (elStockUnits) elStockUnits.textContent = totalStockUnits.toLocaleString();
+    if (elLowCount) elLowCount.textContent = String(lowStockCount);
+    if (elOutCount) elOutCount.textContent = String(outOfStockCount);
+    if (elTotalSkus) elTotalSkus.textContent = String(products.length);
+    if (elCatsMeta) elCatsMeta.textContent = "Across " + Object.keys(categoriesMap).length + " categories";
+
+    // Filter products
     var filtered = products.filter(function (p) {
-      if (inventoryFilter === "low") return (p.stock_qty != null && p.stock_qty <= 5);
-      if (inventoryFilter === "out") return (p.stock_status === "outofstock" || p.stock_qty === 0);
-      return true;
+      var qty = p.stock_qty != null ? p.stock_qty : 25;
+      var matchesStatus = true;
+      if (inventoryFilter === "low") matchesStatus = (qty <= 5 && qty > 0);
+      else if (inventoryFilter === "out") matchesStatus = (qty <= 0 || p.stock_status === "outofstock");
+      else if (inventoryFilter === "in") matchesStatus = (qty > 5);
+
+      var matchesCat = true;
+      if (invCategoryFilter && invCategoryFilter !== "all") {
+        matchesCat = (p.category === invCategoryFilter);
+      }
+
+      return matchesStatus && matchesCat;
     });
 
     var countEl = document.getElementById("inventory-count");
@@ -383,6 +476,11 @@
 
     var tbody = document.getElementById("inventory-table-body");
     if (!tbody) return;
+
+    if (!filtered.length) {
+      tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted" style="padding: 3rem;">No products found matching these filters.</td></tr>';
+      return;
+    }
 
     tbody.innerHTML = filtered.map(function (prod) {
       var qty = prod.stock_qty != null ? prod.stock_qty : 25; // default healthy stock
@@ -400,7 +498,7 @@
         '<td>' +
         '<div style="display:inline-flex;align-items:center;gap:0.4rem;">' +
         '<button class="btn btn--outline btn--xs" data-stock-mod="' + prod.id + '" data-delta="-1" aria-label="Decrease stock">-</button>' +
-        '<span style="min-width: 2rem; text-align: center; font-weight: 600;">' + qty + '</span>' +
+        '<span style="min-width: 2.2rem; text-align: center; font-weight: 600;">' + qty + '</span>' +
         '<button class="btn btn--outline btn--xs" data-stock-mod="' + prod.id + '" data-delta="1" aria-label="Increase stock">+</button>' +
         '</div>' +
         '</td>' +
@@ -458,6 +556,15 @@
     } catch (e) { /* ignore */ }
   }
 
+  function closeAllDropdowns() {
+    document.querySelectorAll(".admin-dropdown-menu").forEach(function (m) {
+      m.style.display = "none";
+    });
+    document.querySelectorAll("[aria-haspopup=true]").forEach(function (b) {
+      b.setAttribute("aria-expanded", "false");
+    });
+  }
+
   function bindInventoryActions() {
     // Inventory filter pills
     document.querySelectorAll("[data-inv-filter]").forEach(function (pill) {
@@ -469,13 +576,63 @@
       });
     });
 
-    // Add Product Button
-    var addBtn = document.getElementById("add-product-btn");
-    if (addBtn) {
-      addBtn.addEventListener("click", function () {
-        openProductModal(null);
+    // Category filter dropdown
+    var filterCat = document.getElementById("inv-category-filter");
+    if (filterCat) {
+      filterCat.addEventListener("change", function () {
+        invCategoryFilter = filterCat.value;
+        renderInventory();
       });
     }
+
+    // Dropdown toggles for "+ Add New"
+    function setupDropdown(triggerId, menuId) {
+      var btn = document.getElementById(triggerId);
+      var menu = document.getElementById(menuId);
+      if (!btn || !menu) return;
+
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var isOpen = menu.style.display === "block";
+        closeAllDropdowns();
+        if (!isOpen) {
+          menu.style.display = "block";
+          btn.setAttribute("aria-expanded", "true");
+        }
+      });
+    }
+
+    setupDropdown("add-new-btn", "add-new-menu");
+    setupDropdown("inv-add-new-btn", "inv-add-new-menu");
+
+    // Close dropdowns on outside click
+    document.addEventListener("click", function (e) {
+      if (!e.target.closest(".admin-dropdown-wrap")) {
+        closeAllDropdowns();
+      }
+    });
+
+    // "Product" option handlers
+    ["add-new-opt-product", "inv-opt-product"].forEach(function (id) {
+      var btn = document.getElementById(id);
+      if (btn) {
+        btn.addEventListener("click", function () {
+          closeAllDropdowns();
+          openProductModal(null);
+        });
+      }
+    });
+
+    // "Category" option handlers
+    ["add-new-opt-category", "inv-opt-category"].forEach(function (id) {
+      var btn = document.getElementById(id);
+      if (btn) {
+        btn.addEventListener("click", function () {
+          closeAllDropdowns();
+          openCategoryModal();
+        });
+      }
+    });
 
     // Save Product Form
     var form = document.getElementById("product-form");
@@ -531,13 +688,70 @@
         }
 
         closeAllModals();
+        refreshCategoryDropdowns();
         renderInventory();
         renderOverview();
       });
     }
+
+    // Category Modal Form setup
+    var catNameInput = document.getElementById("cat-name");
+    var catSlugInput = document.getElementById("cat-slug");
+    if (catNameInput && catSlugInput) {
+      catNameInput.addEventListener("input", function () {
+        catSlugInput.value = catNameInput.value.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+      });
+    }
+
+    var catForm = document.getElementById("category-form");
+    if (catForm) {
+      catForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var name = (catNameInput && catNameInput.value ? catNameInput.value : "").trim();
+        var slug = (catSlugInput && catSlugInput.value ? catSlugInput.value : "").trim() || name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+        var tint = (document.getElementById("cat-tint") && document.getElementById("cat-tint").value) || "--c-cat-office";
+
+        if (!name) return;
+
+        var existing = (SP.categories && SP.categories()) || SP.config.CATEGORIES || [];
+        if (existing.some(function (c) { return c.name.toLowerCase() === name.toLowerCase(); })) {
+          toast("Category '" + name + "' already exists.", "error");
+          return;
+        }
+
+        var newCat = { name: name, slug: slug, tint: tint };
+        SP.config.CATEGORIES.push(newCat);
+
+        try {
+          var custom = JSON.parse(window.localStorage.getItem("sp_custom_categories") || "[]");
+          custom.push(newCat);
+          window.localStorage.setItem("sp_custom_categories", JSON.stringify(custom));
+        } catch (err) { /* ignore */ }
+
+        toast("Category '" + name + "' added successfully!", "success");
+        closeAllModals();
+        refreshCategoryDropdowns();
+        invCategoryFilter = name;
+        var filterEl = document.getElementById("inv-category-filter");
+        if (filterEl) filterEl.value = name;
+        renderInventory();
+      });
+    }
+  }
+
+  function openCategoryModal() {
+    var modal = document.getElementById("category-modal");
+    if (!modal) return;
+    var nameInput = document.getElementById("cat-name");
+    var slugInput = document.getElementById("cat-slug");
+    if (nameInput) nameInput.value = "";
+    if (slugInput) slugInput.value = "";
+    openModal(modal);
   }
 
   function openProductModal(prodId) {
+    refreshCategoryDropdowns();
+
     var modal = document.getElementById("product-modal");
     if (!modal) return;
 
@@ -558,7 +772,7 @@
       idInput.value = prod.id;
       skuInput.value = prod.sku;
       nameInput.value = prod.name;
-      catInput.value = prod.category;
+      if (catInput) catInput.value = prod.category;
       priceInput.value = prod.price;
       stockInput.value = prod.stock_qty != null ? prod.stock_qty : 25;
       dimInput.value = prod.dimensions || "";
@@ -568,7 +782,13 @@
       idInput.value = "";
       skuInput.value = "SP-OE-" + Math.floor(100 + Math.random() * 900);
       nameInput.value = "";
-      catInput.value = "Office Essentials";
+      if (catInput) {
+        if (invCategoryFilter && invCategoryFilter !== "all") {
+          catInput.value = invCategoryFilter;
+        } else if (catInput.options && catInput.options.length) {
+          catInput.selectedIndex = 0;
+        }
+      }
       priceInput.value = 250;
       stockInput.value = 20;
       dimInput.value = '10" x 8"';

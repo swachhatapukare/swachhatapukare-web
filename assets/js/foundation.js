@@ -62,13 +62,16 @@
     var holder = SP.qs("[data-cta-band]");
     if (!holder) return;
     if (!cta) { holder.remove(); return; }
+    var isExternal = /^https?:\/\//i.test(cta.href);
     holder.innerHTML =
       '<div class="cta-band__text">' +
       "<h2>" + SP.esc(cta.title) + "</h2>" +
       "<p>" + SP.esc(cta.text) + "</p>" +
       "</div>" +
       '<div class="cta-band__actions">' +
-      '<a class="btn btn--amber btn--lg" href="' + SP.esc(cta.href) + '">' + SP.esc(cta.label) + "</a>" +
+      '<a class="btn btn--amber btn--lg" href="' + SP.esc(cta.href) + '"' +
+      (isExternal ? ' target="_blank" rel="noopener noreferrer"' : '') +
+      '>' + SP.esc(cta.label) + (isExternal ? " &nearr;" : "") + "</a>" +
       "</div>";
   }
 

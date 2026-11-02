@@ -378,13 +378,14 @@ SP.config = {
       title: "TEDxBistupur",
       lead: "A locally organised TEDx platform bringing pioneering ideas and changemakers to Jamshedpur.",
       placeholderNote:
-        "Upcoming event edition details & participation options.",
+        "Official platform & event details: tedxbistupur.org",
       sections: [
         {
           h: "About the event",
           p: [
             "TEDxBistupur is operated under license from TED, creating a platform for innovators, researchers, social changemakers and grassroots leaders.",
-            "The Foundation collaborates to curate talks centered on environmental sustainability, youth empowerment and community development."
+            "The Foundation collaborates to curate talks centered on environmental sustainability, youth empowerment and community development.",
+            "Visit the official website at tedxbistupur.org for the latest updates, talks, and conference announcements."
           ]
         },
         {
@@ -398,15 +399,15 @@ SP.config = {
           h: "Get involved",
           p: [
             "There are three ways to get involved: nominate a speaker doing transformative work, volunteer with our event curation team, or partner as an institutional sponsor.",
-            "Reach out to our team using the link below to get involved with TEDxBistupur."
+            "Reach out to our team using the link below or register directly through the official TEDxBistupur portal."
           ]
         }
       ],
       cta: {
-        title: "Get involved with TEDxBistupur",
-        text: "Nominate a speaker, join the volunteer team, or partner on the upcoming edition.",
-        label: "Get involved",
-        href: "contact.html?subject=Press%20%26%20partnerships"
+        title: "Visit the Official TEDxBistupur Portal",
+        text: "Discover speaker lineups, talk archives, ticket registration and event schedules on the official TEDxBistupur website.",
+        label: "Visit Us (tedxbistupur.org)",
+        href: "https://www.tedxbistupur.org/"
       }
     },
 
