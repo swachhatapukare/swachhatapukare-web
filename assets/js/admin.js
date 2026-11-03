@@ -1221,7 +1221,7 @@
     });
   }
 
-  function addCmsSectionCard(heading, paragraphs) {
+  function addCmsSectionCard(heading, paragraphs, image, caption) {
     var container = document.getElementById("cms-sections-container");
     if (!container) return;
 
@@ -1241,10 +1241,90 @@
       '    <label class="adm-label">Section Paragraphs <span class="text-xs text-muted" style="font-weight:normal;">(Separate multiple paragraphs with blank lines)</span></label>' +
       '    <textarea class="adm-textarea cms-sec-p" rows="3" placeholder="Enter paragraph copy here..."></textarea>' +
       '  </div>' +
+      '  <div class="adm-form-group adm-form-group--full" style="border-top:1px dashed var(--adm-border);padding-top:0.75rem;margin-top:0.25rem;">' +
+      '    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.35rem;">' +
+      '      <label class="adm-label" style="margin:0;">Section Image (Optional &mdash; Auto-converts to WebP)</label>' +
+      '      <span class="text-xs text-muted">Empty = normal text layout; With image = 2-column layout</span>' +
+      '    </div>' +
+      '    <div style="display:flex;gap:0.5rem;align-items:center;">' +
+      '      <input type="text" class="adm-input cms-sec-img" placeholder="assets/photos/... or upload image" style="flex:1;">' +
+      '      <label class="btn btn--outline btn--sm" style="cursor:pointer;white-space:nowrap;margin:0;display:inline-flex;align-items:center;gap:4px;">' +
+      '        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>' +
+      '        <span>Upload</span>' +
+      '        <input type="file" class="cms-sec-file" accept="image/*" style="display:none;">' +
+      '      </label>' +
+      '      <button type="button" class="btn btn--outline btn--sm cms-sec-clear-btn" style="color:var(--adm-danger);display:none;padding:0.4rem 0.65rem;" title="Remove image">&times; Clear</button>' +
+      '    </div>' +
+      '    <div class="cms-sec-preview-wrap" style="margin-top:0.5rem;display:none;align-items:center;gap:0.75rem;background:#F8FAFC;border:1px solid var(--adm-border);border-radius:6px;padding:0.5rem 0.65rem;">' +
+      '      <div style="width:68px;height:50px;border-radius:4px;border:1px solid var(--adm-border);background:#FFFFFF;overflow:hidden;flex-shrink:0;">' +
+      '        <img class="cms-sec-preview-img" src="" alt="Section preview" style="width:100%;height:100%;object-fit:cover;">' +
+      '      </div>' +
+      '      <div style="flex:1;min-width:0;">' +
+      '        <input type="text" class="adm-input cms-sec-caption" placeholder="Optional image caption / description..." style="font-size:0.82rem;padding:0.35rem 0.55rem;background:#FFFFFF;">' +
+      '        <div class="text-xs text-muted cms-sec-status" style="margin-top:2px;">Layout: 2-column split (Story + Media)</div>' +
+      '      </div>' +
+      '    </div>' +
+      '  </div>' +
       '</div>';
 
-    card.querySelector(".cms-sec-h").value = heading || "";
-    card.querySelector(".cms-sec-p").value = paragraphs || "";
+    var hInput = card.querySelector(".cms-sec-h");
+    var pInput = card.querySelector(".cms-sec-p");
+    var imgInput = card.querySelector(".cms-sec-img");
+    var fileInput = card.querySelector(".cms-sec-file");
+    var clearBtn = card.querySelector(".cms-sec-clear-btn");
+    var previewWrap = card.querySelector(".cms-sec-preview-wrap");
+    var previewImg = card.querySelector(".cms-sec-preview-img");
+    var captionInput = card.querySelector(".cms-sec-caption");
+    var statusEl = card.querySelector(".cms-sec-status");
+
+    hInput.value = heading || "";
+    pInput.value = paragraphs || "";
+    if (captionInput) captionInput.value = caption || "";
+
+    function updateImgPreview(src) {
+      if (src) {
+        previewImg.src = src;
+        previewWrap.style.display = "flex";
+        clearBtn.style.display = "inline-flex";
+      } else {
+        previewImg.src = "";
+        previewWrap.style.display = "none";
+        clearBtn.style.display = "none";
+      }
+    }
+
+    if (image) {
+      imgInput.value = image;
+      updateImgPreview(image);
+    }
+
+    imgInput.addEventListener("input", function () {
+      updateImgPreview(imgInput.value.trim());
+    });
+
+    fileInput.addEventListener("change", function () {
+      var file = fileInput.files && fileInput.files[0];
+      if (file) {
+        if (statusEl) statusEl.textContent = "Converting image to WebP...";
+        convertFileToWebP(file, 1400, 0.84, function (webpUrl, meta) {
+          imgInput.value = webpUrl;
+          updateImgPreview(webpUrl);
+          if (statusEl) {
+            statusEl.innerHTML = '<span style="color:#10B981;font-weight:600;">✓ Converted to WebP (' + meta.sizeKb + ' KB) — 2-Column layout active</span>';
+          }
+          toast("Section photo converted to WebP (" + meta.sizeKb + " KB)!");
+        });
+      }
+    });
+
+    clearBtn.addEventListener("click", function () {
+      imgInput.value = "";
+      if (captionInput) captionInput.value = "";
+      updateImgPreview("");
+      if (fileInput) fileInput.value = "";
+      if (statusEl) statusEl.textContent = "Layout: Default text-only (No image)";
+      toast("Section image removed. Default normal layout restored.");
+    });
 
     card.querySelector(".cms-remove-sec-btn").addEventListener("click", function () {
       card.remove();
@@ -1296,10 +1376,10 @@
       if (copy.sections && copy.sections.length) {
         copy.sections.forEach(function (sec) {
           var pText = Array.isArray(sec.p) ? sec.p.join("\n\n") : (sec.p || "");
-          addCmsSectionCard(sec.h, pText);
+          addCmsSectionCard(sec.h, pText, sec.image, sec.caption);
         });
       } else {
-        addCmsSectionCard("", "");
+        addCmsSectionCard("", "", "", "");
       }
     }
 
@@ -1502,8 +1582,14 @@
           var h = (card.querySelector(".cms-sec-h").value || "").trim();
           var pRaw = (card.querySelector(".cms-sec-p").value || "").trim();
           var pArr = pRaw.split("\n\n").map(function (s) { return s.trim(); }).filter(Boolean);
-          if (h || pArr.length) {
-            sections.push({ h: h, p: pArr });
+          var img = (card.querySelector(".cms-sec-img") && card.querySelector(".cms-sec-img").value || "").trim();
+          var caption = (card.querySelector(".cms-sec-caption") && card.querySelector(".cms-sec-caption").value || "").trim();
+
+          if (h || pArr.length || img) {
+            var secObj = { h: h, p: pArr };
+            if (img) secObj.image = img;
+            if (caption) secObj.caption = caption;
+            sections.push(secObj);
           }
         });
 

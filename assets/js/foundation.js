@@ -46,14 +46,35 @@
     var holder = SP.qs("[data-copy-sections]");
     if (!holder || !sections) return;
     holder.innerHTML = sections.map(function (section) {
+      var hasImg = Boolean(section.image && section.image.trim());
+      var paragraphsHtml = (section.p || []).map(function (para) {
+        var isPlaceholder = para.indexOf("Placeholder") === 0;
+        return "<p" + (isPlaceholder ? ' class="is-placeholder"' : "") + ">" + SP.esc(para) + "</p>";
+      }).join("");
+
+      if (!hasImg) {
+        // Default normal layout
+        return (
+          '<article class="story-block">' +
+          "<h2>" + SP.esc(section.h) + "</h2>" +
+          paragraphsHtml +
+          "</article>"
+        );
+      }
+
+      // Dynamic 2-column split layout with image & caption
+      var captionHtml = section.caption ? '<figcaption class="story-block__caption">' + SP.esc(section.caption) + '</figcaption>' : '';
       return (
-        '<article class="story-block">' +
-        "<h2>" + SP.esc(section.h) + "</h2>" +
-        section.p.map(function (para) {
-          var isPlaceholder = para.indexOf("Placeholder") === 0;
-          return "<p" + (isPlaceholder ? ' class="is-placeholder"' : "") + ">" + SP.esc(para) + "</p>";
-        }).join("") +
-        "</article>"
+        '<article class="story-block story-block--with-image">' +
+        '  <div class="story-block__content">' +
+        '    <h2>' + SP.esc(section.h) + '</h2>' +
+        paragraphsHtml +
+        '  </div>' +
+        '  <figure class="story-block__media">' +
+        '    <img src="' + SP.esc(section.image) + '" alt="' + SP.esc(section.h) + '" class="story-block__img" onerror="this.onerror=null;this.src=\'assets/logo-full.png\';">' +
+        captionHtml +
+        '  </figure>' +
+        '</article>'
       );
     }).join("");
   }
