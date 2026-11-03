@@ -73,6 +73,20 @@
 
 .btn--on-dark:hover { background: var(--c-white); color: var(--c-dark); }
 
+.btn--tedx {
+  background: #EB0028;
+  color: #FFFFFF;
+  border-color: #EB0028;
+  box-shadow: 0 2px 8px rgba(235, 0, 40, 0.22);
+}
+
+.btn--tedx:hover {
+  background: #C80022;
+  border-color: #C80022;
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(235, 0, 40, 0.32);
+}
+
 .btn--block { width: 100%; }
 .btn--sm { padding: 0.5rem 1rem; font-size: var(--t-sm); }
 .btn--lg { padding: 0.9rem 1.9rem; font-size: var(--t-md); }
