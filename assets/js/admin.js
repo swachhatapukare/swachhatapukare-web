@@ -60,6 +60,26 @@
       });
     });
 
+    // Sidebar Collapse / Expand Toggle
+    var layoutEl = document.getElementById("admin-layout");
+    var sidebarToggleBtn = document.getElementById("sidebar-toggle-btn");
+    var topbarToggleBtn = document.getElementById("topbar-sidebar-toggle-btn");
+
+    function toggleSidebar() {
+      if (!layoutEl) return;
+      var isCollapsed = layoutEl.classList.toggle("sidebar-collapsed");
+      try {
+        window.localStorage.setItem("sp_admin_sidebar_collapsed", isCollapsed ? "1" : "0");
+      } catch (e) { /* ignore */ }
+    }
+
+    if (sidebarToggleBtn) {
+      sidebarToggleBtn.addEventListener("click", toggleSidebar);
+    }
+    if (topbarToggleBtn) {
+      topbarToggleBtn.addEventListener("click", toggleSidebar);
+    }
+
     // Logout
     var logoutBtn = document.getElementById("admin-logout-btn");
     if (logoutBtn) {
