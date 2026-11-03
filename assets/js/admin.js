@@ -478,6 +478,62 @@
     }
   }
 
+  /* Convert any uploaded image file (JPG, PNG, GIF, BMP, etc.) into optimized WebP */
+  function convertFileToWebP(file, maxDim, quality, onDone) {
+    if (!file) return;
+    maxDim = maxDim || 1200;
+    quality = quality != null ? quality : 0.82;
+
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      var img = new Image();
+      img.onload = function () {
+        var w = img.width;
+        var h = img.height;
+
+        if (w > maxDim || h > maxDim) {
+          if (w > h) {
+            h = Math.round((h * maxDim) / w);
+            w = maxDim;
+          } else {
+            w = Math.round((w * maxDim) / h);
+            h = maxDim;
+          }
+        }
+
+        var canvas = document.createElement("canvas");
+        canvas.width = w;
+        canvas.height = h;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, w, h);
+
+        var webpDataUrl = canvas.toDataURL("image/webp", quality);
+        var isWebp = webpDataUrl.indexOf("data:image/webp") === 0;
+        var sizeBytes = Math.round((webpDataUrl.length * 3) / 4);
+        var sizeKb = Math.round(sizeBytes / 1024);
+
+        onDone(webpDataUrl, {
+          isWebp: isWebp,
+          format: isWebp ? "WebP" : "Optimized",
+          width: w,
+          height: h,
+          sizeKb: sizeKb,
+          originalName: file.name
+        });
+      };
+      img.onerror = function () {
+        var rawUrl = e.target.result;
+        var sizeKb = Math.round(file.size / 1024);
+        onDone(rawUrl, { isWebp: false, format: "Original", sizeKb: sizeKb, originalName: file.name });
+      };
+      img.src = e.target.result;
+    };
+    reader.onerror = function () {
+      toast("Error reading image file.", "error");
+    };
+    reader.readAsDataURL(file);
+  }
+
   function renderInventory() {
     var products = SP.products || [];
 
@@ -549,8 +605,10 @@
         '<tr>' +
         '<td><strong class="font-mono">' + SP.esc(prod.sku) + '</strong></td>' +
         '<td>' +
-        '  <div style="display:flex;align-items:center;gap:0.75rem;">' +
-        '    <img src="' + SP.esc(imgUrl) + '" alt="' + SP.esc(prod.name) + '" style="width:44px;height:44px;border-radius:6px;object-fit:cover;border:1px solid var(--adm-border);background:#F1F5F9;flex-shrink:0;" onerror="this.onerror=null;this.src=\'assets/logo-full.png\';">' +
+        '  <div style="display:flex;align-items:center;gap:0.75rem;cursor:pointer;" data-edit-prod="' + prod.id + '" title="Click to edit product and change photo">' +
+        '    <div style="position:relative;width:44px;height:44px;flex-shrink:0;">' +
+        '      <img src="' + SP.esc(imgUrl) + '" alt="' + SP.esc(prod.name) + '" style="width:44px;height:44px;border-radius:6px;object-fit:cover;border:1px solid var(--adm-border);background:#F1F5F9;" onerror="this.onerror=null;this.src=\'assets/logo-full.png\';">' +
+        '    </div>' +
         '    <div>' +
         '      <div style="font-weight:600;color:var(--adm-text);">' + SP.esc(prod.name) + '</div>' +
         '      <div class="text-xs text-muted font-mono">' + SP.esc(prod.dimensions || "") + '</div>' +
@@ -569,8 +627,9 @@
         '<td><span class="admin-badge admin-badge--' + badgeClass + '">' + badgeLabel + '</span></td>' +
         '<td class="td-actions">' +
         '<div class="adm-table-actions">' +
-        '<button class="adm-icon-btn" data-edit-prod="' + prod.id + '" title="Edit Product Details" aria-label="Edit Product">' +
-        '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>' +
+        '<button class="btn btn--outline btn--xs" data-edit-prod="' + prod.id + '" style="display:inline-flex;align-items:center;gap:4px;" title="Edit product information and photo">' +
+        '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>' +
+        '<span>Edit / Photo</span>' +
         '</button>' +
         '</div>' +
         '</td>' +
@@ -935,20 +994,23 @@
       updatePreview("");
     }
 
-    // Bind image file picker once
+    // Bind image file picker once - converts ANY image format to WebP
     var photoFile = document.getElementById("prod-photo-file");
     if (photoFile && !photoFile._bound) {
       photoFile._bound = true;
       photoFile.addEventListener("change", function () {
         var file = photoFile.files && photoFile.files[0];
         if (file) {
-          var reader = new FileReader();
-          reader.onload = function (e) {
-            var dataUrl = e.target.result;
-            if (imgInput) imgInput.value = dataUrl;
-            updatePreview(dataUrl);
-          };
-          reader.readAsDataURL(file);
+          var statusEl = document.getElementById("prod-photo-status");
+          if (statusEl) statusEl.textContent = "Converting image to WebP format...";
+          convertFileToWebP(file, 1200, 0.82, function (webpDataUrl, meta) {
+            if (imgInput) imgInput.value = webpDataUrl;
+            updatePreview(webpDataUrl);
+            if (statusEl) {
+              statusEl.innerHTML = '<span style="color:#10B981;font-weight:600;">&check; Auto-converted to ' + meta.format + ' (' + meta.sizeKb + ' KB)</span>';
+            }
+            toast("Product image converted to WebP (" + meta.sizeKb + " KB)!");
+          });
         }
       });
     }
@@ -1333,20 +1395,23 @@
       updatePreview("");
     }
 
-    // Bind file picker once
+    // Bind file picker once - converts ANY gallery image format to WebP
     var galFile = document.getElementById("gal-photo-file");
     if (galFile && !galFile._bound) {
       galFile._bound = true;
       galFile.addEventListener("change", function () {
         var file = galFile.files && galFile.files[0];
         if (file) {
-          var reader = new FileReader();
-          reader.onload = function (e) {
-            var dataUrl = e.target.result;
-            if (srcInput) srcInput.value = dataUrl;
-            updatePreview(dataUrl);
-          };
-          reader.readAsDataURL(file);
+          var statusEl = document.getElementById("gal-photo-status");
+          if (statusEl) statusEl.textContent = "Converting photo to WebP format...";
+          convertFileToWebP(file, 1600, 0.84, function (webpDataUrl, meta) {
+            if (srcInput) srcInput.value = webpDataUrl;
+            updatePreview(webpDataUrl);
+            if (statusEl) {
+              statusEl.innerHTML = '<span style="color:#10B981;font-weight:600;">&check; Auto-converted to ' + meta.format + ' (' + meta.sizeKb + ' KB)</span>';
+            }
+            toast("Gallery photo converted to WebP (" + meta.sizeKb + " KB)!");
+          });
         }
       });
     }

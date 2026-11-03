@@ -663,9 +663,9 @@
             <input type="text" class="adm-input" id="prod-name" required>
           </div>
           <div class="adm-form-group adm-form-group--full">
-            <label class="adm-label">Product Photo (Upload File or Enter URL)</label>
+            <label class="adm-label">Product Photo (Auto-converts to WebP)</label>
             <div style="display: flex; gap: 0.5rem; align-items: center;">
-              <input type="text" class="adm-input" id="prod-image" placeholder="assets/products/... or upload photo" style="flex: 1;">
+              <input type="text" class="adm-input" id="prod-image" placeholder="assets/products/... or upload any photo" style="flex: 1;">
               <label class="btn btn--outline btn--sm" style="cursor: pointer; white-space: nowrap; margin: 0; display: inline-flex; align-items: center; gap: 4px;">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                 <span>Upload Photo</span>
@@ -677,7 +677,9 @@
                 <img id="prod-photo-preview" src="" alt="Product preview" style="display: none; width: 100%; height: 100%; object-fit: cover;">
                 <span id="prod-photo-ph" class="text-xs text-muted" style="font-size: 10px;">No photo</span>
               </div>
-              <span class="text-xs text-muted">Upload product photograph from device or paste an image URL. JPG, PNG, WebP supported.</span>
+              <div>
+                <span class="text-xs text-muted" id="prod-photo-status">Upload any image (JPG, PNG, GIF, BMP) &mdash; automatically converted to lightweight WebP.</span>
+              </div>
             </div>
           </div>
           <div class="adm-form-group">
@@ -900,6 +902,7 @@
               <img id="gal-photo-preview" src="" alt="Photo preview" style="display: none; width: 100%; height: 100%; object-fit: cover;">
               <span id="gal-photo-preview-ph" class="text-xs text-muted">Upload an image file or enter URL to preview</span>
             </div>
+            <div style="margin-top: 0.35rem;" id="gal-photo-status" class="text-xs text-muted">Uploaded photos are automatically optimized and converted to WebP.</div>
           </div>
 
           <div class="adm-form-group adm-form-group--full">
