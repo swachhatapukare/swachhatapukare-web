@@ -28,7 +28,7 @@
   function galleryMarkup() {
     var tint = SP.config.categoryTint(product.category);
     var main = SP.imgTag({
-      src: "assets/products/" + product.slug + "-1.jpg",
+      src: product.image || ("assets/products/" + product.slug + "-1.jpg"),
       alt: product.name + " — product photo 1 of 3",
       name: product.name,
       tint: tint,

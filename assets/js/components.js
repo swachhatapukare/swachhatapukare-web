@@ -937,7 +937,7 @@ window.SP = window.SP || {};
       '<div class="card__media">' +
       (badges ? '<div class="card__badges">' + badges + "</div>" : "") +
       SP.imgTag({
-        src: "assets/products/" + product.slug + "-1.jpg",
+        src: product.image || ("assets/products/" + product.slug + "-1.jpg"),
         alt: product.name + " — handcrafted product photo",
         name: product.name,
         tint: tint,

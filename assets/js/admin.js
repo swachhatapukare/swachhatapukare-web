@@ -436,10 +436,25 @@
         return '<option value="' + SP.esc(c.name) + '">' + SP.esc(c.name) + '</option>';
       }).join("");
 
-      if (lastSelectedCategory && uniqueCategories.some(function (c) { return c.name.toLowerCase() === lastSelectedCategory.toLowerCase(); })) {
-        prodCat.value = lastSelectedCategory;
-      } else if (currentVal && uniqueCategories.some(function (c) { return c.name.toLowerCase() === currentVal.toLowerCase(); })) {
-        prodCat.value = currentVal;
+      var matchedIndex = -1;
+      if (lastSelectedCategory) {
+        for (var i = 0; i < prodCat.options.length; i++) {
+          if (prodCat.options[i].value.toLowerCase() === lastSelectedCategory.toLowerCase()) {
+            matchedIndex = i;
+            break;
+          }
+        }
+      }
+      if (matchedIndex === -1 && currentVal) {
+        for (var j = 0; j < prodCat.options.length; j++) {
+          if (prodCat.options[j].value.toLowerCase() === currentVal.toLowerCase()) {
+            matchedIndex = j;
+            break;
+          }
+        }
+      }
+      if (matchedIndex >= 0) {
+        prodCat.selectedIndex = matchedIndex;
       }
     }
 
@@ -529,10 +544,19 @@
       var badgeClass = isOut ? "danger" : (isLow ? "warning" : "success");
       var badgeLabel = isOut ? "Out of Stock" : (isLow ? "Low Stock (" + qty + ")" : "In Stock (" + qty + ")");
 
+      var imgUrl = prod.image || ("assets/products/" + prod.slug + "-1.jpg");
       return (
         '<tr>' +
         '<td><strong class="font-mono">' + SP.esc(prod.sku) + '</strong></td>' +
-        '<td><strong>' + SP.esc(prod.name) + '</strong></td>' +
+        '<td>' +
+        '  <div style="display:flex;align-items:center;gap:0.75rem;">' +
+        '    <img src="' + SP.esc(imgUrl) + '" alt="' + SP.esc(prod.name) + '" style="width:44px;height:44px;border-radius:6px;object-fit:cover;border:1px solid var(--adm-border);background:#F1F5F9;flex-shrink:0;" onerror="this.onerror=null;this.src=\'assets/logo-full.png\';">' +
+        '    <div>' +
+        '      <div style="font-weight:600;color:var(--adm-text);">' + SP.esc(prod.name) + '</div>' +
+        '      <div class="text-xs text-muted font-mono">' + SP.esc(prod.dimensions || "") + '</div>' +
+        '    </div>' +
+        '  </div>' +
+        '</td>' +
         '<td><span class="admin-badge admin-badge--muted">' + SP.esc(prod.category) + '</span></td>' +
         '<td><strong>₹' + prod.price + '</strong></td>' +
         '<td>' +
@@ -674,6 +698,42 @@
       }
     });
 
+    // Quick Add Category button inside Product Modal
+    var quickCatBtn = document.getElementById("prod-quick-cat-btn");
+    if (quickCatBtn) {
+      quickCatBtn.addEventListener("click", function () {
+        var catName = prompt("Enter new category name (e.g. Eco Gift Hampers, Storage Baskets):");
+        if (!catName || !catName.trim()) return;
+        catName = catName.trim();
+
+        var existing = (SP.categories && SP.categories()) || SP.config.CATEGORIES || [];
+        var found = existing.find(function (c) { return (c.name || "").toLowerCase() === catName.toLowerCase(); });
+        if (!found) {
+          var slug = catName.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "cat-" + Date.now();
+          var newCat = { name: catName, slug: slug, tint: "--c-cat-office" };
+          SP.config.CATEGORIES.push(newCat);
+          try {
+            var custom = JSON.parse(window.localStorage.getItem("sp_custom_categories") || "[]");
+            custom.push(newCat);
+            window.localStorage.setItem("sp_custom_categories", JSON.stringify(custom));
+          } catch (e) { /* ignore */ }
+        }
+
+        lastSelectedCategory = catName;
+        refreshCategoryDropdowns();
+        var catSelect = document.getElementById("prod-category");
+        if (catSelect) {
+          for (var k = 0; k < catSelect.options.length; k++) {
+            if (catSelect.options[k].value.toLowerCase() === catName.toLowerCase()) {
+              catSelect.selectedIndex = k;
+              break;
+            }
+          }
+        }
+        toast("Category '" + catName + "' created and selected!");
+      });
+    }
+
     // Save Product Form
     var form = document.getElementById("product-form");
     if (form) {
@@ -687,6 +747,7 @@
         var stock = Number(document.getElementById("prod-stock").value) || 0;
         var dimensions = document.getElementById("prod-dimensions").value.trim();
         var desc = document.getElementById("prod-desc").value.trim();
+        var image = (document.getElementById("prod-image") && document.getElementById("prod-image").value.trim()) || "";
 
         if (id) {
           // Editing existing
@@ -700,6 +761,7 @@
             prod.stock_status = stock > 0 ? "instock" : "outofstock";
             prod.dimensions = dimensions;
             prod.description = desc;
+            if (image) prod.image = image;
             persistProductChange(prod);
             toast("Product updated successfully.");
           }
@@ -719,6 +781,7 @@
             dimensions: dimensions,
             description: desc,
             short_description: desc.slice(0, 100),
+            image: image,
             featured: false,
             tags: ["Handcrafted", "Water Hyacinth"]
           };
@@ -773,13 +836,20 @@
 
         // 4. Remember as active category so it auto-selects in Product modal
         lastSelectedCategory = name;
-        invCategoryFilter = name;
+        invCategoryFilter = "all";
 
-        // 5. Refresh dropdowns and inventory view
+        // 5. Refresh dropdowns and inventory view (keep all items visible)
         refreshCategoryDropdowns();
         var filterEl = document.getElementById("inv-category-filter");
-        if (filterEl) filterEl.value = name;
+        if (filterEl) filterEl.value = "all";
         renderInventory();
+
+        // 6. Convenience: Ask if they want to add a product in this category now
+        setTimeout(function () {
+          if (confirm("Category '" + name + "' created successfully! Would you like to add a product under this category now?")) {
+            openProductModal(null);
+          }
+        }, 150);
       });
     }
   }
@@ -810,6 +880,23 @@
     var stockInput = document.getElementById("prod-stock");
     var dimInput = document.getElementById("prod-dimensions");
     var descInput = document.getElementById("prod-desc");
+    var imgInput = document.getElementById("prod-image");
+    var imgPreview = document.getElementById("prod-photo-preview");
+    var imgPh = document.getElementById("prod-photo-ph");
+
+    function updatePreview(src) {
+      if (imgPreview && imgPh) {
+        if (src) {
+          imgPreview.src = src;
+          imgPreview.style.display = "block";
+          imgPh.style.display = "none";
+        } else {
+          imgPreview.src = "";
+          imgPreview.style.display = "none";
+          imgPh.style.display = "block";
+        }
+      }
+    }
 
     if (prodId) {
       var prod = SP.products.find(function (p) { return p.id === prodId; });
@@ -823,6 +910,9 @@
       stockInput.value = prod.stock_qty != null ? prod.stock_qty : 25;
       dimInput.value = prod.dimensions || "";
       descInput.value = prod.description || "";
+      var existingImg = prod.image || ("assets/products/" + prod.slug + "-1.jpg");
+      if (imgInput) imgInput.value = prod.image || "";
+      updatePreview(existingImg);
     } else {
       titleEl.textContent = "Add New Handcrafted Product";
       idInput.value = "";
@@ -841,6 +931,33 @@
       stockInput.value = 20;
       dimInput.value = '10" x 8"';
       descInput.value = "";
+      if (imgInput) imgInput.value = "";
+      updatePreview("");
+    }
+
+    // Bind image file picker once
+    var photoFile = document.getElementById("prod-photo-file");
+    if (photoFile && !photoFile._bound) {
+      photoFile._bound = true;
+      photoFile.addEventListener("change", function () {
+        var file = photoFile.files && photoFile.files[0];
+        if (file) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            var dataUrl = e.target.result;
+            if (imgInput) imgInput.value = dataUrl;
+            updatePreview(dataUrl);
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+
+    if (imgInput && !imgInput._bound) {
+      imgInput._bound = true;
+      imgInput.addEventListener("input", function () {
+        updatePreview(imgInput.value.trim());
+      });
     }
 
     openModal(modal);
@@ -878,7 +995,10 @@
     // 1. Render Website Pages CMS table
     renderCmsPages();
 
-    // 2. Blog posts table
+    // 2. Render Living Gallery photos
+    renderCmsGallery();
+
+    // 3. Blog posts table
     var posts = (SP.blog && SP.blog.getAllPosts()) || [];
     var tbody = document.getElementById("cms-posts-table-body");
     if (tbody) {
@@ -1116,6 +1236,131 @@
     openModal(modal);
   }
 
+  function renderCmsGallery() {
+    var grid = document.getElementById("cms-gallery-grid");
+    var tabCount = document.getElementById("cms-gallery-tab-count");
+    var gallery = (SP.config && SP.config.GALLERY) || [];
+    if (tabCount) tabCount.textContent = String(gallery.length);
+    if (!grid) return;
+
+    if (!gallery.length) {
+      grid.innerHTML = '<div class="text-center text-muted" style="grid-column: 1 / -1; padding: 3rem;">No photos in living archive yet. Click "+ Add Field Photo" above.</div>';
+      return;
+    }
+
+    grid.innerHTML = gallery.map(function (item, idx) {
+      var src = item.src || "";
+      var caption = item.caption || "Field Photo";
+      var category = item.category || "General Archive";
+
+      return (
+        '<div class="admin-card" style="margin:0; overflow:hidden; display:flex; flex-direction:column; border: 1px solid var(--adm-border);">' +
+        '  <div style="position:relative; width:100%; height:160px; background:#F1F5F9; overflow:hidden;">' +
+        '    <img src="' + SP.esc(src) + '" alt="' + SP.esc(caption) + '" style="width:100%; height:100%; object-fit:cover;" onerror="this.onerror=null;this.src=\'assets/logo-full.png\';">' +
+        '    <span class="admin-badge admin-badge--info" style="position:absolute; top:8px; left:8px; background:rgba(6,27,46,0.85); color:#fff; backdrop-filter:blur(4px);">' + SP.esc(category) + '</span>' +
+        '  </div>' +
+        '  <div style="padding: 1rem; flex: 1; display: flex; flex-direction: column; justify-content: space-between; gap: 0.75rem;">' +
+        '    <div style="font-size: 0.88rem; font-weight: 600; color: #0F172A; line-height: 1.4;">' + SP.esc(caption) + '</div>' +
+        '    <div style="display: flex; gap: 0.5rem; justify-content: flex-end; border-top: 1px solid #F1F5F9; padding-top: 0.65rem;">' +
+        '      <button type="button" class="btn btn--outline btn--xs" data-edit-gal="' + idx + '">Edit</button>' +
+        '      <button type="button" class="btn btn--outline btn--xs text-danger" data-del-gal="' + idx + '" style="color:var(--adm-danger); border-color:rgba(239,68,68,0.25);">Delete</button>' +
+        '    </div>' +
+        '  </div>' +
+        '</div>'
+      );
+    }).join("");
+
+    grid.querySelectorAll("[data-edit-gal]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var idx = Number(btn.getAttribute("data-edit-gal"));
+        openGalleryPhotoModal(idx);
+      });
+    });
+
+    grid.querySelectorAll("[data-del-gal]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var idx = Number(btn.getAttribute("data-del-gal"));
+        if (!confirm("Are you sure you want to remove this photo from the living gallery?")) return;
+        SP.config.GALLERY.splice(idx, 1);
+        try {
+          window.localStorage.setItem("sp_custom_gallery", JSON.stringify(SP.config.GALLERY));
+        } catch (e) { /* ignore */ }
+        toast("Photo removed from gallery.");
+        renderCmsGallery();
+      });
+    });
+  }
+
+  function openGalleryPhotoModal(idx) {
+    var modal = document.getElementById("gallery-photo-modal");
+    if (!modal) return;
+
+    var titleEl = document.getElementById("gallery-photo-modal-title");
+    var idxInput = document.getElementById("gal-photo-index");
+    var srcInput = document.getElementById("gal-photo-src");
+    var preview = document.getElementById("gal-photo-preview");
+    var placeholder = document.getElementById("gal-photo-preview-ph");
+    var captionInput = document.getElementById("gal-photo-caption");
+    var catSelect = document.getElementById("gal-photo-category");
+
+    function updatePreview(src) {
+      if (preview && placeholder) {
+        if (src) {
+          preview.src = src;
+          preview.style.display = "block";
+          placeholder.style.display = "none";
+        } else {
+          preview.src = "";
+          preview.style.display = "none";
+          placeholder.style.display = "block";
+        }
+      }
+    }
+
+    if (idx != null && SP.config.GALLERY && SP.config.GALLERY[idx]) {
+      var item = SP.config.GALLERY[idx];
+      if (titleEl) titleEl.textContent = "Edit Field Photo";
+      if (idxInput) idxInput.value = String(idx);
+      if (srcInput) srcInput.value = item.src || "";
+      if (captionInput) captionInput.value = item.caption || "";
+      if (catSelect && item.category) catSelect.value = item.category;
+      updatePreview(item.src || "");
+    } else {
+      if (titleEl) titleEl.textContent = "Add Field Photo to Gallery";
+      if (idxInput) idxInput.value = "";
+      if (srcInput) srcInput.value = "";
+      if (captionInput) captionInput.value = "";
+      updatePreview("");
+    }
+
+    // Bind file picker once
+    var galFile = document.getElementById("gal-photo-file");
+    if (galFile && !galFile._bound) {
+      galFile._bound = true;
+      galFile.addEventListener("change", function () {
+        var file = galFile.files && galFile.files[0];
+        if (file) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            var dataUrl = e.target.result;
+            if (srcInput) srcInput.value = dataUrl;
+            updatePreview(dataUrl);
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+
+    if (srcInput && !srcInput._bound) {
+      srcInput._bound = true;
+      srcInput.addEventListener("input", function () {
+        updatePreview(srcInput.value.trim());
+      });
+    }
+
+    openModal(modal);
+  }
+
   function bindCmsActions() {
     // CMS Sub-navigation Tabs switching
     document.querySelectorAll("[data-cms-tab]").forEach(function (btn) {
@@ -1270,6 +1515,52 @@
         Object.assign(SP.config.FOUNDATION, fdnObj);
         window.localStorage.setItem("sp_custom_foundation", JSON.stringify(fdnObj));
         toast("Headquarters & statutory details updated successfully.");
+      });
+    }
+
+    // New Gallery Photo button
+    var newGalBtn = document.getElementById("new-gallery-photo-btn");
+    if (newGalBtn) {
+      newGalBtn.addEventListener("click", function () {
+        openGalleryPhotoModal(null);
+      });
+    }
+
+    // Gallery Photo Form Submit
+    var galForm = document.getElementById("gallery-photo-form");
+    if (galForm) {
+      galForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var idxVal = document.getElementById("gal-photo-index").value;
+        var src = document.getElementById("gal-photo-src").value.trim();
+        var caption = document.getElementById("gal-photo-caption").value.trim();
+        var category = document.getElementById("gal-photo-category").value;
+
+        if (!src || !caption) return;
+
+        var photoObj = {
+          src: src,
+          caption: caption,
+          category: category,
+          tint: "--c-cat-office"
+        };
+
+        if (!SP.config.GALLERY) SP.config.GALLERY = [];
+
+        if (idxVal !== "" && !isNaN(Number(idxVal))) {
+          SP.config.GALLERY[Number(idxVal)] = photoObj;
+          toast("Gallery photo updated successfully.");
+        } else {
+          SP.config.GALLERY.unshift(photoObj);
+          toast("New photo added to Living Gallery!");
+        }
+
+        try {
+          window.localStorage.setItem("sp_custom_gallery", JSON.stringify(SP.config.GALLERY));
+        } catch (err) { /* ignore */ }
+
+        closeAllModals();
+        renderCmsGallery();
       });
     }
 
@@ -1482,6 +1773,7 @@
           custom_copy: JSON.parse(window.localStorage.getItem("sp_custom_copy") || "{}"),
           custom_foundation: JSON.parse(window.localStorage.getItem("sp_custom_foundation") || "{}"),
           custom_categories: JSON.parse(window.localStorage.getItem("sp_custom_categories") || "[]"),
+          gallery_photos: (SP.config && SP.config.GALLERY) || [],
           enquiries: SP.store ? SP.store.getEnquiries() : [],
           bulk_enquiries: SP.store ? SP.store.getBulkEnquiries() : []
         };

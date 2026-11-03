@@ -731,3 +731,11 @@ try {
     });
   }
 } catch (e) { /* ignore */ }
+
+/* Load custom gallery photos from localStorage */
+try {
+  var customGallery = JSON.parse(window.localStorage.getItem("sp_custom_gallery") || "null");
+  if (Array.isArray(customGallery) && customGallery.length) {
+    SP.config.GALLERY = customGallery;
+  }
+} catch (e) { /* ignore */ }

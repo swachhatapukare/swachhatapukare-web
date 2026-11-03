@@ -305,7 +305,7 @@
                 <thead>
                   <tr>
                     <th>SKU</th>
-                    <th>Product Name</th>
+                    <th>Product (Photo &amp; Name)</th>
                     <th>Category</th>
                     <th>Price</th>
                     <th>Stock Units</th>
@@ -333,7 +333,11 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
             <span>Field Stories Blog</span>
           </button>
-          <button type="button" class="admin-subnav-btn" data-cms-tab="home">
+          <button type="button" class="admin-subnav-btn" data-cms-tab="gallery">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Living Gallery &amp; Photos (<span id="cms-gallery-tab-count">12</span>)</span>
+          </button>
+          <button type="button" class="admin-subnav-btn" data-cms-tab="impact">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
             <span>Homepage Metrics</span>
           </button>
@@ -407,6 +411,22 @@
                   <tbody id="cms-posts-table-body"></tbody>
                 </table>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2b. Living Gallery & Field Photos Manager -->
+        <div class="cms-tab-pane" id="cms-pane-gallery" style="display: none;">
+          <div class="admin-card">
+            <div class="admin-card__header">
+              <div>
+                <h2 class="admin-card__title">Living Gallery &amp; Field Photography Archive</h2>
+                <p class="text-xs text-muted" style="margin:2px 0 0;">Upload and curate photographs displayed on <code>gallery.html</code> across river drives, craft, and clean energy.</p>
+              </div>
+              <button type="button" class="btn btn--primary btn--sm" id="new-gallery-photo-btn">+ Add Field Photo</button>
+            </div>
+            <div class="admin-card__body">
+              <div id="cms-gallery-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem;"></div>
             </div>
           </div>
         </div>
@@ -625,7 +645,10 @@
             <input type="text" class="adm-input" id="prod-sku" required>
           </div>
           <div class="adm-form-group">
-            <label class="adm-label" for="prod-category">Category</label>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.35rem;">
+              <label class="adm-label" for="prod-category" style="margin: 0;">Category</label>
+              <button type="button" class="btn btn--outline btn--xs" id="prod-quick-cat-btn" style="padding: 2px 8px; font-size: 0.72rem; line-height: 1.2; text-transform: none; letter-spacing: normal;">+ Add Category</button>
+            </div>
             <select class="adm-select" id="prod-category">
               <option value="Office Essentials">Office Essentials</option>
               <option value="Desk Collection">Desk Collection</option>
@@ -638,6 +661,24 @@
           <div class="adm-form-group adm-form-group--full">
             <label class="adm-label" for="prod-name">Product Title</label>
             <input type="text" class="adm-input" id="prod-name" required>
+          </div>
+          <div class="adm-form-group adm-form-group--full">
+            <label class="adm-label">Product Photo (Upload File or Enter URL)</label>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <input type="text" class="adm-input" id="prod-image" placeholder="assets/products/... or upload photo" style="flex: 1;">
+              <label class="btn btn--outline btn--sm" style="cursor: pointer; white-space: nowrap; margin: 0; display: inline-flex; align-items: center; gap: 4px;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span>Upload Photo</span>
+                <input type="file" id="prod-photo-file" accept="image/*" style="display: none;">
+              </label>
+            </div>
+            <div style="margin-top: 0.5rem; display: flex; align-items: center; gap: 0.75rem;">
+              <div style="width: 56px; height: 56px; border-radius: 6px; border: 1px solid var(--adm-border); background: #F8FAFC; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <img id="prod-photo-preview" src="" alt="Product preview" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+                <span id="prod-photo-ph" class="text-xs text-muted" style="font-size: 10px;">No photo</span>
+              </div>
+              <span class="text-xs text-muted">Upload product photograph from device or paste an image URL. JPG, PNG, WebP supported.</span>
+            </div>
           </div>
           <div class="adm-form-group">
             <label class="adm-label" for="prod-price">Price (₹ INR)</label>
@@ -825,6 +866,64 @@
           <button type="button" class="btn btn--outline btn--sm" data-close-modal>Cancel</button>
           <button type="submit" class="btn btn--primary btn--sm">Save &amp; Publish Page</button>
         </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============================================== GALLERY PHOTO MODAL -->
+<div class="admin-modal-backdrop" id="gallery-photo-modal" hidden style="display: none;">
+  <div class="admin-modal" style="max-width: 540px;">
+    <div class="admin-modal__head">
+      <h3 class="admin-modal__title" id="gallery-photo-modal-title">Add Field Photo to Gallery</h3>
+      <button class="btn btn--outline btn--xs" data-close-modal>&times;</button>
+    </div>
+    <form id="gallery-photo-form">
+      <input type="hidden" id="gal-photo-index" value="">
+      <div class="admin-modal__body">
+        <div class="adm-form-grid">
+          
+          <div class="adm-form-group adm-form-group--full">
+            <label class="adm-label">Photo Source (Upload File or Enter URL)</label>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <input type="text" class="adm-input" id="gal-photo-src" required placeholder="assets/gallery/... or image URL" style="flex: 1;">
+              <label class="btn btn--outline btn--sm" style="cursor: pointer; white-space: nowrap; margin: 0; display: inline-flex; align-items: center; gap: 4px;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span>Upload</span>
+                <input type="file" id="gal-photo-file" accept="image/*" style="display: none;">
+              </label>
+            </div>
+          </div>
+
+          <div class="adm-form-group adm-form-group--full">
+            <div style="width: 100%; height: 180px; border-radius: 8px; border: 1px dashed var(--adm-border); background: #F8FAFC; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+              <img id="gal-photo-preview" src="" alt="Photo preview" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+              <span id="gal-photo-preview-ph" class="text-xs text-muted">Upload an image file or enter URL to preview</span>
+            </div>
+          </div>
+
+          <div class="adm-form-group adm-form-group--full">
+            <label class="adm-label" for="gal-photo-caption">Photo Caption &amp; Story</label>
+            <input type="text" class="adm-input" id="gal-photo-caption" required placeholder="e.g. Volunteers harvesting water hyacinth at Dimna Lake">
+          </div>
+
+          <div class="adm-form-group adm-form-group--full">
+            <label class="adm-label" for="gal-photo-category">Category / Pillar</label>
+            <select class="adm-select" id="gal-photo-category">
+              <option value="River Cleaning Drives">River Cleaning Drives</option>
+              <option value="Water Hyacinth Craft">Water Hyacinth Craft &amp; Weaving</option>
+              <option value="Solar Power Systems">Solar &amp; Clean Energy</option>
+              <option value="Sewage Treatment">Sewage Treatment (STP)</option>
+              <option value="Rural Smart Village Centres">Rural Smart Village Centres</option>
+              <option value="Community &amp; TEDx">Community &amp; TEDxBistupur</option>
+            </select>
+          </div>
+
+        </div>
+      </div>
+      <div class="admin-modal__foot">
+        <button type="button" class="btn btn--outline btn--sm" data-close-modal>Cancel</button>
+        <button type="submit" class="btn btn--primary btn--sm">Save Photo</button>
       </div>
     </form>
   </div>
