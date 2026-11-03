@@ -667,36 +667,16 @@
 
 <!-- ============================================== CATEGORY ADD/EDIT MODAL -->
 <div class="admin-modal-backdrop" id="category-modal" hidden style="display: none;">
-  <div class="admin-modal">
+  <div class="admin-modal" style="max-width: 480px;">
     <div class="admin-modal__head">
-      <h3 class="admin-modal__title" id="category-modal-title">Add New Product Category</h3>
+      <h3 class="admin-modal__title" id="category-modal-title">Add New Category</h3>
       <button class="btn btn--outline btn--xs" data-close-modal>&times;</button>
     </div>
     <form id="category-form">
       <div class="admin-modal__body">
-        <div class="adm-form-grid">
-          <div class="adm-form-group adm-form-group--full">
-            <label class="adm-label" for="cat-name">Category Name</label>
-            <input type="text" class="adm-input" id="cat-name" required placeholder="e.g. Eco Gift Hampers, Storage Baskets">
-          </div>
-          <div class="adm-form-group">
-            <label class="adm-label" for="cat-slug">Category Slug (URL Identifier)</label>
-            <input type="text" class="adm-input" id="cat-slug" required placeholder="e.g. eco-gift-hampers">
-          </div>
-          <div class="adm-form-group">
-            <label class="adm-label" for="cat-tint">Theme Tint</label>
-            <select class="adm-select" id="cat-tint">
-              <option value="--c-cat-office">Teal / Office (--c-cat-office)</option>
-              <option value="--c-cat-desk">Blue / Desk (--c-cat-desk)</option>
-              <option value="--c-cat-home">Amber / Home (--c-cat-home)</option>
-              <option value="--c-cat-tabletop">Emerald / Tabletop (--c-cat-tabletop)</option>
-              <option value="--c-cat-heritage">Rose / Heritage (--c-cat-heritage)</option>
-              <option value="--c-cat-lighting">Indigo / Lighting (--c-cat-lighting)</option>
-            </select>
-          </div>
-          <div class="adm-form-group adm-form-group--full">
-            <p class="text-xs text-muted" style="margin: 0; line-height: 1.5;">This new category will immediately be available when creating products, filtering inventory, and in the storefront catalog.</p>
-          </div>
+        <div class="adm-form-group">
+          <label class="adm-label" for="cat-name">Category Name</label>
+          <input type="text" class="adm-input" id="cat-name" required placeholder="e.g. Eco Gift Hampers, Storage Baskets, Handbags" style="font-size: 0.95rem; padding: 0.75rem 0.9rem;">
         </div>
       </div>
       <div class="admin-modal__foot">

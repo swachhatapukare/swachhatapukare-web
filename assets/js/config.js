@@ -716,3 +716,18 @@ try {
     Object.assign(SP.config.FOUNDATION, customFoundation);
   }
 } catch (e) { /* ignore */ }
+
+/* Load custom categories from localStorage */
+try {
+  var customCategories = JSON.parse(window.localStorage.getItem("sp_custom_categories") || "[]");
+  if (Array.isArray(customCategories)) {
+    customCategories.forEach(function (cat) {
+      var catObj = typeof cat === "string"
+        ? { name: cat, slug: cat.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""), tint: "--c-cat-office" }
+        : cat;
+      if (catObj && catObj.name && !SP.config.CATEGORIES.some(function (c) { return (c.name || "").toLowerCase() === catObj.name.toLowerCase(); })) {
+        SP.config.CATEGORIES.push(catObj);
+      }
+    });
+  }
+} catch (e) { /* ignore */ }

@@ -375,12 +375,38 @@
   }
 
   /* ==================================================== 3. INVENTORY & CATEGORIES */
+  var lastSelectedCategory = "";
+
+  function normalizeCategory(raw) {
+    if (!raw) return null;
+    if (typeof raw === "string") {
+      var trimmed = raw.trim();
+      if (!trimmed) return null;
+      return {
+        name: trimmed,
+        slug: trimmed.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""),
+        tint: "--c-cat-office"
+      };
+    }
+    if (typeof raw === "object" && raw.name) {
+      var n = String(raw.name).trim();
+      if (!n) return null;
+      return {
+        name: n,
+        slug: raw.slug || n.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""),
+        tint: raw.tint || "--c-cat-office"
+      };
+    }
+    return null;
+  }
+
   function loadCustomCategories() {
     try {
       var custom = JSON.parse(window.localStorage.getItem("sp_custom_categories") || "[]");
       if (Array.isArray(custom)) {
-        custom.forEach(function (cat) {
-          if (!SP.config.CATEGORIES.some(function (c) { return c.name === cat.name || c.slug === cat.slug; })) {
+        custom.forEach(function (raw) {
+          var cat = normalizeCategory(raw);
+          if (cat && !SP.config.CATEGORIES.some(function (c) { return (c.name || "").toLowerCase() === cat.name.toLowerCase(); })) {
             SP.config.CATEGORIES.push(cat);
           }
         });
@@ -389,16 +415,30 @@
   }
 
   function refreshCategoryDropdowns() {
+    loadCustomCategories();
     var categories = (SP.categories && SP.categories()) || SP.config.CATEGORIES || [];
 
-    // 1. Product Modal category selector
+    var seen = {};
+    var uniqueCategories = [];
+    categories.forEach(function (c) {
+      var cat = normalizeCategory(c);
+      if (cat && !seen[cat.name.toLowerCase()]) {
+        seen[cat.name.toLowerCase()] = true;
+        uniqueCategories.push(cat);
+      }
+    });
+
+    // 1. Product Modal category selector (#prod-category)
     var prodCat = document.getElementById("prod-category");
     if (prodCat) {
       var currentVal = prodCat.value;
-      prodCat.innerHTML = categories.map(function (c) {
+      prodCat.innerHTML = uniqueCategories.map(function (c) {
         return '<option value="' + SP.esc(c.name) + '">' + SP.esc(c.name) + '</option>';
       }).join("");
-      if (currentVal && categories.some(function (c) { return c.name === currentVal; })) {
+
+      if (lastSelectedCategory && uniqueCategories.some(function (c) { return c.name.toLowerCase() === lastSelectedCategory.toLowerCase(); })) {
+        prodCat.value = lastSelectedCategory;
+      } else if (currentVal && uniqueCategories.some(function (c) { return c.name.toLowerCase() === currentVal.toLowerCase(); })) {
         prodCat.value = currentVal;
       }
     }
@@ -409,11 +449,11 @@
       var currentFilter = filterCat.value || invCategoryFilter || "all";
       var counts = {};
       (SP.products || []).forEach(function (p) {
-        counts[p.category] = (counts[p.category] || 0) + 1;
+        if (p.category) counts[p.category] = (counts[p.category] || 0) + 1;
       });
 
       var options = '<option value="all">All Categories (' + (SP.products || []).length + ')</option>';
-      options += categories.map(function (c) {
+      options += uniqueCategories.map(function (c) {
         var cnt = counts[c.name] || 0;
         return '<option value="' + SP.esc(c.name) + '">' + SP.esc(c.name) + ' (' + cnt + ')</option>';
       }).join("");
@@ -695,43 +735,48 @@
     }
 
     // Category Modal Form setup
-    var catNameInput = document.getElementById("cat-name");
-    var catSlugInput = document.getElementById("cat-slug");
-    if (catNameInput && catSlugInput) {
-      catNameInput.addEventListener("input", function () {
-        catSlugInput.value = catNameInput.value.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
-      });
-    }
-
     var catForm = document.getElementById("category-form");
     if (catForm) {
       catForm.addEventListener("submit", function (e) {
         e.preventDefault();
+        var catNameInput = document.getElementById("cat-name");
         var name = (catNameInput && catNameInput.value ? catNameInput.value : "").trim();
-        var slug = (catSlugInput && catSlugInput.value ? catSlugInput.value : "").trim() || name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-        var tint = (document.getElementById("cat-tint") && document.getElementById("cat-tint").value) || "--c-cat-office";
-
         if (!name) return;
 
         var existing = (SP.categories && SP.categories()) || SP.config.CATEGORIES || [];
-        if (existing.some(function (c) { return c.name.toLowerCase() === name.toLowerCase(); })) {
+        if (existing.some(function (c) { return (c.name || "").toLowerCase() === name.toLowerCase(); })) {
           toast("Category '" + name + "' already exists.", "error");
           return;
         }
 
-        var newCat = { name: name, slug: slug, tint: tint };
+        var slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "cat-" + Date.now();
+        var newCat = { name: name, slug: slug, tint: "--c-cat-office" };
+
+        // 1. Add to in-memory SP.config.CATEGORIES
         SP.config.CATEGORIES.push(newCat);
 
+        // 2. Persist to localStorage
         try {
           var custom = JSON.parse(window.localStorage.getItem("sp_custom_categories") || "[]");
-          custom.push(newCat);
-          window.localStorage.setItem("sp_custom_categories", JSON.stringify(custom));
+          if (!custom.some(function (c) {
+            var cName = typeof c === "string" ? c : (c.name || "");
+            return cName.toLowerCase() === name.toLowerCase();
+          })) {
+            custom.push(newCat);
+            window.localStorage.setItem("sp_custom_categories", JSON.stringify(custom));
+          }
         } catch (err) { /* ignore */ }
 
-        toast("Category '" + name + "' added successfully!", "success");
+        // 3. Close modal & show toast
         closeAllModals();
-        refreshCategoryDropdowns();
+        toast("Category '" + name + "' saved successfully!", "success");
+
+        // 4. Remember as active category so it auto-selects in Product modal
+        lastSelectedCategory = name;
         invCategoryFilter = name;
+
+        // 5. Refresh dropdowns and inventory view
+        refreshCategoryDropdowns();
         var filterEl = document.getElementById("inv-category-filter");
         if (filterEl) filterEl.value = name;
         renderInventory();
@@ -743,9 +788,10 @@
     var modal = document.getElementById("category-modal");
     if (!modal) return;
     var nameInput = document.getElementById("cat-name");
-    var slugInput = document.getElementById("cat-slug");
-    if (nameInput) nameInput.value = "";
-    if (slugInput) slugInput.value = "";
+    if (nameInput) {
+      nameInput.value = "";
+      setTimeout(function () { nameInput.focus(); }, 60);
+    }
     openModal(modal);
   }
 
@@ -783,7 +829,9 @@
       skuInput.value = "SP-OE-" + Math.floor(100 + Math.random() * 900);
       nameInput.value = "";
       if (catInput) {
-        if (invCategoryFilter && invCategoryFilter !== "all") {
+        if (lastSelectedCategory && Array.from(catInput.options).some(function (o) { return o.value.toLowerCase() === lastSelectedCategory.toLowerCase(); })) {
+          catInput.value = lastSelectedCategory;
+        } else if (invCategoryFilter && invCategoryFilter !== "all" && Array.from(catInput.options).some(function (o) { return o.value === invCategoryFilter; })) {
           catInput.value = invCategoryFilter;
         } else if (catInput.options && catInput.options.length) {
           catInput.selectedIndex = 0;
@@ -1433,6 +1481,7 @@
           blog_posts: JSON.parse(window.localStorage.getItem("sp_blog_posts") || "[]"),
           custom_copy: JSON.parse(window.localStorage.getItem("sp_custom_copy") || "{}"),
           custom_foundation: JSON.parse(window.localStorage.getItem("sp_custom_foundation") || "{}"),
+          custom_categories: JSON.parse(window.localStorage.getItem("sp_custom_categories") || "[]"),
           enquiries: SP.store ? SP.store.getEnquiries() : [],
           bulk_enquiries: SP.store ? SP.store.getBulkEnquiries() : []
         };
