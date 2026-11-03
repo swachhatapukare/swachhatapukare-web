@@ -1,0 +1,40 @@
+# SwachhataPukare Foundation
+
+> A registered Section 8 non-profit organization in Jharkhand, India, dedicated to river rejuvenation, ecological water hyacinth upcycling, decentralized solar power, wastewater treatment (STP), and sustainable rural community empowerment.
+
+## Mission & Purpose
+SwachhataPukare Foundation operates at the intersection of ecological restoration and rural circular economy. We convert invasive aquatic weeds into handcrafted utility goods that generate dignified livelihoods for women's Self-Help Groups (SHGs), run continuous weekly river cleanups on the Subarnarekha and Kharkai rivers, install decentralized Japanese Johkasou sewage treatment plants (STP), deploy renewable solar micro-grids, and host community changemaker platforms like TEDxBistupur.
+
+## Core Initiatives & Environmental Pillars
+- [River Cleaning Drives](https://www.swachhatapukare.com/river-cleaning.html): Over 500+ weekly volunteer cleanup drives removing non-biodegradable waste along the Subarnarekha and Kharkai riverbanks in Eastern India.
+- [Water Hyacinth Craft](https://www.swachhatapukare.com/water-hyacinth.html): Harvesting invasive water hyacinth (Eichhornia crassipes), sun-drying natural stems, and training rural women artisans to weave sustainable consumer utility goods.
+- [Solar Power Systems](https://www.swachhatapukare.com/solar-power.html): Over 5,000 kW+ installed solar power capacity across schools, healthcare centres, and community facilities, displacing fossil fuel dependency.
+- [Sewage Treatment (Johkasou STP)](https://www.swachhatapukare.com/sewage-treatment.html): Decentralized Japanese Johkasou wastewater treatment plants and dry waste material recovery to eliminate untreated runoff into river systems.
+- [Rural Smart Village Centres](https://www.swachhatapukare.com/rural-smart-village-centres.html): Green village infrastructure hubs providing artisan production workshops, solar energy, skill training, and digital connectivity.
+
+## Platform & Community
+- [TEDxBistupur Platform](https://www.swachhatapukare.com/tedxbistupur.html): Independent TEDx platform in Jamshedpur with 68+ changemaker speakers driving environmental innovation and civic empowerment. Official external portal: https://www.tedxbistupur.org/
+- [Field Stories & Blog](https://www.swachhatapukare.com/blog.html): Articles and field dispatches documenting river restoration methods, artisan circular economy stories, and sustainable village models.
+- [Living Photo Archive](https://www.swachhatapukare.com/gallery.html): Field photography archives documenting river drives, craft making, and clean energy installations.
+
+## Handcrafted Artisan Store & Catalog
+- [Artisan Shop](https://www.swachhatapukare.com/shop.html): Online store featuring 100% natural, biodegradable water hyacinth lifestyle goods crafted by rural women artisans.
+- [Corporate & Bulk Enquiries](https://www.swachhatapukare.com/bulk-enquiry.html): Customized water hyacinth conference kits, executive folders, seminar bags, and corporate gifting hampers.
+- [Order Tracking](https://www.swachhatapukare.com/track.html): Real-time delivery and shipment tracking for online orders.
+
+## Governance, Support & Compliance
+- [About the Foundation](https://www.swachhatapukare.com/about.html): Registered organization background, founding team, vision, and operational history since 2019.
+- [Donate & Support](https://www.swachhatapukare.com/donate.html): Section 80G tax-exempt charitable donations and corporate CSR project partnerships powering river restoration and artisan equipment.
+- [Contact Us & Headquarters](https://www.swachhatapukare.com/contact.html): Office address in Adityapur, Jamshedpur, official email, phone, and inquiry channels.
+- [Policies & Terms](https://www.swachhatapukare.com/policies.html): Section 8 non-profit statutory terms, payment security, delivery, returns, and digital privacy policies.
+
+## Statutory Information
+- **Legal Entity:** SwachhataPukare Foundation (Registered Section 8 Non-Profit Company under the Companies Act, 2013)
+- **Tax Exemptions:** 12A & 80G of the Income Tax Act, 1961 (Eligible for 50% deduction on donations; Form 10BE certificate issued)
+- **GSTIN:** 20ABHCS8922N1ZZ
+- **Registered Headquarters:** HIG-276, Ward No-15, Near Bank Of Baroda, Adityapur, Jamshedpur, Jharkhand 831013, India
+- **Official Email:** hello@swachhatapukare.com
+- **Operating Hours:** Monday – Saturday, 09:00 – 18:00 IST
+
+## Optional & Deep Dive
+- [Full Text Context (llms-full.txt)](https://www.swachhatapukare.com/llms-full.txt): Comprehensive plain-text documentation of the entire foundation, all program details, impact numbers, full catalog specs, and technical architecture.

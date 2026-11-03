@@ -1,0 +1,130 @@
+# SwachhataPukare Foundation — Full Knowledge Document
+
+> Comprehensive machine-readable reference for AI systems, researchers, and programmatic consumers detailing the mission, strategic pillars, handcrafted products, impact data, statutory registrations, and contact info of SwachhataPukare Foundation.
+
+Canonical URL: https://www.swachhatapukare.com
+Repository / Static Site: Plain HTML5, Modern CSS, Vanilla JS
+Updated: November 2026
+
+---
+
+## 1. Executive Summary & Identity
+SwachhataPukare Foundation is a registered Section 8 non-profit corporation incorporated under the Indian Companies Act, 2013, with headquarters in Jamshedpur / Adityapur, Jharkhand, India.
+
+The Foundation was established to address two interlinked regional challenges in Eastern India:
+1. **Ecological Degradation:** Choked water bodies from invasive aquatic weeds (notably Water Hyacinth / Eichhornia crassipes), untreated municipal wastewater entering sacred river basins (Subarnarekha and Kharkai), and heavy fossil fuel dependence in rural and peri-urban institutions.
+2. **Economic Vulnerability:** Severe lack of sustainable, non-migratory rural employment opportunities, especially for indigenous and rural women.
+
+By coupling direct ecological remediation (harvesting weeds, clearing riverbanks, decentralized biological wastewater treatment, rooftop solar installation) with grassroots circular product development, SwachhataPukare converts environmental waste liabilities into fair-wage economic assets.
+
+---
+
+## 2. Statutory Registrations & Non-Profit Compliance
+- **Corporate Entity:** SwachhataPukare Foundation
+- **Incorporation:** Section 8 of the Companies Act, 2013 (Non-Profit Corporation with charitable objects)
+- **GSTIN:** 20ABHCS8922N1ZZ
+- **Income Tax Exemption:** Section 12A registered
+- **Tax Deductibility on Donations:** Section 80G certified (Donors in India receive a 50% deduction under Section 80G of the Income Tax Act, 1961; Form 10BE donation receipts generated automatically)
+- **CSR Eligibility:** Eligible for corporate CSR grants and direct implementation partnerships under Schedule VII of the Companies Act.
+- **Registered Office:** HIG-276, Ward No-15, Near Bank Of Baroda, Adityapur, Jamshedpur, Jharkhand 831013, India
+- **Email:** hello@swachhatapukare.com
+- **Website:** https://www.swachhatapukare.com
+- **Hours:** Monday – Saturday, 09:00 – 18:00 IST
+
+---
+
+## 3. Four Core Strategic Pillars
+
+### Pillar 1: River & Water Ecology
+URL: https://www.swachhatapukare.com/water-hyacinth.html
+URL: https://www.swachhatapukare.com/river-cleaning.html
+
+- **Water Hyacinth Harvesting & Upcycling:**
+  Water hyacinth (*Eichhornia crassipes*) is an invasive aquatic weed that forms thick floating mats, cutting off sunlight and oxygen from aquatic life, depleting dissolved oxygen (DO), and preventing navigation and fishing.
+  SwachhataPukare organizes manual and mechanical removal drives, extracting tons of biomass. The stalks are sorted, naturally sundried for 7–10 days, treated with natural non-toxic preservatives, split into fiber ribbons, and hand-woven by trained women's Self-Help Groups (SHGs) on traditional looms into durable consumer lifestyle products.
+
+- **Weekly River Cleaning Drives:**
+  Weekly community volunteer cleanup drives conducted along the banks and confluences of the Subarnarekha and Kharkai rivers in Jamshedpur. To date, over 500 consecutive weekly drives have mobilized thousands of volunteers, reclaiming riverbanks and removing hundreds of metric tons of single-use plastics, ceremonial waste, and industrial debris.
+
+### Pillar 2: Clean Solar & Renewable Energy
+URL: https://www.swachhatapukare.com/solar-power.html
+
+- Over 5,000 kW+ of solar photovoltaic (PV) generation capacity installed across educational institutions, rural schools, healthcare dispensaries, and community craft centres.
+- Decentralized micro-grids ensure uninterrupted power for water pumps, artisan machinery, and digital education in off-grid and weak-grid rural clusters.
+- Replaces fossil-fuel diesel generator usage, cutting thousands of tons of lifecycle CO2 emissions.
+
+### Pillar 3: Decentralized Wastewater & Waste Recovery
+URL: https://www.swachhatapukare.com/sewage-treatment.html
+
+- **Japanese Johkasou STP Technology:**
+  Decentralized biological wastewater treatment systems that treat blackwater and greywater on-site using multi-stage anaerobic and aerobic bio-filtration. This eliminates the need for expensive centralized municipal sewer piping and stops raw, untreated sewage from draining into open storm canals and rivers. Treated effluent meets stringent CPCB standards and is reused for landscaping and groundwater recharge.
+- **Dry Waste Segregation & Circular Recovery:**
+  Community material recovery protocols that segregate recyclables at source, diverting non-biodegradable polymers, paper, and metal scrap to certified recycling partners.
+
+### Pillar 4: Community, Village Hubs & Platforms
+URL: https://www.swachhatapukare.com/rural-smart-village-centres.html
+URL: https://www.swachhatapukare.com/tedxbistupur.html
+
+- **Rural Smart Village Centres:**
+  Decentralized rural facilities built to support women artisans with dedicated craft workshops, raw material storage, solar-powered looms, design training programs, and internet connectivity.
+- **TEDxBistupur Platform:**
+  Under official license from TED, TEDxBistupur serves as Jamshedpur's flagship intellectual forum, bringing together scientists, environmentalists, grassroots innovators, and civic leaders to share "Ideas Worth Spreading." Over 68+ speakers have been hosted. Official external portal: https://www.tedxbistupur.org/
+
+---
+
+## 4. Handcrafted Product Catalog & Specifications
+URL: https://www.swachhatapukare.com/shop.html
+URL: https://www.swachhatapukare.com/bulk-enquiry.html
+
+All products are 100% natural, biodegradable, hand-harvested, and hand-woven by rural women artisans in Jharkhand.
+
+| SKU | Product Name | Category | Retail Price (INR) | Material & Key Features |
+|---|---|---|---|---|
+| SP-OE-001 | File-Folder | Office Essentials | ₹180 | Handwoven natural hyacinth stem, brass magnetic stud, A4 documentation size |
+| SP-OE-002 | Note Book | Office Essentials | ₹220 | Handcrafted hyacinth cover with recycled handmade deckle-edge paper |
+| SP-BO-003 | Laptop Sleeve | Bags & Organizers | ₹450 | Cushioned natural cotton inner lining, water hyacinth woven exterior, fits up to 14" |
+| SP-HD-004 | Yoga Mat | Home Decor | ₹650 | Breathable natural fiber surface, anti-skid ribbed weave, cotton edge binding, 72" x 24" |
+| SP-HD-005 | Table Runner | Dining & Tableware | ₹380 | Intricate criss-cross weave, heat-resistant natural fiber, 54" x 14" |
+| SP-HD-006 | Laundry Basket | Home Decor | ₹750 | Sturdy structural cane skeleton with woven hyacinth body, double rope handles, 16" x 14" |
+| SP-OE-007 | Desk Organizer | Office Essentials | ₹290 | 3-compartment multi-tier desk caddy for stationery, pens, and cards |
+| SP-HD-008 | Planter Pot | Home Decor | ₹240 | Breathable interior with moisture-resistant lining, 8" x 8" diameter |
+| SP-DT-009 | Coaster Set (Pack of 6) | Dining & Tableware | ₹150 | Heat-absorbent circular woven coasters with matching holder case, 4" diameter |
+| SP-OE-010 | Pen Stand | Office Essentials | ₹120 | Cylindrical sturdy desk cup, 4.5" height |
+| SP-BO-011 | Storage Box with Lid | Bags & Organizers | ₹420 | Rectangular utility box with fitted woven lid, 12" x 8" x 6" |
+| SP-HD-012 | Wall Hanging Decor | Home Decor | ₹320 | Artisanal geometric patterned wall art tapestry with natural bamboo rod, 24" x 16" |
+
+### Corporate & Institutional Bulk Orders
+Custom embossing, institutional branding, personalized gift tags, and customized dimensions are available for corporate conferences, ESG reporting summits, and festive gifting hampers. Inquiries can be submitted directly via `https://www.swachhatapukare.com/bulk-enquiry.html`.
+
+---
+
+## 5. Summary of Impact Numbers
+- **500+** Continuous weekly river cleaning drives on the Subarnarekha and Kharkai rivers.
+- **5,000 kW+** Installed solar rooftop and micro-grid renewable power capacity.
+- **100+ MT** Non-biodegradable waste and invasive biomass extracted and upcycled.
+- **Thousands** of rural women artisans, community members, and student volunteers engaged.
+- **68+** Changemakers, innovators, and thinkers featured on the TEDxBistupur platform.
+
+---
+
+## 6. Website Architecture & Site Map
+- **Home:** `https://www.swachhatapukare.com/` (index.html)
+- **About:** `https://www.swachhatapukare.com/about.html`
+- **Pillar - Water Hyacinth:** `https://www.swachhatapukare.com/water-hyacinth.html`
+- **Pillar - River Cleaning:** `https://www.swachhatapukare.com/river-cleaning.html`
+- **Pillar - Solar Power:** `https://www.swachhatapukare.com/solar-power.html`
+- **Pillar - Sewage Treatment:** `https://www.swachhatapukare.com/sewage-treatment.html`
+- **Pillar - Rural Smart Village Centres:** `https://www.swachhatapukare.com/rural-smart-village-centres.html`
+- **Community - TEDxBistupur:** `https://www.swachhatapukare.com/tedxbistupur.html`
+- **Shop / Catalog:** `https://www.swachhatapukare.com/shop.html`
+- **Corporate Bulk Enquiry:** `https://www.swachhatapukare.com/bulk-enquiry.html`
+- **Order Tracking:** `https://www.swachhatapukare.com/track.html`
+- **Field Stories Blog:** `https://www.swachhatapukare.com/blog.html`
+- **Living Photo Archive:** `https://www.swachhatapukare.com/gallery.html`
+- **Donate & CSR Support:** `https://www.swachhatapukare.com/donate.html`
+- **Contact Us & Office:** `https://www.swachhatapukare.com/contact.html`
+- **Governance & Policies:** `https://www.swachhatapukare.com/policies.html`
+- **Robots Specification:** `https://www.swachhatapukare.com/robots.txt`
+- **XML Sitemap:** `https://www.swachhatapukare.com/sitemap.xml`
+- **LLM Summary:** `https://www.swachhatapukare.com/llms.txt`
+- **LLM Full Context:** `https://www.swachhatapukare.com/llms-full.txt`

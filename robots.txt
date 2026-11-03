@@ -14,3 +14,8 @@ Disallow: /order-confirmation.html
 # XML Sitemap
 Sitemap: https://www.swachhatapukare.com/sitemap.xml
 
+# LLM & AI Agents Context
+# https://www.swachhatapukare.com/llms.txt
+# https://www.swachhatapukare.com/llms-full.txt
+
+

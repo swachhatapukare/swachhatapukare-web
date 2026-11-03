@@ -1516,6 +1516,7 @@
     modal.hidden = false;
     modal.classList.add("is-open");
     modal.style.display = "flex";
+    document.body.classList.add("modal-open");
   }
 
   function closeAllModals() {
@@ -1524,6 +1525,7 @@
       m.classList.remove("is-open");
       m.style.display = "none";
     });
+    document.body.classList.remove("modal-open");
   }
 
   function getStatusBadgeClass(status) {
