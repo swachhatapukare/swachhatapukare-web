@@ -1201,12 +1201,8 @@
         '  <div class="adm-table-actions">' +
         '    <button class="btn btn--outline btn--xs" data-edit-page-cms="' + SP.esc(p.key) + '" style="display:inline-flex;align-items:center;gap:4px;">' +
         '      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>' +
-        '      <span>Edit</span>' +
+        '      <span>Edit Page</span>' +
         '    </button>' +
-        '    <a class="btn btn--outline btn--xs" href="' + SP.esc(p.file) + '" target="_blank" title="View live page in new tab" style="display:inline-flex;align-items:center;gap:4px;">' +
-        '      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>' +
-        '      <span>Live</span>' +
-        '    </a>' +
         '  </div>' +
         '</td>' +
         '</tr>'
@@ -1333,6 +1329,11 @@
 
     container.appendChild(card);
     refreshCmsSectionNumbers();
+
+    [hInput, pInput, imgInput, captionInput].forEach(function (inp) {
+      if (inp) inp.addEventListener("input", updatePageCmsLivePreview);
+    });
+    updatePageCmsLivePreview();
   }
 
   function refreshCmsSectionNumbers() {
@@ -1341,6 +1342,92 @@
       var numEl = c.querySelector(".cms-sec-number");
       if (numEl) numEl.textContent = "Section " + (idx + 1);
     });
+  }
+
+  function updatePageCmsLivePreview() {
+    var container = document.getElementById("cms-live-preview-container");
+    if (!container) return;
+
+    var eyebrow = (document.getElementById("cms-eyebrow") && document.getElementById("cms-eyebrow").value) || "";
+    var title = (document.getElementById("cms-title") && document.getElementById("cms-title").value) || "Untitled Page";
+    var lead = (document.getElementById("cms-lead") && document.getElementById("cms-lead").value) || "";
+    var note = (document.getElementById("cms-note") && document.getElementById("cms-note").value) || "";
+
+    var ctaTitle = (document.getElementById("cms-cta-title") && document.getElementById("cms-cta-title").value) || "";
+    var ctaLabel = (document.getElementById("cms-cta-label") && document.getElementById("cms-cta-label").value) || "";
+    var ctaText = (document.getElementById("cms-cta-text") && document.getElementById("cms-cta-text").value) || "";
+
+    var secCards = document.querySelectorAll("#cms-sections-container .cms-section-card");
+    var sectionsHtml = "";
+
+    if (secCards.length) {
+      secCards.forEach(function (card, idx) {
+        var h = (card.querySelector(".cms-sec-h") && card.querySelector(".cms-sec-h").value) || "";
+        var pRaw = (card.querySelector(".cms-sec-p") && card.querySelector(".cms-sec-p").value) || "";
+        var pArr = pRaw.split("\n\n").map(function (s) { return s.trim(); }).filter(Boolean);
+        var img = (card.querySelector(".cms-sec-img") && card.querySelector(".cms-sec-img").value) || "";
+        var caption = (card.querySelector(".cms-sec-caption") && card.querySelector(".cms-sec-caption").value) || "";
+
+        var parasHtml = pArr.map(function (p) {
+          return '<p style="color:#475569;line-height:1.65;margin:0 0 0.65rem;font-size:0.9rem;">' + SP.esc(p) + '</p>';
+        }).join("");
+
+        if (!img) {
+          sectionsHtml +=
+            '<div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:1.25rem;margin-bottom:1rem;">' +
+            '  <h3 style="font-family:var(--font-serif);font-size:1.15rem;color:#061B2E;margin:0 0 0.65rem;">' + SP.esc(h || "Section " + (idx + 1)) + '</h3>' +
+            (parasHtml || '<p style="color:#94A3B8;font-style:italic;margin:0;font-size:0.85rem;">No paragraphs entered.</p>') +
+            '</div>';
+        } else {
+          var isEven = (idx % 2 === 1);
+          var mediaBlock =
+            '<div style="flex:1;min-width:200px;border-radius:8px;overflow:hidden;border:1px solid #E2E8F0;background:#FFFFFF;box-shadow:0 2px 8px rgba(0,0,0,0.06);">' +
+            '  <img src="' + SP.esc(img) + '" alt="' + SP.esc(h) + '" style="width:100%;height:140px;object-fit:cover;display:block;" onerror="this.onerror=null;this.src=\'assets/logo-full.png\';">' +
+            (caption ? '<div style="padding:0.4rem 0.6rem;font-size:0.75rem;color:#64748B;background:#F8FAFC;border-top:1px solid #E2E8F0;font-style:italic;">' + SP.esc(caption) + '</div>' : '') +
+            '</div>';
+
+          var textBlock =
+            '<div style="flex:1.2;min-width:200px;">' +
+            '  <h3 style="font-family:var(--font-serif);font-size:1.15rem;color:#061B2E;margin:0 0 0.65rem;">' + SP.esc(h || "Section " + (idx + 1)) + '</h3>' +
+            (parasHtml || '<p style="color:#94A3B8;font-style:italic;margin:0;font-size:0.85rem;">No paragraphs entered.</p>') +
+            '</div>';
+
+          sectionsHtml +=
+            '<div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:1.25rem;margin-bottom:1rem;display:flex;gap:1.25rem;flex-wrap:wrap;align-items:center;">' +
+            (isEven ? (mediaBlock + textBlock) : (textBlock + mediaBlock)) +
+            '</div>';
+        }
+      });
+    } else {
+      sectionsHtml = '<div class="text-center text-muted" style="padding:1.5rem;font-style:italic;">No sections added yet.</div>';
+    }
+
+    var ctaHtml = "";
+    if (ctaTitle || ctaLabel || ctaText) {
+      ctaHtml =
+        '<div style="background:linear-gradient(135deg, #0B2B4A 0%, #061B2E 100%);color:#FFFFFF;border-radius:8px;padding:1.25rem 1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:1rem;">' +
+        '  <div>' +
+        '    <h4 style="font-family:var(--font-serif);font-size:1.1rem;margin:0 0 0.25rem;color:#FFFFFF;">' + SP.esc(ctaTitle || "Ready to connect?") + '</h4>' +
+        '    <p style="margin:0;font-size:0.84rem;color:#CBD5E1;">' + SP.esc(ctaText || "") + '</p>' +
+        '  </div>' +
+        (ctaLabel ? '  <span class="btn btn--amber btn--sm" style="pointer-events:none;white-space:nowrap;">' + SP.esc(ctaLabel) + '</span>' : '') +
+        '</div>';
+    }
+
+    container.innerHTML =
+      '<div style="font-family:var(--font-body);">' +
+      '  <div style="border-bottom:1px solid #E2E8F0;padding-bottom:1.25rem;margin-bottom:1.25rem;">' +
+      (eyebrow ? '    <span style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#176BAE;display:block;margin-bottom:0.35rem;">' + SP.esc(eyebrow) + '</span>' : '') +
+      '    <h2 style="font-family:var(--font-serif);font-size:1.6rem;color:#061B2E;margin:0 0 0.5rem;line-height:1.2;">' + SP.esc(title) + '</h2>' +
+      (lead ? '    <p style="font-size:0.95rem;color:#475569;line-height:1.6;margin:0 0 0.5rem;">' + SP.esc(lead) + '</p>' : '') +
+      (note ? '    <div style="font-size:0.8rem;background:#FEF3C7;color:#92400E;padding:0.35rem 0.65rem;border-radius:4px;display:inline-block;">' + SP.esc(note) + '</div>' : '') +
+      '  </div>' +
+      '  <div>' +
+      '    <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#64748B;margin-bottom:0.75rem;">Page Sections &amp; Story Layout (' + secCards.length + ')</div>' +
+      sectionsHtml +
+      '  </div>' +
+      ctaHtml +
+      '</div>';
   }
 
   function openPageCmsModal(pageKey) {
@@ -1394,6 +1481,17 @@
     if (ctaLabel) ctaLabel.value = cta.label || "";
     if (ctaText) ctaText.value = cta.text || "";
     if (ctaHref) ctaHref.value = cta.href || "";
+
+    updatePageCmsLivePreview();
+
+    // Auto-update live preview on any input
+    ["cms-eyebrow", "cms-title", "cms-lead", "cms-note", "cms-cta-title", "cms-cta-label", "cms-cta-text", "cms-cta-href"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el && !el._boundPreview) {
+        el._boundPreview = true;
+        el.addEventListener("input", updatePageCmsLivePreview);
+      }
+    });
 
     openModal(modal);
   }
@@ -1553,6 +1651,27 @@
         renderCmsPages();
       });
     });
+
+    // Scroll to Live Preview button
+    var scrollPrevBtn = document.getElementById("cms-scroll-preview-btn");
+    if (scrollPrevBtn) {
+      scrollPrevBtn.addEventListener("click", function () {
+        updatePageCmsLivePreview();
+        var prevBox = document.getElementById("cms-preview-box");
+        if (prevBox) {
+          prevBox.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    }
+
+    // Refresh Live Preview button
+    var refreshPrevBtn = document.getElementById("cms-refresh-preview-btn");
+    if (refreshPrevBtn) {
+      refreshPrevBtn.addEventListener("click", function () {
+        updatePageCmsLivePreview();
+        toast("Page preview updated!");
+      });
+    }
 
     // Add Section button in modal
     var addSecBtn = document.getElementById("cms-add-section-btn");
