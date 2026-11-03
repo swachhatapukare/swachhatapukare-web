@@ -509,7 +509,24 @@
   }
 
   /* ------------------------------------------------------------------- init */
+  function initHomeHero() {
+    try {
+      var copy = (SP.config && SP.config.COPY && SP.config.COPY.home);
+      if (copy) {
+        var titleEl = document.getElementById("hero-title");
+        var leadEl = document.querySelector(".h-hero__lead");
+        if (titleEl && copy.title) {
+          titleEl.innerHTML = SP.esc(copy.title).replace(/\n/g, "<br>");
+        }
+        if (leadEl && copy.lead) {
+          leadEl.textContent = copy.lead;
+        }
+      }
+    } catch (e) { /* ignore */ }
+  }
+
   function init() {
+    initHomeHero();
     hydrateFallbacks();
     wireShopLinks();
     initHeroSlideshow();

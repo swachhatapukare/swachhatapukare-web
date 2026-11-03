@@ -58,6 +58,17 @@
     }).join("");
   }
 
+  function renderList(sections) {
+    var list = SP.qs("[data-copy-list]");
+    if (!list || !sections || !sections.length) return;
+    var items = sections[0].p || [];
+    if (items.length) {
+      list.innerHTML = items.map(function (item) {
+        return "<li>" + SP.esc(item) + "</li>";
+      }).join("");
+    }
+  }
+
   function renderCta(cta) {
     var holder = SP.qs("[data-cta-band]");
     if (!holder) return;
@@ -99,6 +110,7 @@
     setText('[data-copy="note"]', copy.placeholderNote);
 
     renderSections(copy.sections);
+    renderList(copy.sections);
     renderCta(copy.cta);
     renderProducts();
 

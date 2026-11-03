@@ -31,8 +31,9 @@
 <script defer src="assets/js/store.js"></script>
 <script defer src="assets/js/components.js"></script>
 <script defer src="assets/js/gallery.js"></script>
+<script defer src="assets/js/foundation.js"></script>
 </head>
-<body data-page="gallery">
+<body data-page="gallery" data-copy="gallery">
 <a class="skip-link" href="#main">Skip to content</a>
 <div id="sp-top"></div>
 
@@ -45,11 +46,11 @@
         <span aria-current="page">Gallery</span>
       </nav>
       <div class="page-hero__inner">
-        <p class="eyebrow">Photos</p>
-        <h1>Gallery</h1>
-        <p class="page-hero__lead">Placeholder tiles stand in for the Foundation's photographs.
+        <p class="eyebrow" data-copy="eyebrow">Photos</p>
+        <h1 data-copy="title">Gallery</h1>
+        <p class="page-hero__lead" data-copy="lead">Placeholder tiles stand in for the Foundation's photographs.
           Open any tile to view it larger.</p>
-        <p><span class="placeholder-note">Placeholder captions and images — see config.js (GALLERY).</span></p>
+        <p><span class="placeholder-note" data-copy="note">Placeholder captions and images — see config.js (GALLERY).</span></p>
       </div>
     </div>
   </section>

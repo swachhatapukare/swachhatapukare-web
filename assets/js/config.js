@@ -499,6 +499,150 @@ SP.config = {
         label: "Donate",
         href: "donate.html"
       }
+    },
+    home: {
+      eyebrow: "Restoring ecosystems. Empowering communities.",
+      title: "Restoring ecosystems.\nEmpowering communities.",
+      lead: "Dedicated to environmental restoration, river rejuvenation, and sustainable circular livelihoods—from cleaning riverbanks and converting invasive aquatic weeds into handcrafted utility, to clean solar power and decentralized sewage treatment across India.",
+      placeholderNote: "Leading environmental non-profit in Eastern India.",
+      sections: [
+        {
+          h: "Things We Do",
+          p: [
+            "Four interconnected pillars driving environmental restoration, clean energy, waste management, and community livelihoods across Eastern India."
+          ]
+        }
+      ],
+      cta: {
+        title: "Join Hands with SwachhataPukare",
+        text: "Partner with us for CSR initiatives, volunteer in our weekly cleanups, or support sustainable artisan crafts.",
+        label: "Get Involved",
+        href: "contact.html"
+      }
+    },
+
+    donate: {
+      eyebrow: "Support the work",
+      title: "Donate to SwachhataPukare",
+      lead: "Your contribution directly powers river cleaning drives, water hyacinth harvesting equipment, clean solar installations, and artisan training centers across Jharkhand.",
+      placeholderNote: "All donations are eligible for tax exemption under Section 80G of the Income Tax Act.",
+      sections: [
+        {
+          h: "Where your support goes",
+          p: [
+            "River cleaning drives — volunteer boots, heavy-duty gloves, waste collection sacks, and transport to recycling centers.",
+            "Water hyacinth upcycling — procurement of artisanal tools, looms, drying equipment, and fair-wage artisan compensation.",
+            "Decentralized wastewater treatment — biological microbial culture, aeration equipment, and testing kits.",
+            "Rural Smart Village Centres — artisan training facilities, community solar power units, and digital livelihood connectivity."
+          ]
+        },
+        {
+          h: "Tax exemption & compliance",
+          p: [
+            "SwachhataPukare Foundation is registered under Section 8 of the Companies Act, 2013 with 12A and 80G tax exemptions.",
+            "Official 80G donation receipts with 10BE certificates are issued automatically for all eligible contributions."
+          ]
+        }
+      ],
+      cta: {
+        title: "Need corporate CSR partnership?",
+        text: "Contact our directorate for formal CSR proposals, project monitoring metrics, and impact reports.",
+        label: "Contact CSR Team",
+        href: "contact.html?subject=Press%20%26%20partnerships"
+      }
+    },
+
+    contact: {
+      eyebrow: "Say hello",
+      title: "Contact SwachhataPukare Foundation",
+      lead: "Questions about our handcrafted store, corporate orders, CSR partnerships, volunteering drives, or ecological technology — send a note and our team will get back to you promptly.",
+      placeholderNote: "Official office hours: Monday – Saturday, 09:00 – 18:00 IST.",
+      sections: [
+        {
+          h: "Registered Headquarters",
+          p: [
+            "HIG-276, Ward No-15, Near Bank Of Baroda, Adityapur, Jamshedpur, Jharkhand 831013.",
+            "GSTIN: 20ABHCS8922N1ZZ · Section 8 Non-Profit Corporation."
+          ]
+        },
+        {
+          h: "Operating Hours & Response",
+          p: [
+            "Our operations office is open Monday through Saturday from 9:00 AM to 6:00 PM IST.",
+            "We typically respond to online enquiries and emails within 24 business hours."
+          ]
+        }
+      ],
+      cta: {
+        title: "Quick Corporate & Bulk Enquiries",
+        text: "Ordering customized water hyacinth conference kits or corporate gifting hampers? Use our dedicated bulk form.",
+        label: "Corporate Bulk Enquiry",
+        href: "bulk-enquiry.html"
+      }
+    },
+
+    policies: {
+      eyebrow: "Governance & Transparency",
+      title: "Terms, Payment & Policies",
+      lead: "SwachhataPukare Foundation operates with strict statutory compliance, transparent payment policies, and data privacy under the Digital Personal Data Protection Act.",
+      placeholderNote: "Standard non-profit terms and consumer policies.",
+      sections: [
+        {
+          h: "01 · Legal Terms & Conditions",
+          p: [
+            "SwachhataPukare Foundation is a registered Section 8 non-profit company (HIG-276, Ward No-15, Near Bank Of Baroda, Adityapur, Jamshedpur, Jharkhand 831013). By using our website, purchasing handcrafted products, or donating, you agree to these Terms.",
+            "All proceeds from product sales directly fund artisan wages, rural center upkeep, and river restoration drives."
+          ]
+        },
+        {
+          h: "02 · Payment & Security",
+          p: [
+            "Online store transactions and donations are securely processed via encrypted payment gateways supporting UPI, Net Banking, Debit/Credit Cards, and RuPay.",
+            "Cash on Delivery (COD) is available for eligible retail orders up to ₹5,000."
+          ]
+        },
+        {
+          h: "03 · Shipping & Fulfillment",
+          p: [
+            "Handcrafted items are prepared and dispatched within 2–4 business days via reliable surface and air couriers.",
+            "Standard delivery across India takes 5–8 working days. Tracking links are emailed and sent via SMS upon dispatch."
+          ]
+        },
+        {
+          h: "04 · Cancellations & Returns",
+          p: [
+            "Because each water hyacinth item is individually handcrafted by rural artisans, minor variations in weave and tone are natural marks of authenticity.",
+            "Damaged in transit? Report within 48 hours with unboxing photos for a full replacement or refund."
+          ]
+        }
+      ],
+      cta: {
+        title: "Have questions about our policies?",
+        text: "Reach out to our compliance and support desk for assistance.",
+        label: "Contact Support",
+        href: "contact.html"
+      }
+    },
+
+    gallery: {
+      eyebrow: "Field Photography",
+      title: "Photographs & Drives",
+      lead: "Visual documentation of our ongoing river restoration drives, water hyacinth harvesting, artisan weaving workshops, and community infrastructure installations.",
+      placeholderNote: "Click any image to view in full-screen detail.",
+      sections: [
+        {
+          h: "Living Archives",
+          p: [
+            "From the banks of the Subarnarekha and Kharkai to rural craft clusters in Jharkhand, every photograph represents a milestone in community-powered ecological action."
+          ]
+        }
+      ],
+      cta: {
+        title: "Have photos from a volunteer drive?",
+        text: "Share your high-resolution cleanup photos with our media team to be featured in the living archive.",
+        label: "Send Us Photos",
+        href: "contact.html?subject=Press%20%26%20partnerships"
+      }
     }
   },
 
@@ -550,3 +694,25 @@ SP.config.categoryTint = function (name) {
   var found = SP.config.CATEGORIES.filter(function (c) { return c.name === name; })[0];
   return found ? found.tint : "--c-cat-home";
 };
+
+/* Load custom copy overrides from localStorage (Admin CMS) */
+try {
+  var customCopy = JSON.parse(window.localStorage.getItem("sp_custom_copy") || "{}");
+  if (customCopy && typeof customCopy === "object") {
+    Object.keys(customCopy).forEach(function (key) {
+      if (SP.config.COPY[key]) {
+        SP.config.COPY[key] = Object.assign({}, SP.config.COPY[key], customCopy[key]);
+      } else {
+        SP.config.COPY[key] = customCopy[key];
+      }
+    });
+  }
+} catch (e) { /* ignore */ }
+
+/* Load custom foundation overrides from localStorage */
+try {
+  var customFoundation = JSON.parse(window.localStorage.getItem("sp_custom_foundation") || "{}");
+  if (customFoundation && typeof customFoundation === "object") {
+    Object.assign(SP.config.FOUNDATION, customFoundation);
+  }
+} catch (e) { /* ignore */ }

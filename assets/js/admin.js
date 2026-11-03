@@ -799,8 +799,38 @@
   }
 
   /* ========================================================== 4. CMS PANEL */
+  var CMS_PAGES = [
+    { key: "home", name: "Home", file: "index.html", category: "Core", desc: "Main landing page, hero mission statement, and pillar overview." },
+    { key: "about", name: "About Us", file: "about.html", category: "Core", desc: "Foundation background, vision, team, and story." },
+    { key: "water-hyacinth", name: "Water Hyacinth Craft", file: "water-hyacinth.html", category: "Initiative", desc: "Ecological upcycling, women artisan empowerment, and product craft." },
+    { key: "river-cleaning", name: "River Cleaning Drives", file: "river-cleaning.html", category: "Initiative", desc: "Weekly Subarnarekha & Kharkai cleanup campaigns and community drives." },
+    { key: "solar-power", name: "Solar Power Systems", file: "solar-power.html", category: "Initiative", desc: "Rooftop and micro-grid renewable solar energy installations." },
+    { key: "sewage-treatment", name: "Sewage Treatment (STP)", file: "sewage-treatment.html", category: "Initiative", desc: "Decentralized Johkasou STP wastewater recovery technology." },
+    { key: "rural-smart-village-centres", name: "Rural Smart Village Centres", file: "rural-smart-village-centres.html", category: "Initiative", desc: "Decentralized rural innovation, artisan workshops, and sustainable village hubs." },
+    { key: "tedxbistupur", name: "TEDxBistupur Platform", file: "tedxbistupur.html", category: "Community", desc: "Ideas worth spreading, conference speaker platform, and changemaker summit." },
+    { key: "donate", name: "Donate & Support", file: "donate.html", category: "Community", desc: "80G tax-exempt charitable donations, funding allocations, and CSR support." },
+    { key: "contact", name: "Contact & Headquarters", file: "contact.html", category: "Legal", desc: "Corporate inquiries, office address, map location, and contact routing." },
+    { key: "policies", name: "Policies & Terms", file: "policies.html", category: "Legal", desc: "Statutory compliance, terms of service, payment, and refund policies." },
+    { key: "gallery", name: "Living Gallery & Field Archive", file: "gallery.html", category: "Community", desc: "Living archive of cleanup drives, artisan workshops, and field photography." }
+  ];
+
+  var cmsFilter = "all";
+  var BASELINE_COPY = null;
+
+  function getBaselineCopy() {
+    if (!BASELINE_COPY && window.SP && window.SP.config && window.SP.config.COPY) {
+      BASELINE_COPY = JSON.parse(JSON.stringify(window.SP.config.COPY));
+    }
+    return BASELINE_COPY || {};
+  }
+
   function renderCms() {
-    // 1. Blog posts table
+    getBaselineCopy();
+
+    // 1. Render Website Pages CMS table
+    renderCmsPages();
+
+    // 2. Blog posts table
     var posts = (SP.blog && SP.blog.getAllPosts()) || [];
     var tbody = document.getElementById("cms-posts-table-body");
     if (tbody) {
@@ -848,7 +878,7 @@
       });
     }
 
-    // 2. Load custom impact metrics if stored
+    // 3. Load custom impact metrics if stored
     try {
       var savedImpact = JSON.parse(window.localStorage.getItem("sp_custom_impact") || "null");
       if (savedImpact) {
@@ -858,9 +888,344 @@
         if (savedImpact.solar) document.getElementById("impact-solar").value = savedImpact.solar;
       }
     } catch (e) { /* ignore */ }
+
+    // 4. Load Headquarters & Foundation info
+    var f = (SP.config && SP.config.FOUNDATION) || {};
+    var elName = document.getElementById("fdn-name");
+    if (elName && f.name) elName.value = f.name;
+    var elAddr1 = document.getElementById("fdn-addr1");
+    if (elAddr1 && f.addressLines && f.addressLines[0]) elAddr1.value = f.addressLines[0];
+    var elAddr2 = document.getElementById("fdn-addr2");
+    if (elAddr2 && f.addressLines && f.addressLines[1]) elAddr2.value = f.addressLines[1];
+    var elGst = document.getElementById("fdn-gst");
+    if (elGst && f.gst) elGst.value = f.gst;
+    var elPhone = document.getElementById("fdn-phone");
+    if (elPhone && f.phone) elPhone.value = f.phone;
+    var elWa = document.getElementById("fdn-whatsapp");
+    if (elWa && f.whatsapp) elWa.value = f.whatsapp;
+    var elEmail = document.getElementById("fdn-email");
+    if (elEmail && f.email) elEmail.value = f.email;
+    var elHours = document.getElementById("fdn-hours");
+    if (elHours && f.hours) elHours.value = f.hours;
+  }
+
+  function renderCmsPages() {
+    var tbody = document.getElementById("cms-pages-table-body");
+    if (!tbody) return;
+
+    var customCopy = {};
+    try {
+      customCopy = JSON.parse(window.localStorage.getItem("sp_custom_copy") || "{}");
+    } catch (e) { /* ignore */ }
+
+    var list = CMS_PAGES.filter(function (p) {
+      if (cmsFilter === "all") return true;
+      return p.category === cmsFilter;
+    });
+
+    tbody.innerHTML = list.map(function (p) {
+      var copy = (SP.config && SP.config.COPY && SP.config.COPY[p.key]) || {};
+      var isCustom = !!customCopy[p.key];
+      var secCount = (copy.sections && copy.sections.length) || 0;
+      var headline = (copy.title || "—").replace(/\n/g, " ");
+
+      var statusBadge = isCustom
+        ? '<span class="admin-badge admin-badge--success" style="background:rgba(16,185,129,0.12);color:#059669;border:1px solid rgba(16,185,129,0.25);">Customized</span>'
+        : '<span class="admin-badge admin-badge--neutral">Default</span>';
+
+      return (
+        '<tr>' +
+        '<td>' +
+        '  <div style="font-weight:600;color:var(--adm-text);">' + SP.esc(p.name) + '</div>' +
+        '  <div class="text-xs text-muted font-mono" style="margin-top:2px;">' + SP.esc(p.file) + '</div>' +
+        '</td>' +
+        '<td><span class="admin-badge admin-badge--info">' + SP.esc(p.category) + '</span></td>' +
+        '<td>' +
+        '  <div class="text-sm font-medium" style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="' + SP.esc(headline) + '">' +
+        SP.esc(headline) +
+        '  </div>' +
+        '</td>' +
+        '<td><span class="admin-badge admin-badge--neutral">' + secCount + ' section' + (secCount === 1 ? '' : 's') + '</span></td>' +
+        '<td>' + statusBadge + '</td>' +
+        '<td class="td-actions">' +
+        '  <div class="adm-table-actions">' +
+        '    <button class="btn btn--outline btn--xs" data-edit-page-cms="' + SP.esc(p.key) + '" style="display:inline-flex;align-items:center;gap:4px;">' +
+        '      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>' +
+        '      <span>Edit</span>' +
+        '    </button>' +
+        '    <a class="btn btn--outline btn--xs" href="' + SP.esc(p.file) + '" target="_blank" title="View live page in new tab" style="display:inline-flex;align-items:center;gap:4px;">' +
+        '      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>' +
+        '      <span>Live</span>' +
+        '    </a>' +
+        '  </div>' +
+        '</td>' +
+        '</tr>'
+      );
+    }).join("");
+
+    tbody.querySelectorAll("[data-edit-page-cms]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var key = btn.getAttribute("data-edit-page-cms");
+        openPageCmsModal(key);
+      });
+    });
+  }
+
+  function addCmsSectionCard(heading, paragraphs) {
+    var container = document.getElementById("cms-sections-container");
+    if (!container) return;
+
+    var card = document.createElement("div");
+    card.className = "cms-section-card";
+    card.innerHTML =
+      '<div class="cms-section-card__head">' +
+      '  <strong class="text-xs cms-sec-number" style="text-transform:uppercase;letter-spacing:0.04em;">Section</strong>' +
+      '  <button type="button" class="btn btn--outline btn--xs cms-remove-sec-btn" style="color:var(--adm-danger);border-color:rgba(239,68,68,0.25);padding:2px 8px;font-size:11px;">Remove</button>' +
+      '</div>' +
+      '<div class="adm-form-grid">' +
+      '  <div class="adm-form-group adm-form-group--full">' +
+      '    <label class="adm-label">Section Heading</label>' +
+      '    <input type="text" class="adm-input cms-sec-h" placeholder="e.g. 01 · Background & Purpose">' +
+      '  </div>' +
+      '  <div class="adm-form-group adm-form-group--full">' +
+      '    <label class="adm-label">Section Paragraphs <span class="text-xs text-muted" style="font-weight:normal;">(Separate multiple paragraphs with blank lines)</span></label>' +
+      '    <textarea class="adm-textarea cms-sec-p" rows="3" placeholder="Enter paragraph copy here..."></textarea>' +
+      '  </div>' +
+      '</div>';
+
+    card.querySelector(".cms-sec-h").value = heading || "";
+    card.querySelector(".cms-sec-p").value = paragraphs || "";
+
+    card.querySelector(".cms-remove-sec-btn").addEventListener("click", function () {
+      card.remove();
+      refreshCmsSectionNumbers();
+    });
+
+    container.appendChild(card);
+    refreshCmsSectionNumbers();
+  }
+
+  function refreshCmsSectionNumbers() {
+    var cards = document.querySelectorAll("#cms-sections-container .cms-section-card");
+    cards.forEach(function (c, idx) {
+      var numEl = c.querySelector(".cms-sec-number");
+      if (numEl) numEl.textContent = "Section " + (idx + 1);
+    });
+  }
+
+  function openPageCmsModal(pageKey) {
+    var modal = document.getElementById("page-cms-modal");
+    if (!modal) return;
+
+    var page = CMS_PAGES.find(function (p) { return p.key === pageKey; });
+    if (!page) return;
+
+    var titleEl = document.getElementById("page-cms-title");
+    var subtitleEl = document.getElementById("page-cms-subtitle");
+    var keyInput = document.getElementById("cms-page-key");
+    var eyebrowInput = document.getElementById("cms-eyebrow");
+    var headlineInput = document.getElementById("cms-title");
+    var leadInput = document.getElementById("cms-lead");
+    var noteInput = document.getElementById("cms-note");
+
+    if (titleEl) titleEl.textContent = "Edit " + page.name + " Content";
+    if (subtitleEl) subtitleEl.textContent = "Target file: " + page.file + " · Category: " + page.category + " · " + page.desc;
+    if (keyInput) keyInput.value = pageKey;
+
+    var copy = (SP.config && SP.config.COPY && SP.config.COPY[pageKey]) || {};
+
+    if (eyebrowInput) eyebrowInput.value = copy.eyebrow || "";
+    if (headlineInput) headlineInput.value = copy.title || "";
+    if (leadInput) leadInput.value = copy.lead || "";
+    if (noteInput) noteInput.value = copy.placeholderNote || "";
+
+    // Clear and build section cards
+    var secContainer = document.getElementById("cms-sections-container");
+    if (secContainer) {
+      secContainer.innerHTML = "";
+      if (copy.sections && copy.sections.length) {
+        copy.sections.forEach(function (sec) {
+          var pText = Array.isArray(sec.p) ? sec.p.join("\n\n") : (sec.p || "");
+          addCmsSectionCard(sec.h, pText);
+        });
+      } else {
+        addCmsSectionCard("", "");
+      }
+    }
+
+    // CTA fields
+    var cta = copy.cta || {};
+    var ctaTitle = document.getElementById("cms-cta-title");
+    var ctaLabel = document.getElementById("cms-cta-label");
+    var ctaText = document.getElementById("cms-cta-text");
+    var ctaHref = document.getElementById("cms-cta-href");
+
+    if (ctaTitle) ctaTitle.value = cta.title || "";
+    if (ctaLabel) ctaLabel.value = cta.label || "";
+    if (ctaText) ctaText.value = cta.text || "";
+    if (ctaHref) ctaHref.value = cta.href || "";
+
+    openModal(modal);
   }
 
   function bindCmsActions() {
+    // CMS Sub-navigation Tabs switching
+    document.querySelectorAll("[data-cms-tab]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var targetTab = btn.getAttribute("data-cms-tab");
+        document.querySelectorAll("[data-cms-tab]").forEach(function (b) {
+          b.classList.toggle("is-active", b === btn);
+        });
+        document.querySelectorAll(".cms-tab-pane").forEach(function (pane) {
+          var match = pane.id === "cms-pane-" + targetTab;
+          pane.classList.toggle("is-active", match);
+          pane.style.display = match ? "block" : "none";
+        });
+      });
+    });
+
+    // CMS Category Filter Pills
+    document.querySelectorAll("[data-cms-filter]").forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        document.querySelectorAll("[data-cms-filter]").forEach(function (p) {
+          p.classList.remove("is-active");
+        });
+        pill.classList.add("is-active");
+        cmsFilter = pill.getAttribute("data-cms-filter");
+        renderCmsPages();
+      });
+    });
+
+    // Add Section button in modal
+    var addSecBtn = document.getElementById("cms-add-section-btn");
+    if (addSecBtn) {
+      addSecBtn.addEventListener("click", function () {
+        addCmsSectionCard("", "");
+      });
+    }
+
+    // Page CMS Form Submit (Save & Publish)
+    var pageCmsForm = document.getElementById("page-cms-form");
+    if (pageCmsForm) {
+      pageCmsForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var pageKey = document.getElementById("cms-page-key").value;
+        var page = CMS_PAGES.find(function (p) { return p.key === pageKey; });
+        if (!page) return;
+
+        var eyebrow = document.getElementById("cms-eyebrow").value.trim();
+        var title = document.getElementById("cms-title").value.trim();
+        var lead = document.getElementById("cms-lead").value.trim();
+        var note = document.getElementById("cms-note").value.trim();
+
+        var sections = [];
+        var secCards = document.querySelectorAll("#cms-sections-container .cms-section-card");
+        secCards.forEach(function (card) {
+          var h = (card.querySelector(".cms-sec-h").value || "").trim();
+          var pRaw = (card.querySelector(".cms-sec-p").value || "").trim();
+          var pArr = pRaw.split("\n\n").map(function (s) { return s.trim(); }).filter(Boolean);
+          if (h || pArr.length) {
+            sections.push({ h: h, p: pArr });
+          }
+        });
+
+        var ctaTitle = document.getElementById("cms-cta-title").value.trim();
+        var ctaLabel = document.getElementById("cms-cta-label").value.trim();
+        var ctaText = document.getElementById("cms-cta-text").value.trim();
+        var ctaHref = document.getElementById("cms-cta-href").value.trim();
+
+        var updatedCopy = {
+          eyebrow: eyebrow,
+          title: title,
+          lead: lead,
+          placeholderNote: note,
+          sections: sections,
+          cta: {
+            title: ctaTitle,
+            label: ctaLabel,
+            text: ctaText,
+            href: ctaHref
+          }
+        };
+
+        if (!SP.config.COPY) SP.config.COPY = {};
+        SP.config.COPY[pageKey] = Object.assign({}, SP.config.COPY[pageKey] || {}, updatedCopy);
+
+        try {
+          var customCopy = JSON.parse(window.localStorage.getItem("sp_custom_copy") || "{}");
+          customCopy[pageKey] = updatedCopy;
+          window.localStorage.setItem("sp_custom_copy", JSON.stringify(customCopy));
+        } catch (err) {
+          console.error("Failed to save custom copy to localStorage", err);
+        }
+
+        closeAllModals();
+        toast("Content saved & published for " + page.name + "!");
+        renderCmsPages();
+      });
+    }
+
+    // Page CMS Reset to Default button
+    var cmsResetBtn = document.getElementById("cms-reset-btn");
+    if (cmsResetBtn) {
+      cmsResetBtn.addEventListener("click", function () {
+        var pageKey = document.getElementById("cms-page-key").value;
+        var page = CMS_PAGES.find(function (p) { return p.key === pageKey; });
+        if (!page) return;
+
+        if (!confirm("Reset '" + page.name + "' to factory default content? This will discard your custom changes.")) return;
+
+        try {
+          var customCopy = JSON.parse(window.localStorage.getItem("sp_custom_copy") || "{}");
+          delete customCopy[pageKey];
+          window.localStorage.setItem("sp_custom_copy", JSON.stringify(customCopy));
+        } catch (err) { /* ignore */ }
+
+        var baseline = getBaselineCopy();
+        if (baseline && baseline[pageKey]) {
+          SP.config.COPY[pageKey] = JSON.parse(JSON.stringify(baseline[pageKey]));
+        }
+
+        closeAllModals();
+        toast("'" + page.name + "' content restored to defaults.");
+        renderCmsPages();
+      });
+    }
+
+    // Foundation Info Form Submit
+    var fdnForm = document.getElementById("foundation-info-form");
+    if (fdnForm) {
+      fdnForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var name = document.getElementById("fdn-name").value.trim();
+        var addr1 = document.getElementById("fdn-addr1").value.trim();
+        var addr2 = document.getElementById("fdn-addr2").value.trim();
+        var gst = document.getElementById("fdn-gst").value.trim();
+        var phone = document.getElementById("fdn-phone").value.trim();
+        var whatsapp = document.getElementById("fdn-whatsapp").value.trim().replace(/\D/g, "");
+        var email = document.getElementById("fdn-email").value.trim();
+        var hours = document.getElementById("fdn-hours").value.trim();
+
+        var fdnObj = {
+          name: name,
+          addressLines: [addr1, addr2],
+          addressOneLine: addr1 + ", " + addr2,
+          gst: gst,
+          phone: phone,
+          phoneTel: phone.replace(/\s+/g, ""),
+          whatsapp: whatsapp,
+          email: email,
+          hours: hours
+        };
+
+        if (!SP.config.FOUNDATION) SP.config.FOUNDATION = {};
+        Object.assign(SP.config.FOUNDATION, fdnObj);
+        window.localStorage.setItem("sp_custom_foundation", JSON.stringify(fdnObj));
+        toast("Headquarters & statutory details updated successfully.");
+      });
+    }
+
+    // New Article button
     var newPostBtn = document.getElementById("new-post-btn");
     if (newPostBtn) {
       newPostBtn.addEventListener("click", function () {
@@ -1066,6 +1431,8 @@
           custom_products: JSON.parse(window.localStorage.getItem("sp_custom_products") || "[]"),
           custom_impact: JSON.parse(window.localStorage.getItem("sp_custom_impact") || "{}"),
           blog_posts: JSON.parse(window.localStorage.getItem("sp_blog_posts") || "[]"),
+          custom_copy: JSON.parse(window.localStorage.getItem("sp_custom_copy") || "{}"),
+          custom_foundation: JSON.parse(window.localStorage.getItem("sp_custom_foundation") || "{}"),
           enquiries: SP.store ? SP.store.getEnquiries() : [],
           bulk_enquiries: SP.store ? SP.store.getBulkEnquiries() : []
         };

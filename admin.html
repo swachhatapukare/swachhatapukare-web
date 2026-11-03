@@ -322,67 +322,185 @@
 
       <!-- ================================================== TAB 4: CMS -->
       <section class="admin-panel" id="panel-cms">
-        <!-- Blog Stories Manager -->
-        <div class="admin-card">
-          <div class="admin-card__header">
-            <div>
-              <h2 class="admin-card__title">Field Stories &amp; Blog Posts</h2>
-              <p class="text-xs text-muted" style="margin:2px 0 0;">Publish and edit articles displayed on <code>blog.html</code>.</p>
+        
+        <!-- CMS Sub-navigation Tabs -->
+        <div class="admin-subnav-bar">
+          <button type="button" class="admin-subnav-btn is-active" data-cms-tab="pages">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <span>Website Pages (12)</span>
+          </button>
+          <button type="button" class="admin-subnav-btn" data-cms-tab="blog">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            <span>Field Stories Blog</span>
+          </button>
+          <button type="button" class="admin-subnav-btn" data-cms-tab="home">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            <span>Homepage Metrics</span>
+          </button>
+          <button type="button" class="admin-subnav-btn" data-cms-tab="foundation">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>Headquarters &amp; Contact</span>
+          </button>
+        </div>
+
+        <!-- 1. Master Pages CMS View -->
+        <div class="cms-tab-pane is-active" id="cms-pane-pages">
+          <div class="admin-card">
+            <div class="admin-card__header">
+              <div>
+                <h2 class="admin-card__title">Website Pages &amp; Editorial Content</h2>
+                <p class="text-xs text-muted" style="margin:2px 0 0;">Manage titles, hero descriptions, story blocks, and CTA bands across all website pages.</p>
+              </div>
             </div>
-            <button class="btn btn--primary btn--sm" onclick="document.getElementById('new-post-btn').click()">+ Compose Article</button>
-          </div>
-          <div class="admin-card__body admin-card__body--flush">
-            <div class="admin-table-wrap">
-              <table class="admin-table">
-                <thead>
-                  <tr>
-                    <th>Title</th>
-                    <th>Category</th>
-                    <th>Author</th>
-                    <th>Date</th>
-                    <th class="th-actions">Actions</th>
-                  </tr>
-                </thead>
-                <tbody id="cms-posts-table-body"></tbody>
-              </table>
+            <div class="admin-card__body">
+              <div class="admin-filter-bar">
+                <div class="admin-filter-tabs">
+                  <button class="admin-pill is-active" data-cms-filter="all">All Pages (12)</button>
+                  <button class="admin-pill" data-cms-filter="Core">Core Pages</button>
+                  <button class="admin-pill" data-cms-filter="Initiative">Initiatives</button>
+                  <button class="admin-pill" data-cms-filter="Community">Community</button>
+                  <button class="admin-pill" data-cms-filter="Legal">Legal &amp; Connect</button>
+                </div>
+              </div>
+
+              <div class="admin-table-wrap">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Page Name &amp; File</th>
+                      <th>Category</th>
+                      <th>Live Headline</th>
+                      <th>Story Sections</th>
+                      <th>Status</th>
+                      <th class="th-actions">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="cms-pages-table-body"></tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Impact Metrics Live Editor -->
-        <div class="admin-card">
-          <div class="admin-card__header">
-            <div>
-              <h2 class="admin-card__title">Homepage Impact Counters ("Work you can count")</h2>
-              <p class="text-xs text-muted" style="margin:2px 0 0;">Changes made here instantly update the 4 homepage metrics.</p>
+        <!-- 2. Blog Posts Manager View -->
+        <div class="cms-tab-pane" id="cms-pane-blog" style="display: none;">
+          <div class="admin-card">
+            <div class="admin-card__header">
+              <div>
+                <h2 class="admin-card__title">Field Stories &amp; Blog Posts</h2>
+                <p class="text-xs text-muted" style="margin:2px 0 0;">Publish and edit articles displayed on <code>blog.html</code>.</p>
+              </div>
+              <button class="btn btn--primary btn--sm" onclick="document.getElementById('new-post-btn').click()">+ Compose Article</button>
+            </div>
+            <div class="admin-card__body admin-card__body--flush">
+              <div class="admin-table-wrap">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Category</th>
+                      <th>Author</th>
+                      <th>Date</th>
+                      <th class="th-actions">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="cms-posts-table-body"></tbody>
+                </table>
+              </div>
             </div>
           </div>
-          <div class="admin-card__body">
-            <form id="impact-metrics-form">
-              <div class="adm-form-grid">
-                <div class="adm-form-group">
-                  <label class="adm-label" for="impact-drives">River Cleaning Drives</label>
-                  <input type="number" class="adm-input" id="impact-drives" value="500" required>
-                </div>
-                <div class="adm-form-group">
-                  <label class="adm-label" for="impact-csr">CSR Projects</label>
-                  <input type="number" class="adm-input" id="impact-csr" value="10" required>
-                </div>
-                <div class="adm-form-group">
-                  <label class="adm-label" for="impact-tedx">TEDx Speakers</label>
-                  <input type="number" class="adm-input" id="impact-tedx" value="68" required>
-                </div>
-                <div class="adm-form-group">
-                  <label class="adm-label" for="impact-solar">Solar Capacity (kW)</label>
-                  <input type="number" class="adm-input" id="impact-solar" value="5000" required>
-                </div>
+        </div>
+
+        <!-- 3. Homepage Impact Metrics View -->
+        <div class="cms-tab-pane" id="cms-pane-impact" style="display: none;">
+          <div class="admin-card">
+            <div class="admin-card__header">
+              <div>
+                <h2 class="admin-card__title">Homepage Impact Counters ("Work you can count")</h2>
+                <p class="text-xs text-muted" style="margin:2px 0 0;">Changes made here instantly update the 4 homepage metrics on <code>index.html</code>.</p>
               </div>
-              <div style="margin-top: 1.25rem; display: flex; justify-content: flex-end;">
-                <button type="submit" class="btn btn--primary btn--sm">Save Impact Metrics</button>
-              </div>
-            </form>
+            </div>
+            <div class="admin-card__body">
+              <form id="impact-metrics-form">
+                <div class="adm-form-grid">
+                  <div class="adm-form-group">
+                    <label class="adm-label" for="impact-drives">River Cleaning Drives</label>
+                    <input type="number" class="adm-input" id="impact-drives" value="500" required>
+                  </div>
+                  <div class="adm-form-group">
+                    <label class="adm-label" for="impact-csr">CSR Projects</label>
+                    <input type="number" class="adm-input" id="impact-csr" value="10" required>
+                  </div>
+                  <div class="adm-form-group">
+                    <label class="adm-label" for="impact-tedx">TEDx Speakers</label>
+                    <input type="number" class="adm-input" id="impact-tedx" value="68" required>
+                  </div>
+                  <div class="adm-form-group">
+                    <label class="adm-label" for="impact-solar">Solar Capacity (kW)</label>
+                    <input type="number" class="adm-input" id="impact-solar" value="5000" required>
+                  </div>
+                </div>
+                <div style="margin-top: 1.25rem; display: flex; justify-content: flex-end;">
+                  <button type="submit" class="btn btn--primary btn--sm">Save Impact Metrics</button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
+
+        <!-- 4. Headquarters & Contact Info View -->
+        <div class="cms-tab-pane" id="cms-pane-foundation" style="display: none;">
+          <div class="admin-card">
+            <div class="admin-card__header">
+              <div>
+                <h2 class="admin-card__title">Headquarters, Contact &amp; Statutory Details</h2>
+                <p class="text-xs text-muted" style="margin:2px 0 0;">Changes update the website footer, contact page, WhatsApp link, and invoice letterheads across the site.</p>
+              </div>
+            </div>
+            <div class="admin-card__body">
+              <form id="foundation-info-form">
+                <div class="adm-form-grid">
+                  <div class="adm-form-group adm-form-group--full">
+                    <label class="adm-label" for="fdn-name">Organization Name</label>
+                    <input type="text" class="adm-input" id="fdn-name" value="SwachhataPukare Foundation" required>
+                  </div>
+                  <div class="adm-form-group adm-form-group--full">
+                    <label class="adm-label" for="fdn-addr1">Address Line 1</label>
+                    <input type="text" class="adm-input" id="fdn-addr1" value="HIG-276, Ward No-15, Near Bank Of Baroda" required>
+                  </div>
+                  <div class="adm-form-group adm-form-group--full">
+                    <label class="adm-label" for="fdn-addr2">Address Line 2 (City, State, PIN)</label>
+                    <input type="text" class="adm-input" id="fdn-addr2" value="Adityapur, Jamshedpur, Jharkhand 831013" required>
+                  </div>
+                  <div class="adm-form-group">
+                    <label class="adm-label" for="fdn-gst">GSTIN / Registration Number</label>
+                    <input type="text" class="adm-input" id="fdn-gst" value="20ABHCS8922N1ZZ" required>
+                  </div>
+                  <div class="adm-form-group">
+                    <label class="adm-label" for="fdn-phone">Display Phone Number</label>
+                    <input type="text" class="adm-input" id="fdn-phone" value="+91 00000 00000" required>
+                  </div>
+                  <div class="adm-form-group">
+                    <label class="adm-label" for="fdn-whatsapp">WhatsApp Number (digits only, e.g. 919876543210)</label>
+                    <input type="text" class="adm-input" id="fdn-whatsapp" value="910000000000" required>
+                  </div>
+                  <div class="adm-form-group">
+                    <label class="adm-label" for="fdn-email">Official Email</label>
+                    <input type="email" class="adm-input" id="fdn-email" value="hello@swachhatapukare.com" required>
+                  </div>
+                  <div class="adm-form-group adm-form-group--full">
+                    <label class="adm-label" for="fdn-hours">Operating Working Hours</label>
+                    <input type="text" class="adm-input" id="fdn-hours" value="Monday – Saturday, 09:00 – 18:00 IST" required>
+                  </div>
+                </div>
+                <div style="margin-top: 1.25rem; display: flex; justify-content: flex-end;">
+                  <button type="submit" class="btn btn--primary btn--sm">Save Headquarters Info</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
       </section>
 
       <!-- ============================================ TAB 5: ENQUIRIES -->
@@ -645,6 +763,88 @@
       <div class="admin-modal__foot">
         <button type="button" class="btn btn--outline btn--sm" data-close-modal>Cancel</button>
         <button type="submit" class="btn btn--primary btn--sm">Publish Article</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============================================== PAGE CMS CONTENT MODAL -->
+<div class="admin-modal-backdrop" id="page-cms-modal" hidden style="display: none;">
+  <div class="admin-modal admin-modal--lg">
+    <div class="admin-modal__head">
+      <div>
+        <h3 class="admin-modal__title" id="page-cms-title">Edit Page Content</h3>
+        <p class="text-xs text-muted" id="page-cms-subtitle" style="margin: 2px 0 0;"></p>
+      </div>
+      <button class="btn btn--outline btn--xs" data-close-modal>&times;</button>
+    </div>
+    <form id="page-cms-form">
+      <input type="hidden" id="cms-page-key">
+      <div class="admin-modal__body" style="display: flex; flex-direction: column; gap: 1.5rem;">
+        
+        <!-- Section A: Hero & Header Info -->
+        <div class="cms-group-box">
+          <div class="cms-group-box__title">1. Page Header &amp; Metadata</div>
+          <div class="adm-form-grid">
+            <div class="adm-form-group">
+              <label class="adm-label" for="cms-eyebrow">Eyebrow / Category Tag</label>
+              <input type="text" class="adm-input" id="cms-eyebrow" placeholder="e.g. What we do · Water">
+            </div>
+            <div class="adm-form-group">
+              <label class="adm-label" for="cms-title">Page Main Title / Headline</label>
+              <input type="text" class="adm-input" id="cms-title" required placeholder="e.g. Water Hyacinth Craft">
+            </div>
+            <div class="adm-form-group adm-form-group--full">
+              <label class="adm-label" for="cms-lead">Lead Synopsis / Introduction</label>
+              <textarea class="adm-textarea" id="cms-lead" rows="3" required placeholder="Brief introductory synopsis..."></textarea>
+            </div>
+            <div class="adm-form-group adm-form-group--full">
+              <label class="adm-label" for="cms-note">Notice / Meta Note (Optional)</label>
+              <input type="text" class="adm-input" id="cms-note" placeholder="e.g. 80G tax exemption note, official portal link, or sub-tagline">
+            </div>
+          </div>
+        </div>
+
+        <!-- Section B: Content Sections / Story Blocks -->
+        <div class="cms-group-box">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+            <div class="cms-group-box__title" style="margin: 0;">2. Story Sections &amp; Paragraphs</div>
+            <button type="button" class="btn btn--outline btn--xs" id="cms-add-section-btn">+ Add Another Section</button>
+          </div>
+          <p class="text-xs text-muted" style="margin: -0.25rem 0 0.85rem;">Each section contains a heading and paragraphs (separate paragraphs with blank lines).</p>
+          <div id="cms-sections-container" style="display: flex; flex-direction: column; gap: 1rem;"></div>
+        </div>
+
+        <!-- Section C: Bottom CTA Band -->
+        <div class="cms-group-box" id="cms-cta-box">
+          <div class="cms-group-box__title">3. Bottom Call to Action (CTA Band)</div>
+          <div class="adm-form-grid">
+            <div class="adm-form-group">
+              <label class="adm-label" for="cms-cta-title">CTA Headline</label>
+              <input type="text" class="adm-input" id="cms-cta-title" placeholder="e.g. Join the next river cleaning drive">
+            </div>
+            <div class="adm-form-group">
+              <label class="adm-label" for="cms-cta-label">CTA Button Label</label>
+              <input type="text" class="adm-input" id="cms-cta-label" placeholder="e.g. Volunteer now">
+            </div>
+            <div class="adm-form-group adm-form-group--full">
+              <label class="adm-label" for="cms-cta-text">CTA Description</label>
+              <input type="text" class="adm-input" id="cms-cta-text" placeholder="e.g. Make an immediate, visible difference along our rivers.">
+            </div>
+            <div class="adm-form-group adm-form-group--full">
+              <label class="adm-label" for="cms-cta-href">CTA Target Link / URL</label>
+              <input type="text" class="adm-input" id="cms-cta-href" placeholder="e.g. contact.html?subject=Volunteering or https://...">
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="admin-modal__foot" style="display: flex; justify-content: space-between; align-items: center;">
+        <button type="button" class="btn btn--outline btn--sm" id="cms-reset-btn" style="color: var(--adm-danger); border-color: rgba(239, 68, 68, 0.3);">Reset to Default</button>
+        <div style="display: flex; gap: 0.75rem;">
+          <button type="button" class="btn btn--outline btn--sm" data-close-modal>Cancel</button>
+          <button type="submit" class="btn btn--primary btn--sm">Save &amp; Publish Page</button>
+        </div>
       </div>
     </form>
   </div>
