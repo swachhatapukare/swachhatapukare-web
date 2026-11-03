@@ -928,25 +928,57 @@ html.no-scroll { overflow: hidden; }
 }
 
 /* ============================================================ TEDxBistupur styling */
+body[data-page="tedxbistupur"] .page-hero .breadcrumb {
+  margin-bottom: var(--s-3);
+}
+
 .tedx-hero-brand {
-  margin-bottom: var(--s-4);
+  margin: 0.15rem 0 0.35rem 0;
+  display: block;
 }
 
 .tedx-hero-brand picture {
   display: inline-block;
+  line-height: 0;
 }
 
-.tedx-hero-brand img {
-  max-width: 330px;
+.tedx-hero-brand a {
+  display: inline-block;
+  line-height: 0;
+  text-decoration: none;
+}
+
+.tedx-hero-brand img,
+.tedx-hero-logo {
+  max-width: clamp(260px, 44vw, 360px);
   width: 100%;
   height: auto;
   display: block;
-  filter: drop-shadow(0 2px 6px rgba(6, 27, 46, 0.05));
   transition: transform var(--d-sm) var(--e-out);
 }
 
-.tedx-hero-brand a:hover img {
+.tedx-hero-brand a:hover img,
+.tedx-hero-brand a:hover .tedx-hero-logo {
   transform: translateY(-2px);
+}
+
+.tedx-hero-btn-row {
+  margin-top: var(--s-3);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  align-items: center;
+}
+
+.tedx-hero-btn-row .btn {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 540px) {
+  .tedx-hero-btn-row .btn {
+    width: 100%;
+    flex: 1 1 100%;
+  }
 }
 
 .tedx-highlight-block {
