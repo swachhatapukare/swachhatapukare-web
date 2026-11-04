@@ -1027,6 +1027,149 @@ body[data-page="tedxbistupur"] .cta-band .btn--amber:hover {
   box-shadow: 0 6px 18px rgba(235, 0, 40, 0.45);
 }
 
+
+/* ============================================================ We've Been Covered Press Section */
+.tedx-covered-section {
+  padding-top: var(--s-5);
+  padding-bottom: var(--s-2);
+}
+
+.tedx-covered-card {
+  background: linear-gradient(135deg, #061B2E 0%, #0D263B 100%);
+  border-radius: var(--r-xl);
+  padding: clamp(1.75rem, 4vw, 2.75rem) clamp(1.25rem, 3.5vw, 2.5rem);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(6, 27, 46, 0.14);
+  border-top: 3px solid #EB0028;
+}
+
+.tedx-covered-card::before {
+  content: "";
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(235, 0, 40, 0.18), transparent 70%);
+  pointer-events: none;
+}
+
+.tedx-covered-card::after {
+  content: "";
+  position: absolute;
+  bottom: -60px;
+  left: -60px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(46, 111, 86, 0.2), transparent 70%);
+  pointer-events: none;
+}
+
+.tedx-covered-head {
+  position: relative;
+  z-index: 1;
+  margin-bottom: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+.tedx-covered-eyebrow {
+  color: #EB0028 !important;
+  text-transform: uppercase;
+  font-size: var(--t-xs);
+  letter-spacing: 0.12em;
+  font-weight: var(--fw-bold);
+  display: inline-block;
+  margin-bottom: 0.35rem;
+}
+
+.tedx-covered-title {
+  color: #FFFFFF;
+  font-family: var(--f-display);
+  font-size: clamp(1.6rem, 3.2vw, 2.35rem);
+  letter-spacing: -0.01em;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.tedx-covered-pill {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  border-radius: 9999px;
+  padding: clamp(0.85rem, 1.8vw, 1.25rem) clamp(1.5rem, 4vw, 3rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: clamp(1rem, 3vw, 2.75rem);
+  max-width: 920px;
+  margin: 0 auto;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+}
+
+.tedx-covered-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 0 0.5rem;
+}
+
+.tedx-covered-logo {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  transition: transform var(--d-sm) var(--e-out);
+}
+
+.tedx-covered-item:hover .tedx-covered-logo {
+  transform: scale(1.05);
+}
+
+.tedx-covered-logo--pioneer {
+  height: clamp(30px, 3.8vw, 42px);
+}
+
+.tedx-covered-logo--jagran {
+  height: clamp(40px, 5.2vw, 56px);
+}
+
+.tedx-covered-logo--prabhat {
+  height: clamp(42px, 5.5vw, 58px);
+}
+
+.tedx-covered-sep {
+  width: 1px;
+  height: 42px;
+  background: #E2E8F0;
+  flex-shrink: 0;
+}
+
+@media (max-width: 720px) {
+  .tedx-covered-pill {
+    border-radius: var(--r-xl);
+    flex-direction: column;
+    padding: 1.5rem 1.25rem;
+    gap: 1.35rem;
+  }
+  .tedx-covered-sep {
+    width: 60%;
+    height: 1px;
+  }
+  .tedx-covered-logo--pioneer {
+    height: 38px;
+  }
+  .tedx-covered-logo--jagran {
+    height: 52px;
+  }
+  .tedx-covered-logo--prabhat {
+    height: 54px;
+  }
+}
+
 /* ============================================================ about editorial */
 .about-hero {
   padding: clamp(1.25rem, 3vw, 2rem) 0 clamp(3.5rem, 8vw, 7rem);
