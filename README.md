@@ -22,6 +22,7 @@ Then visit `http://localhost:8000` (or `http://localhost:3000`).
 - **Shop & Products**: `shop.html`, `product.html`
 - **Cart & Checkout**: `cart.html`, `checkout.html`, `order-confirmation.html`, `track.html`
 - **Our Work**: `about.html`, `water-hyacinth.html`, `river-cleaning.html`, `solar-power.html`, `sewage-treatment.html`, `tedxbistupur.html`, `gallery.html`
+- **Featured**: TEDxBistupur Community Hub and press spotlight (`the pioneer`, `dainik jagran`, `prabhat khabar`).
 - **Get Involved**: `donate.html`, `contact.html`, `bulk-enquiry.html`
 - **Policies**: `policies.html`
 
