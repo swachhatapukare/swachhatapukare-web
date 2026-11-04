@@ -364,7 +364,7 @@ window.SP = window.SP || {};
       '<button class="nav__link' + (wwdActive ? " is-active" : "") + '" type="button" data-action="wwd-toggle" aria-expanded="false" aria-controls="nav-wwd-panel">What we do' + caretSvg() + "</button>" +
       '<div class="nav__panel nav__panel--categorized" id="nav-wwd-panel">' + wwdPanelContent +
       "</div></li>" +
-      '<li class="nav__item"><a class="nav__link' + active("tedxbistupur") + '" href="tedxbistupur.html"' + activeAttr("tedxbistupur") + ">TEDx</a></li>" +
+      '<li class="nav__item"><a class="nav__link' + active("tedxbistupur") + '" href="tedxbistupur.html"' + activeAttr("tedxbistupur") + ">TEDxBistupur</a></li>" +
       '<li class="nav__item"><a class="nav__link' + active("shop") + '" href="shop.html"' + activeAttr("shop") + ">Shop</a></li>" +
       '<li class="nav__item"><a class="nav__link' + active("donate") + '" href="donate.html"' + activeAttr("donate") + ">Donate</a></li>" +
       '<li class="nav__item"><a class="nav__link' + active("gallery") + '" href="gallery.html"' + activeAttr("gallery") + ">Gallery</a></li>" +
@@ -409,7 +409,7 @@ window.SP = window.SP || {};
       link("about.html", "about", "About") +
       '<span class="mobile-nav__group">What we do</span>' +
       '<div class="mobile-nav__sub">' + wwd + "</div>" +
-      link("tedxbistupur.html", "tedxbistupur", "TEDx") +
+      link("tedxbistupur.html", "tedxbistupur", "TEDxBistupur") +
       link("shop.html", "shop", "Shop") +
       link("donate.html", "donate", "Donate") +
       link("gallery.html", "gallery", "Gallery") +
