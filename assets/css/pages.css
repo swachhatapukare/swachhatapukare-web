@@ -983,13 +983,13 @@ body[data-page="tedxbistupur"] #main {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 165vw;
-  height: 165vh;
+  width: 180vw;
+  height: 195vh;
   transform: translate(-50%, -50%) rotate(-8deg) rotateX(4deg);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: clamp(1.2rem, 3vh, 2.5rem);
+  gap: clamp(0.85rem, 2.2vh, 1.75rem);
   will-change: transform;
 }
 
@@ -1646,12 +1646,12 @@ body[data-page="tedxbistupur"] .cta-band .btn--amber:hover {
     padding: 0.65rem 1rem;
   }
 
-  /* Living Ambient Diagonal Marquee Background */
+  /* Living Ambient Diagonal Marquee Background (5 Full Rows) */
   .tedx-diagonal-stage {
-    width: 220vw !important;
-    height: 180vh !important;
-    transform: translate(-50%, -50%) rotate(-8deg) !important;
-    gap: 0.85rem !important;
+    width: 240vw !important;
+    height: 210vh !important;
+    transform: translate(-50%, -50%) rotate(-8deg) rotateX(3deg) !important;
+    gap: 0.65rem !important;
   }
 
   .tedx-marquee-track img {
