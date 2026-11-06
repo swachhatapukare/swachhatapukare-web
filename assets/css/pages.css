@@ -974,17 +974,18 @@ body[data-page="tedxbistupur"] #main {
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
-  background-color: #EEF2F6;
+  perspective: 1200px;
+  background-color: #061B2E;
 }
 
-/* Diagonal Marquee Canvas Stage */
+/* Diagonal Marquee Canvas Stage with 3D Depth */
 .tedx-diagonal-stage {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 160vw;
-  height: 160vh;
-  transform: translate(-50%, -50%) rotate(-8deg);
+  width: 165vw;
+  height: 165vh;
+  transform: translate(-50%, -50%) rotate(-8deg) rotateX(4deg);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1030,18 +1031,20 @@ body[data-page="tedxbistupur"] #main {
   height: clamp(165px, 15vw, 220px);
   object-fit: cover;
   border-radius: var(--r-md, 14px);
-  box-shadow: 0 10px 30px rgba(6, 27, 46, 0.16);
-  filter: saturate(1.1) contrast(1.06);
+  box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.45), 0 4px 12px rgba(0, 0, 0, 0.25);
+  filter: saturate(1.15) contrast(1.08);
   opacity: 0.95;
   display: block;
 }
 
-/* Clean transparent overlay - removes all white haze so photos are 100% clearly visible */
+/* Semi-transparent calming depth veil: softens visual noise and creates cinematic depth without any white haze */
 .tedx-backdrop-overlay {
   position: absolute;
   inset: 0;
-  background: transparent;
   pointer-events: none;
+  background: radial-gradient(circle at 50% 45%, rgba(6, 27, 46, 0.25) 0%, rgba(6, 27, 46, 0.45) 75%, rgba(6, 27, 46, 0.60) 100%);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }
 
 /* TEDxBistupur Floating Social Dock */
