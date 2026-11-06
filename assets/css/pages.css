@@ -1015,25 +1015,26 @@ body[data-page="tedxbistupur"] #main {
 }
 
 .tedx-marquee-track img {
-  width: clamp(260px, 24vw, 360px);
-  height: clamp(165px, 15vw, 220px);
+  width: clamp(380px, 34vw, 520px);
+  height: clamp(253px, 22.7vw, 347px);
+  aspect-ratio: 3 / 2;
   object-fit: cover;
-  border-radius: var(--r-md, 14px);
-  box-shadow: 0 10px 30px rgba(6, 27, 46, 0.16);
-  filter: saturate(1.1) contrast(1.06);
-  opacity: 0.95;
+  border-radius: var(--r-lg, 16px);
+  box-shadow: 0 14px 36px -4px rgba(6, 27, 46, 0.22), 0 4px 12px rgba(6, 27, 46, 0.12);
+  filter: saturate(1.12) contrast(1.08);
+  opacity: 0.96;
   display: block;
 }
 
-/* Lighter, reduced-whiteness overlay to make photos clearly visible */
+/* Lighter, ultra-crisp overlay so individual photos and speakers are distinct and prominent */
 .tedx-backdrop-overlay {
   position: absolute;
   inset: 0;
   background: 
-    radial-gradient(circle at 50% 25%, rgba(255, 255, 255, 0.28) 0%, rgba(248, 250, 252, 0.42) 65%, rgba(241, 245, 249, 0.55) 100%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(248, 250, 252, 0.4) 45%, rgba(241, 245, 249, 0.55) 100%);
-  backdrop-filter: blur(1.5px);
-  -webkit-backdrop-filter: blur(1.5px);
+    radial-gradient(circle at 50% 25%, rgba(255, 255, 255, 0.18) 0%, rgba(248, 250, 252, 0.28) 65%, rgba(241, 245, 249, 0.38) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.20) 0%, rgba(248, 250, 252, 0.26) 45%, rgba(241, 245, 249, 0.38) 100%);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
 }
 
 /* TEDxBistupur Floating Social Dock */
@@ -1635,12 +1636,13 @@ body[data-page="tedxbistupur"] .cta-band .btn--amber:hover {
     padding: 0.65rem 1rem;
   }
 
-  /* Living Ambient Marquee Background */
+  /* Living Ambient Marquee Background at natural 3:2 proportion */
   .tedx-marquee-track img {
-    width: 175px !important;
-    height: 115px !important;
-    border-radius: 10px !important;
-    margin: 0 4px !important;
+    width: clamp(240px, 68vw, 310px) !important;
+    height: clamp(160px, 45.3vw, 207px) !important;
+    aspect-ratio: 3 / 2 !important;
+    border-radius: 12px !important;
+    margin: 0 6px !important;
   }
 
   .tedx-marquee-group {
