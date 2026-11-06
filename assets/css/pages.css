@@ -947,149 +947,265 @@ body[data-page="tedxbistupur"] .page-hero .breadcrumb {
   }
 }
 
-.tedx-hero-social-card {
-  background: #FFFFFF;
-  border: 1px solid var(--c-line, #E2E8F0);
-  border-top: 3.5px solid #EB0028;
-  border-radius: var(--r-xl, 24px);
-  padding: clamp(1.35rem, 3vw, 1.85rem);
-  box-shadow: 0 10px 32px rgba(6, 27, 46, 0.07);
+/* TEDxBistupur Editorial Channels Hub */
+.tedx-hub {
+  background: var(--c-paper, #FFFFFF);
+  border: 1px solid var(--c-line, #D6E4F1);
+  border-top: 3px solid #EB0028;
+  border-radius: var(--r-md, 14px);
+  padding: clamp(1.4rem, 2.5vw, 1.85rem);
+  box-shadow: 0 4px 18px -2px rgba(11, 46, 79, 0.05), 0 2px 6px -1px rgba(11, 46, 79, 0.03);
   display: flex;
   flex-direction: column;
-  gap: var(--s-3);
   position: relative;
-  overflow: hidden;
-  transition: transform var(--d-sm) var(--e-out), box-shadow var(--d-sm) var(--e-out);
+  transition: border-color var(--d-sm, 0.2s) ease, box-shadow var(--d-sm, 0.2s) ease;
 }
 
-.tedx-hero-social-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 40px rgba(6, 27, 46, 0.1);
+.tedx-hub:hover {
+  border-color: #CBD5E1;
+  box-shadow: 0 10px 28px -4px rgba(11, 46, 79, 0.08), 0 4px 10px -2px rgba(11, 46, 79, 0.04);
 }
 
-.tedx-social-card__head {
+.tedx-hub__head {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  margin-bottom: 0.85rem;
 }
 
-.tedx-social-card__badge {
+.tedx-hub__eyebrow {
   display: inline-flex;
   align-items: center;
-  font-size: 0.72rem;
-  font-weight: var(--fw-bold);
+  gap: 0.45rem;
+  font-family: var(--f-body);
+  font-size: 0.6875rem;
+  font-weight: var(--fw-bold, 700);
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
   color: #EB0028;
+  margin-bottom: 0.35rem;
 }
 
-.tedx-social-card__title {
+.tedx-hub__sep {
+  color: var(--c-line, #D6E4F1);
+  font-size: 0.65rem;
+}
+
+.tedx-hub__region {
+  color: var(--c-muted, #53687C);
+  letter-spacing: 0.12em;
+}
+
+.tedx-hub__title {
   font-family: var(--f-display);
-  font-size: clamp(1.2rem, 2vw, 1.45rem);
-  color: var(--c-dark, #061B2E);
-  margin: 0;
-  line-height: 1.25;
+  font-size: clamp(1.35rem, 2.2vw, 1.65rem);
+  font-weight: 400;
+  color: var(--c-dark, #0B2E4F);
+  line-height: 1.22;
+  margin: 0 0 0.4rem 0;
+  letter-spacing: -0.01em;
 }
 
-.tedx-social-card__desc {
-  font-size: 0.85rem;
-  line-height: 1.45;
+.tedx-hub__desc {
+  font-family: var(--f-body);
+  font-size: 0.84rem;
+  line-height: 1.5;
   color: var(--c-muted, #53687C);
   margin: 0;
 }
 
-.tedx-social-links {
+/* Hairline Swiss Register List */
+.tedx-hub__list {
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
-  margin-top: 0.35rem;
+  border-top: 1px solid var(--c-line, #E2E8F0);
+  margin-top: 0.75rem;
 }
 
-.tedx-social-item {
-  display: flex;
+.tedx-hub__item {
+  display: grid;
+  grid-template-columns: 24px 34px 1fr auto;
   align-items: center;
-  gap: 0.85rem;
-  padding: 0.65rem 0.85rem;
-  border-radius: var(--r-md, 12px);
-  background: #F8FAFC;
-  border: 1px solid var(--c-line, #E2E8F0);
+  gap: 0.75rem;
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid var(--c-line, #E2E8F0);
+  border-radius: 6px;
   text-decoration: none;
-  transition: all var(--d-sm) var(--e-out);
+  min-height: 52px;
+  background-color: transparent;
+  transition: background-color var(--d-sm, 0.18s) ease, padding-left var(--d-sm, 0.18s) ease;
 }
 
-.tedx-social-item:hover {
-  background: #FFFFFF;
-  border-color: #CBD5E1;
-  transform: translateX(3px);
-  box-shadow: 0 4px 12px rgba(6, 27, 46, 0.05);
+.tedx-hub__item:hover {
+  background-color: #F8FAFC;
+  padding-left: 0.75rem;
 }
 
-.tedx-social-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 9px;
-  display: flex;
+.tedx-hub__item:focus-visible {
+  outline: 2px solid #EB0028;
+  outline-offset: 2px;
+  background-color: #F8FAFC;
+}
+
+/* Editorial Monospace Index */
+.tedx-hub__index {
+  font-family: var(--f-mono, ui-monospace, monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #94A3B8;
+  transition: color var(--d-sm, 0.18s) ease;
+}
+
+.tedx-hub__item:hover .tedx-hub__index {
+  color: #EB0028;
+}
+
+/* Icon Box */
+.tedx-hub__icon-box {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: #F1F5F9;
+  color: var(--c-dark, #0B2E4F);
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: #FFFFFF;
-  transition: transform var(--d-sm) var(--e-out);
+  transition: all var(--d-sm, 0.18s) ease;
 }
 
-.tedx-social-item:hover .tedx-social-icon {
-  transform: scale(1.08);
+.tedx-hub__item:hover .tedx-hub__icon-box--ig {
+  background: rgba(225, 48, 108, 0.1);
+  color: #E1306C;
 }
 
-.tedx-social-icon--ig {
-  background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF, #515BD4);
+.tedx-hub__item:hover .tedx-hub__icon-box--li {
+  background: rgba(10, 102, 194, 0.1);
+  color: #0A66C2;
 }
 
-.tedx-social-icon--li {
-  background: #0A66C2;
+.tedx-hub__item:hover .tedx-hub__icon-box--fb {
+  background: rgba(24, 119, 242, 0.1);
+  color: #1877F2;
 }
 
-.tedx-social-icon--fb {
-  background: #1877F2;
-}
-
-.tedx-social-info {
+/* Metadata */
+.tedx-hub__meta {
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
-  flex: 1;
   min-width: 0;
 }
 
-.tedx-social-name {
-  font-size: 0.84rem;
-  font-weight: var(--fw-bold, 600);
-  color: var(--c-dark, #061B2E);
+.tedx-hub__name {
+  font-family: var(--f-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--c-dark, #0B2E4F);
   line-height: 1.2;
 }
 
-.tedx-social-handle {
-  font-size: 0.76rem;
+.tedx-hub__handle {
+  font-family: var(--f-body);
+  font-size: 0.77rem;
   color: var(--c-muted, #53687C);
-  line-height: 1.2;
+  line-height: 1.25;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: color var(--d-sm, 0.18s) ease;
 }
 
-.tedx-social-item:hover .tedx-social-handle {
+.tedx-hub__item:hover .tedx-hub__handle {
+  color: var(--c-dark, #0B2E4F);
+}
+
+/* Action button/arrow indicator */
+.tedx-hub__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #94A3B8;
+  font-family: var(--f-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color var(--d-sm, 0.18s) ease;
+}
+
+.tedx-hub__arrow {
+  flex-shrink: 0;
+  transition: transform var(--d-sm, 0.18s) cubic-bezier(0.16, 1, 0.3, 1), stroke var(--d-sm, 0.18s) ease;
+}
+
+.tedx-hub__item:hover .tedx-hub__action {
   color: #EB0028;
 }
 
-.tedx-social-card__foot {
-  padding-top: 0.55rem;
-  border-top: 1px dashed var(--c-line, #E2E8F0);
-  text-align: center;
+.tedx-hub__item:hover .tedx-hub__arrow {
+  transform: translate(2px, -2px);
+  stroke: #EB0028;
 }
 
-.tedx-social-license {
-  font-size: 0.73rem;
+/* Footer Colophon */
+.tedx-hub__foot {
+  padding-top: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.tedx-hub__license {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--f-body);
+  font-size: 0.72rem;
   color: var(--c-muted, #53687C);
+  line-height: 1.35;
   letter-spacing: 0.02em;
+}
+
+.tedx-hub__license-bullet {
+  color: #EB0028;
+  font-size: 0.65rem;
+  flex-shrink: 0;
+}
+
+/* Motion Preference */
+@media (prefers-reduced-motion: reduce) {
+  .tedx-hub,
+  .tedx-hub__item,
+  .tedx-hub__index,
+  .tedx-hub__icon-box,
+  .tedx-hub__arrow,
+  .tedx-hub__action {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .tedx-hub {
+    padding: 1.25rem 1rem;
+    border-radius: var(--r-sm, 10px);
+  }
+
+  .tedx-hub__item {
+    grid-template-columns: 20px 30px 1fr auto;
+    gap: 0.55rem;
+    padding: 0.65rem 0.25rem;
+  }
+
+  .tedx-hub__icon-box {
+    width: 30px;
+    height: 30px;
+  }
+
+  .tedx-hub__action-text {
+    display: none;
+  }
 }
 
 .tedx-hero-brand {
