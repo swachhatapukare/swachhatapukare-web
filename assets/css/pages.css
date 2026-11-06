@@ -934,6 +934,17 @@ body[data-page="tedxbistupur"] {
   min-height: 100vh;
 }
 
+/* Transparent section ending lines & seamless transitions */
+body[data-page="tedxbistupur"] .site-header,
+body[data-page="tedxbistupur"] .page-hero,
+body[data-page="tedxbistupur"] .section,
+body[data-page="tedxbistupur"] .section--tight,
+body[data-page="tedxbistupur"] .tedx-covered-section,
+body[data-page="tedxbistupur"] hr {
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
 body[data-page="tedxbistupur"] .site-header {
   position: sticky;
   top: 0;
@@ -941,7 +952,6 @@ body[data-page="tedxbistupur"] .site-header {
   background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--c-line, #D6E4F1);
 }
 
 body[data-page="tedxbistupur"] .site-footer {
