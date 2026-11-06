@@ -929,7 +929,7 @@ html.no-scroll { overflow: hidden; }
 
 /* ============================================================ TEDxBistupur styling & Ambient Moving Backdrop */
 body[data-page="tedxbistupur"] {
-  background-color: #0B192C;
+  background-color: #EEF2F6;
   position: relative;
   min-height: 100vh;
 }
@@ -976,10 +976,9 @@ body[data-page="tedxbistupur"] #main {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  gap: clamp(0.5rem, 1.4vh, 0.9rem);
-  padding: clamp(0.4rem, 1.2vh, 0.8rem) 0;
-  background-color: #0B192C;
+  justify-content: space-around;
+  gap: 1.25rem;
+  background-color: #EEF2F6;
 }
 
 .tedx-marquee-track {
@@ -992,8 +991,8 @@ body[data-page="tedxbistupur"] #main {
 .tedx-marquee-group {
   display: flex;
   align-items: center;
-  gap: clamp(10px, 1.4vw, 18px);
-  padding: 0 clamp(5px, 0.7vw, 9px);
+  gap: clamp(14px, 1.8vw, 24px);
+  padding: 0 clamp(7px, 0.9vw, 12px);
   flex-shrink: 0;
 }
 
@@ -1015,26 +1014,23 @@ body[data-page="tedxbistupur"] #main {
   100% { transform: translate3d(0, 0, 0); }
 }
 
-/* Compact, natural 3:2 camera proportions so all 3 tracks are 100% visible on screen */
 .tedx-marquee-track img {
-  height: clamp(130px, 16vh, 175px);
-  width: auto;
-  aspect-ratio: 3 / 2;
+  width: clamp(260px, 24vw, 360px);
+  height: clamp(165px, 15vw, 220px);
   object-fit: cover;
-  border-radius: var(--r-md, 12px);
-  box-shadow: 0 8px 24px -2px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.2);
-  filter: saturate(1.18) contrast(1.10) brightness(1.02);
-  opacity: 1;
+  border-radius: var(--r-md, 14px);
+  box-shadow: 0 10px 30px rgba(6, 27, 46, 0.16);
+  filter: saturate(1.1) contrast(1.06);
+  opacity: 0.95;
   display: block;
 }
 
-/* Zero milky-white haze: crystal-clear contrast so photos are vivid, crisp, and richly saturated */
+/* Clean transparent overlay - removes all white haze so photos are 100% clearly visible */
 .tedx-backdrop-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(11, 25, 44, 0.10) 0%, rgba(11, 25, 44, 0.20) 100%);
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  background: transparent;
+  pointer-events: none;
 }
 
 /* TEDxBistupur Floating Social Dock */
@@ -1135,16 +1131,6 @@ body[data-page="tedxbistupur"] #main {
 
 body[data-page="tedxbistupur"] .page-hero .breadcrumb {
   margin-bottom: var(--s-3);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.35rem 0.85rem;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-radius: var(--r-full, 999px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-  border: 1px solid var(--c-line, #D6E4F1);
 }
 
 .tedx-hero-card {
@@ -1646,23 +1632,21 @@ body[data-page="tedxbistupur"] .cta-band .btn--amber:hover {
     padding: 0.65rem 1rem;
   }
 
-  /* Living Ambient Marquee Background: Compact so all 3 rows fit cleanly on mobile */
+  /* Living Ambient Marquee Background */
   .tedx-marquee-track img {
-    height: clamp(95px, 13.5vh, 120px) !important;
-    width: auto !important;
-    aspect-ratio: 3 / 2 !important;
-    border-radius: 9px !important;
+    width: 175px !important;
+    height: 115px !important;
+    border-radius: 10px !important;
     margin: 0 4px !important;
   }
 
   .tedx-marquee-group {
-    gap: 6px !important;
-    padding: 0 3px !important;
+    gap: 8px !important;
+    padding: 0 4px !important;
   }
 
   .tedx-ambient-backdrop {
-    gap: clamp(0.35rem, 1vh, 0.6rem) !important;
-    padding: clamp(0.25rem, 0.8vh, 0.5rem) 0 !important;
+    gap: 0.6rem !important;
   }
 
   /* Body narrative cards */
