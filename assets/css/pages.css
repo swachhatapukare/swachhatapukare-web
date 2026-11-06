@@ -974,11 +974,22 @@ body[data-page="tedxbistupur"] #main {
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
+  background-color: #EEF2F6;
+}
+
+/* Diagonal Marquee Canvas Stage */
+.tedx-diagonal-stage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 160vw;
+  height: 160vh;
+  transform: translate(-50%, -50%) rotate(-8deg);
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  gap: 1.25rem;
-  background-color: #EEF2F6;
+  justify-content: center;
+  gap: clamp(1.2rem, 3vh, 2.5rem);
+  will-change: transform;
 }
 
 .tedx-marquee-track {
@@ -1632,10 +1643,17 @@ body[data-page="tedxbistupur"] .cta-band .btn--amber:hover {
     padding: 0.65rem 1rem;
   }
 
-  /* Living Ambient Marquee Background */
+  /* Living Ambient Diagonal Marquee Background */
+  .tedx-diagonal-stage {
+    width: 220vw !important;
+    height: 180vh !important;
+    transform: translate(-50%, -50%) rotate(-8deg) !important;
+    gap: 0.85rem !important;
+  }
+
   .tedx-marquee-track img {
-    width: 175px !important;
-    height: 115px !important;
+    width: 185px !important;
+    height: 120px !important;
     border-radius: 10px !important;
     margin: 0 4px !important;
   }
@@ -1643,10 +1661,6 @@ body[data-page="tedxbistupur"] .cta-band .btn--amber:hover {
   .tedx-marquee-group {
     gap: 8px !important;
     padding: 0 4px !important;
-  }
-
-  .tedx-ambient-backdrop {
-    gap: 0.6rem !important;
   }
 
   /* Body narrative cards */
