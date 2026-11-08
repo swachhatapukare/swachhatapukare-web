@@ -444,10 +444,6 @@ window.SP = window.SP || {};
 
   /* =============================================================== footer */
   function renderFooter(root) {
-    var shopLinks = SP.categories().map(function (c) {
-      return '<li><a href="shop.html?cat=' + c.slug + '">' + SP.esc(c.name) + "</a></li>";
-    }).join("");
-
     var wwdLinks = cfg.WHAT_WE_DO.map(function (item) {
       return '<li><a href="' + item.href + '">' + SP.esc(item.title) + "</a></li>";
     }).join("");
@@ -478,7 +474,6 @@ window.SP = window.SP || {};
       '<div class="footer-col"><span class="footer-title">Handcrafted Shop</span>' +
       '<ul class="footer-list">' +
       '<li><a href="shop.html">Browse all products</a></li>' +
-      shopLinks +
       '<li><a href="bulk-enquiry.html">Bulk &amp; corporate gifting</a></li>' +
       '<li><a href="track.html">Track your parcel</a></li>' +
       '</ul></div>' +

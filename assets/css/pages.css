@@ -1321,17 +1321,105 @@ body[data-page="tedxbistupur"] .wwd-aside .story-block {
   border-top: 3.5px solid #EB0028 !important;
 }
 
-.tedx-sidebar-logo {
-  margin-bottom: var(--s-3);
-  padding-bottom: var(--s-3);
-  border-bottom: 1px solid var(--c-line);
+/* Past Events Archive Card */
+.tedx-past-events-card {
+  scroll-margin-top: 5rem;
 }
 
-.tedx-sidebar-logo img {
-  max-width: 210px;
-  width: 100%;
-  height: auto;
-  display: block;
+.tedx-past-events-head {
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--c-line, #D6E4F1);
+}
+
+.tedx-past-events-head h2 {
+  font-family: var(--f-display, "DM Serif Display", serif);
+  font-size: 1.45rem;
+  color: var(--c-dark, #0B2E4F);
+  margin: 0.2rem 0 0.35rem 0;
+  line-height: 1.25;
+}
+
+.tedx-past-events-head p {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.tedx-editions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tedx-edition-item {
+  background: #F8FAFC;
+  border: 1px solid var(--c-line, #E2E8F0);
+  border-radius: var(--r-md, 12px);
+  padding: 0.85rem 0.95rem;
+  transition: all var(--d-sm, 0.18s) ease;
+  position: relative;
+}
+
+.tedx-edition-item:hover {
+  background: #FFFFFF;
+  border-color: #CBD5E1;
+  box-shadow: 0 4px 14px rgba(6, 27, 46, 0.08);
+  transform: translateY(-1px);
+}
+
+.tedx-edition-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.35rem;
+}
+
+.tedx-edition-badge {
+  font-family: var(--f-body, "Inter", sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #EB0028;
+  background: rgba(235, 0, 40, 0.08);
+  padding: 0.18rem 0.5rem;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.tedx-edition-year {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--c-muted, #53687C);
+}
+
+.tedx-edition-theme {
+  font-family: var(--f-body, "Inter", sans-serif);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--c-dark, #0B2E4F);
+  line-height: 1.35;
+  margin: 0 0 0.3rem 0;
+}
+
+.tedx-edition-desc {
+  font-size: 0.8rem;
+  color: var(--c-muted, #53687C);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.tedx-past-events-foot {
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--c-line, #D6E4F1);
+}
+
+.tedx-past-events-foot p {
+  font-size: 0.76rem;
+  line-height: 1.45;
+  margin: 0;
 }
 
 .tedx-aside-channels {

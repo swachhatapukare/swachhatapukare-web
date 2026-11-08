@@ -378,14 +378,14 @@ SP.config = {
       title: "TEDxBistupur",
       lead: "A locally organised TEDx platform bringing pioneering ideas and changemakers to Jamshedpur.",
       placeholderNote:
-        "Official platform & event details: tedxbistupur.org",
+        "Past & upcoming event editions, conference archives & participation options.",
       sections: [
         {
           h: "About the event",
           p: [
             "TEDxBistupur is operated under license from TED, creating a platform for innovators, researchers, social changemakers and grassroots leaders.",
             "The Foundation collaborates to curate talks centered on environmental sustainability, youth empowerment and community development.",
-            "Visit the official website at tedxbistupur.org for the latest updates, talks, and conference announcements."
+            "TEDxBistupur brings together thinkers and doers from Jharkhand and across India to share ideas that inspire action and civic progress."
           ]
         },
         {
@@ -399,15 +399,15 @@ SP.config = {
           h: "Get involved",
           p: [
             "There are three ways to get involved: nominate a speaker doing transformative work, volunteer with our event curation team, or partner as an institutional sponsor.",
-            "Reach out to our team using the link below or register directly through the official TEDxBistupur portal."
+            "Reach out to our team using the link below to get involved with upcoming TEDxBistupur editions."
           ]
         }
       ],
       cta: {
-        title: "Visit the Official TEDxBistupur Portal",
-        text: "Discover speaker lineups, talk archives, ticket registration and event schedules on the official TEDxBistupur website.",
-        label: "Visit Us (tedxbistupur.org)",
-        href: "https://www.tedxbistupur.org/"
+        title: "Get Involved with TEDxBistupur",
+        text: "Nominate a speaker doing transformative work, join our event volunteer team, or partner on upcoming editions in Jamshedpur.",
+        label: "Get Involved / Nominate",
+        href: "contact.html?subject=Press%20%26%20partnerships"
       }
     },
 
