@@ -16,12 +16,15 @@
   <link rel="stylesheet" href="assets/css/layout.css">
   <link rel="stylesheet" href="assets/css/components.css">
   <link rel="stylesheet" href="assets/css/pages.css">
+  <link rel="stylesheet" href="assets/css/past-events.css">
   <script defer src="assets/js/config.js"></script>
   <script defer src="assets/js/data.js"></script>
   <script defer src="assets/js/utils.js"></script>
   <script defer src="assets/js/store.js"></script>
   <script defer src="assets/js/components.js"></script>
   <script defer src="assets/js/foundation.js"></script>
+  <script defer src="assets/js/past-events-data.js"></script>
+  <script defer src="assets/js/past-events.js"></script>
 </head>
 <body data-page="tedxbistupur" data-copy="tedxbistupur">
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -188,9 +191,20 @@
         <div class="tedx-hero-actions-wrap">
           <div class="btn-row tedx-hero-btn-row">
             <a class="btn btn--tedx" href="contact.html?subject=Press%20%26%20partnerships">Get involved / Nominate</a>
-            <a class="btn btn--secondary" href="#past-events">Past Events &darr;</a>
+            <div class="tedx-hero-dropdown-wrap">
+              <button class="btn btn--secondary tedx-dropdown-trigger" type="button" aria-expanded="false" id="tedx-hero-dropdown-btn">
+                <span>Past Events</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="tedx-hero-dropdown-menu" id="tedx-hero-dropdown-menu">
+                <a href="#power-of-why" class="tedx-hero-dropdown-item" data-edition-id="power-of-why">The power of why?</a>
+                <a href="#connecting-the-dots" class="tedx-hero-dropdown-item" data-edition-id="connecting-the-dots">Connecting the Dots</a>
+                <a href="#countdown" class="tedx-hero-dropdown-item" data-edition-id="countdown">CountDown</a>
+                <a href="#what-next" class="tedx-hero-dropdown-item" data-edition-id="what-next">What Next?</a>
+                <a href="#she-leads" class="tedx-hero-dropdown-item" data-edition-id="she-leads">She Leads</a>
+              </div>
+            </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -206,60 +220,128 @@
           <div class="tedx-past-events-head">
             <span class="eyebrow" style="color: #EB0028; font-weight: 700;">Conference Archive</span>
             <h2>Past Events</h2>
-            <p class="muted">Previous TEDxBistupur editions, keynote themes, and community milestones in Jamshedpur.</p>
+            <p class="muted">Click any edition to explore its keynote speakers, official logo, and talk recordings below.</p>
           </div>
 
           <div class="tedx-editions-list">
-            <!-- Edition 1: Recent / Flagship Edition -->
-            <article class="tedx-edition-item">
-              <div class="tedx-edition-meta">
-                <span class="tedx-edition-badge">Flagship Edition</span>
-                <span class="tedx-edition-year">2024</span>
-              </div>
-              <h3 class="tedx-edition-theme">Regenerative Futures — Ideas from the Heartland</h3>
-              <p class="tedx-edition-desc">Keynote talks spanning grassroots sustainability, ecological innovation, youth leadership, and civic transformation.</p>
-            </article>
+            <!-- Edition 1: The power of why? -->
+            <a class="tedx-edition-link" href="#power-of-why" data-edition-id="power-of-why">
+              <article class="tedx-edition-item">
+                <div class="tedx-edition-meta">
+                  <span class="tedx-edition-badge">Flagship</span>
+                  <span class="tedx-edition-year">2024</span>
+                </div>
+                <h3 class="tedx-edition-theme">The power of why?</h3>
+                <p class="tedx-edition-desc">Unraveling Purpose: How ‘Why’ Drives Innovation, Impact, and Change &bull; 13 Talks</p>
+              </article>
+            </a>
 
-            <!-- Edition 2: Inaugural Edition -->
-            <article class="tedx-edition-item">
-              <div class="tedx-edition-meta">
-                <span class="tedx-edition-badge">Inaugural Edition</span>
-                <span class="tedx-edition-year">2023</span>
-              </div>
-              <h3 class="tedx-edition-theme">Ideas Worth Spreading — Bistupur</h3>
-              <p class="tedx-edition-desc">The pioneer gathering introducing TEDx to the industrial hub of Jamshedpur with diverse multidisciplinary voices.</p>
-            </article>
+            <!-- Edition 2: Connecting the Dots -->
+            <a class="tedx-edition-link" href="#connecting-the-dots" data-edition-id="connecting-the-dots">
+              <article class="tedx-edition-item">
+                <div class="tedx-edition-meta">
+                  <span class="tedx-edition-badge">Flagship</span>
+                  <span class="tedx-edition-year">2024</span>
+                </div>
+                <h3 class="tedx-edition-theme">Connecting the Dots</h3>
+                <p class="tedx-edition-desc">Connecting ideas, experiences, and breakthroughs to inspire a better tomorrow &bull; 15 Talks</p>
+              </article>
+            </a>
+
+            <!-- Edition 3: CountDown -->
+            <a class="tedx-edition-link" href="#countdown" data-edition-id="countdown">
+              <article class="tedx-edition-item">
+                <div class="tedx-edition-meta">
+                  <span class="tedx-edition-badge" style="color:#65A30D; background:rgba(101,163,13,0.1);">CountDown</span>
+                  <span class="tedx-edition-year">2023</span>
+                </div>
+                <h3 class="tedx-edition-theme">CountDown — Take Action</h3>
+                <p class="tedx-edition-desc">Pioneering climate solutions, igniting change, and shaping a sustainable future &bull; 9 Talks</p>
+              </article>
+            </a>
+
+            <!-- Edition 4: What Next? -->
+            <a class="tedx-edition-link" href="#what-next" data-edition-id="what-next">
+              <article class="tedx-edition-item">
+                <div class="tedx-edition-meta">
+                  <span class="tedx-edition-badge">Inaugural</span>
+                  <span class="tedx-edition-year">2022</span>
+                </div>
+                <h3 class="tedx-edition-theme">What Next?</h3>
+                <p class="tedx-edition-desc">Exploring the next big leap, bold actions, and the future we create together &bull; 11 Talks</p>
+              </article>
+            </a>
+
+            <!-- Edition 5: She Leads -->
+            <a class="tedx-edition-link" href="#she-leads" data-edition-id="she-leads">
+              <article class="tedx-edition-item">
+                <div class="tedx-edition-meta">
+                  <span class="tedx-edition-badge" style="color:#DB2777; background:rgba(219,39,119,0.1);">TEDxWomen</span>
+                  <span class="tedx-edition-year">2024</span>
+                </div>
+                <h3 class="tedx-edition-theme">She Leads</h3>
+                <p class="tedx-edition-desc">Women Who Are Shaping the world: Empowering women to share transformative ideas &bull; 9 Talks</p>
+              </article>
+            </a>
           </div>
 
           <div class="tedx-past-events-foot">
-            <p class="muted">
-              <strong>Archive Notice:</strong> Full speaker rosters, themes, and session recordings will be updated with your verified edition data.
-            </p>
-          </div>
-        </div>
-
-        <div class="story-block tedx-channels-sidebar">
-          <span class="eyebrow">Official Handles</span>
-          <h2>Connect &bull; Follow</h2>
-          <p class="muted">Live speaker announcements and regional community updates.</p>
-          <div class="tedx-aside-channels">
-            <a class="tedx-aside-link" href="https://www.instagram.com/TEDxBistupur/" target="_blank" rel="noopener noreferrer">
-              <span>Instagram</span>
-              <strong>@TEDxBistupur &nearr;</strong>
-            </a>
-            <a class="tedx-aside-link" href="https://www.linkedin.com/showcase/tedxbistupur/posts/?feedView=all" target="_blank" rel="noopener noreferrer">
-              <span>LinkedIn</span>
-              <strong>Showcase &nearr;</strong>
-            </a>
-            <a class="tedx-aside-link" href="https://www.facebook.com/p/TEDxBistupur-100083561313036/" target="_blank" rel="noopener noreferrer">
-              <span>Facebook</span>
-              <strong>TEDxBistupur &nearr;</strong>
+            <a class="btn btn--tedx btn--sm btn--block" href="#past-events-showcase">
+              <span>Explore Event Archive &darr;</span>
             </a>
           </div>
         </div>
       </aside>
     </div>
   </section>
+
+  <!-- TEDx Past Events Dynamic Showcase Section -->
+  <section class="section tedx-past-events-section" id="past-events-showcase">
+    <div class="container">
+      <div class="tedx-past-events-container">
+        
+        <!-- Header & Nav Selector for Past Events -->
+        <div class="tedx-showcase-header">
+          <div class="tedx-showcase-header__top">
+            <span class="eyebrow" style="color: #EB0028; font-weight: 700;">Conference Archive</span>
+            <h2 class="tedx-showcase-title">Past TEDxBistupur Events</h2>
+            <p class="tedx-showcase-lead">Select an edition below to view its official keynote speakers, talks, emcee, and event photos.</p>
+          </div>
+
+          <!-- Selector Bar -->
+          <div class="tedx-showcase-bar">
+            <!-- Dropdown for fast select -->
+            <div class="tedx-menu-dropdown">
+              <button class="tedx-menu-dropdown__btn" type="button" data-tedx-dropdown-trigger aria-expanded="false">
+                <span>Select Event Edition</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <ul class="tedx-menu-dropdown__content" id="tedx-showcase-dropdown-menu">
+                <!-- Injected by past-events.js -->
+              </ul>
+            </div>
+
+            <!-- Pill buttons -->
+            <div class="tedx-edition-pills" id="tedx-showcase-pills" role="tablist" aria-label="Event Editions">
+              <!-- Injected by past-events.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- The Dynamic Event Content Stage -->
+        <div id="tedx-edition-stage" class="tedx-edition-stage" aria-live="polite">
+          <!-- Rendered dynamically by past-events.js from past-events-data.js -->
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo Lightbox Modal -->
+  <div class="tedx-lightbox" id="tedx-lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Photo Lightbox">
+    <button class="tedx-lightbox__close" type="button" aria-label="Close photo">&times;</button>
+    <img class="tedx-lightbox__img" id="tedx-lightbox-img" src="" alt="">
+  </div>
 
   <!-- We've Been Covered / Press & Media Spotlight -->
   <section class="tedx-covered-section" aria-label="Media coverage">

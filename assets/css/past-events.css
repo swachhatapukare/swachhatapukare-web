@@ -1,0 +1,806 @@
+/* ==========================================================================
+   TEDxBistupur Past Events Archive Styles
+   ========================================================================== */
+
+:root {
+  --tedx-red: #EB0028;
+  --tedx-red-hover: #C50022;
+  --tedx-red-glow: rgba(235, 0, 40, 0.28);
+  --tedx-dark: #0A0D12;
+  --tedx-card-bg: #121721;
+  --tedx-card-border: rgba(255, 255, 255, 0.08);
+  --tedx-card-hover: rgba(235, 0, 40, 0.25);
+  --tedx-text-main: #FFFFFF;
+  --tedx-text-muted: #94A3B8;
+  --tedx-text-dim: #64748B;
+}
+
+body.page-past-events {
+  background-color: var(--tedx-dark);
+  color: var(--tedx-text-main);
+  font-family: var(--f-body, "Inter", sans-serif);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* ========================================================== Top Navigation */
+.tedx-subnav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(10, 13, 18, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.tedx-subnav__container {
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.tedx-subnav__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+
+.tedx-subnav__brand img {
+  height: 34px;
+  width: auto;
+  display: block;
+}
+
+.tedx-subnav__menu {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tedx-subnav__item {
+  position: relative;
+}
+
+.tedx-subnav__link {
+  color: #CBD5E1;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.4rem 0.65rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.tedx-subnav__link:hover,
+.tedx-subnav__link.is-active {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Dropdown Menu Component */
+.tedx-menu-dropdown {
+  position: relative;
+}
+
+.tedx-menu-dropdown__btn {
+  background: rgba(235, 0, 40, 0.12);
+  color: #FFFFFF;
+  border: 1px solid rgba(235, 0, 40, 0.4);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all 0.2s ease;
+}
+
+.tedx-menu-dropdown__btn:hover,
+.tedx-menu-dropdown.is-open .tedx-menu-dropdown__btn {
+  background: var(--tedx-red);
+  color: #FFFFFF;
+  border-color: var(--tedx-red);
+  box-shadow: 0 0 16px var(--tedx-red-glow);
+}
+
+.tedx-menu-dropdown__btn svg {
+  transition: transform 0.2s ease;
+}
+
+.tedx-menu-dropdown.is-open .tedx-menu-dropdown__btn svg {
+  transform: rotate(180deg);
+}
+
+.tedx-menu-dropdown__content {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 230px;
+  background: #171C26;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+  padding: 0.5rem;
+  list-style: none;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1010;
+}
+
+.tedx-menu-dropdown.is-open .tedx-menu-dropdown__content,
+.tedx-menu-dropdown:hover .tedx-menu-dropdown__content,
+.tedx-menu-dropdown:focus-within .tedx-menu-dropdown__content {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.tedx-menu-dropdown__item {
+  margin: 0;
+}
+
+.tedx-menu-dropdown__link {
+  display: block;
+  padding: 0.6rem 0.85rem;
+  color: #E2E8F0;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.15s ease;
+}
+
+.tedx-menu-dropdown__link:hover,
+.tedx-menu-dropdown__link.is-active {
+  background: rgba(235, 0, 40, 0.18);
+  color: #FFFFFF;
+  padding-left: 1.05rem;
+}
+
+/* ======================================================== Header Hero Band */
+.past-events-hero {
+  position: relative;
+  padding: 3.5rem 1.25rem 2.5rem;
+  text-align: center;
+  background: radial-gradient(circle at 50% 20%, rgba(235, 0, 40, 0.12) 0%, transparent 60%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.past-events-hero__eyebrow {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--tedx-red);
+  background: rgba(235, 0, 40, 0.1);
+  border: 1px solid rgba(235, 0, 40, 0.28);
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+}
+
+.past-events-hero__title {
+  font-family: var(--f-display, "DM Serif Display", serif);
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  color: #FFFFFF;
+  line-height: 1.15;
+  margin: 0 0 1rem 0;
+}
+
+.past-events-hero__lead {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  color: var(--tedx-text-muted);
+  max-width: 720px;
+  margin: 0 auto 1.75rem;
+  line-height: 1.6;
+}
+
+/* ================================================= Interactive Filter Tabs */
+.edition-selector-bar {
+  position: sticky;
+  top: 56px;
+  z-index: 900;
+  background: rgba(10, 13, 18, 0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.75rem 1.25rem;
+}
+
+.edition-selector-bar__inner {
+  max-width: 1260px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.edition-pills {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0.2rem 0;
+  flex: 1;
+}
+
+.edition-pills::-webkit-scrollbar {
+  display: none;
+}
+
+.edition-pill {
+  white-space: nowrap;
+  background: #171D27;
+  color: #CBD5E1;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.edition-pill:hover {
+  background: #232B39;
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.edition-pill.is-active {
+  background: var(--tedx-red);
+  color: #FFFFFF;
+  border-color: var(--tedx-red);
+  box-shadow: 0 0 14px var(--tedx-red-glow);
+}
+
+.edition-view-all-btn {
+  background: transparent;
+  color: #94A3B8;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  font-size: 0.825rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.edition-view-all-btn:hover,
+.edition-view-all-btn.is-active {
+  color: #FFFFFF;
+  border-color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ======================================================== Event Section */
+.event-edition {
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem 4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.event-edition.is-hidden {
+  display: none;
+}
+
+.event-edition__header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.event-edition__date-badge {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--tedx-red);
+  margin-bottom: 0.75rem;
+}
+
+.event-edition__title {
+  font-family: var(--f-display, "DM Serif Display", serif);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  line-height: 1.12;
+  margin: 0 0 1rem;
+  letter-spacing: -0.01em;
+}
+
+.event-edition__tagline {
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  color: var(--tedx-text-muted);
+  max-width: 780px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* ========================================================== Emcee Card */
+.event-emcee {
+  background: #141923;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 20px;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  margin-bottom: 3.5rem;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2.25rem;
+  align-items: center;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35);
+}
+
+.event-emcee__photo-wrap {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #1F2735;
+  aspect-ratio: 1 / 1;
+}
+
+.event-emcee__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.event-emcee__eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--tedx-red);
+  margin-bottom: 0.35rem;
+}
+
+.event-emcee__name {
+  font-family: var(--f-display, "DM Serif Display", serif);
+  font-size: 1.85rem;
+  color: #FFFFFF;
+  margin: 0 0 0.25rem 0;
+  line-height: 1.2;
+}
+
+.event-emcee__role {
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: #CBD5E1;
+  margin-bottom: 1rem;
+}
+
+.event-emcee__bio {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--tedx-text-muted);
+  margin: 0;
+}
+
+/* ========================================================== Speakers Grid */
+.speakers-section__head {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 1rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.speakers-section__title {
+  font-family: var(--f-display, "DM Serif Display", serif);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.speakers-section__count {
+  font-size: 0.875rem;
+  color: var(--tedx-text-dim);
+  font-weight: 600;
+}
+
+.speakers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.75rem;
+  margin-bottom: 3.5rem;
+}
+
+.speaker-card {
+  background: var(--tedx-card-bg);
+  border: 1px solid var(--tedx-card-border);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  position: relative;
+}
+
+.speaker-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(235, 0, 40, 0.45);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 20px var(--tedx-card-hover);
+}
+
+.speaker-card__media {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: #171D27;
+  overflow: hidden;
+}
+
+.speaker-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.speaker-card:hover .speaker-card__img {
+  transform: scale(1.03);
+}
+
+.speaker-card__body {
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.speaker-card__name {
+  font-family: var(--f-body, "Inter", sans-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin: 0 0 0.35rem 0;
+  letter-spacing: 0.02em;
+}
+
+.speaker-card__role {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #CBD5E1;
+  margin-bottom: 0.85rem;
+  line-height: 1.4;
+}
+
+.speaker-card__bio {
+  font-size: 0.875rem;
+  color: var(--tedx-text-muted);
+  line-height: 1.6;
+  margin: 0 0 1.25rem 0;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.speaker-card.is-expanded .speaker-card__bio {
+  -webkit-line-clamp: unset;
+}
+
+.speaker-card__bio-toggle {
+  background: none;
+  border: none;
+  color: #94A3B8;
+  font-size: 0.775rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 1.1rem;
+  text-align: left;
+  text-decoration: underline;
+}
+
+.speaker-card__bio-toggle:hover {
+  color: #FFFFFF;
+}
+
+.speaker-card__action {
+  margin-top: auto;
+}
+
+.btn--tedx-talk {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  background: var(--tedx-red);
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.btn--tedx-talk:hover {
+  background: var(--tedx-red-hover);
+  box-shadow: 0 4px 16px var(--tedx-red-glow);
+  transform: translateY(-1px);
+}
+
+/* ======================================================== Photo Gallery */
+.gallery-section {
+  margin-top: 3.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 2.5rem;
+}
+
+.gallery-section__title {
+  font-family: var(--f-display, "DM Serif Display", serif);
+  font-size: 2rem;
+  margin: 0 0 1.5rem 0;
+  color: #FFFFFF;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.gallery-item {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #171D27;
+  cursor: pointer;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.06);
+}
+
+/* ================================================= Lightbox Modal */
+.tedx-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+}
+
+.tedx-lightbox.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tedx-lightbox__img {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+.tedx-lightbox__close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #FFFFFF;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transition: background 0.2s ease;
+}
+
+.tedx-lightbox__close:hover {
+  background: var(--tedx-red);
+}
+
+/* ======================================================== Newsletter Footer */
+.past-events-footer {
+  background: #0E121A;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 4rem 1.25rem 3rem;
+  text-align: center;
+}
+
+.past-events-footer__inner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.past-events-footer__title {
+  font-family: var(--f-display, "DM Serif Display", serif);
+  font-size: 2.2rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.past-events-footer__sub {
+  color: var(--tedx-text-muted);
+  margin-bottom: 2rem;
+}
+
+.past-events-footer__logo {
+  margin-top: 2.5rem;
+  display: inline-block;
+}
+
+.past-events-footer__logo img {
+  height: 38px;
+  width: auto;
+}
+
+.past-events-footer__disclaimer {
+  font-size: 0.775rem;
+  color: var(--tedx-text-dim);
+  margin-top: 1.5rem;
+  line-height: 1.5;
+}
+
+.past-events-footer__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.past-events-footer__nav a {
+  color: #94A3B8;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.past-events-footer__nav a:hover {
+  color: #FFFFFF;
+}
+
+/* ======================================================== Showcase in tedxbistupur.html */
+.tedx-past-events-section {
+  position: relative;
+  z-index: 10;
+  padding: 2.5rem 0 4.5rem;
+}
+
+.tedx-past-events-container {
+  background: #0D1118;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: clamp(1.5rem, 3.5vw, 3rem);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  color: #FFFFFF;
+}
+
+.tedx-showcase-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  padding-bottom: 1.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.tedx-showcase-header__top {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.tedx-showcase-title {
+  font-family: var(--f-display, "DM Serif Display", serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: #FFFFFF;
+  margin: 0.35rem 0 0.5rem;
+  line-height: 1.2;
+}
+
+.tedx-showcase-lead {
+  font-size: 1rem;
+  color: #94A3B8;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.tedx-showcase-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.tedx-edition-pills {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.event-edition__logo-wrap {
+  text-align: center;
+  margin: 0 auto 1.5rem;
+  max-width: 440px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.event-edition__logo-img {
+  max-width: 100%;
+  max-height: 110px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.5));
+}
+
+/* ======================================================== Responsive */
+@media (max-width: 860px) {
+  .event-emcee {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .event-emcee__photo-wrap {
+    max-width: 220px;
+    margin: 0 auto;
+  }
+  .speakers-grid {
+    grid-template-columns: 1fr;
+  }
+  .tedx-subnav__menu {
+    gap: 0.5rem;
+  }
+}
+

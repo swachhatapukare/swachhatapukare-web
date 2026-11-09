@@ -1422,6 +1422,72 @@ body[data-page="tedxbistupur"] .wwd-aside .story-block {
   margin: 0;
 }
 
+/* Hero Past Events Dropdown */
+.tedx-hero-dropdown-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.tedx-hero-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 240px;
+  background: #171C26;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+  padding: 0.5rem;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: left;
+}
+
+.tedx-hero-dropdown-wrap:hover .tedx-hero-dropdown-menu,
+.tedx-hero-dropdown-wrap:focus-within .tedx-hero-dropdown-menu,
+.tedx-hero-dropdown-wrap.is-open .tedx-hero-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.tedx-hero-dropdown-item {
+  display: block;
+  padding: 0.6rem 0.85rem;
+  color: #E2E8F0;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.15s ease;
+}
+
+.tedx-hero-dropdown-item:hover {
+  background: rgba(235, 0, 40, 0.2);
+  color: #FFFFFF;
+  padding-left: 1.05rem;
+}
+
+.tedx-hero-dropdown-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 0.4rem 0;
+}
+
+.tedx-hero-dropdown-item--all {
+  color: #EB0028 !important;
+  font-weight: 700 !important;
+}
+
+.tedx-edition-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
 .tedx-aside-channels {
   display: flex;
   flex-direction: column;
