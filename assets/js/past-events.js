@@ -176,7 +176,9 @@
     if (ev.logoImage) {
       logoHtml =
         '<div class="event-edition__logo-wrap">' +
+        '<div class="event-edition__logo-card">' +
         '<img class="event-edition__logo-img" src="' + escapeAttr(ev.logoImage) + '" alt="' + escapeAttr(ev.title) + ' Official Logo" loading="lazy">' +
+        '</div>' +
         '</div>';
     }
 
