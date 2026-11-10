@@ -1,10 +1,12 @@
 /* ==========================================================================
-   TEDxBistupur Past Events Engine (Integrated Showcase)
+   TEDxBistupur Past Events Engine (with Pagination & Load More)
    ========================================================================== */
 
 (function () {
   "use strict";
 
+  var PAGE_SIZE_SPEAKERS = 6;
+  var PAGE_SIZE_GALLERY = 8;
   var activeEditionId = null;
 
   function init() {
@@ -54,23 +56,26 @@
 
     // Setup Click Delegations
     document.addEventListener("click", function (e) {
-      var target = e.target.closest("[data-edition-id]");
-      if (target) {
-        var id = target.getAttribute("data-edition-id");
+      // Edition switch
+      var targetEdition = e.target.closest("[data-edition-id]");
+      if (targetEdition) {
+        var id = targetEdition.getAttribute("data-edition-id");
         if (id) {
           e.preventDefault();
           switchEdition(id, true);
+          return;
         }
       }
 
       // Handle Read More / Read Less in speaker bio
-      var toggleBtn = e.target.closest(".speaker-card__bio-toggle");
-      if (toggleBtn) {
-        var card = toggleBtn.closest(".speaker-card");
+      var toggleBioBtn = e.target.closest(".speaker-card__bio-toggle");
+      if (toggleBioBtn) {
+        var card = toggleBioBtn.closest(".speaker-card");
         if (card) {
           card.classList.toggle("is-expanded");
-          toggleBtn.textContent = card.classList.contains("is-expanded") ? "Read less ↑" : "Read more ↓";
+          toggleBioBtn.textContent = card.classList.contains("is-expanded") ? "Read less ↑" : "Read more ↓";
         }
+        return;
       }
 
       // Handle Lightbox click
@@ -78,6 +83,56 @@
       if (galleryItem) {
         var img = galleryItem.querySelector("img");
         if (img) openLightbox(img.src, img.alt);
+        return;
+      }
+
+      // Handle Load More Speakers
+      var loadMoreSpeakersBtn = e.target.closest('[data-action="load-more-speakers"]');
+      if (loadMoreSpeakersBtn) {
+        handleLoadMoreSpeakers(loadMoreSpeakersBtn);
+        return;
+      }
+
+      // Handle Show Less Speakers
+      var showLessSpeakersBtn = e.target.closest('[data-action="show-less-speakers"]');
+      if (showLessSpeakersBtn) {
+        handleShowLessSpeakers(showLessSpeakersBtn);
+        return;
+      }
+
+      // Handle Speaker Page Number Click
+      var speakerPageBtn = e.target.closest('[data-action="speaker-page"]');
+      if (speakerPageBtn) {
+        handleSpeakerPage(speakerPageBtn);
+        return;
+      }
+
+      // Handle View All Speakers
+      var viewAllSpeakersBtn = e.target.closest('[data-action="view-all-speakers"]');
+      if (viewAllSpeakersBtn) {
+        handleViewAllSpeakers(viewAllSpeakersBtn);
+        return;
+      }
+
+      // Handle Load More Gallery
+      var loadMoreGalleryBtn = e.target.closest('[data-action="load-more-gallery"]');
+      if (loadMoreGalleryBtn) {
+        handleLoadMoreGallery(loadMoreGalleryBtn);
+        return;
+      }
+
+      // Handle Show Less Gallery
+      var showLessGalleryBtn = e.target.closest('[data-action="show-less-gallery"]');
+      if (showLessGalleryBtn) {
+        handleShowLessGallery(showLessGalleryBtn);
+        return;
+      }
+
+      // Handle View All Gallery
+      var viewAllGalleryBtn = e.target.closest('[data-action="view-all-gallery"]');
+      if (viewAllGalleryBtn) {
+        handleViewAllGallery(viewAllGalleryBtn);
+        return;
       }
     });
 
@@ -104,7 +159,6 @@
     if (hash && events.some(function (e) { return e.id === hash; })) {
       switchEdition(hash, false);
     } else {
-      // Default to "connecting-the-dots" or "power-of-why"
       switchEdition("connecting-the-dots", false);
     }
 
@@ -141,7 +195,10 @@
         '</div></div>';
     }
 
-    var speakersHtml = (ev.speakers || []).map(function (sp) {
+    var totalSpeakers = (ev.speakers || []).length;
+    var initialVisible = Math.min(PAGE_SIZE_SPEAKERS, totalSpeakers);
+
+    var speakersHtml = (ev.speakers || []).map(function (sp, idx) {
       var talkBtn = "";
       if (sp.talk_url) {
         talkBtn =
@@ -154,9 +211,10 @@
 
       var bioLines = (sp.bio || "").trim();
       var hasLongBio = bioLines.length > 280;
+      var isHiddenClass = idx >= PAGE_SIZE_SPEAKERS ? " is-paged-hidden" : "";
 
       return (
-        '<article class="speaker-card">' +
+        '<article class="speaker-card' + isHiddenClass + '" data-speaker-index="' + idx + '">' +
         '<div class="speaker-card__media">' +
         '<img class="speaker-card__img" src="' + escapeAttr(sp.image) + '" alt="' + escapeAttr(sp.image_alt || sp.name) + '" loading="lazy">' +
         '</div>' +
@@ -170,20 +228,68 @@
       );
     }).join("");
 
+    // Build speaker pagination / load more wrap
+    var speakerPaginationHtml = "";
+    if (totalSpeakers > PAGE_SIZE_SPEAKERS) {
+      var totalPages = Math.ceil(totalSpeakers / PAGE_SIZE_SPEAKERS);
+      var pagesButtons = [];
+      for (var p = 1; p <= totalPages; p++) {
+        pagesButtons.push(
+          '<button class="tedx-page-btn' + (p === 1 ? ' is-active' : '') + '" type="button" data-action="speaker-page" data-page="' + p + '" aria-label="Page ' + p + '">' + p + '</button>'
+        );
+      }
+
+      speakerPaginationHtml =
+        '<div class="tedx-load-more-wrap" data-wrap="speakers">' +
+        '<div class="tedx-pagination-info">' +
+        'Showing <strong class="js-speaker-shown">' + initialVisible + '</strong> of <strong class="js-speaker-total">' + totalSpeakers + '</strong> Keynote Speakers' +
+        '</div>' +
+        '<div class="tedx-pagination-actions">' +
+        '<button class="btn btn--tedx-load-more" type="button" data-action="load-more-speakers">' +
+        '<span>Load More Speakers</span>' +
+        '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>' +
+        '</button>' +
+        '<div class="tedx-pagination-pages">' + pagesButtons.join("") + '</div>' +
+        '<button class="btn btn--tedx-show-all" type="button" data-action="view-all-speakers">View All (' + totalSpeakers + ')</button>' +
+        '</div></div>';
+    }
+
+    // Build gallery
     var galleryHtml = "";
-    if (ev.gallery && ev.gallery.length > 0) {
-      var items = ev.gallery.map(function (g) {
+    var totalPhotos = (ev.gallery || []).length;
+    var initialGalleryVisible = Math.min(PAGE_SIZE_GALLERY, totalPhotos);
+
+    if (totalPhotos > 0) {
+      var items = ev.gallery.map(function (g, gIdx) {
+        var isHiddenClass = gIdx >= PAGE_SIZE_GALLERY ? " is-paged-hidden" : "";
         return (
-          '<div class="gallery-item" tabindex="0" role="button" aria-label="View photo in full size">' +
+          '<div class="gallery-item' + isHiddenClass + '" data-gallery-index="' + gIdx + '" tabindex="0" role="button" aria-label="View photo in full size">' +
           '<img src="' + escapeAttr(g.src) + '" alt="' + escapeAttr(g.alt) + '" loading="lazy">' +
           '</div>'
         );
       }).join("");
 
+      var galleryPaginationHtml = "";
+      if (totalPhotos > PAGE_SIZE_GALLERY) {
+        galleryPaginationHtml =
+          '<div class="tedx-load-more-wrap" data-wrap="gallery">' +
+          '<div class="tedx-pagination-info">' +
+          'Showing <strong class="js-gallery-shown">' + initialGalleryVisible + '</strong> of <strong class="js-gallery-total">' + totalPhotos + '</strong> Event Photos' +
+          '</div>' +
+          '<div class="tedx-pagination-actions">' +
+          '<button class="btn btn--tedx-load-more" type="button" data-action="load-more-gallery">' +
+          '<span>Load More Photos</span>' +
+          '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>' +
+          '</button>' +
+          '<button class="btn btn--tedx-show-all" type="button" data-action="view-all-gallery">View All (' + totalPhotos + ')</button>' +
+          '</div></div>';
+      }
+
       galleryHtml =
         '<div class="gallery-section">' +
         '<h3 class="gallery-section__title">Through the Lens</h3>' +
         '<div class="gallery-grid">' + items + '</div>' +
+        galleryPaginationHtml +
         '</div>';
     }
 
@@ -201,13 +307,191 @@
       '<div class="speakers-section">' +
       '<div class="speakers-section__head">' +
       '<h3 class="speakers-section__title">' + sectionTitle + '</h3>' +
-      '<span class="speakers-section__count">' + (ev.speakers || []).length + ' Keynote Speakers</span>' +
+      '<span class="speakers-section__count">' + totalSpeakers + ' Keynote Speakers</span>' +
       '</div>' +
       '<div class="speakers-grid">' + speakersHtml + '</div>' +
+      speakerPaginationHtml +
       '</div>' +
       galleryHtml +
       '</section>'
     );
+  }
+
+  /* ================================================= Pagination / Load More Handlers */
+  function handleLoadMoreSpeakers(btn) {
+    var section = btn.closest(".event-edition");
+    if (!section) return;
+    var cards = section.querySelectorAll(".speaker-card");
+    var hiddenCards = section.querySelectorAll(".speaker-card.is-paged-hidden");
+    var total = cards.length;
+
+    // Unhide next 6 cards
+    var toUnhide = Array.prototype.slice.call(hiddenCards, 0, PAGE_SIZE_SPEAKERS);
+    toUnhide.forEach(function (card) {
+      card.classList.remove("is-paged-hidden");
+    });
+
+    var nowVisible = section.querySelectorAll(".speaker-card:not(.is-paged-hidden)").length;
+    var countEl = section.querySelector(".js-speaker-shown");
+    if (countEl) countEl.textContent = nowVisible;
+
+    // Update active page button if all from that page are visible
+    var currentPage = Math.ceil(nowVisible / PAGE_SIZE_SPEAKERS);
+    section.querySelectorAll(".tedx-page-btn").forEach(function (pb) {
+      if (parseInt(pb.getAttribute("data-page"), 10) === currentPage) pb.classList.add("is-active");
+      else pb.classList.remove("is-active");
+    });
+
+    if (nowVisible >= total) {
+      btn.setAttribute("data-action", "show-less-speakers");
+      btn.querySelector("span").textContent = "Show Less";
+      btn.classList.add("is-expanded");
+    }
+  }
+
+  function handleShowLessSpeakers(btn) {
+    var section = btn.closest(".event-edition");
+    if (!section) return;
+    var cards = section.querySelectorAll(".speaker-card");
+    cards.forEach(function (card, idx) {
+      if (idx >= PAGE_SIZE_SPEAKERS) card.classList.add("is-paged-hidden");
+      else card.classList.remove("is-paged-hidden");
+    });
+
+    var countEl = section.querySelector(".js-speaker-shown");
+    if (countEl) countEl.textContent = Math.min(PAGE_SIZE_SPEAKERS, cards.length);
+
+    btn.setAttribute("data-action", "load-more-speakers");
+    btn.querySelector("span").textContent = "Load More Speakers";
+    btn.classList.remove("is-expanded");
+
+    section.querySelectorAll(".tedx-page-btn").forEach(function (pb) {
+      if (pb.getAttribute("data-page") === "1") pb.classList.add("is-active");
+      else pb.classList.remove("is-active");
+    });
+
+    var headEl = section.querySelector(".speakers-section__head");
+    if (headEl) headEl.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function handleSpeakerPage(btn) {
+    var section = btn.closest(".event-edition");
+    if (!section) return;
+    var targetPage = parseInt(btn.getAttribute("data-page"), 10);
+    var startIdx = (targetPage - 1) * PAGE_SIZE_SPEAKERS;
+    var endIdx = targetPage * PAGE_SIZE_SPEAKERS;
+
+    var cards = section.querySelectorAll(".speaker-card");
+    cards.forEach(function (card, idx) {
+      if (idx >= startIdx && idx < endIdx) {
+        card.classList.remove("is-paged-hidden");
+      } else {
+        card.classList.add("is-paged-hidden");
+      }
+    });
+
+    section.querySelectorAll(".tedx-page-btn").forEach(function (pb) {
+      if (parseInt(pb.getAttribute("data-page"), 10) === targetPage) pb.classList.add("is-active");
+      else pb.classList.remove("is-active");
+    });
+
+    var countEl = section.querySelector(".js-speaker-shown");
+    if (countEl) countEl.textContent = (startIdx + 1) + " - " + Math.min(endIdx, cards.length);
+
+    var loadMoreBtn = section.querySelector('[data-action="show-less-speakers"], [data-action="load-more-speakers"]');
+    if (loadMoreBtn) {
+      loadMoreBtn.setAttribute("data-action", "load-more-speakers");
+      loadMoreBtn.querySelector("span").textContent = "Load More Speakers";
+      loadMoreBtn.classList.remove("is-expanded");
+    }
+
+    var headEl = section.querySelector(".speakers-section__head");
+    if (headEl) headEl.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function handleViewAllSpeakers(btn) {
+    var section = btn.closest(".event-edition");
+    if (!section) return;
+    var cards = section.querySelectorAll(".speaker-card");
+    cards.forEach(function (card) {
+      card.classList.remove("is-paged-hidden");
+    });
+
+    var countEl = section.querySelector(".js-speaker-shown");
+    if (countEl) countEl.textContent = cards.length;
+
+    var loadMoreBtn = section.querySelector('[data-action="load-more-speakers"]');
+    if (loadMoreBtn) {
+      loadMoreBtn.setAttribute("data-action", "show-less-speakers");
+      loadMoreBtn.querySelector("span").textContent = "Show Less";
+      loadMoreBtn.classList.add("is-expanded");
+    }
+
+    section.querySelectorAll(".tedx-page-btn").forEach(function (pb) {
+      pb.classList.remove("is-active");
+    });
+  }
+
+  function handleLoadMoreGallery(btn) {
+    var section = btn.closest(".event-edition");
+    if (!section) return;
+    var items = section.querySelectorAll(".gallery-item");
+    var hiddenItems = section.querySelectorAll(".gallery-item.is-paged-hidden");
+    var total = items.length;
+
+    var toUnhide = Array.prototype.slice.call(hiddenItems, 0, PAGE_SIZE_GALLERY);
+    toUnhide.forEach(function (item) {
+      item.classList.remove("is-paged-hidden");
+    });
+
+    var nowVisible = section.querySelectorAll(".gallery-item:not(.is-paged-hidden)").length;
+    var countEl = section.querySelector(".js-gallery-shown");
+    if (countEl) countEl.textContent = nowVisible;
+
+    if (nowVisible >= total) {
+      btn.setAttribute("data-action", "show-less-gallery");
+      btn.querySelector("span").textContent = "Show Less";
+      btn.classList.add("is-expanded");
+    }
+  }
+
+  function handleShowLessGallery(btn) {
+    var section = btn.closest(".event-edition");
+    if (!section) return;
+    var items = section.querySelectorAll(".gallery-item");
+    items.forEach(function (item, idx) {
+      if (idx >= PAGE_SIZE_GALLERY) item.classList.add("is-paged-hidden");
+      else item.classList.remove("is-paged-hidden");
+    });
+
+    var countEl = section.querySelector(".js-gallery-shown");
+    if (countEl) countEl.textContent = Math.min(PAGE_SIZE_GALLERY, items.length);
+
+    btn.setAttribute("data-action", "load-more-gallery");
+    btn.querySelector("span").textContent = "Load More Photos";
+    btn.classList.remove("is-expanded");
+
+    var galHead = section.querySelector(".gallery-section__title");
+    if (galHead) galHead.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function handleViewAllGallery(btn) {
+    var section = btn.closest(".event-edition");
+    if (!section) return;
+    var items = section.querySelectorAll(".gallery-item");
+    items.forEach(function (item) {
+      item.classList.remove("is-paged-hidden");
+    });
+
+    var countEl = section.querySelector(".js-gallery-shown");
+    if (countEl) countEl.textContent = items.length;
+
+    var loadMoreBtn = section.querySelector('[data-action="load-more-gallery"]');
+    if (loadMoreBtn) {
+      loadMoreBtn.setAttribute("data-action", "show-less-gallery");
+      loadMoreBtn.querySelector("span").textContent = "Show Less";
+      loadMoreBtn.classList.add("is-expanded");
+    }
   }
 
   function switchEdition(editionId, updateHistory) {
@@ -219,6 +503,24 @@
     sections.forEach(function (sec) {
       if (sec.getAttribute("data-event-edition") === editionId) {
         sec.classList.remove("is-hidden");
+        // Reset pagination state when switching to this edition
+        var speakerCards = sec.querySelectorAll(".speaker-card");
+        speakerCards.forEach(function (card, idx) {
+          if (idx >= PAGE_SIZE_SPEAKERS) card.classList.add("is-paged-hidden");
+          else card.classList.remove("is-paged-hidden");
+        });
+        var countEl = sec.querySelector(".js-speaker-shown");
+        if (countEl) countEl.textContent = Math.min(PAGE_SIZE_SPEAKERS, speakerCards.length);
+        var loadMoreBtn = sec.querySelector('[data-action="show-less-speakers"], [data-action="load-more-speakers"]');
+        if (loadMoreBtn) {
+          loadMoreBtn.setAttribute("data-action", "load-more-speakers");
+          loadMoreBtn.querySelector("span").textContent = "Load More Speakers";
+          loadMoreBtn.classList.remove("is-expanded");
+        }
+        sec.querySelectorAll(".tedx-page-btn").forEach(function (pb) {
+          if (pb.getAttribute("data-page") === "1") pb.classList.add("is-active");
+          else pb.classList.remove("is-active");
+        });
       } else {
         sec.classList.add("is-hidden");
       }

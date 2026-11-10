@@ -512,6 +512,120 @@ body.page-past-events {
   -webkit-line-clamp: unset;
 }
 
+.speaker-card.is-paged-hidden,
+.gallery-item.is-paged-hidden {
+  display: none !important;
+}
+
+/* ========================================================== Pagination & Load More */
+.tedx-load-more-wrap {
+  margin: 1.5rem 0 3.5rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  text-align: center;
+}
+
+.tedx-pagination-info {
+  font-size: 0.875rem;
+  color: var(--tedx-text-muted);
+}
+
+.tedx-pagination-info strong {
+  color: #FFFFFF;
+}
+
+.tedx-pagination-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.btn--tedx-load-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--tedx-red);
+  color: #FFFFFF;
+  border: none;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 0.65rem 1.35rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px var(--tedx-red-glow);
+}
+
+.btn--tedx-load-more:hover {
+  background: var(--tedx-red-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--tedx-red-glow);
+}
+
+.tedx-pagination-pages {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.tedx-page-btn {
+  background: #171D27;
+  color: #CBD5E1;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  min-width: 36px;
+  height: 36px;
+  padding: 0 0.5rem;
+  border-radius: 8px;
+  font-size: 0.825rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.tedx-page-btn:hover {
+  background: #242D3D;
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.tedx-page-btn.is-active {
+  background: var(--tedx-red);
+  color: #FFFFFF;
+  border-color: var(--tedx-red);
+  box-shadow: 0 0 12px var(--tedx-red-glow);
+}
+
+.btn--tedx-show-all {
+  background: transparent;
+  color: #94A3B8;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  font-family: inherit;
+  font-size: 0.825rem;
+  font-weight: 600;
+  padding: 0.55rem 0.95rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn--tedx-show-all:hover {
+  color: #FFFFFF;
+  border-color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.06);
+}
+
 .speaker-card__bio-toggle {
   background: none;
   border: none;
