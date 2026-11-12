@@ -46,7 +46,8 @@ window.SP = window.SP || {};
       instagram: '<rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>',
       x: '<path d="M18.9 3h3.1l-6.8 7.8L23 21h-6.2l-4.9-6.4L6.3 21H3.1l7.3-8.3L2.5 3h6.4l4.4 5.8L18.9 3zm-1.1 16.2h1.7L7.3 4.7H5.5l12.3 14.5z" fill="currentColor"/>',
       linkedin: '<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="9" width="4" height="12" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="4" cy="4" r="2" fill="currentColor"/>',
-      facebook: '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3V2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>'
+      facebook: '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3V2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
+      youtube: '<path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.43z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"/>'
     };
     return '<svg class="i" width="' + s + '" height="' + s + '" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
       (paths[name] || "") + "</svg>";
@@ -119,8 +120,9 @@ window.SP = window.SP || {};
     var hgt = opts.h || 800;
     var cls = opts.cls ? ' class="' + opts.cls + '"' : "";
     var loading = opts.eager ? ' loading="eager" fetchpriority="high"' : ' loading="lazy"';
+    var dims = opts.noDims ? "" : ' width="' + w + '" height="' + hgt + '"';
     return '<img' + cls + ' src="' + SP.esc(src) + '" alt="' + SP.esc(alt) + '"' +
-      ' width="' + w + '" height="' + hgt + '"' + loading + ' decoding="async"' +
+      dims + loading + ' decoding="async"' +
       ' data-sp-fallback data-name="' + SP.esc(opts.name || alt) + '"' +
       ' data-tint="' + SP.esc(opts.tint || "--c-cat-home") + '"' +
       (opts.tag ? ' data-tag="' + SP.esc(opts.tag) + '"' : "") + ">";
@@ -463,10 +465,12 @@ window.SP = window.SP || {};
       '<div class="footer-social">' +
       '<span class="footer-social__title">Connect with us</span>' +
       '<div class="footer-social__icons">' +
-      '<a class="social-icon" href="' + (social.instagram || "#") + '" target="_blank" rel="noopener noreferrer" aria-label="Follow SwachhataPukare on Instagram">' + icon("instagram", 18) + '</a>' +
-      '<a class="social-icon" href="' + (social.x || "#") + '" target="_blank" rel="noopener noreferrer" aria-label="Follow SwachhataPukare on X">' + icon("x", 16) + '</a>' +
-      '<a class="social-icon" href="' + (social.linkedin || "#") + '" target="_blank" rel="noopener noreferrer" aria-label="Follow SwachhataPukare on LinkedIn">' + icon("linkedin", 18) + '</a>' +
-      '<a class="social-icon" href="' + (social.facebook || "#") + '" target="_blank" rel="noopener noreferrer" aria-label="Follow SwachhataPukare on Facebook">' + icon("facebook", 18) + '</a>' +
+      '<svg width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false"><defs><linearGradient id="sp-insta-grad" x1="100%" y1="100%" x2="0%" y2="0%"><stop stop-color="#fdf497" offset="0%"/><stop stop-color="#fd5949" offset="45%"/><stop stop-color="#d6249f" offset="65%"/><stop stop-color="#285AEB" offset="95%"/></linearGradient></defs></svg>' +
+      '<a class="social-icon social-icon--instagram" href="' + (social.instagram || "#") + '" target="_blank" rel="noopener noreferrer" aria-label="Follow SwachhataPukare on Instagram">' + icon("instagram", 18) + '</a>' +
+      '<a class="social-icon social-icon--facebook" href="' + (social.facebook || "#") + '" target="_blank" rel="noopener noreferrer" aria-label="Follow SwachhataPukare on Facebook">' + icon("facebook", 18) + '</a>' +
+      (social.youtube ? '<a class="social-icon social-icon--youtube" href="' + social.youtube + '" target="_blank" rel="noopener noreferrer" aria-label="Follow SwachhataPukare on YouTube">' + icon("youtube", 18) + '</a>' : '') +
+      '<a class="social-icon social-icon--linkedin" href="' + (social.linkedin || "#") + '" target="_blank" rel="noopener noreferrer" aria-label="Follow SwachhataPukare on LinkedIn">' + icon("linkedin", 18) + '</a>' +
+      '<a class="social-icon social-icon--x" href="' + (social.x || "#") + '" target="_blank" rel="noopener noreferrer" aria-label="Follow SwachhataPukare on X">' + icon("x", 16) + '</a>' +
       '</div></div>' +
       '</div>' +
 
@@ -780,7 +784,20 @@ window.SP = window.SP || {};
     }, 30);
   }
 
+  var CART_OPENED_KEY = "sp_cart_has_opened";
+  function hasCartBeenOpened() {
+    try {
+      return window.sessionStorage && window.sessionStorage.getItem(CART_OPENED_KEY) === "1";
+    } catch (e) { return false; }
+  }
+  function markCartOpened() {
+    try {
+      if (window.sessionStorage) window.sessionStorage.setItem(CART_OPENED_KEY, "1");
+    } catch (e) {}
+  }
+
   function openCart() {
+    markCartOpened();
     closeMenu();
     SP.ui.closeModal();
     var drawer = el("#cart-drawer");
@@ -791,6 +808,88 @@ window.SP = window.SP || {};
 
   function closeCart() {
     if (openLayer && openLayer.key === "cart" && openLayer.close) openLayer.close();
+  }
+
+  /* Product-to-Cart flight animation */
+  var pendingFlyers = 0;
+
+  function animateProductToCart(sourceEl, onComplete) {
+    var cartBtn = document.querySelector('.site-header [data-action="cart-open"]') ||
+      document.querySelector('[data-action="cart-open"]');
+    var prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (!cartBtn || prefersReduced) {
+      if (onComplete) onComplete();
+      return;
+    }
+
+    var container = sourceEl.closest(".card") ||
+      sourceEl.closest(".pdp-layout") ||
+      sourceEl.closest("[data-product-panel]") ||
+      document;
+    var img = container.querySelector ?
+      (container.querySelector(".card__media img") ||
+       container.querySelector(".pdp-gallery__main img") ||
+       container.querySelector(".pdp-gallery img") ||
+       container.querySelector("img[data-sp-fallback]") ||
+       container.querySelector("img")) : null;
+
+    var srcRect = (img && img.getBoundingClientRect && img.getBoundingClientRect().width > 0)
+      ? img.getBoundingClientRect()
+      : sourceEl.getBoundingClientRect();
+
+    var destRect = cartBtn.getBoundingClientRect();
+
+    var flyer = document.createElement("div");
+    flyer.className = "sp-cart-flyer";
+
+    var size = 54;
+    var startX = srcRect.left + srcRect.width / 2 - size / 2;
+    var startY = srcRect.top + srcRect.height / 2 - size / 2;
+    var targetX = destRect.left + destRect.width / 2 - size / 2;
+    var targetY = destRect.top + destRect.height / 2 - size / 2;
+
+    if (img && img.src && !img.src.endsWith(".svg")) {
+      flyer.style.backgroundImage = 'url("' + img.src + '")';
+    } else {
+      flyer.innerHTML = icon("cart", 22);
+      flyer.classList.add("sp-cart-flyer--icon");
+    }
+
+    flyer.style.transform = 'translate3d(' + startX + 'px, ' + startY + 'px, 0) scale(1)';
+    flyer.style.opacity = '1';
+
+    document.body.appendChild(flyer);
+    pendingFlyers++;
+
+    // Force layout reflow before triggering transition
+    void flyer.offsetHeight;
+
+    requestAnimationFrame(function () {
+      flyer.style.transform = 'translate3d(' + targetX + 'px, ' + targetY + 'px, 0) scale(0.24)';
+      flyer.style.opacity = '0.2';
+    });
+
+    var finished = false;
+    function cleanup() {
+      if (finished) return;
+      finished = true;
+      pendingFlyers = Math.max(0, pendingFlyers - 1);
+      if (flyer.parentNode) flyer.parentNode.removeChild(flyer);
+
+      // Cart icon bounce feedback
+      cartBtn.classList.remove("is-bumped");
+      void cartBtn.offsetWidth;
+      cartBtn.classList.add("is-bumped");
+      setTimeout(function () {
+        cartBtn.classList.remove("is-bumped");
+      }, 450);
+
+      if (onComplete) onComplete();
+    }
+
+    flyer.addEventListener("transitionend", cleanup, { once: true });
+    setTimeout(cleanup, 560);
   }
 
   function toggleWwd(btn) {
@@ -854,10 +953,33 @@ window.SP = window.SP || {};
             (selected ? selected.getAttribute("data-variant-selected") : "");
           var qtyInput = panel.querySelector("[data-qty-input]");
           var qty = qtyInput ? Number(qtyInput.value) || 1 : 1;
+
+          var isFirstAdd = !hasCartBeenOpened();
+
           var result = SP.store.addToCart(pid, variantId, qty);
           if (result) {
-            SP.ui.toast(result.product.name + " added to cart.");
-            if (cfg.OPEN_MINI_CART_ON_ADD) openCart();
+            // Elegant button feedback
+            var origContent = target.innerHTML;
+            target.classList.add("is-added");
+            target.innerHTML = icon("check", 16) + ' <span>Added to Cart</span>';
+            setTimeout(function () {
+              target.innerHTML = origContent;
+              target.classList.remove("is-added");
+            }, 1400);
+
+            // Animate product travelling into the cart
+            animateProductToCart(target, function () {
+              updateBadge();
+
+              if (isFirstAdd) {
+                // First interaction: open side cart panel to introduce cart experience
+                markCartOpened();
+                openCart();
+              } else {
+                // Subsequent additions: stay on page, show elegant confirmation
+                SP.ui.toast(result.product.name + " added to cart.");
+              }
+            });
           }
           break;
         }
@@ -892,10 +1014,11 @@ window.SP = window.SP || {};
     });
 
     document.addEventListener("sp:cart", function () {
-      updateBadge();
+      if (pendingFlyers === 0) {
+        updateBadge();
+      }
       var drawer = el("#cart-drawer");
       if (drawer && drawer.classList.contains("is-open")) renderMiniCart();
-      updateBadge();
     });
   }
 

@@ -19,8 +19,7 @@
           alt: item.caption,
           name: item.caption.replace(/ — .*$/, ""),
           tint: item.tint,
-          w: 800,
-          h: 600
+          noDims: true
         }) +
         '<span class="gallery-tile__caption">' + SP.esc(item.caption) + "</span>" +
         "</button>"

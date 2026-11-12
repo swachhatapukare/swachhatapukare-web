@@ -15,9 +15,10 @@ SP.config = {
 
   SOCIAL: {
     instagram: "https://www.instagram.com/swachhatapukare",
-    x: "https://x.com/swachhatapukare",
+    facebook: "https://www.facebook.com/swachhatapukare",
+    youtube: "https://www.youtube.com/@swachhatapukare",
     linkedin: "https://www.linkedin.com/company/swachhatapukare-foundation",
-    facebook: "https://www.facebook.com/swachhatapukare"
+    x: "https://x.com/swachhatapukare"
   },
 
   FOUNDATION: {

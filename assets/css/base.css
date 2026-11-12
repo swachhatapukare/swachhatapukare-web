@@ -2,9 +2,13 @@
 
 *,
 *::before,
-*::after { box-sizing: border-box; }
+*::after {
+  box-sizing: border-box;
+}
 
-* { margin: 0; }
+* {
+  margin: 0;
+}
 
 html {
   -webkit-text-size-adjust: 100%;
@@ -33,12 +37,17 @@ video {
   max-width: 100%;
 }
 
-img { height: auto; background: var(--c-cream); }
+img {
+  height: auto;
+  background: var(--c-cream);
+}
 
 /* logos are transparent PNGs — never put a placeholder tint behind them */
 img.brand__img,
 .page-hero__logo,
-.invoice__logo { background: transparent; }
+.invoice__logo {
+  background: transparent;
+}
 
 input,
 button,
@@ -48,10 +57,17 @@ select {
   color: inherit;
 }
 
-button { cursor: pointer; background: none; border: 0; }
+button {
+  cursor: pointer;
+  background: none;
+  border: 0;
+}
 
 ul[class],
-ol[class] { list-style: none; padding: 0; }
+ol[class] {
+  list-style: none;
+  padding: 0;
+}
 
 a {
   color: var(--c-teal-deep);
@@ -59,9 +75,15 @@ a {
   text-underline-offset: 0.18em;
 }
 
-a:hover { color: var(--c-dark); }
+a:hover {
+  color: var(--c-dark);
+}
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-family: var(--f-display);
   font-weight: var(--fw-regular);
   line-height: var(--lh-tight);
@@ -70,14 +92,30 @@ h1, h2, h3, h4, h5 {
   text-wrap: balance;
 }
 
-h1 { font-size: var(--t-3xl); }
-h2 { font-size: var(--t-2xl); }
-h3 { font-size: var(--t-xl); }
-h4 { font-size: var(--t-lg); }
+h1 {
+  font-size: var(--t-3xl);
+}
 
-p { text-wrap: pretty; }
+h2 {
+  font-size: var(--t-2xl);
+}
 
-strong, b { font-weight: var(--fw-semibold); }
+h3 {
+  font-size: var(--t-xl);
+}
+
+h4 {
+  font-size: var(--t-lg);
+}
+
+p {
+  text-wrap: pretty;
+}
+
+strong,
+b {
+  font-weight: var(--fw-semibold);
+}
 
 hr {
   border: 0;
@@ -117,17 +155,26 @@ hr {
   transition: transform var(--d-sm) var(--e-out);
 }
 
-.skip-link:focus-visible { transform: translateY(0); color: var(--c-on-dark); }
+.skip-link:focus-visible {
+  transform: translateY(0);
+  color: var(--c-on-dark);
+}
 
 .visually-hidden {
   position: absolute !important;
-  width: 1px; height: 1px;
-  padding: 0; margin: -1px;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
   overflow: hidden;
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
   white-space: nowrap;
   border: 0;
+}
+
+[hidden] {
+  display: none !important;
 }
 
 /* --------------------------------------------------------------- typography helpers */
@@ -149,36 +196,76 @@ hr {
 /* Long unbreakable strings (emails, order ids, URLs) must never widen a
    grid/flex track or leak out of a card. `anywhere` — unlike `break-word` —
    also shrinks the min-content width, which is what actually stops the leak. */
-p, li, dd, dt, address, h1, h2, h3, h4, h5, h6,
-figcaption, summary, label, legend, td, th,
-span, strong, a, em, b, small {
+p,
+li,
+dd,
+dt,
+address,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+figcaption,
+summary,
+label,
+legend,
+td,
+th,
+span,
+strong,
+a,
+em,
+b,
+small {
   overflow-wrap: anywhere;
 }
 
 /* …except where a string must stay on one line. */
-.nowrap, .mono.nowrap { overflow-wrap: normal; word-break: keep-all; }
+.nowrap,
+.mono.nowrap {
+  overflow-wrap: normal;
+  word-break: keep-all;
+}
 
-.muted { color: var(--c-muted); }
+.muted {
+  color: var(--c-muted);
+}
 
-.text-sm { font-size: var(--t-sm); }
+.text-sm {
+  font-size: var(--t-sm);
+}
 
 .mono {
   font-family: var(--f-mono);
   font-size: 0.92em;
 }
 
-.nowrap { white-space: nowrap; }
+.nowrap {
+  white-space: nowrap;
+}
 
 /* long paragraphs in narrow columns */
-.prose > * + * { margin-top: var(--s-4); }
-.prose h3 { margin-top: var(--s-6); }
+.prose>*+* {
+  margin-top: var(--s-4);
+}
+
+.prose h3 {
+  margin-top: var(--s-6);
+}
 
 /* ------------------------------------------------------------------- lists */
-.check-list { display: grid; gap: var(--s-3); }
+.check-list {
+  display: grid;
+  gap: var(--s-3);
+}
+
 .check-list li {
   position: relative;
   padding-left: var(--s-6);
 }
+
 .check-list li::before {
   content: "";
   position: absolute;
@@ -192,12 +279,19 @@ span, strong, a, em, b, small {
 }
 
 /* ------------------------------------------------------------------- utilities */
-.block { display: block !important; }
-.inline-block { display: inline-block !important; }
+.block {
+  display: block !important;
+}
+
+.inline-block {
+  display: inline-block !important;
+}
 
 /* ---------------------------------------------------------- reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+  html {
+    scroll-behavior: auto;
+  }
 
   *,
   *::before,

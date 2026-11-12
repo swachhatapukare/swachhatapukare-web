@@ -353,27 +353,89 @@
     var elSpotDesc = hero.querySelector("[data-spotlight-desc]");
     var elSpotLink = hero.querySelector("[data-spotlight-link]");
     var elSpotCta = hero.querySelector("[data-spotlight-cta]");
+    var elSpotDots = hero.querySelector("[data-spotlight-dots]");
 
     if (!slides.length) return;
 
-    var current = 0;
+    var currentCat = 0;
+    var currentImg = 0;
     var timer = null;
-    var duration = 5000;
+    var photoDuration = 4500;
 
-    function goTo(index) {
-      current = (index + slides.length) % slides.length;
+    function getSlideImages(slide) {
+      if (!slide) return [];
+      return qsa(".h-hero__slide-bg img", slide);
+    }
 
-      // 1. Update background slides
+    function renderDots(images) {
+      if (!elSpotDots) return;
+      if (!images || images.length <= 1) {
+        elSpotDots.innerHTML = "";
+        return;
+      }
+      var html = "";
+      for (var i = 0; i < images.length; i++) {
+        var label = images[i].getAttribute("data-label") || ("Photo " + (i + 1));
+        html += '<button type="button" class="h-hero__spotlight-dot' + (i === currentImg ? " is-active" : "") + '" data-photo-idx="' + i + '" title="' + SP.esc(label) + '" aria-label="' + SP.esc(label) + '"></button>';
+      }
+      elSpotDots.innerHTML = html;
+
+      qsa(".h-hero__spotlight-dot", elSpotDots).forEach(function (dot) {
+        dot.addEventListener("click", function (e) {
+          e.stopPropagation();
+          var idx = Number(dot.getAttribute("data-photo-idx"));
+          if (!isNaN(idx)) {
+            goToImage(idx);
+            restartTimer();
+          }
+        });
+      });
+    }
+
+    function updateDots() {
+      if (!elSpotDots) return;
+      var dots = qsa(".h-hero__spotlight-dot", elSpotDots);
+      dots.forEach(function (dot, i) {
+        dot.classList.toggle("is-active", i === currentImg);
+      });
+    }
+
+    function goToImage(imgIndex) {
+      var activeSlide = slides[currentCat];
+      if (!activeSlide) return;
+      var images = getSlideImages(activeSlide);
+      if (!images.length) return;
+
+      currentImg = (imgIndex + images.length) % images.length;
+      images.forEach(function (img, i) {
+        img.classList.toggle("is-active", i === currentImg);
+      });
+      updateDots();
+    }
+
+    function goToCategory(catIndex) {
+      currentCat = (catIndex + slides.length) % slides.length;
+      currentImg = 0;
+
+      // 1. Update background slides & initialize first image of this category
       slides.forEach(function (slide, i) {
-        var active = i === current;
+        var active = i === currentCat;
         slide.classList.toggle("is-active", active);
-        if (active) slide.removeAttribute("aria-hidden");
-        else slide.setAttribute("aria-hidden", "true");
+        if (active) {
+          slide.removeAttribute("aria-hidden");
+          var images = getSlideImages(slide);
+          images.forEach(function (img, j) {
+            img.classList.toggle("is-active", j === 0);
+          });
+          renderDots(images);
+        } else {
+          slide.setAttribute("aria-hidden", "true");
+        }
       });
 
-      // 2. Update timeline tabs & progress bars
+      // 2. Update timeline tabs & progress bars (if present)
       tabs.forEach(function (tab, i) {
-        var active = i === current;
+        var active = i === currentCat;
         tab.classList.toggle("is-active", active);
         tab.setAttribute("aria-selected", active ? "true" : "false");
         var bar = tab.querySelector(".h-hero__tab-bar");
@@ -381,15 +443,15 @@
           bar.style.transition = "none";
           bar.style.width = "0%";
           if (active && !reduced) {
-            void bar.offsetWidth; // Force layout recalculation
-            bar.style.transition = "width " + (duration / 1000) + "s linear";
+            void bar.offsetWidth;
+            bar.style.transition = "width " + (photoDuration / 1000) + "s linear";
             bar.style.width = "100%";
           }
         }
       });
 
       // 3. Update spotlight card content smoothly
-      var curSlide = slides[current];
+      var curSlide = slides[currentCat];
       if (curSlide) {
         var name = curSlide.getAttribute("data-work-name") || "Initiative";
         var cat = curSlide.getAttribute("data-work-cat") || "Key Focus";
@@ -398,7 +460,7 @@
         var cta = curSlide.getAttribute("data-work-cta") || "Learn more";
 
         if (elSpotCat) elSpotCat.textContent = cat;
-        if (elSpotCounter) elSpotCounter.textContent = (current + 1 < 10 ? "0" : "") + (current + 1) + " / " + (slides.length < 10 ? "0" : "") + slides.length;
+        if (elSpotCounter) elSpotCounter.textContent = (currentCat + 1 < 10 ? "0" : "") + (currentCat + 1) + " / " + (slides.length < 10 ? "0" : "") + slides.length;
         if (elSpotTitle) elSpotTitle.textContent = name;
         if (elSpotDesc) elSpotDesc.textContent = desc;
         if (elSpotLink) elSpotLink.setAttribute("href", href);
@@ -406,13 +468,30 @@
       }
     }
 
-    function next() { goTo(current + 1); }
-    function prev() { goTo(current - 1); }
+    function nextStep() {
+      var activeSlide = slides[currentCat];
+      var images = getSlideImages(activeSlide);
+      if (images.length > 1 && currentImg + 1 < images.length) {
+        // Step to next photo within the active category
+        goToImage(currentImg + 1);
+      } else {
+        // All photos in this category shown, advance to next category
+        goToCategory(currentCat + 1);
+      }
+    }
 
-    function startAuto() {
+    function nextCategory() {
+      goToCategory(currentCat + 1);
+    }
+
+    function prevCategory() {
+      goToCategory(currentCat - 1);
+    }
+
+    function restartTimer() {
       if (reduced) return;
       stopAuto();
-      timer = setInterval(next, duration);
+      timer = setInterval(nextStep, photoDuration);
     }
 
     function stopAuto() {
@@ -420,45 +499,36 @@
         clearInterval(timer);
         timer = null;
       }
-      var activeTab = tabs[current];
-      if (activeTab) {
-        var bar = activeTab.querySelector(".h-hero__tab-bar");
-        if (bar) {
-          var computedWidth = window.getComputedStyle(bar).width;
-          bar.style.transition = "none";
-          bar.style.width = computedWidth;
-        }
-      }
     }
 
     tabs.forEach(function (tab, i) {
       tab.addEventListener("click", function () {
-        goTo(i);
-        startAuto();
+        goToCategory(i);
+        restartTimer();
       });
     });
 
     prevBtns.forEach(function (btn) {
       btn.addEventListener("click", function () {
-        prev();
-        startAuto();
+        prevCategory();
+        restartTimer();
       });
     });
 
     nextBtns.forEach(function (btn) {
       btn.addEventListener("click", function () {
-        next();
-        startAuto();
+        nextCategory();
+        restartTimer();
       });
     });
 
     hero.addEventListener("mouseenter", stopAuto);
-    hero.addEventListener("mouseleave", startAuto);
+    hero.addEventListener("mouseleave", restartTimer);
     hero.addEventListener("touchstart", stopAuto, { passive: true });
-    hero.addEventListener("touchend", startAuto, { passive: true });
+    hero.addEventListener("touchend", restartTimer, { passive: true });
 
-    goTo(0);
-    startAuto();
+    goToCategory(0);
+    restartTimer();
   }
 
   /* ------------------------------------------------------------- work tabs */

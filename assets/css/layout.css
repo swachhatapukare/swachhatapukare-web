@@ -890,23 +890,71 @@
   height: 38px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
-  color: #FFFFFF;
+  color: rgba(255, 255, 255, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.18);
-  transition: all 0.25s var(--e-out);
+  transition: transform 0.25s var(--e-out),
+              background 0.25s var(--e-out),
+              border-color 0.25s var(--e-out),
+              box-shadow 0.25s var(--e-out);
   text-decoration: none;
 }
 
 .social-icon svg {
   width: 17px;
   height: 17px;
+  transition: color 0.25s var(--e-out),
+              stroke 0.25s var(--e-out),
+              fill 0.25s var(--e-out),
+              transform 0.25s var(--e-out);
 }
 
+/* Neutral container state on hover — never recolors the button wrapper */
 .social-icon:hover {
-  background: #176BAE;
-  border-color: #86BEE6;
-  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.13);
+  border-color: rgba(255, 255, 255, 0.32);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.social-icon:hover svg {
+  transform: scale(1.1);
+}
+
+/* Brand colours applied ONLY to the icon itself */
+.social-icon--instagram:hover {
+  color: #E1306C;
+}
+
+.social-icon--instagram:hover svg rect,
+.social-icon--instagram:hover svg circle {
+  stroke: url(#sp-insta-grad, #E1306C);
+}
+
+.social-icon--instagram:hover svg circle[r="1.2"] {
+  fill: url(#sp-insta-grad, #E1306C);
+}
+
+.social-icon--facebook:hover {
+  color: #1877F2;
+}
+
+.social-icon--youtube:hover {
+  color: #FF0000;
+}
+
+.social-icon--linkedin:hover {
+  color: #0A66C2;
+}
+
+.social-icon--x:hover {
+  color: #FFFFFF;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social-icon,
+  .social-icon svg {
+    transition: none !important;
+  }
 }
 
 .footer-address {

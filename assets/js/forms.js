@@ -79,6 +79,12 @@
       submitBtn.disabled = false;
     }
 
+    var customTimer = null;
+    if (customWrap) {
+      customWrap.hidden = true;
+      customWrap.classList.remove("is-open");
+    }
+
     SP.qsa("[data-amount]", form).forEach(function (chip) {
       chip.addEventListener("click", function () {
         var value = chip.getAttribute("data-amount");
@@ -88,8 +94,25 @@
           c.classList.toggle("is-selected", on);
           c.setAttribute("aria-pressed", on ? "true" : "false");
         });
-        if (customWrap) customWrap.hidden = value !== "custom";
-        if (value === "custom" && customInput) customInput.focus();
+        if (customWrap) {
+          clearTimeout(customTimer);
+          if (value === "custom") {
+            customWrap.hidden = false;
+            // reflow to ensure smooth transition from collapsed state
+            void customWrap.offsetHeight;
+            customWrap.classList.add("is-open");
+            if (customInput) {
+              setTimeout(function () {
+                if (amount === "custom") customInput.focus();
+              }, 120);
+            }
+          } else {
+            customWrap.classList.remove("is-open");
+            customTimer = setTimeout(function () {
+              if (amount !== "custom") customWrap.hidden = true;
+            }, 360);
+          }
+        }
         refreshLabel();
       });
     });

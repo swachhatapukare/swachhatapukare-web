@@ -2093,6 +2093,45 @@ body[data-page="tedxbistupur"] .cta-band .btn--amber:hover {
 }
 
 .donate-form { gap: var(--s-4); }
+
+/* Custom amount smooth animated reveal/hide */
+.donate-custom-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              margin 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.donate-custom-wrap > .field {
+  min-height: 0;
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(-8px);
+}
+
+.donate-custom-wrap.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  margin-top: var(--s-2);
+  margin-bottom: var(--s-1);
+}
+
+.donate-custom-wrap.is-open > .field {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .donate-custom-wrap,
+  .donate-custom-wrap > .field {
+    transition: none !important;
+  }
+}
+
 .donate-aside { display: grid; gap: var(--s-5); }
 
 .address-static { font-style: normal; color: var(--c-muted); line-height: 1.7; }
