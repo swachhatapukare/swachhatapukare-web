@@ -1112,6 +1112,16 @@ window.SP = window.SP || {};
 
       renderFab(document.body);
 
+      /* locked navbar elevation on scroll */
+      var headerEl = el(".site-header");
+      if (headerEl) {
+        var onHeaderScroll = function () {
+          headerEl.classList.toggle("is-scrolled", (window.scrollY || window.pageYOffset || 0) > 12);
+        };
+        window.addEventListener("scroll", onHeaderScroll, { passive: true });
+        onHeaderScroll();
+      }
+
       attachPhotoLogo(document);
       bindActions();
       updateBadge();

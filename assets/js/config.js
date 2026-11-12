@@ -648,20 +648,19 @@ SP.config = {
   },
 
   /* ---------------------------------------------------------------- gallery */
-  // TODO: placeholder captions and image paths — swap in real photographs.
   GALLERY: [
-    { src: "assets/gallery/river-drive-1.jpg", caption: "River cleaning drive — photo pending", tint: "--c-cat-office" },
-    { src: "assets/gallery/river-drive-2.jpg", caption: "River cleaning drive — photo pending", tint: "--c-cat-desk" },
-    { src: "assets/gallery/harvest-1.jpg", caption: "Water hyacinth — photo pending", tint: "--c-cat-home" },
-    { src: "assets/gallery/weaving-1.jpg", caption: "Weaving — photo pending", tint: "--c-cat-tabletop" },
-    { src: "assets/gallery/office-1.jpg", caption: "Office essentials — photo pending", tint: "--c-cat-office" },
-    { src: "assets/gallery/desk-1.jpg", caption: "Desk collection — photo pending", tint: "--c-cat-desk" },
-    { src: "assets/gallery/home-1.jpg", caption: "Home & utility — photo pending", tint: "--c-cat-home" },
-    { src: "assets/gallery/tabletop-1.jpg", caption: "Tabletop — photo pending", tint: "--c-cat-tabletop" },
-    { src: "assets/gallery/heritage-1.jpg", caption: "Heritage collection — photo pending", tint: "--c-cat-heritage" },
-    { src: "assets/gallery/lighting-1.jpg", caption: "Lighting — photo pending", tint: "--c-cat-lighting" },
-    { src: "assets/gallery/solar-1.jpg", caption: "Solar power — photo pending", tint: "--c-cat-lighting" },
-    { src: "assets/gallery/tedx-1.jpg", caption: "TEDxBistupur — photo pending", tint: "--c-cat-heritage" }
+    { src: "assets/gallery/river-drive-1.jpg", caption: "River cleaning drive — Subarnarekha riverbank restoration", tint: "--c-cat-office" },
+    { src: "assets/gallery/river-drive-2.jpg", caption: "River cleaning drive — volunteer community cleanup", tint: "--c-cat-desk" },
+    { src: "assets/gallery/harvest-1.jpg", caption: "Water hyacinth — harvesting invasive river weeds", tint: "--c-cat-home" },
+    { src: "assets/gallery/weaving-1.jpg", caption: "Artisan weaving with rural women's self-help groups", tint: "--c-cat-tabletop" },
+    { src: "assets/gallery/office-1.jpg", caption: "Office essentials handwoven from river weed fiber", tint: "--c-cat-office" },
+    { src: "assets/gallery/desk-1.jpg", caption: "Desk collection handcrafted by rural artisans", tint: "--c-cat-desk" },
+    { src: "assets/gallery/home-1.jpg", caption: "Home & utility handcrafted circular products", tint: "--c-cat-home" },
+    { src: "assets/gallery/tabletop-1.jpg", caption: "Tabletop utility and handcrafted baskets", tint: "--c-cat-tabletop" },
+    { src: "assets/gallery/heritage-1.jpg", caption: "Heritage collection showcasing indigenous craftsmanship", tint: "--c-cat-heritage" },
+    { src: "assets/gallery/lighting-1.jpg", caption: "Clean lighting — sustainable solar solutions", tint: "--c-cat-lighting" },
+    { src: "assets/gallery/solar-1.jpg", caption: "Solar power community clean energy setup", tint: "--c-cat-lighting" },
+    { src: "assets/gallery/tedx-1.jpg", caption: "TEDxBistupur — ideas worth spreading in Jamshedpur", tint: "--c-cat-heritage" }
   ],
 
   /* ---------------------------------------------------------------- delivery */

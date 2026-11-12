@@ -6,22 +6,28 @@
   var items = [];
   var grid, lightbox, lightboxImg, lightboxCaption, current = 0, untrap = null, lastFocused = null;
 
+  function cleanCaption(text) {
+    if (!text) return "";
+    return String(text).replace(/\s*—\s*photo\s+pending/gi, "").trim();
+  }
+
   function render() {
     var holder = SP.qs("[data-gallery]");
     if (!holder) return;
     items = SP.config.GALLERY;
     holder.innerHTML = items.map(function (item, i) {
+      var caption = cleanCaption(item.caption);
       return (
         '<button class="gallery-tile" type="button" data-gallery-index="' + i + '" ' +
-        'aria-label="Open image: ' + SP.esc(item.caption) + '">' +
+        'aria-label="Open image: ' + SP.esc(caption) + '">' +
         SP.imgTag({
           src: item.src,
-          alt: item.caption,
-          name: item.caption.replace(/ — .*$/, ""),
+          alt: caption,
+          name: caption.replace(/ — .*$/, ""),
           tint: item.tint,
           noDims: true
         }) +
-        '<span class="gallery-tile__caption">' + SP.esc(item.caption) + "</span>" +
+        '<span class="gallery-tile__caption">' + SP.esc(caption) + "</span>" +
         "</button>"
       );
     }).join("");
@@ -76,15 +82,16 @@
   function update() {
     var item = items[current];
     if (!item) return;
-    lightboxImg.dataset.name = item.caption.replace(/ — .*$/, "");
+    var caption = cleanCaption(item.caption);
+    lightboxImg.dataset.name = caption.replace(/ — .*$/, "");
     lightboxImg.dataset.tint = item.tint;
     delete lightboxImg.dataset.spFallbackDone;
-    lightboxImg.alt = item.caption;
+    lightboxImg.alt = caption;
     lightboxImg.src = item.src;
     if (lightboxImg.complete && lightboxImg.naturalWidth === 0) {
       lightboxImg.dispatchEvent(new Event("error"));
     }
-    lightboxCaption.textContent = item.caption + " (" + (current + 1) + " of " + items.length + ")";
+    lightboxCaption.textContent = caption + " (" + (current + 1) + " of " + items.length + ")";
   }
 
   function open(index) {
