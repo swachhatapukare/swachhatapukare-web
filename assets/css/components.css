@@ -1038,6 +1038,58 @@
 .timeline__item:not(.is-done) .timeline__label { color: var(--c-muted); }
 
 /* -------------------------------------------------------------- gallery (Waterfall / Masonry) */
+.gallery-filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+  padding-bottom: 0.25rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.gallery-filters::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 1.15rem;
+  border-radius: var(--r-full);
+  border: 1px solid var(--c-line);
+  background: var(--c-white);
+  color: var(--c-muted);
+  font-size: var(--t-sm);
+  font-weight: var(--fw-semibold);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--d-sm) var(--e-out);
+}
+
+.gallery-filter-btn:hover {
+  background: var(--c-cream);
+  color: var(--c-dark);
+  border-color: rgba(23, 107, 174, 0.35);
+}
+
+.gallery-filter-btn.is-active {
+  background: var(--c-teal);
+  color: #FFFFFF;
+  border-color: var(--c-teal);
+  box-shadow: 0 4px 14px rgba(23, 107, 174, 0.22);
+}
+
+.gallery-empty {
+  padding: 3rem 1rem;
+  text-align: center;
+  color: var(--c-muted);
+  font-size: 1.1rem;
+}
+
 .gallery-grid {
   column-count: 3;
   column-gap: var(--s-4, 1.5rem);
@@ -1119,13 +1171,35 @@
   right: 0;
   bottom: 0;
   padding: 2.2rem var(--s-3) var(--s-3);
-  background: linear-gradient(180deg, transparent 0%, rgba(6, 24, 43, 0.55) 45%, rgba(6, 24, 43, 0.88) 100%);
+  background: linear-gradient(180deg, transparent 0%, rgba(6, 24, 43, 0.55) 35%, rgba(6, 24, 43, 0.9) 100%);
   color: var(--c-on-dark);
   font-size: var(--t-sm);
   font-weight: 500;
   text-align: left;
-  opacity: 0.9;
+  opacity: 0.92;
   transition: opacity 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.gallery-tile__tag {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.68rem;
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-amber);
+  background: rgba(207, 230, 248, 0.15);
+  border: 1px solid rgba(207, 230, 248, 0.25);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--r-full);
+}
+
+.gallery-tile__text {
+  display: block;
+  line-height: 1.35;
 }
 
 .gallery-tile:hover .gallery-tile__caption {

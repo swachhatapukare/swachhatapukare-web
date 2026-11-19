@@ -1,22 +1,86 @@
-/* gallery.js — responsive grid + keyboard accessible lightbox */
+/* gallery.js — responsive category-filtered masonry grid + keyboard accessible lightbox */
 
 (function (SP) {
   "use strict";
 
-  var items = [];
-  var grid, lightbox, lightboxImg, lightboxCaption, current = 0, untrap = null, lastFocused = null;
+  var allItems = [];
+  var currentItems = [];
+  var currentFilter = "all";
+  var lightbox, lightboxImg, lightboxCaption, current = 0, untrap = null, lastFocused = null;
 
   function cleanCaption(text) {
     if (!text) return "";
     return String(text).replace(/\s*—\s*photo\s+pending/gi, "").trim();
   }
 
-  function render() {
+  function getCategoryLabel(catId) {
+    var cats = (SP.config && SP.config.GALLERY_CATEGORIES) || [];
+    for (var i = 0; i < cats.length; i++) {
+      if (cats[i].id === catId) return cats[i].label;
+    }
+    return catId;
+  }
+
+  function renderFilters() {
+    var bar = SP.qs("[data-gallery-filters]");
+    if (!bar) return;
+    var cats = (SP.config && SP.config.GALLERY_CATEGORIES) || [
+      { id: "all", label: "All Photos" }
+    ];
+
+    bar.innerHTML = cats.map(function (c) {
+      var active = c.id === currentFilter;
+      return (
+        '<button class="gallery-filter-btn' + (active ? " is-active" : "") + '" ' +
+        'type="button" role="tab" aria-selected="' + (active ? "true" : "false") + '" ' +
+        'data-gallery-filter="' + c.id + '">' +
+        SP.esc(c.label) +
+        '</button>'
+      );
+    }).join("");
+
+    bar.addEventListener("click", function (e) {
+      var btn = e.target.closest("[data-gallery-filter]");
+      if (!btn) return;
+      var cat = btn.getAttribute("data-gallery-filter");
+      if (cat && cat !== currentFilter) {
+        setFilter(cat);
+      }
+    });
+  }
+
+  function setFilter(cat) {
+    currentFilter = cat;
+    var btns = SP.qsa(".gallery-filter-btn");
+    btns.forEach(function (btn) {
+      var active = btn.getAttribute("data-gallery-filter") === cat;
+      btn.classList.toggle("is-active", active);
+      btn.setAttribute("aria-selected", active ? "true" : "false");
+    });
+
+    renderGrid();
+  }
+
+  function renderGrid() {
     var holder = SP.qs("[data-gallery]");
     if (!holder) return;
-    items = SP.config.GALLERY;
-    holder.innerHTML = items.map(function (item, i) {
+
+    if (!allItems.length) {
+      allItems = (SP.config && SP.config.GALLERY) || [];
+    }
+
+    currentItems = (currentFilter === "all")
+      ? allItems
+      : allItems.filter(function (item) { return item.category === currentFilter; });
+
+    if (!currentItems.length) {
+      holder.innerHTML = '<p class="gallery-empty">No photographs found in this category.</p>';
+      return;
+    }
+
+    holder.innerHTML = currentItems.map(function (item, i) {
       var caption = cleanCaption(item.caption);
+      var catName = getCategoryLabel(item.category);
       return (
         '<button class="gallery-tile" type="button" data-gallery-index="' + i + '" ' +
         'aria-label="Open image: ' + SP.esc(caption) + '">' +
@@ -27,16 +91,14 @@
           tint: item.tint,
           noDims: true
         }) +
-        '<span class="gallery-tile__caption">' + SP.esc(caption) + "</span>" +
-        "</button>"
+        '<span class="gallery-tile__caption">' +
+        (item.category && item.category !== "all" ? '<span class="gallery-tile__tag">' + SP.esc(catName) + '</span>' : '') +
+        '<span class="gallery-tile__text">' + SP.esc(caption) + '</span>' +
+        '</span>' +
+        '</button>'
       );
     }).join("");
     SP.hydrateImages(holder);
-
-    holder.addEventListener("click", function (e) {
-      var btn = e.target.closest("[data-gallery-index]");
-      if (btn) open(Number(btn.getAttribute("data-gallery-index")));
-    });
   }
 
   function ensureLightbox() {
@@ -80,7 +142,7 @@
   }
 
   function update() {
-    var item = items[current];
+    var item = currentItems[current];
     if (!item) return;
     var caption = cleanCaption(item.caption);
     lightboxImg.dataset.name = caption.replace(/ — .*$/, "");
@@ -91,12 +153,12 @@
     if (lightboxImg.complete && lightboxImg.naturalWidth === 0) {
       lightboxImg.dispatchEvent(new Event("error"));
     }
-    lightboxCaption.textContent = caption + " (" + (current + 1) + " of " + items.length + ")";
+    lightboxCaption.textContent = caption + " (" + (current + 1) + " of " + currentItems.length + ")";
   }
 
   function open(index) {
     ensureLightbox();
-    current = SP.clamp(index, 0, items.length - 1);
+    current = SP.clamp(index, 0, currentItems.length - 1);
     lastFocused = document.activeElement;
     lightbox.classList.add("is-open");
     document.documentElement.classList.add("no-scroll");
@@ -114,11 +176,23 @@
   }
 
   function step(dir) {
-    current = (current + dir + items.length) % items.length;
+    if (!currentItems.length) return;
+    current = (current + dir + currentItems.length) % currentItems.length;
     update();
   }
 
-  function init() { render(); }
+  function init() {
+    var holder = SP.qs("[data-gallery]");
+    if (!holder) return;
+
+    renderFilters();
+    renderGrid();
+
+    holder.addEventListener("click", function (e) {
+      var btn = e.target.closest("[data-gallery-index]");
+      if (btn) open(Number(btn.getAttribute("data-gallery-index")));
+    });
+  }
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);

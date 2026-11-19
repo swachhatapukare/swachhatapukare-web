@@ -648,19 +648,193 @@ SP.config = {
   },
 
   /* ---------------------------------------------------------------- gallery */
+  GALLERY_CATEGORIES: [
+    { id: "all", label: "All Photos" },
+    { id: "river-restoration", label: "River Restoration" },
+    { id: "water-hyacinth", label: "Water Hyacinth & Livelihoods" },
+    { id: "community-drives", label: "Community Drives" },
+    { id: "tedxbistupur", label: "TEDxBistupur" },
+    { id: "handcrafted-products", label: "Handcrafted Goods" }
+  ],
+
   GALLERY: [
-    { src: "assets/gallery/river-drive-1.jpg", caption: "River cleaning drive — Subarnarekha riverbank restoration", tint: "--c-cat-office" },
-    { src: "assets/gallery/river-drive-2.jpg", caption: "River cleaning drive — volunteer community cleanup", tint: "--c-cat-desk" },
-    { src: "assets/gallery/harvest-1.jpg", caption: "Water hyacinth — harvesting invasive river weeds", tint: "--c-cat-home" },
-    { src: "assets/gallery/weaving-1.jpg", caption: "Artisan weaving with rural women's self-help groups", tint: "--c-cat-tabletop" },
-    { src: "assets/gallery/office-1.jpg", caption: "Office essentials handwoven from river weed fiber", tint: "--c-cat-office" },
-    { src: "assets/gallery/desk-1.jpg", caption: "Desk collection handcrafted by rural artisans", tint: "--c-cat-desk" },
-    { src: "assets/gallery/home-1.jpg", caption: "Home & utility handcrafted circular products", tint: "--c-cat-home" },
-    { src: "assets/gallery/tabletop-1.jpg", caption: "Tabletop utility and handcrafted baskets", tint: "--c-cat-tabletop" },
-    { src: "assets/gallery/heritage-1.jpg", caption: "Heritage collection showcasing indigenous craftsmanship", tint: "--c-cat-heritage" },
-    { src: "assets/gallery/lighting-1.jpg", caption: "Clean lighting — sustainable solar solutions", tint: "--c-cat-lighting" },
-    { src: "assets/gallery/solar-1.jpg", caption: "Solar power community clean energy setup", tint: "--c-cat-lighting" },
-    { src: "assets/gallery/tedx-1.jpg", caption: "TEDxBistupur — ideas worth spreading in Jamshedpur", tint: "--c-cat-heritage" }
+    // --- River Cleaning & Restoration ---
+    {
+      src: "assets/gallery/river-drive-1.jpg",
+      category: "river-restoration",
+      caption: "Volunteers and sanitation team clearing debris along the Subarnarekha riverbed",
+      tint: "--c-cat-office"
+    },
+    {
+      src: "assets/gallery/river-drive-2.jpg",
+      category: "river-restoration",
+      caption: "Foundation volunteers entering the river for morning water restoration",
+      tint: "--c-cat-desk"
+    },
+    {
+      src: "assets/gallery/home-1.jpg",
+      category: "river-restoration",
+      caption: "Mass community gathering of volunteers and citizens at the riverbank cleanup drive",
+      tint: "--c-cat-home"
+    },
+    {
+      src: "assets/gallery/office-1.jpg",
+      category: "river-restoration",
+      caption: "Volunteer mobilization for Subarnarekha riverbank rejuvenation",
+      tint: "--c-cat-office"
+    },
+    {
+      src: "assets/gallery/desk-1.jpg",
+      category: "river-restoration",
+      caption: "SwachhataPukare volunteer cleanup team at the river ghat",
+      tint: "--c-cat-desk"
+    },
+    {
+      src: "assets/gallery/heritage-1.jpg",
+      category: "river-restoration",
+      caption: "Retrieved sacred clay idols during post-festival cleanup to prevent river contamination",
+      tint: "--c-cat-heritage"
+    },
+    {
+      src: "assets/photos/home/gallery-5.jpg",
+      category: "river-restoration",
+      caption: "Immersed idol bamboo and straw frameworks retrieved and piled on the riverbank",
+      tint: "--c-cat-desk"
+    },
+    {
+      src: "assets/photos/home/gallery-4.jpg",
+      category: "river-restoration",
+      caption: "Volunteer assembly on the river ghat steps before the community cleanup drive",
+      tint: "--c-cat-office"
+    },
+    {
+      src: "assets/photos/home/gallery-3.jpg",
+      category: "river-restoration",
+      caption: "River ghat awareness campaign against single-use plastic during festival immersion",
+      tint: "--c-cat-home"
+    },
+    {
+      src: "assets/images/about/hero-river-action.jpg",
+      category: "river-restoration",
+      caption: "Morning riverbank monitoring and restoration drive along the river ghat",
+      tint: "--c-cat-desk"
+    },
+
+    // --- Water Hyacinth Harvesting & Livelihoods ---
+    {
+      src: "assets/gallery/harvest-1.jpg",
+      category: "water-hyacinth",
+      caption: "Harvesting dense invasive water hyacinth weeds from water bodies using sickles",
+      tint: "--c-cat-home"
+    },
+    {
+      src: "assets/gallery/weaving-1.jpg",
+      category: "water-hyacinth",
+      caption: "Volunteer wading through thick hyacinth weed mats to clear trapped river plastics",
+      tint: "--c-cat-tabletop"
+    },
+    {
+      src: "assets/images/initiatives/hyacinth-weaving.jpg",
+      category: "water-hyacinth",
+      caption: "Youth volunteers collecting waste cleared from hyacinth choke points into disposal bags",
+      tint: "--c-cat-home"
+    },
+    {
+      src: "assets/images/about/artisan-solution.jpg",
+      category: "water-hyacinth",
+      caption: "Rural women artisans crafting sustainable utility goods from dried water hyacinth stalks",
+      tint: "--c-cat-tabletop"
+    },
+
+    // --- Community Drives & Sustainability ---
+    {
+      src: "assets/gallery/tabletop-1.jpg",
+      category: "community-drives",
+      caption: "Community tree plantation drive planting saplings near rural village facilities",
+      tint: "--c-cat-tabletop"
+    },
+    {
+      src: "assets/gallery/lighting-1.jpg",
+      category: "community-drives",
+      caption: "Keynote presentation at the CII National Conference on Sustainable Waste Management",
+      tint: "--c-cat-lighting"
+    },
+    {
+      src: "assets/gallery/solar-1.jpg",
+      category: "community-drives",
+      caption: "Founder Gaurav Anand speaking on the Sustainable Waste Management expert panel",
+      tint: "--c-cat-lighting"
+    },
+
+    // --- TEDxBistupur & Youth Leadership ---
+    {
+      src: "assets/gallery/tedx-1.jpg",
+      category: "tedxbistupur",
+      caption: "TEDxBistupur organizing team and speakers receiving honors on stage",
+      tint: "--c-cat-heritage"
+    },
+    {
+      src: "assets/images/tedxbistupur/moment-stage-spotlight.jpg",
+      category: "tedxbistupur",
+      caption: "Environmental collaboration and sustainability MoU exchange at TEDxBistupur",
+      tint: "--c-cat-heritage"
+    },
+    {
+      src: "assets/images/tedxbistupur/hero-stage-backdrop.jpg",
+      category: "tedxbistupur",
+      caption: "Audience engaged during a TEDxBistupur ideas conference in Jamshedpur",
+      tint: "--c-cat-heritage"
+    },
+    {
+      src: "assets/images/tedxbistupur/moment-interactive-summit.jpg",
+      category: "tedxbistupur",
+      caption: "Youth volunteer team managing attendee registration at TEDxBistupur",
+      tint: "--c-cat-heritage"
+    },
+    {
+      src: "assets/images/tedxbistupur/moment-audience-hall.jpg",
+      category: "tedxbistupur",
+      caption: "Eco-friendly cotton delegate bags for TEDxBistupur attendees",
+      tint: "--c-cat-heritage"
+    },
+
+    // --- Handcrafted Products ---
+    {
+      src: "assets/products/coaster-set-1.jpg",
+      category: "handcrafted-products",
+      caption: "Handwoven natural water hyacinth 4-piece coaster set",
+      tint: "--c-cat-tabletop"
+    },
+    {
+      src: "assets/products/file-folder-1.jpg",
+      category: "handcrafted-products",
+      caption: "Handcrafted water hyacinth office document file-folder",
+      tint: "--c-cat-office"
+    },
+    {
+      src: "assets/products/tea-box-1.jpg",
+      category: "handcrafted-products",
+      caption: "Handwoven natural fiber tea storage box",
+      tint: "--c-cat-home"
+    },
+    {
+      src: "assets/products/dokra-photo-frame-1.jpg",
+      category: "handcrafted-products",
+      caption: "Traditional Dokra lost-wax metal-cast handcrafted photo frame",
+      tint: "--c-cat-heritage"
+    },
+    {
+      src: "assets/products/ecoblossom-lampshade-1.jpg",
+      category: "handcrafted-products",
+      caption: "EcoBlossom lampshade with hand-pressed dry botanical flowers",
+      tint: "--c-cat-lighting"
+    },
+    {
+      src: "assets/products/utility-box-1.jpg",
+      category: "handcrafted-products",
+      caption: "Multi-purpose handcrafted woven storage utility box",
+      tint: "--c-cat-desk"
+    }
   ],
 
   /* ---------------------------------------------------------------- delivery */
