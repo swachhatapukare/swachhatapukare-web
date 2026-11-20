@@ -302,38 +302,44 @@ SP.config = {
     },
 
     "water-hyacinth": {
-      eyebrow: "What we do",
+      eyebrow: "What we do · Ecology & Livelihoods",
       title: "Water Hyacinth",
       lead:
-        "The Foundation works with water hyacinth — an invasive aquatic plant — as a raw material for handcrafted products.",
+        "The Foundation transforms water hyacinth — an aggressive invasive aquatic weed that chokes freshwater bodies — into high-value everyday handcrafted utilities, providing sustainable livelihoods for rural women's self-help groups.",
       placeholderNote:
-        "Placeholder copy — pending the Foundation's approved text (see config.js).",
+        "Community ecological processing and artisan craft cluster model.",
       sections: [
         {
-          h: "The plant",
+          h: "Harvesting the Invasive Weed",
+          image: "assets/images/gallery/harvest-1.jpg",
+          caption: "Volunteers and workers harvesting dense water hyacinth mats with sickles to unclog freshwater channels.",
           p: [
-            "Water hyacinth grows quickly in water bodies and, left unchecked, chokes them. The Foundation works with it as a resource rather than only as waste.",
-            "Placeholder paragraph — replace with the actual sites, quantities and method."
+            "Water hyacinth doubles its biomass every two weeks, blanketing lakes and rivers, blocking sunlight, depleting dissolved oxygen, and suffocating aquatic biodiversity.",
+            "Instead of treating it merely as toxic waste, SwachhataPukare harvests the dense weed stalks directly from choked river bends and village water bodies in Jamshedpur and surrounding regions."
           ]
         },
         {
-          h: "From weed to weave",
+          h: "From Weed to Weave",
+          image: "assets/images/about/artisan-solution.jpg",
+          caption: "Rural women artisans weaving dried water hyacinth fiber into durable, biodegradable everyday utility goods.",
           p: [
-            "Harvested stems are prepared and woven into everyday pieces that appear in the catalogue tagged Water Hyacinth.",
-            "Placeholder paragraph — replace with the real processing and craft steps, and credit the makers."
+            "Harvested stems are washed, naturally sun-dried, sanitized, and carefully hand-braided. Rural women artisans are trained to weave the resilient fiber into baskets, desk organizers, file folders, and homeware.",
+            "The natural fiber is strong, lightweight, flexible, and completely biodegradable, offering an elegant ecological alternative to single-use plastics."
           ]
         },
         {
-          h: "Why it matters",
+          h: "Restoring Rivers & Uplifting Women",
+          image: "assets/images/initiatives/hyacinth-weaving.jpg",
+          caption: "Community youth and artisan cluster clearing trapped plastic debris and preparing materials for crafting.",
           p: [
-            "Using the plant gives a waste material a second life and supports the craft around it.",
-            "Placeholder paragraph — replace with verified environmental and community impact."
+            "Every product handcrafted from water hyacinth represents kilograms of invasive weed removed from choking waterways, paired with fair wages and financial independence for rural women self-help groups (SHGs).",
+            "By establishing circular value chains around ecological remediation, waste becomes dignified local employment."
           ]
         }
       ],
       cta: {
         title: "See what it becomes",
-        text: "Browse the products genuinely made from water hyacinth.",
+        text: "Browse handcrafted pieces made genuinely from harvested water hyacinth.",
         label: "Shop the catalogue",
         href: "shop.html?tag=water-hyacinth"
       }
@@ -342,29 +348,35 @@ SP.config = {
     "river-cleaning": {
       eyebrow: "What we do · Water",
       title: "River Cleaning Drives",
-      lead: "The Foundation mobilises volunteers and partners to keep our rivers, ghats and urban drains clean.",
+      lead: "The Foundation mobilises volunteers and institutional partners to keep our sacred rivers, public ghats, and urban drains free from synthetic pollution and plastic choke points.",
       placeholderNote:
-        "Verified schedule and upcoming cleaning drives in Jamshedpur.",
+        "500+ volunteer and partner-led cleaning drives across the Subarnarekha and Kharkai rivers.",
       sections: [
         {
-          h: "The work",
+          h: "On-Ground Cleanup Action",
+          image: "assets/images/gallery/river-drive-1.jpg",
+          caption: "Volunteer teams in protective gear clearing non-biodegradable waste along the Subarnarekha riverbanks.",
           p: [
-            "SwachhataPukare Foundation conducts frequent community cleaning drives across riverbanks, ghats, and surrounding tributaries in Jamshedpur and surrounding districts.",
+            "SwachhataPukare Foundation conducts frequent community cleaning drives across riverbanks, ghats, and surrounding tributaries in Jamshedpur and neighboring districts.",
             "Volunteers remove plastic waste, discarded synthetic materials, and choked vegetation to keep river water flowing freely and protect aquatic ecosystems."
           ]
         },
         {
-          h: "How to take part",
+          h: "Mobilizing Communities & Youth",
+          image: "assets/images/gallery/river-drive-2.jpg",
+          caption: "Early morning river restoration drive engaging citizen volunteers, youth clubs, and partner organizations.",
           p: [
             "Anyone can participate — students, citizen volunteers, corporate groups and youth clubs. No prior experience is needed.",
             "Safety boots, protective gloves, grabbers and waste disposal bags are provided at every drive site by the Foundation team."
           ]
         },
         {
-          h: "Volunteer Recognition",
+          h: "Preventing Post-Festival Contamination",
+          image: "assets/images/about/hero-river-action.jpg",
+          caption: "Systematic retrieval of immersed idol frameworks and synthetic decor during post-festival cleanup campaigns.",
           p: [
-            "Every volunteer receives a certificate of participation acknowledging their direct contribution to environmental conservation.",
-            "Click the Volunteer button below to sign up for our upcoming river cleaning drive."
+            "During cultural festivals, hundreds of immersed idols and synthetic decorations threaten water quality. Our dedicated retrieval task forces intercept straw, toxic paints, and plastics before they dissolve.",
+            "Every volunteer receives a certificate of participation acknowledging their direct contribution to environmental conservation."
           ]
         }
       ],
@@ -419,20 +431,24 @@ SP.config = {
       title: "Rural Smart Village Centres",
       lead: "Establishing sustainable rural infrastructure hubs for craft training, clean energy, local artisan workshops, and community resilience.",
       placeholderNote:
-        "We need more details for this — full project specifications, pilot locations and architectural drawings will be published as project rollout begins.",
+        "Decentralized incubation hubs empowering rural artisan clusters.",
       sections: [
         {
-          h: "Vision & Purpose",
+          h: "Vision & Community Incubation",
+          image: "assets/images/home/gallery-3.jpg",
+          caption: "Community assembly at a rural incubation center discussing local crafts and renewable practices.",
           p: [
             "Rural Smart Village Centres are decentralized community facilities designed to foster sustainable rural living, local material processing, clean energy access, and vocational training for rural artisans.",
-            "These centres serve as the regional workshops where harvested water hyacinth is dried, stored, and transformed by local self-help group artisans into marketable utility craft."
+            "These centres serve as regional workshops where harvested water hyacinth is dried, stored, and transformed by local self-help group artisans into marketable utility craft."
           ]
         },
         {
-          h: "Sustainable Infrastructure",
+          h: "Preserving Heritage & Green Infrastructure",
+          image: "assets/images/gallery/heritage-1.jpg",
+          caption: "Traditional artisan crafts and eco-friendly utility goods produced in rural training clusters.",
           p: [
             "The centres incorporate rooftop solar power, natural rainwater harvesting, and eco-friendly infrastructure, acting as living demonstration models for sustainable rural living.",
-            "More detailed operational frameworks, model village blueprints, and community partnership details will be published here as the pilot rollout commences."
+            "Local artisans receive training in design finishing, quality control, packaging, and digital catalogue access, linking village enterprise directly with urban markets."
           ]
         }
       ],
@@ -445,60 +461,68 @@ SP.config = {
     },
 
     "solar-power": {
-      eyebrow: "What we do",
-      title: "Solar Power",
-      lead: "The Foundation works on solar power initiatives.",
+      eyebrow: "What we do · Clean Energy",
+      title: "Solar Power Initiatives",
+      lead: "Deploying decentralized solar power systems and rooftop arrays to provide clean, reliable energy for rural community facilities and healthcare centres.",
       placeholderNote:
-        "Placeholder copy — pending the Foundation's approved text (see config.js).",
+        "5,000+ kW installed solar capacity across institutions and rural communities.",
       sections: [
         {
-          h: "The work",
+          h: "Powering Essential Services with Solar",
+          image: "assets/images/initiatives/healthcare-solar.jpg",
+          caption: "Solar rooftop installation providing uninterrupted clean power for community healthcare and clinics.",
           p: [
-            "Work on solar power forms one of the Foundation's focus areas.",
-            "Placeholder paragraph — replace with real project sites, capacity and outcomes."
+            "Unreliable grid power in rural areas disrupts essential clinics, community workshops, and schools. The Foundation designs and installs low-maintenance solar installations.",
+            "By providing reliable solar micro-grids, health centres maintain cold chains for critical vaccines and equipment around the clock."
           ]
         },
         {
-          h: "Why solar",
+          h: "Pioneering Sustainable Clean Energy",
+          image: "assets/images/gallery/solar-1.jpg",
+          caption: "Founder Gaurav Anand speaking at national clean energy and waste management leadership conferences.",
           p: [
-            "Clean energy reduces running costs and emissions over the life of an installation.",
-            "Placeholder paragraph — replace with the Foundation's own reasoning and results."
+            "Transitioning to decentralized solar drastically cuts diesel generator reliance, slashes operating costs, and avoids thousands of tons of greenhouse emissions.",
+            "The Foundation collaborates with corporate partners like M+ Solar by Petronas and Tata Communications to scale community clean energy adoption."
           ]
         }
       ],
       cta: {
-        title: "Partner with us",
-        text: "Talk to the Foundation about solar and sustainability projects.",
+        title: "Partner with us on Solar",
+        text: "Talk to the Foundation about solar adoption and clean energy sustainability projects.",
         label: "Get in touch",
         href: "contact.html"
       }
     },
 
     "sewage-treatment": {
-      eyebrow: "What we do",
-      title: "Sewage Treatment Plant",
-      lead: "The Foundation works on a sewage treatment plant.",
+      eyebrow: "What we do · Water & Sanitation",
+      title: "Sewage Treatment & Drainage Remediation",
+      lead: "Developing affordable, decentralized biological wastewater treatment solutions to intercept municipal sewage before it pollutes rivers and groundwater.",
       placeholderNote:
-        "Placeholder copy — pending the Foundation's approved text (see config.js).",
+        "Decentralized wastewater interception protecting the Subarnarekha river basin.",
       sections: [
         {
-          h: "The work",
+          h: "Intercepting Drain Outfalls",
+          image: "assets/images/about/river-crisis.jpg",
+          caption: "Severe raw wastewater and plastic discharge at urban drain outfalls before ecological intervention.",
           p: [
-            "Sewage treatment is one of the Foundation's stated areas of work.",
-            "Placeholder paragraph — replace with the plant's location, capacity, technology and status."
+            "Untreated sewage from municipal stormwater drains is the primary contributor to river pollution and dead zones in freshwater streams.",
+            "The Foundation works on low-cost biological filtration barriers and constructed wetland setups that naturally treat contaminated effluent before entering riverbanks."
           ]
         },
         {
-          h: "Why it matters",
+          h: "Biological Remediation & Testing",
+          image: "assets/images/home/gallery-5.jpg",
+          caption: "Sedimentation and bio-remediation site intercepting debris and solid contaminants.",
           p: [
-            "Treating sewage before it reaches water bodies keeps rivers cleaner downstream.",
-            "Placeholder paragraph — replace with verified outcomes and data."
+            "By utilizing natural bacterial bio-cultures and phytoremediation plants, hazardous pathogens and biological oxygen demand (BOD) are reduced significantly without heavy chemical treatment.",
+            "Treating sewage and wastewater at the source safeguards clean drinking water downstream and restores balance to aquatic life."
           ]
         }
       ],
       cta: {
         title: "Support this work",
-        text: "Every contribution helps the Foundation continue its environmental work.",
+        text: "Every contribution helps the Foundation expand decentralized water sanitation systems.",
         label: "Donate",
         href: "donate.html"
       }
@@ -721,6 +745,24 @@ SP.config = {
       caption: "Morning riverbank monitoring and restoration drive along the river ghat",
       tint: "--c-cat-desk"
     },
+    {
+      src: "assets/images/home/clear.jpg",
+      category: "river-restoration",
+      caption: "Volunteers clearing floating plastics and weed rafts from the riverbank",
+      tint: "--c-cat-office"
+    },
+    {
+      src: "assets/images/initiatives/water-restoration.jpg",
+      category: "river-restoration",
+      caption: "Riverbank biological filtration and ecological shoreline restoration",
+      tint: "--c-cat-desk"
+    },
+    {
+      src: "assets/images/about/river-crisis.jpg",
+      category: "river-restoration",
+      caption: "Addressing plastic and waste contamination at urban river drain outfalls",
+      tint: "--c-cat-desk"
+    },
 
     // --- Water Hyacinth Harvesting & Livelihoods ---
     {
@@ -747,6 +789,12 @@ SP.config = {
       caption: "Rural women artisans crafting sustainable utility goods from dried water hyacinth stalks",
       tint: "--c-cat-tabletop"
     },
+    {
+      src: "assets/images/home/hero.jpg",
+      category: "water-hyacinth",
+      caption: "Close-up of artisan handloom weaving dried water hyacinth natural fiber",
+      tint: "--c-cat-home"
+    },
 
     // --- Community Drives & Sustainability ---
     {
@@ -766,6 +814,24 @@ SP.config = {
       category: "community-drives",
       caption: "Founder Gaurav Anand speaking on the Sustainable Waste Management expert panel",
       tint: "--c-cat-lighting"
+    },
+    {
+      src: "assets/images/initiatives/healthcare-solar.jpg",
+      category: "community-drives",
+      caption: "Decentralized rooftop solar installation powering primary rural healthcare facilities",
+      tint: "--c-cat-lighting"
+    },
+    {
+      src: "assets/images/team/gaurav-anand.jpg",
+      category: "community-drives",
+      caption: "Founder Gaurav Anand leading community ecological orientation and field projects",
+      tint: "--c-cat-desk"
+    },
+    {
+      src: "assets/images/team/pankaj-upadhyay.jpg",
+      category: "community-drives",
+      caption: "Operations Lead Pankaj Upadhyay coordinating volunteer river cleanup drives",
+      tint: "--c-cat-office"
     },
 
     // --- TEDxBistupur & Youth Leadership ---
@@ -799,6 +865,120 @@ SP.config = {
       caption: "Eco-friendly cotton delegate bags for TEDxBistupur attendees",
       tint: "--c-cat-heritage"
     },
+    {
+      src: "assets/images/tedxbistupur/moment-community-dialogue.jpg",
+      category: "tedxbistupur",
+      caption: "Community dialogue and thought leadership session during TEDxBistupur",
+      tint: "--c-cat-heritage"
+    },
+    {
+      src: "assets/images/tedxbistupur/speaker-nupur-tandon.jpg",
+      category: "tedxbistupur",
+      caption: "Speaker Nupur Tandon delivering an inspiring address on stage",
+      tint: "--c-cat-heritage"
+    },
+    {
+      src: "assets/images/tedxbistupur/speaker-rajiv-ranjan-mishra.jpg",
+      category: "tedxbistupur",
+      caption: "Speaker Rajiv Ranjan Mishra sharing insights on river governance",
+      tint: "--c-cat-heritage"
+    },
+    {
+      src: "assets/images/tedxbistupur/speaker-rashi-jamuar.jpg",
+      category: "tedxbistupur",
+      caption: "Speaker Rashi Jamuar addressing youth innovation and civic action",
+      tint: "--c-cat-heritage"
+    },
+    {
+      src: "assets/images/tedxbistupur/collage/tedx-01.webp",
+      category: "tedxbistupur",
+      caption: "TEDxBistupur eco-friendly canvas tote bags for conference delegates",
+      tint: "--c-cat-heritage"
+    },
+    {
+      src: "assets/images/tedxbistupur/collage/tedx-03.webp",
+      category: "tedxbistupur",
+      caption: "Full cohort group photograph with stage backdrop at TEDxBistupur",
+      tint: "--c-cat-heritage"
+    },
+    {
+      src: "assets/images/tedxbistupur/collage/tedx-04.webp",
+      category: "tedxbistupur",
+      caption: "Outdoor courtyard networking and idea exchange between attendees",
+      tint: "--c-cat-heritage"
+    },
+    {
+      src: "assets/images/tedxbistupur/collage/tedx-05.webp",
+      category: "tedxbistupur",
+      caption: "Giant 3D TEDxBistupur red letters signature stage installation",
+      tint: "--c-cat-heritage"
+    },
+    {
+      src: "assets/images/tedxbistupur/collage/tedx-06.webp",
+      category: "tedxbistupur",
+      caption: "Student volunteer organizing committee gathered on the main stage",
+      tint: "--c-cat-heritage"
+    },
+    {
+      src: "assets/images/tedxbistupur/collage/tedx-07.webp",
+      category: "tedxbistupur",
+      caption: "Acoustic guitarist and musical interlude on the red dot stage",
+      tint: "--c-cat-heritage"
+    },
+    {
+      src: "assets/images/tedxbistupur/collage/tedx-08.webp",
+      category: "tedxbistupur",
+      caption: "Auditorium wide shot during presentation on environmental innovation",
+      tint: "--c-cat-heritage"
+    },
+    {
+      src: "assets/images/tedxbistupur/collage/tedx-11.webp",
+      category: "tedxbistupur",
+      caption: "Engaged audience listening attentively to changemaker stories",
+      tint: "--c-cat-heritage"
+    },
+    {
+      src: "assets/images/tedxbistupur/collage/tedx-13.webp",
+      category: "tedxbistupur",
+      caption: "Expert multidisciplinary panel discussion on sustainability and water",
+      tint: "--c-cat-heritage"
+    },
+    {
+      src: "assets/images/tedxbistupur/collage/tedx-14.webp",
+      category: "tedxbistupur",
+      caption: "Keynote presenter greeting the auditorium from the stage",
+      tint: "--c-cat-heritage"
+    },
+    {
+      src: "assets/images/tedxbistupur/collage/tedx-16.webp",
+      category: "tedxbistupur",
+      caption: "Awards and recognition ceremony honoring grassroots contributors",
+      tint: "--c-cat-heritage"
+    },
+    {
+      src: "assets/images/tedxbistupur/collage/tedx-19.webp",
+      category: "tedxbistupur",
+      caption: "Volunteer team holding certificates of appreciation on stage",
+      tint: "--c-cat-heritage"
+    },
+    {
+      src: "assets/images/tedxbistupur/collage/tedx-23.webp",
+      category: "tedxbistupur",
+      caption: "Keynote Speaker Nupur Tandon addressing the gathering",
+      tint: "--c-cat-heritage"
+    },
+    {
+      src: "assets/images/tedxbistupur/collage/tedx-24.webp",
+      category: "tedxbistupur",
+      caption: "Keynote Speaker Rajiv Ranjan Mishra delivering insights on water governance",
+      tint: "--c-cat-heritage"
+    },
+    {
+      src: "assets/images/tedxbistupur/collage/tedx-25.webp",
+      category: "tedxbistupur",
+      caption: "Keynote Speaker Rashi Jamuar speaking on community-driven innovation",
+      tint: "--c-cat-heritage"
+    },
 
     // --- Handcrafted Products ---
     {
@@ -810,7 +990,7 @@ SP.config = {
     {
       src: "assets/images/products/file-folder-1.jpg",
       category: "handcrafted-products",
-      caption: "Handcrafted water hyacinth office document file-folder",
+      caption: "Handcrafted water hyacinth office document file folder",
       tint: "--c-cat-office"
     },
     {
@@ -836,6 +1016,72 @@ SP.config = {
       category: "handcrafted-products",
       caption: "Multi-purpose handcrafted woven storage utility box",
       tint: "--c-cat-desk"
+    },
+    {
+      src: "assets/images/products/note-book-1.jpg",
+      category: "handcrafted-products",
+      caption: "Water hyacinth hardbound textured eco notebook with unbleached paper",
+      tint: "--c-cat-office"
+    },
+    {
+      src: "assets/images/products/pen-stand-1.jpg",
+      category: "handcrafted-products",
+      caption: "Artisan handwoven desk pen and pencil organizer",
+      tint: "--c-cat-desk"
+    },
+    {
+      src: "assets/images/products/photo-frame-1.jpg",
+      category: "handcrafted-products",
+      caption: "Handcrafted natural fiber photo frame with woven border",
+      tint: "--c-cat-tabletop"
+    },
+    {
+      src: "assets/images/products/slip-box-1.jpg",
+      category: "handcrafted-products",
+      caption: "Natural fiber desk slip note box with brass accent",
+      tint: "--c-cat-office"
+    },
+    {
+      src: "assets/images/products/slip-pad-1.jpg",
+      category: "handcrafted-products",
+      caption: "Executive handcrafted desk slip pad holder",
+      tint: "--c-cat-office"
+    },
+    {
+      src: "assets/images/products/tray-1.jpg",
+      category: "handcrafted-products",
+      caption: "Handwoven water hyacinth serving and hospitality tray",
+      tint: "--c-cat-home"
+    },
+    {
+      src: "assets/images/products/writing-pad-1.jpg",
+      category: "handcrafted-products",
+      caption: "Artisan eco conference writing pad with sturdy backing",
+      tint: "--c-cat-office"
+    },
+    {
+      src: "assets/images/home/coaster-set.jpg",
+      category: "handcrafted-products",
+      caption: "Handcrafted natural fiber coaster set tabletop arrangement",
+      tint: "--c-cat-tabletop"
+    },
+    {
+      src: "assets/images/home/file-folder.jpg",
+      category: "handcrafted-products",
+      caption: "Executive file folder and documents organized in natural weave",
+      tint: "--c-cat-office"
+    },
+    {
+      src: "assets/images/home/tea-box.jpg",
+      category: "handcrafted-products",
+      caption: "Handmade tea storage box styled for contemporary living",
+      tint: "--c-cat-home"
+    },
+    {
+      src: "assets/images/home/dokra-photo-frame.jpg",
+      category: "handcrafted-products",
+      caption: "Indigenous Dokra tribal metal craft photo frame styling",
+      tint: "--c-cat-heritage"
     }
   ],
 
