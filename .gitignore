@@ -1,9 +1,55 @@
-__pycache__/
-*.pyc
+# ==============================================================================
+# SwachhataPukare Foundation - .gitignore
+# ==============================================================================
+
+# OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Thumbs.db:encryptable
+[Dd]esktop.ini
 
+# Editor & IDE configurations
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
 
+# Python cache & build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Environment files & secrets
+.env
+.env.local
+.env.*.local
+*.pem
+
+# Logs & debug outputs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary & backup files
+*.tmp
+*.temp
+*.bak
+
+# Internal reference documents & working drafts (not for production web bundle)
+*.docx
 SwachhataPukareWebsite-Changes.docx
 Swachhatapukare_Corporate_Catalogue-2.pdf
-assets/tedxbistupur-unused/
+
+# Raw archives & unused staging folders
 assets/archive/
+assets/tedxbistupur-unused/
