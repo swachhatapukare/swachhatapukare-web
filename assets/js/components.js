@@ -541,7 +541,7 @@ window.SP = window.SP || {};
       '<article class="mini-line">' +
       '<a class="mini-line__media" href="' + line.href + '" tabindex="-1" aria-hidden="true">' +
       SP.imgTag({
-        src: "assets/products/" + line.product.slug + "-1.jpg",
+        src: "assets/images/products/" + line.product.slug + "-1.jpg",
         alt: "",
         name: line.product.name,
         tint: SP.config.categoryTint(line.category),
@@ -1055,7 +1055,7 @@ window.SP = window.SP || {};
       '<div class="card__media">' +
       (badges ? '<div class="card__badges">' + badges + "</div>" : "") +
       SP.imgTag({
-        src: product.image || ("assets/products/" + product.slug + "-1.jpg"),
+        src: product.image || ("assets/images/products/" + product.slug + "-1.jpg"),
         alt: product.name + " — handcrafted product photo",
         name: product.name,
         tint: tint,

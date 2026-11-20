@@ -56,7 +56,10 @@
 
   <section class="section">
     <div class="container contact-layout">
-      <form class="story-block contact-form" id="contact-form" novalidate>
+      <form class="story-block contact-form" id="contact-form" novalidate action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="4b388d46-989d-4bf2-8730-b2c0af2ad37f">
+        <input type="hidden" name="from_name" value="SwachhataPukare Foundation Contact Form">
+        <input type="checkbox" name="botcheck" class="hidden" style="display:none">
         <span class="eyebrow">Enquiry form</span>
         <h2>Send a message</h2>
 
@@ -97,9 +100,10 @@
         <div class="btn-row">
           <button class="btn btn--primary btn--lg" type="submit">Send message</button>
         </div>
-        <p class="form-note">Your message is saved in this browser only.</p>
+        <p class="form-note">We usually respond within 24–48 business hours.</p>
 
         <div class="notice notice--success" id="contact-success" hidden role="status"></div>
+        <div class="notice notice--error" id="contact-error" hidden role="alert"></div>
       </form>
 
       <aside class="contact-aside" aria-label="Foundation contact details">

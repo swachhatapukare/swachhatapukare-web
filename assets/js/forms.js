@@ -43,18 +43,73 @@
       });
       data.phone = SP.digits(data.phone);
 
-      // BACKEND-HOOK: POST /api/enquiries — sends the enquiry to the Foundation
-      SP.store.saveEnquiry("contact", data);
+      var submitBtn = form.querySelector('button[type="submit"]');
+      var origBtnText = submitBtn ? submitBtn.textContent : "Send message";
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending message...";
+      }
 
       var success = document.getElementById("contact-success");
-      if (success) {
-        success.hidden = false;
-        success.textContent = "Thank you, " + data.name +
-          ". Your message has been recorded in this browser.";
-        success.focus && success.focus();
-      }
-      SP.ui.toast("Message sent.");
-      form.reset();
+      var errorNotice = document.getElementById("contact-error");
+      if (success) success.hidden = true;
+      if (errorNotice) errorNotice.hidden = true;
+
+      var accessKey = (form.querySelector('[name="access_key"]') && form.querySelector('[name="access_key"]').value) ||
+        cfg.WEB3FORMS_ACCESS_KEY || "4b388d46-989d-4bf2-8730-b2c0af2ad37f";
+      var botcheck = form.querySelector('[name="botcheck"]');
+      if (botcheck && botcheck.checked) return;
+
+      var payload = {
+        access_key: accessKey,
+        name: data.name,
+        phone: data.phone,
+        email: data.email,
+        subject: "[" + (cfg.SITE_SHORT || "SwachhataPukare") + "] " + data.subject,
+        message: data.message,
+        from_name: cfg.SITE_NAME || "SwachhataPukare Foundation"
+      };
+
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(function (res) { return res.json(); })
+      .then(function (result) {
+        if (result && result.success) {
+          SP.store.saveEnquiry("contact", data);
+          if (success) {
+            success.hidden = false;
+            success.textContent = "Thank you, " + data.name +
+              ". Your message has been sent successfully. We will get back to you shortly.";
+            success.focus && success.focus();
+          }
+          SP.ui.toast("Message sent successfully!", "success");
+          form.reset();
+        } else {
+          throw new Error((result && result.message) || "Submission unsuccessful");
+        }
+      })
+      .catch(function (err) {
+        // Fallback: preserve enquiry locally
+        SP.store.saveEnquiry("contact", data);
+        if (errorNotice) {
+          errorNotice.hidden = false;
+          errorNotice.textContent = "Could not send online: " + (err.message || "Network error") +
+            ". Your message has been saved locally. You can also contact us via WhatsApp.";
+        }
+        SP.ui.toast("Message saved locally. Please try WhatsApp if urgent.", "error");
+      })
+      .finally(function () {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = origBtnText;
+        }
+      });
     });
   }
 

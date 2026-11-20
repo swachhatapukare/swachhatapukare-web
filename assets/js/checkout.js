@@ -24,7 +24,7 @@
       return (
         '<div class="order-item">' +
         SP.imgTag({
-          src: "assets/products/" + line.product.slug + "-1.jpg",
+          src: "assets/images/products/" + line.product.slug + "-1.jpg",
           alt: "",
           name: line.product.name,
           tint: SP.config.categoryTint(line.category),

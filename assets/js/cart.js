@@ -12,7 +12,7 @@
       '<article class="cart-line">' +
       '<a class="cart-line__media" href="' + line.href + '">' +
       SP.imgTag({
-        src: "assets/products/" + line.product.slug + "-1.jpg",
+        src: "assets/images/products/" + line.product.slug + "-1.jpg",
         alt: line.product.name + " product photo",
         name: line.product.name,
         tint: tint,

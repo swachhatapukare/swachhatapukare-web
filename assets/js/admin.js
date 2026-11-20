@@ -620,7 +620,7 @@
       var badgeClass = isOut ? "danger" : (isLow ? "warning" : "success");
       var badgeLabel = isOut ? "Out of Stock" : (isLow ? "Low Stock (" + qty + ")" : "In Stock (" + qty + ")");
 
-      var imgUrl = prod.image || ("assets/products/" + prod.slug + "-1.jpg");
+      var imgUrl = prod.image || ("assets/images/products/" + prod.slug + "-1.jpg");
       return (
         '<tr>' +
         '<td><strong class="font-mono">' + SP.esc(prod.sku) + '</strong></td>' +
@@ -989,7 +989,7 @@
       stockInput.value = prod.stock_qty != null ? prod.stock_qty : 25;
       dimInput.value = prod.dimensions || "";
       descInput.value = prod.description || "";
-      var existingImg = prod.image || ("assets/products/" + prod.slug + "-1.jpg");
+      var existingImg = prod.image || ("assets/images/products/" + prod.slug + "-1.jpg");
       if (imgInput) imgInput.value = prod.image || "";
       updatePreview(existingImg);
     } else {
@@ -1243,7 +1243,7 @@
       '      <span class="text-xs text-muted">Empty = normal text layout; With image = 2-column layout</span>' +
       '    </div>' +
       '    <div style="display:flex;gap:0.5rem;align-items:center;">' +
-      '      <input type="text" class="adm-input cms-sec-img" placeholder="assets/photos/... or upload image" style="flex:1;">' +
+      '      <input type="text" class="adm-input cms-sec-img" placeholder="assets/images/... or upload image" style="flex:1;">' +
       '      <label class="btn btn--outline btn--sm" style="cursor:pointer;white-space:nowrap;margin:0;display:inline-flex;align-items:center;gap:4px;">' +
       '        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>' +
       '        <span>Upload</span>' +

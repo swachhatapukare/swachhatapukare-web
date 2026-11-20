@@ -21,6 +21,8 @@ SP.config = {
     x: "https://x.com/swachhatapukare"
   },
 
+  WEB3FORMS_ACCESS_KEY: "4b388d46-989d-4bf2-8730-b2c0af2ad37f",
+
   FOUNDATION: {
     name: "SwachhataPukare Foundation",
     addressLines: [
@@ -80,16 +82,16 @@ SP.config = {
      Files live in assets/partners/ — all placed on clean white card backgrounds.
      width is the logo's max width in rem to maintain visual harmony. */
   PARTNER_LOGOS: [
-    { name: "Tata Steel", src: "assets/partners/tatasteel.png", width: 9.5 },
-    { name: "Tata Communications", src: "assets/partners/tatacommunications.png", width: 11 },
-    { name: "NTPC", src: "assets/partners/NTPC.png", width: 7.5 },
-    { name: "Axis India", src: "assets/partners/Axis india.png", width: 9.5 },
-    { name: "M+ Solar by Petronas", src: "assets/partners/msolar by petronas.jpg", width: 9.5 },
-    { name: "Neoperl", src: "assets/partners/neoperl.png", width: 9 },
-    { name: "MM Aqua", src: "assets/partners/mmaqua.png", width: 9.5 },
-    { name: "Enactus", src: "assets/partners/enactus.png", width: 10 },
-    { name: "Inner Wheel", src: "assets/partners/innerwheel.png", width: 8.5 },
-    { name: "Utkarsh Bangla", src: "assets/partners/utkarshbangla.png", width: 9 }
+    { name: "Tata Steel", src: "assets/images/partners/tatasteel.png", width: 9.5 },
+    { name: "Tata Communications", src: "assets/images/partners/tatacommunications.png", width: 11 },
+    { name: "NTPC", src: "assets/images/partners/NTPC.png", width: 7.5 },
+    { name: "Axis India", src: "assets/images/partners/Axis india.png", width: 9.5 },
+    { name: "M+ Solar by Petronas", src: "assets/images/partners/msolar by petronas.jpg", width: 9.5 },
+    { name: "Neoperl", src: "assets/images/partners/neoperl.png", width: 9 },
+    { name: "MM Aqua", src: "assets/images/partners/mmaqua.png", width: 9.5 },
+    { name: "Enactus", src: "assets/images/partners/enactus.png", width: 10 },
+    { name: "Inner Wheel", src: "assets/images/partners/innerwheel.png", width: 8.5 },
+    { name: "Utkarsh Bangla", src: "assets/images/partners/utkarshbangla.png", width: 9 }
   ],
 
   /* ------------------------------------------------------------ testimonials */
@@ -660,55 +662,55 @@ SP.config = {
   GALLERY: [
     // --- River Cleaning & Restoration ---
     {
-      src: "assets/gallery/river-drive-1.jpg",
+      src: "assets/images/gallery/river-drive-1.jpg",
       category: "river-restoration",
       caption: "Volunteers and sanitation team clearing debris along the Subarnarekha riverbed",
       tint: "--c-cat-office"
     },
     {
-      src: "assets/gallery/river-drive-2.jpg",
+      src: "assets/images/gallery/river-drive-2.jpg",
       category: "river-restoration",
       caption: "Foundation volunteers entering the river for morning water restoration",
       tint: "--c-cat-desk"
     },
     {
-      src: "assets/gallery/home-1.jpg",
+      src: "assets/images/gallery/home-1.jpg",
       category: "river-restoration",
       caption: "Mass community gathering of volunteers and citizens at the riverbank cleanup drive",
       tint: "--c-cat-home"
     },
     {
-      src: "assets/gallery/office-1.jpg",
+      src: "assets/images/gallery/office-1.jpg",
       category: "river-restoration",
       caption: "Volunteer mobilization for Subarnarekha riverbank rejuvenation",
       tint: "--c-cat-office"
     },
     {
-      src: "assets/gallery/desk-1.jpg",
+      src: "assets/images/gallery/desk-1.jpg",
       category: "river-restoration",
       caption: "SwachhataPukare volunteer cleanup team at the river ghat",
       tint: "--c-cat-desk"
     },
     {
-      src: "assets/gallery/heritage-1.jpg",
+      src: "assets/images/gallery/heritage-1.jpg",
       category: "river-restoration",
       caption: "Retrieved sacred clay idols during post-festival cleanup to prevent river contamination",
       tint: "--c-cat-heritage"
     },
     {
-      src: "assets/photos/home/gallery-5.jpg",
+      src: "assets/images/home/gallery-5.jpg",
       category: "river-restoration",
       caption: "Immersed idol bamboo and straw frameworks retrieved and piled on the riverbank",
       tint: "--c-cat-desk"
     },
     {
-      src: "assets/photos/home/gallery-4.jpg",
+      src: "assets/images/home/gallery-4.jpg",
       category: "river-restoration",
       caption: "Volunteer assembly on the river ghat steps before the community cleanup drive",
       tint: "--c-cat-office"
     },
     {
-      src: "assets/photos/home/gallery-3.jpg",
+      src: "assets/images/home/gallery-3.jpg",
       category: "river-restoration",
       caption: "River ghat awareness campaign against single-use plastic during festival immersion",
       tint: "--c-cat-home"
@@ -722,13 +724,13 @@ SP.config = {
 
     // --- Water Hyacinth Harvesting & Livelihoods ---
     {
-      src: "assets/gallery/harvest-1.jpg",
+      src: "assets/images/gallery/harvest-1.jpg",
       category: "water-hyacinth",
       caption: "Harvesting dense invasive water hyacinth weeds from water bodies using sickles",
       tint: "--c-cat-home"
     },
     {
-      src: "assets/gallery/weaving-1.jpg",
+      src: "assets/images/gallery/weaving-1.jpg",
       category: "water-hyacinth",
       caption: "Volunteer wading through thick hyacinth weed mats to clear trapped river plastics",
       tint: "--c-cat-tabletop"
@@ -748,19 +750,19 @@ SP.config = {
 
     // --- Community Drives & Sustainability ---
     {
-      src: "assets/gallery/tabletop-1.jpg",
+      src: "assets/images/gallery/tabletop-1.jpg",
       category: "community-drives",
       caption: "Community tree plantation drive planting saplings near rural village facilities",
       tint: "--c-cat-tabletop"
     },
     {
-      src: "assets/gallery/lighting-1.jpg",
+      src: "assets/images/gallery/lighting-1.jpg",
       category: "community-drives",
       caption: "Keynote presentation at the CII National Conference on Sustainable Waste Management",
       tint: "--c-cat-lighting"
     },
     {
-      src: "assets/gallery/solar-1.jpg",
+      src: "assets/images/gallery/solar-1.jpg",
       category: "community-drives",
       caption: "Founder Gaurav Anand speaking on the Sustainable Waste Management expert panel",
       tint: "--c-cat-lighting"
@@ -768,7 +770,7 @@ SP.config = {
 
     // --- TEDxBistupur & Youth Leadership ---
     {
-      src: "assets/gallery/tedx-1.jpg",
+      src: "assets/images/gallery/tedx-1.jpg",
       category: "tedxbistupur",
       caption: "TEDxBistupur organizing team and speakers receiving honors on stage",
       tint: "--c-cat-heritage"
@@ -800,37 +802,37 @@ SP.config = {
 
     // --- Handcrafted Products ---
     {
-      src: "assets/products/coaster-set-1.jpg",
+      src: "assets/images/products/coaster-set-1.jpg",
       category: "handcrafted-products",
       caption: "Handwoven natural water hyacinth 4-piece coaster set",
       tint: "--c-cat-tabletop"
     },
     {
-      src: "assets/products/file-folder-1.jpg",
+      src: "assets/images/products/file-folder-1.jpg",
       category: "handcrafted-products",
       caption: "Handcrafted water hyacinth office document file-folder",
       tint: "--c-cat-office"
     },
     {
-      src: "assets/products/tea-box-1.jpg",
+      src: "assets/images/products/tea-box-1.jpg",
       category: "handcrafted-products",
       caption: "Handwoven natural fiber tea storage box",
       tint: "--c-cat-home"
     },
     {
-      src: "assets/products/dokra-photo-frame-1.jpg",
+      src: "assets/images/products/dokra-photo-frame-1.jpg",
       category: "handcrafted-products",
       caption: "Traditional Dokra lost-wax metal-cast handcrafted photo frame",
       tint: "--c-cat-heritage"
     },
     {
-      src: "assets/products/ecoblossom-lampshade-1.jpg",
+      src: "assets/images/products/ecoblossom-lampshade-1.jpg",
       category: "handcrafted-products",
       caption: "EcoBlossom lampshade with hand-pressed dry botanical flowers",
       tint: "--c-cat-lighting"
     },
     {
-      src: "assets/products/utility-box-1.jpg",
+      src: "assets/images/products/utility-box-1.jpg",
       category: "handcrafted-products",
       caption: "Multi-purpose handcrafted woven storage utility box",
       tint: "--c-cat-desk"

@@ -28,7 +28,7 @@
   function galleryMarkup() {
     var tint = SP.config.categoryTint(product.category);
     var main = SP.imgTag({
-      src: product.image || ("assets/products/" + product.slug + "-1.jpg"),
+      src: product.image || ("assets/images/products/" + product.slug + "-1.jpg"),
       alt: product.name + " — product photo 1 of 3",
       name: product.name,
       tint: tint,
@@ -41,7 +41,7 @@
       return '<button class="thumb' + (n === 1 ? " is-active" : "") + '" type="button" data-thumb="' + n + '" ' +
         'aria-label="Show photo ' + n + ' of 3" aria-pressed="' + (n === 1 ? "true" : "false") + '">' +
         SP.imgTag({
-          src: "assets/products/" + product.slug + "-" + n + ".jpg",
+          src: "assets/images/products/" + product.slug + "-" + n + ".jpg",
           alt: "",
           name: product.name,
           tint: tint,
@@ -127,7 +127,7 @@
   function addJsonLd() {
     var url = window.location.href;
     var images = [1, 2, 3].map(function (n) {
-      return new URL("assets/products/" + product.slug + "-" + n + ".jpg", url).href;
+      return new URL("assets/images/products/" + product.slug + "-" + n + ".jpg", url).href;
     });
     var data = {
       "@context": "https://schema.org",
@@ -300,7 +300,7 @@
         });
         if (!mainHolder) return;
         mainHolder.innerHTML = SP.imgTag({
-          src: "assets/products/" + product.slug + "-" + n + ".jpg",
+          src: "assets/images/products/" + product.slug + "-" + n + ".jpg",
           alt: product.name + " — product photo " + n + " of 3",
           name: product.name,
           tint: SP.config.categoryTint(product.category),
